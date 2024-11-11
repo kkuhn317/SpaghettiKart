@@ -1382,12 +1382,12 @@ void main_menu_act(struct Controller* controller, u16 arg1) {
                 if (btnAndStick & D_JPAD) {
                     sp24 = false;
                     if (func_800B555C()) {
-                        if (sp28 < gGameModePlayerColumnExtra[gPlayerCount - 1][D_800E86AC[gPlayerCount - 1] + 1]) {
+                        if (sp28 < gGameModePlayerColumnExtra[gPlayerCount - 1][D_800E86AC[gPlayerCount - 1]]) {
                             sp24 = true;
                         }
                     } else {
                         // L800B30D4
-                        if (sp28 < gGameModePlayerColumnDefault[gPlayerCount - 1][D_800E86AC[gPlayerCount - 1] + 1]) {
+                        if (sp28 < gGameModePlayerColumnDefault[gPlayerCount - 1][D_800E86AC[gPlayerCount - 1]]) {
                             sp24 = true;
                         }
                     }
