@@ -173,6 +173,9 @@ void GameEngine::ProcessGfxCommands(Gfx* commands) {
     if (wnd != nullptr) {
         wnd->SetTargetFps(CVarGetInteger("gInterpolationFPS", 30));
         wnd->SetMaximumFrameLatency(1);
+        auto pos = wnd->GetMousePos();
+
+        SPDLOG_INFO("Mouse X: {} - Y: {}", pos.x, pos.y);
     }
 }
 
