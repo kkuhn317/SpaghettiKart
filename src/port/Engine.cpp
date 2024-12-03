@@ -176,6 +176,12 @@ void GameEngine::ProcessGfxCommands(Gfx* commands) {
         auto pos = wnd->GetMousePos();
 
         SPDLOG_INFO("Mouse X: {} - Y: {}", pos.x, pos.y);
+
+        for(int i = 0; i < 3; i++){
+            if(wnd->GetMouseState((Ship::MouseBtn) i)){
+                SPDLOG_INFO("Mouse button {} is pressed", i);
+            }
+        }
     }
 }
 
