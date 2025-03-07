@@ -15,12 +15,17 @@ set(CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum OS X deployment ve
 set(CMAKE_CXX_STANDARD 20 CACHE STRING "The C++ standard to use")
 set(CMAKE_C_STANDARD 11 CACHE STRING "The C standard to use")
 set_property(DIRECTORY ${CMAKE_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Spaghettify)
+set(PROJECT_TEAM "MegaMech")
+set(PROJECT_VERSION_MAJOR 1)
+set(PROJECT_VERSION_MINOR 0)
+set(PROJECT_VERSION_PATCH 0)
 #add_compile_options(-fsanitize=address)
 #add_link_options(-fsanitize=address)
 
 # Add a custom module path to locate additional CMake modules
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
-include(FindFontconfig)
+set(YAML_CPP_STATIC_DEFINE ON)
+add_compile_definitions(YAML_CPP_STATIC_DEFINE)
 include(cmake/lus-cvars.cmake)
 
 if (WIN32)
@@ -70,6 +75,20 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     endif()
 endif()
 
+################################################################################
+# Global configuration types
+################################################################################
+if (CMAKE_SYSTEM_NAME STREQUAL "NintendoSwitch")
+set(CMAKE_C_FLAGS_DEBUG "-g -ffast-math -DDEBUG")
+set(CMAKE_CXX_FLAGS_DEBUG "-g -ffast-math -DDEBUG")
+set(CMAKE_C_FLAGS_RELEASE "-O3 -ffast-math -DNDEBUG")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -ffast-math -DNDEBUG")
+else()
+set(CMAKE_C_FLAGS_RELEASE "-O2 -DNDEBUG")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG")
+set(CMAKE_OBJCXX_FLAGS_RELEASE "-O2 -DNDEBUG")
+endif()
+
 # Set game compilation version
 set(VERSION us)
 set(USE_NETWORKING ON)
@@ -80,7 +99,7 @@ set(GFX_DEBUG_DISASSEMBLER ON)
 add_compile_definitions(
     VERSION_US=1
     ENABLE_RUMBLE=1
-    # F3DEX_GBI=1
+    F3DEX_GBI=1
     _LANGUAGE_C
     _USE_MATH_DEFINES
     CIMGUI_DEFINE_ENUMS_AND_STRUCTS
@@ -243,7 +262,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(dr_libs)
 
 #==============================================================================#
-# Libultraship Integration                                                            #
+# Libultraship Integration                                                     #
 #==============================================================================#
 
 include_directories(
@@ -347,8 +366,10 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
         "Vorbis::vorbisfile"
     )
 elseif(CMAKE_SYSTEM_NAME STREQUAL "NintendoSwitch")
+    find_package(SDL2)
     set(ADDITIONAL_LIBRARY_DEPENDENCIES
         -lglad
+        SDL2::SDL2
     )
 elseif(CMAKE_SYSTEM_NAME STREQUAL "CafeOS")
     set(ADDITIONAL_LIBRARY_DEPENDENCIES
@@ -376,8 +397,12 @@ if(USE_NETWORKING)
     endif()
     find_package(SDL2_net REQUIRED)
     include_directories(${SDL2_NET_INCLUDE_DIRS})
-    # target_link_libraries(${PROJECT_NAME} PRIVATE SDL2_net::SDL2_net)
-    # target_compile_definitions(${PROJECT_NAME} PRIVATE USE_NETWORKING)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE USE_NETWORKING)
+    if(CMAKE_SYSTEM_NAME STREQUAL "NintendoSwitch")
+        target_link_libraries(${PROJECT_NAME} PRIVATE SDL2_net)
+    else()
+        target_link_libraries(${PROJECT_NAME} PRIVATE SDL2_net::SDL2_net)
+    endif()
 endif()
 
 option(USE_STANDALONE "Build as a standalone executable" OFF)
@@ -408,11 +433,6 @@ endif()
 ################################################################################
 # Compile and link options
 ################################################################################
-
-set(GBI_UCODE F3DEX_GBI)
-
-target_compile_definitions(${PROJECT_NAME} PRIVATE F3DEX_GBI=1)
-
 if(MSVC)
   if("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64")
       target_compile_options(${PROJECT_NAME} PRIVATE
@@ -603,6 +623,7 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang")
   endif()
 endif()
 
+if(NOT CMAKE_SYSTEM_NAME STREQUAL "NintendoSwitch")
 include(ExternalProject)
 ExternalProject_Add(TorchExternal
     PREFIX TorchExternal
@@ -616,7 +637,6 @@ if (MSVC)
 else()
   set(TORCH_EXECUTABLE ${install_dir}/src/TorchExternal-build/torch)
 endif()
-message(STATUS "Torch executable path: ${TORCH_EXECUTABLE}")
 
 add_custom_target(
     ExtractAssets
@@ -661,6 +681,7 @@ endif()
 set_property(TARGET ${PROJECT_NAME} PROPERTY APPIMAGE_DESKTOP_FILE_TERMINAL YES)
 set_property(TARGET ${PROJECT_NAME} PROPERTY APPIMAGE_DESKTOP_FILE "${CMAKE_SOURCE_DIR}/SpaghettiKart.desktop")
 set_property(TARGET ${PROJECT_NAME} PROPERTY APPIMAGE_ICON_FILE "${CMAKE_SOURCE_DIR}/logo.png")
+endif()
 
 if(CMAKE_SYSTEM_NAME MATCHES "Linux")
     set(CPACK_GENERATOR "External")

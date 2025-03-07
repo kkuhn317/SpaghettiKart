@@ -29,6 +29,10 @@
 
 #include <utility>
 
+#ifdef __SWITCH__
+#include <port/switch/SwitchImpl.h>
+#endif
+
 extern "C" {
 bool prevAltAssets = false;
 float gInterpolationStep = 0.0f;
@@ -46,6 +50,10 @@ float gInterpolationStep = 0.0f;
 GameEngine* GameEngine::Instance;
 
 GameEngine::GameEngine() {
+#ifdef __SWITCH__
+    Ship::Switch::Init(Ship::PreInitPhase);
+    Ship::Switch::Init(Ship::PostInitPhase);
+#endif
     std::vector<std::string> archiveFiles;
 
     const std::string main_path = Ship::Context::GetPathRelativeToAppDirectory("spaghetti.o2r");
@@ -102,10 +110,11 @@ GameEngine::GameEngine() {
 
     this->context->Init(archiveFiles, {}, 3, { 26800, 512, 1100 }, wnd, controlDeck);
 
-    
-    // this->context = Ship::Context::CreateInstance("Spaghettify", "skart64", "spaghettify.cfg.json", OTRFiles, {}, 3,
-    //                                               { 26800, 512, 1100 });
-
+#ifndef __SWITCH__
+    Ship::Context::GetInstance()->GetLogger()->set_level(
+        (spdlog::level::level_enum) CVarGetInteger("gDeveloperTools.LogLevel", 1));
+    Ship::Context::GetInstance()->GetLogger()->set_pattern("[%H:%M:%S.%e] [%s:%#] [%l] %v");
+#endif
 
     wnd->SetRendererUCode(ucode_f3dex);
     this->context->InitGfxDebugger();
@@ -193,18 +202,21 @@ bool GameEngine::GenAssetFile() {
 }
 
 void GameEngine::ShowMessage(const char* title, const char* message, SDL_MessageBoxFlags type) {
-    #if defined(__SWITCH__)
-        SPDLOG_ERROR(message);
-    #else
-        SDL_ShowSimpleMessageBox(type, title, message, nullptr);
-        SPDLOG_ERROR(message);
-    #endif
+#if defined(__SWITCH__)
+    SPDLOG_ERROR(message);
+#else
+    SDL_ShowSimpleMessageBox(type, title, message, nullptr);
+    SPDLOG_ERROR(message);
+#endif
 }
 
 int GameEngine::ShowYesNoBox(const char* title, const char* box) {
     int ret;
 #ifdef _WIN32
     ret = MessageBoxA(nullptr, box, title, MB_YESNO | MB_ICONQUESTION);
+#elif defined(__SWITCH__)
+    SPDLOG_ERROR(box);
+    return IDYES;
 #else
     SDL_MessageBoxData boxData = { 0 };
     SDL_MessageBoxButtonData buttons[2] = { { 0 } };
@@ -236,6 +248,9 @@ void GameEngine::Create() {
 
 void GameEngine::Destroy() {
     AudioExit();
+#ifdef __SWITCH__
+    Ship::Switch::Exit();
+#endif
 }
 
 bool ShouldClearTextureCacheAtEndOfFrame = false;
