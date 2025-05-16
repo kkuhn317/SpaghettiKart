@@ -41,7 +41,7 @@ void FrameInterpolation_RecordActorPosRotMatrix(void);
 
 //void FrameInterpolation_RecordMatrixMult(Matrix* matrix, MtxF* mf, u8 mode);
 
-//void FrameInterpolation_RecordMatrixTranslate(Matrix* matrix, f32 x, f32 y, f32 z, u8 mode);
+void FrameInterpolation_RecordMatrixTranslate(Mat4* matrix, Vec3f b);
 
 //void FrameInterpolation_RecordMatrixScale(Matrix* matrix, f32 x, f32 y, f32 z, u8 mode);
 

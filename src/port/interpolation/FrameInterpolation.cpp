@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <math.h>
 #include "port/Engine.h"
+#include <math_util.h>
 #include <math_util_2.h>
 #include "FrameInterpolation.h"
 
@@ -89,8 +90,7 @@ union Data {
 
     struct {
         Mat4* matrix;
-        f32 x, y, z;
-        u8 mode;
+        Vec3f b;
     } matrix_translate, matrix_scale;
 
     struct {
@@ -181,9 +181,12 @@ Data& append(Op op) {
     return m.emplace_back();
 }
 
-extern "C" {extern Mat4* gInterpolationMatrix;}
+extern "C" {
+extern Mat4* gInterpolationMatrix;
+void mtxf_translate(Mat4, Vec3f);
+}
 
-MtxF* Matrix_GetCurrent(){
+MtxF* Matrix_GetCurrent() {
     return (MtxF*) gInterpolationMatrix;
 }
 
@@ -245,15 +248,15 @@ struct InterpolateCtx {
     s16 interpolate_angle(s16 os, s16 ns) {
         if (os == ns)
             return ns;
-        int o = (u16)os;
-        int n = (u16)ns;
+        int o = (u16) os;
+        int n = (u16) ns;
         u16 res;
         int diff = o - n;
         if (-0x8000 <= diff && diff <= 0x8000) {
             if (diff < -0x4000 || diff > 0x4000) {
                 return ns;
             }
-            res = (u16)(w * o + step * n);
+            res = (u16) (w * o + step * n);
         } else {
             if (o < n) {
                 o += 0x10000;
@@ -264,9 +267,9 @@ struct InterpolateCtx {
             if (diff < -0x4000 || diff > 0x4000) {
                 return ns;
             }
-            res = (u16)(w * o + step * n);
+            res = (u16) (w * o + step * n);
         }
-        if (os / 327 == ns / 327 && (s16)res / 327 != os / 327) {
+        if (os / 327 == ns / 327 && (s16) res / 327 != os / 327) {
             int bp = 0;
         }
         return res;
@@ -317,11 +320,11 @@ struct InterpolateCtx {
                             // Matrix_Pop(&gInterpolationMatrix);
                             break;
 
-                     // Unused on SF64
-                     // case Op::MatrixPut:
-                     //     interpolate_mtxf(&tmp_mtxf, &old_op.matrix_put.src, &new_op.matrix_put.src);
-                     //     Matrix_Put(&tmp_mtxf);
-                     //     break;
+                            // Unused on SF64
+                            // case Op::MatrixPut:
+                            //     interpolate_mtxf(&tmp_mtxf, &old_op.matrix_put.src, &new_op.matrix_put.src);
+                            //     Matrix_Put(&tmp_mtxf);
+                            //     break;
 
                         case Op::MatrixMult:
                             interpolate_mtxf(&tmp_mtxf, &old_op.matrix_mult.mf, &new_op.matrix_mult.mf);
@@ -329,16 +332,26 @@ struct InterpolateCtx {
                             break;
 
                         case Op::MatrixTranslate:
-                            // Matrix_Translate(gInterpolationMatrix, lerp(old_op.matrix_translate.x, new_op.matrix_translate.x),
+                            // Matrix_Translate(gInterpolationMatrix, lerp(old_op.matrix_translate.x,
+                            // new_op.matrix_translate.x),
                             //                  lerp(old_op.matrix_translate.y, new_op.matrix_translate.y),
                             //                  lerp(old_op.matrix_translate.z, new_op.matrix_translate.z),
                             //                  new_op.matrix_translate.mode);
+
+                            Vec3f temp;
+
+                            temp[0] = lerp(old_op.matrix_translate.b[0], new_op.matrix_translate.b[0]);
+                            temp[1] = lerp(old_op.matrix_translate.b[1], new_op.matrix_translate.b[1]);
+                            temp[2] = lerp(old_op.matrix_translate.b[2], new_op.matrix_translate.b[2]);
+
+                            mtxf_translate(*gInterpolationMatrix, temp);
                             break;
 
                         case Op::MatrixScale:
                             // Matrix_Scale(gInterpolationMatrix, lerp(old_op.matrix_scale.x, new_op.matrix_scale.x),
                             //              lerp(old_op.matrix_scale.y, new_op.matrix_scale.y),
-                            //              lerp(old_op.matrix_scale.z, new_op.matrix_scale.z), new_op.matrix_scale.mode);
+                            //              lerp(old_op.matrix_scale.z, new_op.matrix_scale.z),
+                            //              new_op.matrix_scale.mode);
                             break;
 
                         case Op::MatrixRotate1Coord: {
@@ -361,14 +374,18 @@ struct InterpolateCtx {
                             break;
                         }
                         case Op::MatrixMultVec3fNoTranslate: {
-                            interpolate_vecs(&tmp_vec3f, &old_op.matrix_vec_no_translate.src, &new_op.matrix_vec_no_translate.src);
-                            interpolate_vecs(&tmp_vec3f2, &old_op.matrix_vec_no_translate.dest, &new_op.matrix_vec_no_translate.dest);
+                            interpolate_vecs(&tmp_vec3f, &old_op.matrix_vec_no_translate.src,
+                                             &new_op.matrix_vec_no_translate.src);
+                            interpolate_vecs(&tmp_vec3f2, &old_op.matrix_vec_no_translate.dest,
+                                             &new_op.matrix_vec_no_translate.dest);
                             // Matrix_MultVec3fNoTranslate(gInterpolationMatrix, &tmp_vec3f, &tmp_vec3f2);
                             break;
                         }
                         case Op::MatrixMultVec3f: {
-                            interpolate_vecs(&tmp_vec3f, &old_op.matrix_vec_translate.src, &new_op.matrix_vec_translate.src);
-                            interpolate_vecs(&tmp_vec3f2, &old_op.matrix_vec_translate.dest, &new_op.matrix_vec_translate.dest);
+                            interpolate_vecs(&tmp_vec3f, &old_op.matrix_vec_translate.src,
+                                             &new_op.matrix_vec_translate.src);
+                            interpolate_vecs(&tmp_vec3f2, &old_op.matrix_vec_translate.dest,
+                                             &new_op.matrix_vec_translate.dest);
                             // Matrix_MultVec3f(gInterpolationMatrix, &tmp_vec3f, &tmp_vec3f2);
                             break;
                         }
@@ -393,8 +410,10 @@ struct InterpolateCtx {
 
                         case Op::MatrixRotateAxis: {
                             lerp_vec3f(&tmp_vec3f, &old_op.matrix_rotate_axis.axis, &new_op.matrix_rotate_axis.axis);
-                            auto tmp = interpolate_angle(old_op.matrix_rotate_axis.angle, new_op.matrix_rotate_axis.angle);
-                            // Matrix_RotateAxis((Matrix*) &tmp_vec3f, tmp, 1.0f, 1.0f, 1.0f, new_op.matrix_rotate_axis.mode);
+                            auto tmp =
+                                interpolate_angle(old_op.matrix_rotate_axis.angle, new_op.matrix_rotate_axis.angle);
+                            // Matrix_RotateAxis((Matrix*) &tmp_vec3f, tmp, 1.0f, 1.0f, 1.0f,
+                            // new_op.matrix_rotate_axis.mode);
                             break;
                         }
                     }
@@ -466,7 +485,7 @@ void FrameInterpolation_DontInterpolateCamera(void) {
 }
 
 int FrameInterpolation_GetCameraEpoch(void) {
-    return (int)camera_epoch;
+    return (int) camera_epoch;
 }
 
 void FrameInterpolation_RecordActorPosRotMatrix(void) {
@@ -498,7 +517,7 @@ void FrameInterpolation_RecordMatrixPop(Mat4** matrix) {
 void FrameInterpolation_RecordMatrixPut(MtxF* src) {
     if (!is_recording)
         return;
-//    append(Op::MatrixPut).matrix_put = { matrix, *src };
+    //    append(Op::MatrixPut).matrix_put = { matrix, *src };
 }
 
 void FrameInterpolation_RecordMatrixMult(Mat4* matrix, MtxF* mf, u8 mode) {
@@ -507,25 +526,26 @@ void FrameInterpolation_RecordMatrixMult(Mat4* matrix, MtxF* mf, u8 mode) {
     append(Op::MatrixMult).matrix_mult = { matrix, *mf, mode };
 }
 
-void FrameInterpolation_RecordMatrixTranslate(Mat4* matrix, f32 x, f32 y, f32 z, u8 mode) {
+void FrameInterpolation_RecordMatrixTranslate(Mat4* matrix, Vec3f b) {
     if (!is_recording)
         return;
-    append(Op::MatrixTranslate).matrix_translate = { matrix, x, y, z, mode };
+    
+    append(Op::MatrixTranslate).matrix_translate = { matrix, b[0] };
 }
 
 void FrameInterpolation_RecordMatrixScale(Mat4* matrix, f32 x, f32 y, f32 z, u8 mode) {
     if (!is_recording)
         return;
-    append(Op::MatrixScale).matrix_scale = { matrix, x, y, z, mode };
+    // append(Op::MatrixScale).matrix_scale = { matrix, x, y, z, mode };
 }
 
-void FrameInterpolation_RecordMatrixMultVec3fNoTranslate(Mat4* matrix, Vec3f src, Vec3f dest){
+void FrameInterpolation_RecordMatrixMultVec3fNoTranslate(Mat4* matrix, Vec3f src, Vec3f dest) {
     if (!is_recording)
         return;
     // append(Op::MatrixMultVec3fNoTranslate).matrix_vec_no_translate = { matrix, src, dest };
 }
 
-void FrameInterpolation_RecordMatrixMultVec3f(Mat4* matrix, Vec3f src, Vec3f dest){
+void FrameInterpolation_RecordMatrixMultVec3f(Mat4* matrix, Vec3f src, Vec3f dest) {
     if (!is_recording)
         return;
     // append(Op::MatrixMultVec3f).matrix_vec_translate = { matrix, src, dest };

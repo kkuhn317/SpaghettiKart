@@ -244,21 +244,21 @@ void PortMenu::AddSettings() {
                 .DefaultValue(1));
 #endif
 
-    // AddWidget(path, "Current FPS: %d", WIDGET_CVAR_SLIDER_INT)
-    //     .CVar("gInterpolationFPS")
-    //     .Callback([](WidgetInfo& info) {
-    //         int32_t defaultValue = std::static_pointer_cast<IntSliderOptions>(info.options)->defaultValue;
-    //         if (CVarGetInteger(info.cVar, defaultValue) == defaultValue) {
-    //             info.name = "Current FPS: Original (%d)";
-    //         } else {
-    //             info.name = "Current FPS: %d";
-    //         }
-    //     })
-    //     .PreFunc([](WidgetInfo& info) {
-    //         if (mPortMenu->disabledMap.at(DISABLE_FOR_MATCH_REFRESH_RATE_ON).active)
-    //             info.activeDisables.push_back(DISABLE_FOR_MATCH_REFRESH_RATE_ON);
-    //     })
-    //     .Options(IntSliderOptions().Tooltip(tooltip).Min(20).Max(maxFps).DefaultValue(20));
+    AddWidget(path, "Current FPS: %d", WIDGET_CVAR_SLIDER_INT)
+        .CVar("gInterpolationFPS")
+        .Callback([](WidgetInfo& info) {
+            int32_t defaultValue = std::static_pointer_cast<IntSliderOptions>(info.options)->defaultValue;
+            if (CVarGetInteger(info.cVar, defaultValue) == defaultValue) {
+                info.name = "Current FPS: Original (%d)";
+            } else {
+                info.name = "Current FPS: %d";
+            }
+        })
+        .PreFunc([](WidgetInfo& info) {
+            if (mPortMenu->disabledMap.at(DISABLE_FOR_MATCH_REFRESH_RATE_ON).active)
+                info.activeDisables.push_back(DISABLE_FOR_MATCH_REFRESH_RATE_ON);
+        })
+        .Options(IntSliderOptions().Tooltip(tooltip).Min(20).Max(maxFps).DefaultValue(20));
     AddWidget(path, "Match Refresh Rate", WIDGET_BUTTON)
         .Callback([](WidgetInfo& info) {
             int hz = Ship::Context::GetInstance()->GetWindow()->GetCurrentRefreshRate();

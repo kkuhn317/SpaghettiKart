@@ -222,6 +222,7 @@ UNUSED void add_translate_mat4_vec3f_lite(Mat4 mat, Mat4 dest, Vec3f pos) {
 
 // create a translation matrix
 void mtxf_translate(Mat4 dest, Vec3f b) {
+    FrameInterpolation_RecordMatrixTranslate(dest, b);
     mtxf_identity(dest);
     dest[3][0] = b[0];
     dest[3][1] = b[1];
