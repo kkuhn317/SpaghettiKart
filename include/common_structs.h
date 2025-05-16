@@ -28,7 +28,7 @@ typedef struct {
 // In the data to use "A, B, Z, R" instead of hex numbers.
 typedef enum { A = 0x80, B = 0x40, Z = 0x20, R = 0x10 } GhostController;
 
-/***  types.h  ***/
+/***  types.h  ***/ 
 
 typedef struct {
     /* 0x0 */ s16 waypointStart;

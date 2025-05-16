@@ -10,6 +10,23 @@ typedef struct {
     float b;
 } Color;
 
+typedef struct {
+    float x;
+    float y;
+    float z;
+} Vec3fInterp;
+
+typedef struct {
+    s16 x;
+    s16 y;
+    s16 z;
+} Vec3sInterp;
+
+typedef struct {
+    f32 m1; f32 m2; f32 m3; f32 m4;
+    f32 m5; f32 m6; f32 m7; f32 m8;
+} Mat4Interp;
+
 #define M_PI    3.14159265358979323846f
 #define M_RTOD	(180.0f / M_PI)
 #define SQ(val) ((val) * (val))
@@ -50,6 +67,7 @@ extern Mtx gMainMatrixStack[];
 extern Mtx* gGfxMtx;
 
 void Matrix_InitPerspective(Gfx** dList);
+void Matrix_InitOrtho(Gfx** dList);
 void Matrix_Copy(Matrix* dst, Matrix* src);
 void Matrix_Push(Matrix** mtxStack);
 void Matrix_Pop(Matrix** mtxStack);

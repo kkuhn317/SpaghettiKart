@@ -48,6 +48,7 @@
 #include "port/Game.h"
 #include "engine/Matrix.h"
 #include "port/interpolation/matrix.h"
+#include "port/interpolation/FrameInterpolation.h"
 
 // Declarations (not in this file)
 void func_80091B78(void);
@@ -943,6 +944,7 @@ void game_state_handler(void) {
         gGamestateNext = ENDING;
     }
 #endif
+    FrameInterpolation_StartRecord();
     switch (gGamestate) {
         case 7:
             game_init_clear_framebuffer();
@@ -970,6 +972,7 @@ void game_state_handler(void) {
             credits_loop();
             break;
     }
+    FrameInterpolation_StopRecord();
 }
 
 void interrupt_gfx_sptask(void) {

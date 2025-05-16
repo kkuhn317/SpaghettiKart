@@ -33,6 +33,18 @@ void Matrix_InitPerspective(Gfx** dList) {
     Matrix_Copy(gGfxMatrix, &gIdentityMatrix);
 }
 
+void Matrix_InitOrtho(Gfx** dList) {
+    FrameInterpolation_RecordOpenChild("ortho", 0);
+    FrameInterpolation_RecordMarker(__FILE__, __LINE__);
+    guOrtho(gGfxMtx, -320.0f / 2, 320.0f / 2, -240.0f / 2, 240.0f / 2, 0.0f, 5.0f, 1.0f);
+    gSPMatrix((*dList)++, gGfxMtx++, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+    guLookAt(gGfxMtx, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, -12800.0f, 0.0f, 1.0f, 0.0f);
+    gSPMatrix((*dList)++, gGfxMtx++, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
+    Matrix_Copy(gGfxMatrix, &gIdentityMatrix);
+    FrameInterpolation_RecordCloseChild();
+}
+
+
 // Copies src Matrix into dst
 void Matrix_Copy(Matrix* dst, Matrix* src) {
     int32_t i;

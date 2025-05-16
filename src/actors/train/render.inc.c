@@ -2,6 +2,8 @@
 #include <libultra/gbi.h>
 #include <main.h>
 #include <assets/kalimari_desert_data.h>
+#include <port/interpolation/matrix.h>
+#include <port/interpolation/FrameInterpolation.h>
 
 /**
  * @brief Renders the train engine actor.
@@ -18,6 +20,8 @@ void render_actor_train_engine(Camera* camera, struct TrainCar* actor) {
     Mat4 mainMtx;
     Mat4 objectMtx;
     Mat4 resultMtx;
+
+    FrameInterpolation_RecordOpenChild(actor, 0);
 
     f32 distance = is_within_render_distance(camera->pos, actor->pos, camera->rot[1], 2500.0f,
                                              gCameraZoom[camera - camera1], 9000000.0f);
@@ -39,6 +43,7 @@ void render_actor_train_engine(Camera* camera, struct TrainCar* actor) {
     mtxf_pos_rotation_xyz(mainMtx, actor->pos, actor->rot);
     maxObjectsReached = render_set_position(mainMtx, 0) == 0;
     if (maxObjectsReached) {
+        FrameInterpolation_RecordCloseChild();
         return;
     }
 
@@ -56,6 +61,7 @@ void render_actor_train_engine(Camera* camera, struct TrainCar* actor) {
         gSPDisplayList(gDisplayListHead++, d_course_kalimari_desert_dl_1E480);
     }
     if (1440000.0f < distance) {
+        FrameInterpolation_RecordCloseChild();
         return;
     }
 
@@ -69,6 +75,7 @@ void render_actor_train_engine(Camera* camera, struct TrainCar* actor) {
 
     maxObjectsReached = render_set_position(resultMtx, 3) == 0;
     if (maxObjectsReached) {
+        FrameInterpolation_RecordCloseChild();
         return;
     }
 
@@ -82,6 +89,7 @@ void render_actor_train_engine(Camera* camera, struct TrainCar* actor) {
 
     maxObjectsReached = render_set_position(resultMtx, 3) == 0;
     if (maxObjectsReached) {
+        FrameInterpolation_RecordCloseChild();
         return;
     }
 
@@ -95,6 +103,7 @@ void render_actor_train_engine(Camera* camera, struct TrainCar* actor) {
 
     maxObjectsReached = render_set_position(resultMtx, 3) == 0;
     if (maxObjectsReached) {
+        FrameInterpolation_RecordCloseChild();
         return;
     }
 
@@ -108,6 +117,7 @@ void render_actor_train_engine(Camera* camera, struct TrainCar* actor) {
 
     maxObjectsReached = render_set_position(resultMtx, 3) == 0;
     if (maxObjectsReached) {
+        FrameInterpolation_RecordCloseChild();
         return;
     }
 
@@ -121,6 +131,7 @@ void render_actor_train_engine(Camera* camera, struct TrainCar* actor) {
 
     maxObjectsReached = render_set_position(resultMtx, 3) == 0;
     if (maxObjectsReached) {
+        FrameInterpolation_RecordCloseChild();
         return;
     }
 
@@ -134,6 +145,7 @@ void render_actor_train_engine(Camera* camera, struct TrainCar* actor) {
 
     maxObjectsReached = render_set_position(resultMtx, 3) == 0;
     if (maxObjectsReached) {
+        FrameInterpolation_RecordCloseChild();
         return;
     }
 
@@ -147,6 +159,7 @@ void render_actor_train_engine(Camera* camera, struct TrainCar* actor) {
 
     maxObjectsReached = render_set_position(resultMtx, 3) == 0;
     if (maxObjectsReached) {
+        FrameInterpolation_RecordCloseChild();
         return;
     }
 
@@ -160,12 +173,14 @@ void render_actor_train_engine(Camera* camera, struct TrainCar* actor) {
 
     maxObjectsReached = render_set_position(resultMtx, 3) == 0;
     if (maxObjectsReached) {
+        FrameInterpolation_RecordCloseChild();
         return;
     }
 
     gSPDisplayList(gDisplayListHead++, d_course_kalimari_desert_dl_22D70);
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
     gSPSetGeometryMode(gDisplayListHead++, G_CULL_BACK);
+    FrameInterpolation_RecordCloseChild();
 }
 
 void render_actor_train_tender(Camera* camera, struct TrainCar* actor) {

@@ -9,6 +9,7 @@
 #include "memory.h"
 #include "engine/Matrix.h"
 #include "port/Game.h"
+#include <port/interpolation/FrameInterpolation.h>
 #include <port/interpolation/matrix.h>
 
 #pragma intrinsic(sqrtf, fabs)
@@ -331,6 +332,7 @@ void func_802B5794(Mat4 mtx, Vec3f from, Vec3f to) {
 
 // create a rotation matrix around the x axis
 void mtxf_rotate_x(Mat4 mat, s16 angle) {
+    FrameInterpolation_RecordMatrixRotate1Coord(&mat, 0, angle);
     f32 sin_theta = sins(angle);
     f32 cos_theta = coss(angle);
 
@@ -350,6 +352,7 @@ void mtxf_rotate_x(Mat4 mat, s16 angle) {
 
 // create a rotation matrix around the y axis
 void mtxf_rotate_y(Mat4 mat, s16 angle) {
+    FrameInterpolation_RecordMatrixRotate1Coord(&mat, 1, angle);
     f32 sin_theta = sins(angle);
     f32 cos_theta = coss(angle);
 
@@ -369,6 +372,7 @@ void mtxf_rotate_y(Mat4 mat, s16 angle) {
 
 // create a rotation matrix around the z axis
 void mtxf_s16_rotate_z(Mat4 mat, s16 angle) {
+    FrameInterpolation_RecordMatrixRotate1Coord(&mat, 2, angle);
     f32 sin_theta = sins(angle);
     f32 cos_theta = coss(angle);
 
@@ -475,6 +479,8 @@ void mtxf_scale(Mat4 mat, f32 coef) {
 
 // look like create a translation and rotation matrix with arg1 position and arg2 rotation
 void mtxf_pos_rotation_xyz(Mat4 out, Vec3f pos, Vec3s orientation) {
+    FrameInterpolation_RecordMatrixPosRotXYZ(out, pos, orientation);
+
     f32 sine1;
     f32 cosine1;
     f32 sine2;
@@ -825,6 +831,7 @@ void func_802B6D58(Mat4 arg0, Vec3f arg1, Vec3f arg2) {
 }
 
 void mtxf_multiplication(Mat4 dest, Mat4 mat1, Mat4 mat2) {
+    // FrameInterpolation_RecordMatrixMult4x4(dest, mat1, mat2);
     Mat4 product;
     product[0][0] =
         (mat1[0][0] * mat2[0][0]) + (mat1[0][1] * mat2[1][0]) + (mat1[0][2] * mat2[2][0]) + (mat1[0][3] * mat2[3][0]);

@@ -12,10 +12,7 @@
 std::unordered_map<Mtx*, MtxF> FrameInterpolation_Interpolate(float step);
 
 extern "C" {
-
 #endif
-
-
 
 void FrameInterpolation_ShouldInterpolateFrame(bool shouldInterpolate);
 
@@ -35,6 +32,8 @@ int FrameInterpolation_GetCameraEpoch(void);
 
 void FrameInterpolation_RecordActorPosRotMatrix(void);
 
+void FrameInterpolation_RecordMatrixPosRotXYZ(Mat4 out, Vec3f pos, Vec3s orientation);
+
 //void FrameInterpolation_RecordMatrixPush(Matrix** mtx);
 
 //void FrameInterpolation_RecordMatrixPop(Matrix** mtx);
@@ -45,7 +44,7 @@ void FrameInterpolation_RecordMatrixTranslate(Mat4* matrix, Vec3f b);
 
 //void FrameInterpolation_RecordMatrixScale(Matrix* matrix, f32 x, f32 y, f32 z, u8 mode);
 
-//void FrameInterpolation_RecordMatrixRotate1Coord(Matrix* matrix, u32 coord, f32 value, u8 mode);
+void FrameInterpolation_RecordMatrixRotate1Coord(Mat4* matrix, u32 coord, s16 value);
 
 void FrameInterpolation_RecordMatrixMtxFToMtx(MtxF* src, Mtx* dest);
 

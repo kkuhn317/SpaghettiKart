@@ -12,6 +12,10 @@
 
 #define sqr(x) ((x) * (x))
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // Here to appease the pragma gods
 double fabs(double x);
 
@@ -71,5 +75,9 @@ f32 is_within_render_distance(Vec3f, Vec3f, u16, f32, f32, f32);
 extern s32 D_802B91C0[];
 extern Vec3f D_802B91C8;
 // extern Mtx gIdentityMatrix;
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // MATH_UTIL_H
