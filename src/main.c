@@ -647,7 +647,7 @@ void calculate_updaterate(void) {
     s32 total;
 
     // Get target FPS from configuration variable
-    s32 targetFPS = CVarGetInteger("gInterpolationFPS", 30);
+    s32 targetFPS = 30;
 
     if (targetFPS < 60) {
         targetFPS = 30;
