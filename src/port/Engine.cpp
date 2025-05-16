@@ -24,6 +24,7 @@
 #include "window/gui/resource/FontFactory.h"
 #include "SpaghettiGui.h"
 
+#include "port/interpolation/FrameInterpolation.h"
 #include <graphic/Fast3D/Fast3dWindow.h>
 #include <graphic/Fast3D/interpreter.h>
 //#include <Fast3D/gfx_rendering_api.h>
@@ -225,6 +226,28 @@ bool GameEngine::GenAssetFile() {
     return extractor->GenerateOTR();
 }
 
+uint32_t GameEngine::GetInterpolationFPS() {
+    if (CVarGetInteger("gMatchRefreshRate", 0)) {
+        return Ship::Context::GetInstance()->GetWindow()->GetCurrentRefreshRate();
+
+    } else if (CVarGetInteger("gVsyncEnabled", 1) ||
+               !Ship::Context::GetInstance()->GetWindow()->CanDisableVerticalSync()) {
+        return std::min<uint32_t>(Ship::Context::GetInstance()->GetWindow()->GetCurrentRefreshRate(),
+                                  CVarGetInteger("gInterpolationFPS", 60));
+    }
+
+    return CVarGetInteger("gInterpolationFPS", 60);
+}
+
+uint32_t GameEngine::GetInterpolationFrameCount()
+{
+	return ceil((float)GetInterpolationFPS() / (60.0f / 2 /*gVIsPerFrame*/));
+}
+
+extern "C" uint32_t GameEngine_GetInterpolationFrameCount() {
+	return GameEngine::GetInterpolationFrameCount();
+}
+
 void GameEngine::ShowMessage(const char* title, const char* message, SDL_MessageBoxFlags type) {
 #if defined(__SWITCH__)
     SPDLOG_ERROR(message);
@@ -321,6 +344,36 @@ void GameEngine::RunCommands(Gfx* Commands) {
 }
 
 void GameEngine::ProcessGfxCommands(Gfx* commands) {
+    std::vector<std::unordered_map<Mtx*, MtxF>> mtx_replacements;
+    int target_fps = GameEngine::Instance->GetInterpolationFPS();
+    static int last_fps;
+    static int last_update_rate;
+    static int time;
+    int fps = target_fps;
+    int original_fps = 60 / 2 /*gVIsPerFrame*/;
+
+    if (target_fps == 20 || original_fps > target_fps) {
+        fps = original_fps;
+    }
+
+    if (last_fps != fps || last_update_rate != 2 /*gVIsPerFrame*/) {
+        time = 0;
+    }
+
+    // time_base = fps * original_fps (one second)
+    int next_original_frame = fps;
+
+    while (time + original_fps <= next_original_frame) {
+        time += original_fps;
+        if (time != next_original_frame) {
+            mtx_replacements.push_back(FrameInterpolation_Interpolate((float) time / next_original_frame));
+        } else {
+            mtx_replacements.emplace_back();
+        }
+    }
+
+    time -= fps;
+
     auto wnd = std::dynamic_pointer_cast<Fast::Fast3dWindow>(Ship::Context::GetInstance()->GetWindow());
     if (wnd != nullptr) {
         wnd->SetTargetFps(CVarGetInteger("gInterpolationFPS", 30));

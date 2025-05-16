@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <math.h>
 #include "port/Engine.h"
-
+#include <math_util_2.h>
 #include "FrameInterpolation.h"
 
 /*
@@ -180,6 +180,8 @@ Data& append(Op op) {
     current_path.back()->items.emplace_back(op, m.size());
     return m.emplace_back();
 }
+
+extern "C" {extern Mat4* gInterpolationMatrix;}
 
 MtxF* Matrix_GetCurrent(){
     return (MtxF*) gInterpolationMatrix;
