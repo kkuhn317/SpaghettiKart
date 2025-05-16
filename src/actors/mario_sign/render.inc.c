@@ -14,7 +14,7 @@ void render_actor_mario_sign(Camera* arg0, UNUSED Mat4 arg1, struct Actor* arg2)
     Mat4 sp40;
     f32 unk;
     s16 temp = arg2->flags;
-
+    FrameInterpolation_RecordOpenChild(arg2, 0);
     if (temp & 0x800) {
         return;
     }
@@ -31,4 +31,7 @@ void render_actor_mario_sign(Camera* arg0, UNUSED Mat4 arg1, struct Actor* arg2)
             gSPDisplayList(gDisplayListHead++, d_course_mario_raceway_dl_sign);
         }
     }
+
+    FrameInterpolation_RecordCloseChild();
+
 }

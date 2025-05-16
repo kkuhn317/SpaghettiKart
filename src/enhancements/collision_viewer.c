@@ -4,6 +4,8 @@
 #include "code_800029B0.h"
 #include "mk64.h"
 #include "main.h"
+#include <port/interpolation/FrameInterpolation.h>
+#include <port/interpolation/matrix.h>
 
 #include "collision_viewer.h"
 #include "math_util.h"

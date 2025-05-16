@@ -1,6 +1,7 @@
 #include <libultraship.h>
 #include <libultra/gbi.h>
 #include "engine/World.h"
+#include "src/port/interpolation/FrameInterpolation.h"
 
 extern "C" {
 #include "common_structs.h"
@@ -16,6 +17,7 @@ void AddMatrix(std::vector<Mtx>& stack, Mat4 mtx, s32 flags) {
     stack.emplace_back();
 
     // Convert to a fixed-point matrix
+    FrameInterpolation_RecordMatrixMtxFToMtx((MtxF*)mtx, &stack.back());
     guMtxF2L(mtx, &stack.back());
 
     // Load the matrix
