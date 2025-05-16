@@ -4,6 +4,8 @@
 #include "Train.h"
 #include <vector>
 
+#include "port/interpolation/FrameInterpolation.h"
+
 extern "C" {
 #include "macros.h"
 #include "main.h"
@@ -151,6 +153,7 @@ void ATrain::SyncComponents(TrainCarStuff* trainCar, s16 orientationY) {
 }
 
 void ATrain::Tick() {
+    FrameInterpolation_StartRecord();
     f32 temp_f20;
     TrainCarStuff* car;
     u16 oldWaypointIndex;
@@ -221,6 +224,8 @@ void ATrain::Tick() {
             sync_train_components(car, orientationYUpdate);
         }
     }
+
+    FrameInterpolation_StopRecord();
 }
 
 void ATrain::VehicleCollision(s32 playerId, Player* player) {

@@ -47,6 +47,7 @@
 #include "engine/wasm.h"
 #include "port/Game.h"
 #include "engine/Matrix.h"
+#include "port/interpolation/matrix.h"
 
 // Declarations (not in this file)
 void func_80091B78(void);
@@ -495,6 +496,9 @@ void rendering_init(void) {
     set_segment_base_addr_x64(1, gGfxPool);
     gGfxSPTask = &gGfxPool->spTask;
     gDisplayListHead = gGfxPool->gfxPool;
+    gGfxMtx = &gMainMatrixStack[0];
+    gGfxMatrix = &sGfxMatrixStack[0];
+    gCalcMatrix = &sCalcMatrixStack[0];
     init_rcp();
     clear_framebuffer(0);
     end_master_display_list();
@@ -647,7 +651,7 @@ void calculate_updaterate(void) {
     s32 total;
 
     // Get target FPS from configuration variable
-    s32 targetFPS = CVarGetInteger("gInterpolationFPS", 30);
+    s32 targetFPS = 30;
 
     if (targetFPS < 60) {
         targetFPS = 30;

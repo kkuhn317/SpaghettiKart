@@ -188,6 +188,7 @@ file(GLOB_RECURSE ALL_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
     "src/enhancements/freecam/*.h"
     "src/engine/*.cpp"
     "src/engine/*.h"
+    "src/port/interpolation/*.c"
 )
 
 list(APPEND ALL_FILES ${ALL_FILES_ROOT})

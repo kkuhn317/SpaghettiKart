@@ -26,7 +26,7 @@ void render_collision(void) {
     gDPSetCombineMode(gDisplayListHead++, G_CC_SHADE, G_CC_SHADE);
 
     // Set matrix
-    gSPMatrix(gDisplayListHead++, &gIdentityMatrix, G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    // gSPMatrix(gDisplayListHead++, &gIdentityMatrix, G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
 
     for (size_t i = 0; i < gCollisionMeshCount; i++) {
         // Load vertices for this tri
