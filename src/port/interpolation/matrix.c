@@ -1,6 +1,7 @@
 #include <libultraship.h>
 #include <math.h>
 #include "matrix.h"
+#include "common_structs.h"
 
 Mtx gIdentityMtx = gdSPDefMtx(1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f);
 Matrix gIdentityMatrix = { {
@@ -347,17 +348,17 @@ void Matrix_FromMtx(Mtx* src, Matrix* dest) {
 
 // Applies the transform matrix mtx to the vector src, putting the result in dest
 void Matrix_MultVec3f(Matrix* mtx, Vec3f* src, Vec3f* dest) {
-    dest->x = (mtx->mf[0][0] * src->x) + (mtx->mf[1][0] * src->y) + (mtx->mf[2][0] * src->z) + mtx->mf[3][0];
-    dest->y = (mtx->mf[0][1] * src->x) + (mtx->mf[1][1] * src->y) + (mtx->mf[2][1] * src->z) + mtx->mf[3][1];
-    dest->z = (mtx->mf[0][2] * src->x) + (mtx->mf[1][2] * src->y) + (mtx->mf[2][2] * src->z) + mtx->mf[3][2];
+    *dest[0] = (mtx->mf[0][0] * *src[0]) + (mtx->mf[1][0] * *src[1]) + (mtx->mf[2][0] * *src[2]) + mtx->mf[3][0];
+    *dest[1] = (mtx->mf[0][1] * *src[0]) + (mtx->mf[1][1] * *src[1]) + (mtx->mf[2][1] * *src[2]) + mtx->mf[3][1];
+    *dest[2] = (mtx->mf[0][2] * *src[0]) + (mtx->mf[1][2] * *src[1]) + (mtx->mf[2][2] * *src[2]) + mtx->mf[3][2];
 }
 
 // Applies the linear part of the transformation matrix mtx to the vector src, ignoring any translation that mtx might
 // have. Puts the result in dest.
 void Matrix_MultVec3fNoTranslate(Matrix* mtx, Vec3f* src, Vec3f* dest) {
-    dest->x = (mtx->mf[0][0] * src->x) + (mtx->mf[1][0] * src->y) + (mtx->mf[2][0] * src->z);
-    dest->y = (mtx->mf[0][1] * src->x) + (mtx->mf[1][1] * src->y) + (mtx->mf[2][1] * src->z);
-    dest->z = (mtx->mf[0][2] * src->x) + (mtx->mf[1][2] * src->y) + (mtx->mf[2][2] * src->z);
+    *dest[0] = (mtx->mf[0][0] * *src[0]) + (mtx->mf[1][0] * *src[1]) + (mtx->mf[2][0] * *src[2]);
+    *dest[1] = (mtx->mf[0][1] * *src[0]) + (mtx->mf[1][1] * *src[1]) + (mtx->mf[2][1] * *src[2]);
+    *dest[2] = (mtx->mf[0][2] * *src[0]) + (mtx->mf[1][2] * *src[1]) + (mtx->mf[2][2] * *src[2]);
 }
 
 // Expresses the rotational part of the transform mtx as Tait-Bryan angles, in the yaw-pitch-roll (intrinsic YXZ)
@@ -374,20 +375,20 @@ void Matrix_GetYRPAngles(Matrix* mtx, Vec3f* rot) {
     Matrix_MultVec3fNoTranslate(mtx, &origin, &originP);
     Matrix_MultVec3fNoTranslate(mtx, &zHat, &zHatP);
     Matrix_MultVec3fNoTranslate(mtx, &xHat, &xHatP);
-    zHatP.x -= originP.x;
-    zHatP.y -= originP.y;
-    zHatP.z -= originP.z;
-    xHatP.x -= originP.x;
-    xHatP.y -= originP.y;
-    xHatP.z -= originP.z;
-    rot->y = atan2f(zHatP.x, zHatP.z);
-    rot->x = -atan2f(zHatP.y, sqrtf(SQ(zHatP.x) + SQ(zHatP.z)));
-    Matrix_RotateX(&invYP, -rot->x, MTXF_NEW);
-    Matrix_RotateY(&invYP, -rot->y, MTXF_APPLY);
+    zHatP[0] -= originP[0];
+    zHatP[1] -= originP[1];
+    zHatP[2] -= originP[2];
+    xHatP[0] -= originP[0];
+    xHatP[1] -= originP[1];
+    xHatP[2] -= originP[2];
+    *rot[1] = atan2f(zHatP[0], zHatP[2]);
+    *rot[0] = -atan2f(zHatP[1], sqrtf(SQ(zHatP[0]) + SQ(zHatP[2])));
+    Matrix_RotateX(&invYP, -*rot[0], MTXF_NEW);
+    Matrix_RotateY(&invYP, -*rot[1], MTXF_APPLY);
     Matrix_MultVec3fNoTranslate(&invYP, &xHatP, &xHat);
-    rot->x *= M_RTOD;
-    rot->y *= M_RTOD;
-    rot->z = atan2f(xHat.y, xHat.x) * M_RTOD;
+    *rot[0] *= M_RTOD;
+    *rot[1] *= M_RTOD;
+    *rot[2] = atan2f(xHat[1], xHat[0]) * M_RTOD;
 }
 
 // Expresses the rotational part of the transform mtx as Tait-Bryan angles, in the extrinsic XYZ convention used in
@@ -404,20 +405,20 @@ void Matrix_GetXYZAngles(Matrix* mtx, Vec3f* rot) {
     Matrix_MultVec3fNoTranslate(mtx, &origin, &originP);
     Matrix_MultVec3fNoTranslate(mtx, &xHat, &xHatP);
     Matrix_MultVec3fNoTranslate(mtx, &yHat, &yHatP);
-    xHatP.x -= originP.x;
-    xHatP.y -= originP.y;
-    xHatP.z -= originP.z;
-    yHatP.x -= originP.x;
-    yHatP.y -= originP.y;
-    yHatP.z -= originP.z;
-    rot->z = atan2f(xHatP.y, xHatP.x);
-    rot->y = -atan2f(xHatP.z, sqrtf(SQ(xHatP.x) + SQ(xHatP.y)));
-    Matrix_RotateY(&invYZ, -rot->y, MTXF_NEW);
-    Matrix_RotateZ(&invYZ, -rot->z, MTXF_APPLY);
+    xHatP[0] -= originP[0];
+    xHatP[1] -= originP[1];
+    xHatP[2] -= originP[2];
+    yHatP[0] -= originP[0];
+    yHatP[1] -= originP[1];
+    yHatP[2] -= originP[2];
+    *rot[2] = atan2f(xHatP[1], xHatP[0]);
+    *rot[1] = -atan2f(xHatP[2], sqrtf(SQ(xHatP[0]) + SQ(xHatP[1])));
+    Matrix_RotateY(&invYZ, -*rot[1], MTXF_NEW);
+    Matrix_RotateZ(&invYZ, -*rot[2], MTXF_APPLY);
     Matrix_MultVec3fNoTranslate(&invYZ, &yHatP, &yHat);
-    rot->x = atan2f(yHat.z, yHat.y) * M_RTOD;
-    rot->y *= M_RTOD;
-    rot->z *= M_RTOD;
+    *rot[0] = atan2f(yHat[2], yHat[1]) * M_RTOD;
+    *rot[1] *= M_RTOD;
+    *rot[2] *= M_RTOD;
 }
 
 // Creates a look-at matrix from Eye, At, and Up in mtx (MTXF_NEW) or applies one to mtx (MTXF_APPLY).

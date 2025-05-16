@@ -2,6 +2,7 @@
 
 #define MTXF_NEW 0
 #define MTXF_APPLY 1
+#include "common_structs.h"
 
 typedef struct {
     float r;
