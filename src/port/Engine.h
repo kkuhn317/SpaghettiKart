@@ -59,6 +59,7 @@ class GameEngine {
     static void EndAudioFrame();
     static void AudioExit();
 
+    static uint32_t GetInterpolationFPS();
     void StartFrame() const;
     static void RunCommands(Gfx* Commands);
     void ProcessFrame(void (*run_one_game_iter)()) const;

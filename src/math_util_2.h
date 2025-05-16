@@ -5,6 +5,8 @@
 #include <common_structs.h>
 #include "camera.h"
 
+extern Mat4* gInterpolationMatrix;
+
 /* Function Prototypes */
 
 // Unused functions

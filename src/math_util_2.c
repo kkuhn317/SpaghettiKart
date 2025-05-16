@@ -18,6 +18,9 @@
 
 #pragma intrinsic(sqrtf)
 
+Mat4 sInterpolationMatrixStack[0x1000];
+Mat4* gInterpolationMatrix = &sInterpolationMatrixStack[0];
+
 UNUSED void operator_or(s32* arg0, s32 arg1) {
     *arg0 = (s32) (*arg0 | arg1);
 }
