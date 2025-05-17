@@ -77,9 +77,9 @@ void camera_init(f32 posX, f32 posY, f32 posZ, UNUSED s16 rot, u32 arg4, s32 cam
             camera->lookAt.x = 0.0f;
             camera->lookAt.z = 150.0f;
             camera->lookAt.y = posY - 3.0;
-            camera->up[0] = 0.0f;
-            camera->up[1] = 1.0f;
-            camera->up[2] = 0.0f;
+            camera->up.x = 0.0f;
+            camera->up.y = 1.0f;
+            camera->up.z = 0.0f;
             camera->playerId = (s16) cameraId;
             camera->unk_B0 = 0;
             camera->unk_A0 = 0.0f;
@@ -102,60 +102,60 @@ void camera_init(f32 posX, f32 posY, f32 posZ, UNUSED s16 rot, u32 arg4, s32 cam
             camera->unk_94.unk_0 = 0.0f;
 
             player += cameraId;
-            camera->unk_2C = player->rotation[1];
-            camera->unk_AC = player->rotation[1];
+            camera->unk_2C = player->rotation.y;
+            camera->unk_AC = player->rotation.y;
             switch (gActiveScreenMode) {
                 case SCREEN_MODE_1P:
                 case SCREEN_MODE_2P_SPLITSCREEN_VERTICAL:
                     if (gModeSelection == BATTLE) {
-                        camera->unk_30[0] = 0.0f;
-                        camera->unk_30[1] = 11.6f;
-                        camera->unk_30[2] = -38.5f;
-                        camera->unk_3C[0] = 0.0f;
-                        camera->unk_3C[1] = 0.0f;
-                        camera->unk_3C[2] = 19.2f;
+                        camera->unk_30.x = 0.0f;
+                        camera->unk_30.y = 11.6f;
+                        camera->unk_30.z = -38.5f;
+                        camera->unk_3C.x = 0.0f;
+                        camera->unk_3C.y = 0.0f;
+                        camera->unk_3C.z = 19.2f;
                         D_80164A88 = 0;
                     } else {
-                        camera->unk_30[0] = 0.0f;
-                        camera->unk_30[1] = 9.5f;
-                        camera->unk_30[2] = -50.0f;
-                        camera->unk_3C[0] = 0.0f;
-                        camera->unk_3C[1] = 0.0f;
-                        camera->unk_3C[2] = 70.0f;
+                        camera->unk_30.x = 0.0f;
+                        camera->unk_30.y = 9.5f;
+                        camera->unk_30.z = -50.0f;
+                        camera->unk_3C.x = 0.0f;
+                        camera->unk_3C.y = 0.0f;
+                        camera->unk_3C.z = 70.0f;
                     }
                     break;
                 case SCREEN_MODE_2P_SPLITSCREEN_HORIZONTAL:
                     if (gModeSelection == BATTLE) {
-                        camera->unk_30[0] = 0.0f;
-                        camera->unk_30[1] = 11.6f;
-                        camera->unk_30[2] = -38.5f;
-                        camera->unk_3C[0] = 0.0f;
-                        camera->unk_3C[1] = 0.0f;
-                        camera->unk_3C[2] = 19.2f;
+                        camera->unk_30.x = 0.0f;
+                        camera->unk_30.y = 11.6f;
+                        camera->unk_30.z = -38.5f;
+                        camera->unk_3C.x = 0.0f;
+                        camera->unk_3C.y = 0.0f;
+                        camera->unk_3C.z = 19.2f;
                     } else {
-                        camera->unk_30[0] = 0.0f;
-                        camera->unk_30[1] = 9.6f;
-                        camera->unk_30[2] = -35.0f;
-                        camera->unk_3C[0] = 0.0f;
-                        camera->unk_3C[1] = 0.0f;
-                        camera->unk_3C[2] = 30.0f;
+                        camera->unk_30.x = 0.0f;
+                        camera->unk_30.y = 9.6f;
+                        camera->unk_30.z = -35.0f;
+                        camera->unk_3C.x = 0.0f;
+                        camera->unk_3C.y = 0.0f;
+                        camera->unk_3C.z = 30.0f;
                     }
                     break;
                 case SCREEN_MODE_3P_4P_SPLITSCREEN:
                     if (gModeSelection == BATTLE) {
-                        camera->unk_30[0] = 0.0f;
-                        camera->unk_30[1] = 11.6f;
-                        camera->unk_30[2] = -38.5f;
-                        camera->unk_3C[0] = 0.0f;
-                        camera->unk_3C[1] = 0.0f;
-                        camera->unk_3C[2] = 19.2f;
+                        camera->unk_30.x = 0.0f;
+                        camera->unk_30.y = 11.6f;
+                        camera->unk_30.z = -38.5f;
+                        camera->unk_3C.x = 0.0f;
+                        camera->unk_3C.y = 0.0f;
+                        camera->unk_3C.z = 19.2f;
                     } else {
-                        camera->unk_30[0] = 0.0f;
-                        camera->unk_30[1] = 9.0f;
-                        camera->unk_30[2] = -40.0f;
-                        camera->unk_3C[0] = 0.0f;
-                        camera->unk_3C[1] = 0.0f;
-                        camera->unk_3C[2] = 18.0f;
+                        camera->unk_30.x = 0.0f;
+                        camera->unk_30.y = 9.0f;
+                        camera->unk_30.z = -40.0f;
+                        camera->unk_3C.x = 0.0f;
+                        camera->unk_3C.y = 0.0f;
+                        camera->unk_3C.z = 18.0f;
                     }
                     break;
             }
@@ -231,35 +231,35 @@ void func_8001CA78(UNUSED Player* player, Camera* camera, Vec3f arg2, f32* arg3,
     TrackWaypoint* temp_s2;
 
     temp_s2 = &D_80164550[0][gWaypointCountByPathIndex[0] - 10];
-    sp68[0] = camera->unk_30[0];
-    sp68[1] = camera->unk_30[1];
-    sp68[2] = camera->unk_30[2];
-    sp5C[0] = camera->unk_3C[0];
-    sp5C[1] = camera->unk_3C[1];
-    sp5C[2] = camera->unk_3C[2];
-    arg2[0] = camera->lookAt.x;
-    arg2[1] = camera->lookAt.y;
-    arg2[2] = camera->lookAt.z;
+    sp68.x = camera->unk_30.x;
+    sp68.y = camera->unk_30.y;
+    sp68.z = camera->unk_30.z;
+    sp5C.x = camera->unk_3C.x;
+    sp5C.y = camera->unk_3C.y;
+    sp5C.z = camera->unk_3C.z;
+    arg2.x = camera->lookAt.x;
+    arg2.y = camera->lookAt.y;
+    arg2.z = camera->lookAt.z;
     calculate_orientation_matrix(sp74, 0, 1, 0, -0x00008000);
     mtxf_translate_vec3f_mat3(sp5C, sp74);
     if (GetCourse() == GetToadsTurnpike()) {
-        var_f14 = sp5C[0];
+        var_f14 = sp5C.x;
     } else {
-        var_f14 = sp5C[0] + temp_s2->posX;
+        var_f14 = sp5C.x + temp_s2->posX;
     }
-    temp_f16 = D_80165230[7] + sp5C[2];
-    temp_f18 = sp5C[1] + (temp_s2->posY + D_80164A30);
-    arg2[0] += (var_f14 - camera->lookAt.x) * 1;
-    arg2[1] += (temp_f18 - camera->lookAt.y) * 1;
-    arg2[2] += (temp_f16 - camera->lookAt.z) * 1;
+    temp_f16 = D_80165230[7] + sp5C.z;
+    temp_f18 = sp5C.y + (temp_s2->posY + D_80164A30);
+    arg2.x += (var_f14 - camera->lookAt.x) * 1;
+    arg2.y += (temp_f18 - camera->lookAt.y) * 1;
+    arg2.z += (temp_f16 - camera->lookAt.z) * 1;
     mtxf_translate_vec3f_mat3(sp68, sp74);
     if (GetCourse() == GetToadsTurnpike()) {
-        var_f14 = sp68[0];
+        var_f14 = sp68.x;
     } else {
-        var_f14 = sp68[0] + temp_s2->posX;
+        var_f14 = sp68.x + temp_s2->posX;
     }
-    temp_f16 = D_80165230[7] + sp68[2];
-    temp_f18 = sp68[1] + (temp_s2->posY + D_80164A30 + 6.0f);
+    temp_f16 = D_80165230[7] + sp68.z;
+    temp_f18 = sp68.y + (temp_s2->posY + D_80164A30 + 6.0f);
     move_f32_towards(&D_80164A30, 0, 0.02f);
     posX = camera->pos.x;
     *arg3 = ((var_f14 - posX) * 1) + posX;
@@ -359,43 +359,43 @@ void func_8001CCEC(Player* player, Camera* camera, Vec3f arg2, f32* arg3, f32* a
         move_f32_towards(&D_80164A90[index], 0, 0.04f);
         move_f32_towards(&D_80164AA0[index], 0, 0.04f);
     }
-    sp90[0] = camera->unk_30[0];
-    sp90[1] =
-        camera->unk_30[1] + (player->unk_DB4.unk1E * 0.85) - D_80164A48[index] + D_80164AA0[index] + (temp_f12 / 2);
-    sp90[2] = camera->unk_30[2] + temp_f0 + D_80164A38[index];
-    sp84[0] = camera->unk_3C[0];
-    sp84[1] = camera->unk_3C[1] + (player->unk_DB4.unk1E * 0.85) + temp_f12;
-    sp84[2] = camera->unk_3C[2] + temp_f0 - D_80164A90[index];
-    arg2[0] = camera->lookAt.x;
-    arg2[1] = camera->lookAt.y;
-    arg2[2] = camera->lookAt.z;
+    sp90.x = camera->unk_30.x;
+    sp90.y =
+        camera->unk_30.y + (player->unk_DB4.unk1E * 0.85) - D_80164A48[index] + D_80164AA0[index] + (temp_f12 / 2);
+    sp90.z = camera->unk_30.z + temp_f0 + D_80164A38[index];
+    sp84.x = camera->unk_3C.x;
+    sp84.y = camera->unk_3C.y + (player->unk_DB4.unk1E * 0.85) + temp_f12;
+    sp84.z = camera->unk_3C.z + temp_f0 - D_80164A90[index];
+    arg2.x = camera->lookAt.x;
+    arg2.y = camera->lookAt.y;
+    arg2.z = camera->lookAt.z;
     if ((player->effects & 0x01000000) == 0x01000000) {
-        sp84[2] /= 3.0f;
+        sp84.z /= 3.0f;
     }
     calculate_orientation_matrix(sp9C, 0, 1, 0, arg7);
     mtxf_translate_vec3f_mat3(sp84, sp9C);
 
-    x = player->pos.x + sp84[0];
-    z = player->pos.z + sp84[2];
-    y = player->pos.y + sp84[1];
+    x = player->pos.x + sp84.x;
+    z = player->pos.z + sp84.z;
+    y = player->pos.y + sp84.y;
 
-    arg2[0] += (x - camera->lookAt.x) * D_80164A78[index];
-    arg2[2] += ((z - camera->lookAt.z) * D_80164A78[index]);
+    arg2.x += (x - camera->lookAt.x) * D_80164A78[index];
+    arg2.z += ((z - camera->lookAt.z) * D_80164A78[index]);
 
     if ((((player->unk_094 / 18) * 216) <= 5.0f) && ((player->effects & 2) == 2)) {
-        arg2[1] += ((y - camera->lookAt.y) * 0.02);
+        arg2.y += ((y - camera->lookAt.y) * 0.02);
     } else {
-        arg2[1] += ((y - camera->lookAt.y) * 0.5);
+        arg2.y += ((y - camera->lookAt.y) * 0.5);
     }
     mtxf_translate_vec3f_mat3(sp90, sp9C);
-    x = player->pos.x + sp90[0];
-    z = player->pos.z + sp90[2];
+    x = player->pos.x + sp90.x;
+    z = player->pos.z + sp90.z;
     if ((player->effects & 0x01000000) != 0x01000000) {
-        var_f0 = player->pos.y + sp90[1];
+        var_f0 = player->pos.y + sp90.y;
         // permute
         y = var_f0;
     } else {
-        y = player->unk_074 + player->boundingBoxSize + sp90[1];
+        y = player->unk_074 + player->boundingBoxSize + sp90.y;
     }
 
     *arg3 = camera->pos.x + ((x - camera->pos.x) * D_80164A78[index]);
@@ -431,29 +431,29 @@ void func_8001D53C(Player* player, Camera* camera, Vec3f arg2, f32* arg3, f32* a
         move_f32_towards(&camera->unk_A0, 0.0f, 0.06f);
     }
     thing = D_801652A0[arg7];
-    sp68[0] = camera->unk_30[0];
-    sp68[1] = camera->unk_30[1];
-    sp68[2] = camera->unk_30[2];
-    sp5C[0] = camera->unk_3C[0];
-    sp5C[1] = camera->unk_3C[1] + camera->unk_A0;
-    sp5C[2] = camera->unk_3C[2];
-    arg2[0] = camera->lookAt.x;
-    arg2[1] = camera->lookAt.y;
-    arg2[2] = camera->lookAt.z;
+    sp68.x = camera->unk_30.x;
+    sp68.y = camera->unk_30.y;
+    sp68.z = camera->unk_30.z;
+    sp5C.x = camera->unk_3C.x;
+    sp5C.y = camera->unk_3C.y + camera->unk_A0;
+    sp5C.z = camera->unk_3C.z;
+    arg2.x = camera->lookAt.x;
+    arg2.y = camera->lookAt.y;
+    arg2.z = camera->lookAt.z;
     calculate_orientation_matrix(sp74, 0.0f, 1.0f, 0.0f, arg6);
     mtxf_translate_vec3f_mat3(sp5C, sp74);
-    stackPadding0 = player->pos.x + sp5C[0];
-    stackPadding2 = player->pos.z + sp5C[2];
-    stackPadding1 = player->pos.y + sp5C[1];
-    arg2[0] += (stackPadding0 - camera->lookAt.x) * 1;
-    arg2[2] += (stackPadding2 - camera->lookAt.z) * 1;
-    arg2[1] += (stackPadding1 - camera->lookAt.y) * 1;
+    stackPadding0 = player->pos.x + sp5C.x;
+    stackPadding1 = player->pos.y + sp5C.y;
+    stackPadding2 = player->pos.z + sp5C.z;
+    arg2.x += (stackPadding0 - camera->lookAt.x) * 1;
+    arg2.y += (stackPadding1 - camera->lookAt.y) * 1;
+    arg2.z += (stackPadding2 - camera->lookAt.z) * 1;
     mtxf_translate_vec3f_mat3(sp68, sp74);
-    stackPadding0 = player->pos.x + sp68[0];
-    stackPadding2 = player->pos.z + sp68[2];
-    stackPadding1 = sp68[1] + (player->unk_074 + 1.5);
+    stackPadding0 = player->pos.x + sp68.x;
+    stackPadding1 = sp68.y + (player->unk_074 + 1.5);
+    stackPadding2 = player->pos.z + sp68.z;
     if ((player->unk_0CA & 1) == 1) {
-        stackPadding1 = sp68[1] + (thing + 10.0f);
+        stackPadding1 = sp68.y + (thing + 10.0f);
     }
     *arg3 = stackPadding0;
     *arg4 = stackPadding1;
@@ -471,33 +471,33 @@ void func_8001D794(Player* player, Camera* camera, Vec3f arg2, f32* arg3, f32* a
     f32 test2;
     f32 test3;
 
-    sp60[0] = camera->unk_30[0];
-    sp60[1] = camera->unk_30[1];
-    sp60[2] = camera->unk_30[2] - 6;
+    sp60.x = camera->unk_30.x;
+    sp60.y = camera->unk_30.y;
+    sp60.z = camera->unk_30.z - 6;
 
-    sp54[0] = camera->unk_3C[0];
-    sp54[1] = camera->unk_3C[1];
-    sp54[2] = camera->unk_3C[2];
+    sp54.x = camera->unk_3C.x;
+    sp54.y = camera->unk_3C.y;
+    sp54.z = camera->unk_3C.z;
 
-    arg2[0] = camera->lookAt.x;
-    arg2[1] = camera->lookAt.y;
-    arg2[2] = camera->lookAt.z;
+    arg2.x = camera->lookAt.x;
+    arg2.y = camera->lookAt.y;
+    arg2.z = camera->lookAt.z;
 
     calculate_orientation_matrix(sp6C, 0, 1, 0, arg6);
     mtxf_translate_vec3f_mat3(sp54, sp6C);
 
-    test1 = player->pos.x + sp54[0];
-    test3 = player->pos.z + sp54[2];
-    test2 = player->pos.y + sp54[1];
-    arg2[0] += (test1 - camera->lookAt.x) * 1;
-    arg2[1] += (test2 - camera->lookAt.y) * 1;
-    arg2[2] += (test3 - camera->lookAt.z) * 1;
+    test1 = player->pos.x + sp54.x;
+    test2 = player->pos.y + sp54.y;
+    test3 = player->pos.z + sp54.z;
+    arg2.x += (test1 - camera->lookAt.x) * 1;
+    arg2.y += (test2 - camera->lookAt.y) * 1;
+    arg2.z += (test3 - camera->lookAt.z) * 1;
 
     mtxf_translate_vec3f_mat3(sp60, sp6C);
 
-    test1 = player->pos.x + sp60[0];
-    test3 = player->pos.z + sp60[2];
-    test2 = player->pos.y + sp60[1];
+    test1 = player->pos.x + sp60.x;
+    test2 = player->pos.y + sp60.y;
+    test3 = player->pos.z + sp60.z;
     *arg3 = camera->pos.x + ((test1 - camera->pos.x) * 1);
     *arg4 = camera->pos.y + ((test2 - camera->pos.y) * 1);
     *arg5 = camera->pos.z + ((test3 - camera->pos.z) * 1);
@@ -579,43 +579,43 @@ void func_8001D944(Player* player, Camera* camera, Vec3f arg2, f32* arg3, f32* a
         move_f32_towards(&D_80164A90[index], 0, 0.02f);
         move_f32_towards(&D_80164AA0[index], 0, 0.02f);
     }
-    sp90[0] = camera->unk_30[0];
-    sp90[1] =
-        camera->unk_30[1] + (player->unk_DB4.unk1E * 0.85) - D_80164A48[index] + D_80164AA0[index] + (temp_f12 / 2);
-    sp90[2] = camera->unk_30[2] + temp_f0 + D_80164A38[index] + D_80164AA0[index];
-    sp84[0] = camera->unk_3C[0];
-    sp84[1] = camera->unk_3C[1] + (player->unk_DB4.unk1E * 0.85) + temp_f12;
-    sp84[2] = camera->unk_3C[2] + temp_f0 - D_80164A90[index];
-    arg2[0] = camera->lookAt.x;
-    arg2[1] = camera->lookAt.y;
-    arg2[2] = camera->lookAt.z;
+    sp90.x = camera->unk_30.x;
+    sp90.y =
+        camera->unk_30.y + (player->unk_DB4.unk1E * 0.85) - D_80164A48[index] + D_80164AA0[index] + (temp_f12 / 2);
+    sp90.z = camera->unk_30.z + temp_f0 + D_80164A38[index] + D_80164AA0[index];
+    sp84.x = camera->unk_3C.x;
+    sp84.y = camera->unk_3C.y + (player->unk_DB4.unk1E * 0.85) + temp_f12;
+    sp84.z = camera->unk_3C.z + temp_f0 - D_80164A90[index];
+    arg2.x = camera->lookAt.x;
+    arg2.y = camera->lookAt.y;
+    arg2.z = camera->lookAt.z;
     if ((player->effects & 0x01000000) == 0x01000000) {
-        sp84[2] /= 3.0f;
+        sp84.z /= 3.0f;
     }
     calculate_orientation_matrix(sp9C, 0, 1, 0, arg7);
     mtxf_translate_vec3f_mat3(sp84, sp9C);
 
-    x = player->pos.x + sp84[0];
-    z = player->pos.z + sp84[2];
-    y = player->pos.y + sp84[1];
+    x = player->pos.x + sp84.x;
+    y = player->pos.y + sp84.y;
+    z = player->pos.z + sp84.z;
 
-    arg2[0] += (x - camera->lookAt.x) * D_80164A78[index];
-    arg2[2] += ((z - camera->lookAt.z) * D_80164A78[index]);
+    arg2.x += (x - camera->lookAt.x) * D_80164A78[index];
+    arg2.z += ((z - camera->lookAt.z) * D_80164A78[index]);
 
     if ((((player->unk_094 / 18) * 216) <= 5.0f) && ((player->effects & 2) == 2)) {
-        arg2[1] += ((y - camera->lookAt.y) * 0.02);
+        arg2.y += ((y - camera->lookAt.y) * 0.02);
     } else {
-        arg2[1] += ((y - camera->lookAt.y) * 0.5);
+        arg2.y += ((y - camera->lookAt.y) * 0.5);
     }
     mtxf_translate_vec3f_mat3(sp90, sp9C);
-    x = player->pos.x + sp90[0];
-    z = player->pos.z + sp90[2];
+    x = player->pos.x + sp90.x;
+    z = player->pos.z + sp90.z;
     if ((player->effects & 0x01000000) != 0x01000000) {
-        var_f0 = player->pos.y + sp90[1];
+        var_f0 = player->pos.y + sp90.y;
         // permute
         y = var_f0;
     } else {
-        y = player->unk_074 + player->boundingBoxSize + sp90[1];
+        y = player->unk_074 + player->boundingBoxSize + sp90.y;
     }
 
     *arg3 = camera->pos.x + ((x - camera->pos.x) * D_80164A78[index]);
@@ -654,33 +654,33 @@ void func_8001E0C4(Camera* camera, Player* player, s8 arg2) {
     } else {
         var_a2 = (player->unk_078 / 3) + 0x87;
     }
-    adjust_angle(&camera->unk_2C, player->rotation[1], var_a2);
+    adjust_angle(&camera->unk_2C, player->rotation.y, var_a2);
     func_8001CA78(player, camera, sp60, &sp74, &sp70, &sp6C, camera->unk_2C, arg2);
     camera->someBitFlags &= ~0x0004;
     temp_t7 = check_bounding_collision(&camera->collision, test, sp74, sp70, sp6C);
-    if (camera->collision.surfaceDistance[2] < 0.0f) {
-        sp74 += -camera->collision.orientationVector[0] * camera->collision.surfaceDistance[2] * 1;
-        sp70 += -camera->collision.orientationVector[1] * camera->collision.surfaceDistance[2] * 0.5;
-        sp6C += -camera->collision.orientationVector[2] * camera->collision.surfaceDistance[2] * 1;
+    if (camera->collision.surfaceDistance.z < 0.0f) {
+        sp74 += -camera->collision.orientationVector.x * camera->collision.surfaceDistance.z * 1;
+        sp70 += -camera->collision.orientationVector.y * camera->collision.surfaceDistance.z * 0.5;
+        sp6C += -camera->collision.orientationVector.z * camera->collision.surfaceDistance.z * 1;
     }
-    if (camera->collision.surfaceDistance[0] < 0.0f) {
+    if (camera->collision.surfaceDistance.x < 0.0f) {
         camera->someBitFlags = camera->someBitFlags | 4 | 2;
-        sp74 += -camera->collision.unk48[0] * camera->collision.surfaceDistance[0] * 1.5;
-        sp70 += -camera->collision.unk48[1] * camera->collision.surfaceDistance[0] * 1;
-        sp6C += -camera->collision.unk48[2] * camera->collision.surfaceDistance[0] * 1.5;
+        sp74 += -camera->collision.unk48.x * camera->collision.surfaceDistance.x * 1.5;
+        sp70 += -camera->collision.unk48.y * camera->collision.surfaceDistance.x * 1;
+        sp6C += -camera->collision.unk48.z * camera->collision.surfaceDistance.x * 1.5;
     }
-    if (camera->collision.surfaceDistance[1] < 0.0f) {
+    if (camera->collision.surfaceDistance.y < 0.0f) {
         camera->someBitFlags = camera->someBitFlags | 4 | 2;
-        sp74 += -camera->collision.unk54[0] * camera->collision.surfaceDistance[1] * 1.5;
-        sp70 += -camera->collision.unk54[1] * camera->collision.surfaceDistance[1] * 1;
-        sp6C += -camera->collision.unk54[2] * camera->collision.surfaceDistance[1] * 1.5;
+        sp74 += -camera->collision.unk54.x * camera->collision.surfaceDistance.y * 1.5;
+        sp70 += -camera->collision.unk54.y * camera->collision.surfaceDistance.y * 1;
+        sp6C += -camera->collision.unk54.z * camera->collision.surfaceDistance.y * 1.5;
     }
     if ((temp_t7 == 0) && ((camera->someBitFlags & 2) != 2)) {
         camera->unk_AC = camera->unk_2C;
     }
-    camera->lookAt.x = sp60[0];
-    camera->lookAt.y = sp60[1];
-    camera->lookAt.z = sp60[2];
+    camera->lookAt.x = sp60.x;
+    camera->lookAt.y = sp60.y;
+    camera->lookAt.z = sp60.z;
     camera->pos.x = sp74;
     camera->pos.y = sp70;
     camera->pos.z = sp6C;
@@ -734,7 +734,7 @@ void func_8001E45C(Camera* camera, Player* player, s8 arg2) {
         }
     } else {
         move_s16_towards(&camera->unk_B0, 0, 0.05f);
-        var_a3 = ((s16) camera->unk_2C / 182) - ((s16) player->rotation[1] / 182);
+        var_a3 = ((s16) camera->unk_2C / 182) - ((s16) player->rotation.y / 182);
         if (player->unk_078 == 0) {
             if ((player->effects & 0x20) == 0x20) {
                 var_a3 = 0x02D8;
@@ -756,11 +756,11 @@ void func_8001E45C(Camera* camera, Player* player, s8 arg2) {
     if (((player->effects & 0x80) == 0x80) || ((player->effects & 0x40) == 0x40) ||
         ((player->effects & 0x4000) == 0x4000) || ((player->effects & 0x80000) == 0x80000) ||
         ((player->effects & 0x800000) == 0x800000) || (((player->effects & 0x20) == 0x20) && (player->unk_078 != 0)) ||
-        (player->collision.surfaceDistance[0] <= 0.0f) || (player->collision.surfaceDistance[1] <= 0.0f) ||
+        (player->collision.surfaceDistance.x <= 0.0f) || (player->collision.surfaceDistance.y <= 0.0f) ||
         ((player->effects & 0x20000) == 0x20000)) {
         func_8001CCEC(player, camera, sp64, &sp84, &sp80, &sp7C, &sp58, (s32) camera->unk_2C, (s32) arg2);
     } else {
-        adjust_angle(&camera->unk_2C, (s16) (player->rotation[1] + camera->unk_B0), var_a3);
+        adjust_angle(&camera->unk_2C, (s16) (player->rotation.y + camera->unk_B0), var_a3);
         func_8001CCEC(player, camera, sp64, &sp84, &sp80, &sp7C, &sp58, (s32) camera->unk_2C, (s32) arg2);
     }
     temp = 3;
@@ -771,9 +771,9 @@ void func_8001E45C(Camera* camera, Player* player, s8 arg2) {
     camera->pos.y = sp80;
     camera->pos.z = sp7C;
 
-    camera->lookAt.x = sp64[0];
-    camera->lookAt.y = sp64[1];
-    camera->lookAt.z = sp64[2];
+    camera->lookAt.x = sp64.x;
+    camera->lookAt.y = sp64.y;
+    camera->lookAt.z = sp64.z;
 
     temp_f12 = camera->lookAt.x - camera->pos.x;
     sp90 = camera->lookAt.y - camera->pos.y;
@@ -798,12 +798,12 @@ void func_8001E8E8(Camera* camera, Player* player, s8 arg2) {
     UNUSED f32 pad4[10];
 
     camera->unk_B0 = 0;
-    camera->unk_2C = player->rotation[1];
-    func_8001D53C(player, camera, sp5C, &sp7C, &sp78, &sp74, (s16) (s32) player->rotation[1], (s16) (s32) arg2);
+    camera->unk_2C = player->rotation.y;
+    func_8001D53C(player, camera, sp5C, &sp7C, &sp78, &sp74, (s16) (s32) player->rotation.y, (s16) (s32) arg2);
     check_bounding_collision(&camera->collision, 5.0f, sp7C, sp78, sp74);
-    camera->lookAt.x = sp5C[0];
-    camera->lookAt.y = sp5C[1];
-    camera->lookAt.z = sp5C[2];
+    camera->lookAt.x = sp5C.x;
+    camera->lookAt.y = sp5C.y;
+    camera->lookAt.z = sp5C.z;
     camera->pos.x = sp7C;
     camera->pos.y = sp78;
     camera->pos.z = sp74;
@@ -857,7 +857,7 @@ void func_8001EA0C(Camera* camera, Player* player, s8 arg2) {
         }
     } else {
         move_s16_towards(&camera->unk_B0, 0, 0.05f);
-        var_a3 = ((s16) camera->unk_2C / 182) - ((s16) player->rotation[1] / 182);
+        var_a3 = ((s16) camera->unk_2C / 182) - ((s16) player->rotation.y / 182);
         if (player->unk_078 == 0) {
             if ((player->effects & 0x20) == 0x20) {
                 var_a3 = 0x02D8;
@@ -879,11 +879,11 @@ void func_8001EA0C(Camera* camera, Player* player, s8 arg2) {
     if (((player->effects & 0x80) == 0x80) || ((player->effects & 0x40) == 0x40) ||
         ((player->effects & 0x4000) == 0x4000) || ((player->effects & 0x80000) == 0x80000) ||
         ((player->effects & 0x800000) == 0x800000) || (((player->effects & 0x20) == 0x20) && (player->unk_078 != 0)) ||
-        (player->collision.surfaceDistance[0] <= 0.0f) || (player->collision.surfaceDistance[1] <= 0.0f) ||
+        (player->collision.surfaceDistance.x <= 0.0f) || (player->collision.surfaceDistance.y <= 0.0f) ||
         ((player->effects & 0x20000) == 0x20000)) {
         func_8001D944(player, camera, sp64, &sp84, &sp80, &sp7C, &sp58, (s32) camera->unk_2C, (s32) arg2);
     } else {
-        adjust_angle(&camera->unk_2C, (s16) (player->rotation[1] + camera->unk_B0), var_a3);
+        adjust_angle(&camera->unk_2C, (s16) (player->rotation.y + camera->unk_B0), var_a3);
         func_8001D944(player, camera, sp64, &sp84, &sp80, &sp7C, &sp58, (s32) camera->unk_2C, (s32) arg2);
     }
     temp = 3;
@@ -894,9 +894,9 @@ void func_8001EA0C(Camera* camera, Player* player, s8 arg2) {
     camera->pos.y = sp80;
     camera->pos.z = sp7C;
 
-    camera->lookAt.x = sp64[0];
-    camera->lookAt.y = sp64[1];
-    camera->lookAt.z = sp64[2];
+    camera->lookAt.x = sp64.x;
+    camera->lookAt.y = sp64.y;
+    camera->lookAt.z = sp64.z;
 
     temp_f12 = camera->lookAt.x - camera->pos.x;
     sp90 = camera->lookAt.y - camera->pos.y;
@@ -1160,8 +1160,8 @@ void func_8001F87C(s32 cameraId) {
                 if ((playerIndex == 7) && (D_80164A2C == 0x0000003C)) {
                     D_80164A28 = 2;
                     D_80152300[id] = 1;
-                    cameras[id].rot.y = gPlayerOne[playerIndex].rotation[1];
-                    cameras[id].unk_2C = gPlayerOne[playerIndex].rotation[1];
+                    cameras[id].rot.y = gPlayerOne[playerIndex].rotation.y;
+                    cameras[id].unk_2C = gPlayerOne[playerIndex].rotation.y;
                 }
             }
         }
