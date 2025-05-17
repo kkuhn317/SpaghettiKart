@@ -919,6 +919,8 @@ void set_transform_matrix(Mat4 dest, Vec3f orientationVector, Vec3f positionVect
     Vec3f sp38;
     Vec3f sp2C;
 
+    FrameInterpolation_Record_set_transform_matrix(dest, orientationVector, positionVector, rotationAngle, scaleFactor);
+    
     vec3f_set_xyz(sp44, sins(rotationAngle), 0.0f, coss(rotationAngle));
     vec3f_normalize(orientationVector);
     vec3f_cross_product(sp38, orientationVector, sp44);

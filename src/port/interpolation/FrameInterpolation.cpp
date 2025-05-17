@@ -5,11 +5,13 @@
 #include <unordered_map>
 #include <math.h>
 #include "port/Engine.h"
-#include <math_util.h>
-#include "math_util_2.h"
 #include "FrameInterpolation.h"
 #include "matrix.h"
 
+extern "C" {
+#include "math_util.h"
+#include "math_util_2.h"
+}
 /*
 Frame interpolation.
 
@@ -162,7 +164,7 @@ union Data {
     } matrix_rotate_axis;
 
     struct {
-        Mat4 dest;
+        Mat4* dest;
         Vec3f orientationVector;
         Vec3f positionVector;
         u16 rotationAngle;
@@ -606,11 +608,11 @@ void FrameInterpolation_RecordMatrixMultVec3fNoTranslate(Mat4* matrix, Vec3f src
     // append(Op::MatrixMultVec3fNoTranslate).matrix_vec_no_translate = { matrix, src, dest };
 }
 
-void FrameInterpolation_Record_set_transform_matrix(Mat4 dest, Vec3f orientationVector, Vec3f positionVector, u16 rotationAngle,
+void FrameInterpolation_Record_set_transform_matrix(Mat4* dest, Vec3f orientationVector, Vec3f positionVector, u16 rotationAngle,
                           f32 scaleFactor) {
     if (!is_recording)
         return;
-    append(Op::SetTransformMatrix).set_transform_matrix_data = { dest[0][0], orientationVector[0], positionVector[0], rotationAngle, scaleFactor};
+    append(Op::SetTransformMatrix).set_transform_matrix_data = { dest, orientationVector[0], positionVector[0], (f32)rotationAngle, scaleFactor};
 }
 
 // Make a template for deref

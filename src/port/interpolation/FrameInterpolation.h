@@ -67,6 +67,9 @@ void FrameInterpolation_RecordSkinMatrixMtxFToMtx(MtxF* src, Mtx* dest);
 
 //void FrameInterpolation_RecordMatrixMultVec3fNoTranslate(Matrix* matrix, Vec3f src, Vec3f dest);
 
+void FrameInterpolation_Record_set_transform_matrix(Mat4* dest, Vec3f orientationVector, Vec3f positionVector, u16 rotationAngle,
+                          f32 scaleFactor);
+
 #ifdef __cplusplus
 }
 #endif
