@@ -266,9 +266,9 @@ void init_render_player(Player* player, Camera* camera, s8 playerId, s8 screenId
 void load_kart_texture_and_render_kart_particle_on_screen_one(void) {
     s16 i;
 
-    load_kart_texture_non_blocking(gPlayersToRenderPlayer.x, gPlayersToRenderPlayerId.x, gPlayersToRenderScreenId.x,
-                                   gPlayersToRenderScreenId.x,
-                                   D_801651D0[gPlayersToRenderScreenId.x][gPlayersToRenderPlayerId.x]);
+    load_kart_texture_non_blocking(gPlayersToRenderPlayer[0], gPlayersToRenderPlayerId[0], gPlayersToRenderScreenId[0],
+                                   gPlayersToRenderScreenId[0],
+                                   D_801651D0[gPlayersToRenderScreenId[0]][gPlayersToRenderPlayerId[0]]);
 
     osRecvMesg(&gDmaMesgQueue, &gMainReceivedMesg, OS_MESG_BLOCK);
 
@@ -328,9 +328,9 @@ void load_kart_texture_and_render_kart_particle_on_screen_one(void) {
 void load_kart_texture_and_render_kart_particle_on_screen_two(void) {
     s16 var_s0;
 
-    load_kart_texture_non_blocking(gPlayersToRenderPlayer.x, gPlayersToRenderPlayerId.x, gPlayersToRenderScreenId.x,
-                                   gPlayersToRenderScreenId.x,
-                                   D_801651D0[gPlayersToRenderScreenId.x][gPlayersToRenderPlayerId.x]);
+    load_kart_texture_non_blocking(gPlayersToRenderPlayer[0], gPlayersToRenderPlayerId[0], gPlayersToRenderScreenId[0],
+                                   gPlayersToRenderScreenId[0],
+                                   D_801651D0[gPlayersToRenderScreenId[0]][gPlayersToRenderPlayerId[0]]);
     osRecvMesg(&gDmaMesgQueue, &gMainReceivedMesg, OS_MESG_BLOCK);
     for (var_s0 = 1; var_s0 < gPlayersToRenderCount; var_s0++) {
         load_kart_texture_non_blocking(gPlayersToRenderPlayer[var_s0], gPlayersToRenderPlayerId[var_s0],
@@ -388,10 +388,9 @@ void load_kart_texture_and_render_kart_particle_on_screen_two(void) {
 void load_kart_texture_and_render_kart_particle_on_screen_three(void) {
     s16 var_s0;
 
-    load_kart_texture_non_blocking(gPlayersToRenderPlayer.x, gPlayersToRenderPlayerId.x + 4,
-                                   gPlayersToRenderScreenId.x, gPlayersToRenderScreenId.x - 2,
-                                   D_801651D0[gPlayersToRenderScreenId.x][gPlayersToRenderPlayerId.x]);
-    osRecvMesg(&gDmaMesgQueue, &gMainReceivedMesg, OS_MESG_BLOCK);
+    load_kart_texture_non_blocking(gPlayersToRenderPlayer[0], gPlayersToRenderPlayerId[0] + 4,
+                                   gPlayersToRenderScreenId[0], gPlayersToRenderScreenId[0] - 2,
+                                   D_801651D0[gPlayersToRenderScreenId[0]][gPlayersToRenderPlayerId[0]]);
     for (var_s0 = 1; var_s0 < gPlayersToRenderCount; var_s0++) {
         load_kart_texture_non_blocking(gPlayersToRenderPlayer[var_s0], gPlayersToRenderPlayerId[var_s0] + 4,
                                        gPlayersToRenderScreenId[var_s0], gPlayersToRenderScreenId[var_s0] - 2,
@@ -448,9 +447,9 @@ void load_kart_texture_and_render_kart_particle_on_screen_three(void) {
 void load_kart_texture_and_render_kart_particle_on_screen_four(void) {
     s16 var_s0;
 
-    load_kart_texture_non_blocking(gPlayersToRenderPlayer.x, gPlayersToRenderPlayerId.x + 4,
-                                   gPlayersToRenderScreenId.x, gPlayersToRenderScreenId.x - 2,
-                                   D_801651D0[gPlayersToRenderScreenId.x][gPlayersToRenderPlayerId.x]);
+    load_kart_texture_non_blocking(gPlayersToRenderPlayer[0], gPlayersToRenderPlayerId[0] + 4,
+                                   gPlayersToRenderScreenId[0], gPlayersToRenderScreenId[0] - 2,
+                                   D_801651D0[gPlayersToRenderScreenId[0]][gPlayersToRenderPlayerId[0]]);
     osRecvMesg(&gDmaMesgQueue, &gMainReceivedMesg, OS_MESG_BLOCK);
     for (var_s0 = 1; var_s0 < gPlayersToRenderCount; var_s0++) {
         load_kart_texture_non_blocking(gPlayersToRenderPlayer[var_s0], gPlayersToRenderPlayerId[var_s0] + 4,
@@ -903,40 +902,40 @@ void mtxf_translate_rotate(Mat4 dest, Vec3f pos, Vec3s orientation) {
     f32 sinZ = sins(orientation.z);
     f32 cosZ = coss(orientation.z);
 
-    dest.x.x = (cosY * cosZ) + ((sinX * sinY) * sinZ);
-    dest.y.x = (-cosY * sinZ) + ((sinX * sinY) * cosZ);
-    dest.z.x = cosX * sinY;
-    dest[3].x = pos.x;
-    dest.x.y = cosX * sinZ;
-    dest.y.y = cosX * cosZ;
-    dest.z.y = -sinX;
-    dest[3].y = pos.y;
-    dest.x.z = (-sinY * cosZ) + ((sinX * cosY) * sinZ);
-    dest.y.z = (sinY * sinZ) + ((sinX * cosY) * cosZ);
-    dest.z.z = cosX * cosY;
-    dest[3].z = pos.z;
-    dest.x[3] = 0.0f;
-    dest.y[3] = 0.0f;
-    dest.z[3] = 0.0f;
+    dest[0][0] = (cosY * cosZ) + ((sinX * sinY) * sinZ);
+    dest[1][0] = (-cosY * sinZ) + ((sinX * sinY) * cosZ);
+    dest[2][0] = cosX * sinY;
+    dest[3][0] = pos.x;
+    dest[0][1] = cosX * sinZ;
+    dest[1][1] = cosX * cosZ;
+    dest[2][1] = -sinX;
+    dest[3][1] = pos.y;
+    dest[0][2] = (-sinY * cosZ) + ((sinX * cosY) * sinZ);
+    dest[1][2] = (sinY * sinZ) + ((sinX * cosY) * cosZ);
+    dest[2][2] = cosX * cosY;
+    dest[3][2] = pos.z;
+    dest[0][3] = 0.0f;
+    dest[1][3] = 0.0f;
+    dest[2][3] = 0.0f;
     dest[3][3] = 1.0f;
 }
 
 UNUSED void func_80021F50(Mat4 arg0, Vec3f arg1) {
-    arg0[3].x += arg1.x;
-    arg0[3].y += arg1.y;
-    arg0[3].z += arg1.z;
+    arg0[3][0] += arg1.x;
+    arg0[3][1] += arg1.y;
+    arg0[3][2] += arg1.z;
 }
 
 void mtxf_scale2(Mat4 arg0, f32 scale) {
-    arg0.x.x *= scale;
-    arg0.y.x *= scale;
-    arg0.z.x *= scale;
-    arg0.x.y *= scale;
-    arg0.y.y *= scale;
-    arg0.z.y *= scale;
-    arg0.x.z *= scale;
-    arg0.y.z *= scale;
-    arg0.z.z *= scale;
+    arg0[0][0] *= scale;
+    arg0[1][0] *= scale;
+    arg0[2][0] *= scale;
+    arg0[0][1] *= scale;
+    arg0[1][1] *= scale;
+    arg0[2][1] *= scale;
+    arg0[0][2] *= scale;
+    arg0[1][2] *= scale;
+    arg0[2][2] *= scale;
 }
 
 /**
@@ -949,21 +948,21 @@ void mtxf_scale2(Mat4 arg0, f32 scale) {
  */
 UNUSED void failed_fixed_point_matrix_conversion(Mtx* dest, Mat4 src) {
     f32 toFixed = 65536.0f;
-    dest->m.x.x = src.x.x * toFixed;
-    dest->m.x.y = src.x.y * toFixed;
-    dest->m.x.z = src.x.z * toFixed;
-    dest->m.x[3] = src.x[3] * toFixed;
-    dest->m.y.x = src.y.x * toFixed;
-    dest->m.y.y = src.y.y * toFixed;
-    dest->m.y.z = src.y.z * toFixed;
-    dest->m.y[3] = src.y[3] * toFixed;
-    dest->m.z.x = src.z.x * toFixed;
-    dest->m.z.y = src.z.y * toFixed;
-    dest->m.z.z = src.z.z * toFixed;
-    dest->m.z[3] = src.z[3] * toFixed;
-    dest->m[3].x = src[3].x * toFixed;
-    dest->m[3].y = src[3].y * toFixed;
-    dest->m[3].z = src[3].z * toFixed;
+    dest->m[0][0] = src[0][0] * toFixed;
+    dest->m[0][1] = src[0][1] * toFixed;
+    dest->m[0][2] = src[0][2] * toFixed;
+    dest->m[0][3] = src[0][3] * toFixed;
+    dest->m[1][0] = src[1][0] * toFixed;
+    dest->m[1][1] = src[1][1] * toFixed;
+    dest->m[1][2] = src[1][2] * toFixed;
+    dest->m[1][3] = src[1][3] * toFixed;
+    dest->m[2][0] = src[2][0] * toFixed;
+    dest->m[2][1] = src[2][1] * toFixed;
+    dest->m[2][2] = src[2][2] * toFixed;
+    dest->m[2][3] = src[2][3] * toFixed;
+    dest->m[3][0] = src[3][0] * toFixed;
+    dest->m[3][1] = src[3][1] * toFixed;
+    dest->m[3][2] = src[3][2] * toFixed;
     dest->m[3][3] = src[3][3] * toFixed;
 }
 
@@ -1224,8 +1223,8 @@ void func_80022CA8(Player* player, s8 playerId, UNUSED s8 screenId, s8 arg3) {
  * short period of time. Perhaps does not do anything
  **/
 void func_80022D60(UNUSED Player* player, s8 playerId, UNUSED s8 screenId, s8 arg3) {
-    D_800DDBB4[playerId][arg3].v.ob.y = 21;
-    D_800DDBB4[playerId][arg3 + 0x3].v.ob.y = 21;
+    D_800DDBB4[playerId][arg3].v.ob[1] = 21;
+    D_800DDBB4[playerId][arg3 + 0x3].v.ob[1] = 21;
 }
 
 void func_80022DB4(Player* player, UNUSED s8 arg1) {
@@ -1255,12 +1254,12 @@ void func_80022DB4(Player* player, UNUSED s8 arg1) {
 void func_80022E84(Player* player, s8 playerId, UNUSED s8 screenId, s8 arg3) {
     s16 temp_v0 = player->unk_DB4.unk1E;
 
-    D_800DDBB4[playerId][arg3 + 0x0].v.ob.y = 18 - temp_v0;
-    D_800DDBB4[playerId][arg3 + 0x1].v.ob.y = 9 - temp_v0;
-    D_800DDBB4[playerId][arg3 + 0x2].v.ob.y = 9 - temp_v0;
-    D_800DDBB4[playerId][arg3 + 0x3].v.ob.y = 18 - temp_v0;
-    D_800DDBB4[playerId][arg3 + 0x4].v.ob.y = 9 - temp_v0;
-    D_800DDBB4[playerId][arg3 + 0x7].v.ob.y = 9 - temp_v0;
+    D_800DDBB4[playerId][arg3 + 0x0].v.ob[1] = 18 - temp_v0;
+    D_800DDBB4[playerId][arg3 + 0x1].v.ob[1] = 9 - temp_v0;
+    D_800DDBB4[playerId][arg3 + 0x2].v.ob[1] = 9 - temp_v0;
+    D_800DDBB4[playerId][arg3 + 0x3].v.ob[1] = 18 - temp_v0;
+    D_800DDBB4[playerId][arg3 + 0x4].v.ob[1] = 9 - temp_v0;
+    D_800DDBB4[playerId][arg3 + 0x7].v.ob[1] = 9 - temp_v0;
 }
 
 /**
@@ -1537,7 +1536,7 @@ void render_player_shadow(Player* player, s8 playerId, s8 screenId) {
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
     func_8004B414(0, 0, 0, 0xFF);
     gDPSetRenderMode(gDisplayListHead++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
-    gSPVertex(gDisplayListHead++, &D_800E51D0.x, 4, 0);
+    gSPVertex(gDisplayListHead++, &D_800E51D0[0], 4, 0);
 
     gSPDisplayList(gDisplayListHead++, common_square_plain_render);
     gDPLoadTextureBlock(gDisplayListHead++, (D_8018D474 + SOME_TEXTURE_POINTER_MATH), G_IM_FMT_I, G_IM_SIZ_8b, 64, 32,
@@ -1545,7 +1544,7 @@ void render_player_shadow(Player* player, s8 playerId, s8 screenId) {
                         G_TX_NOLOD);
     func_8004B414(0, 0, 0, 0xFF);
     gDPSetRenderMode(gDisplayListHead++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
-    gSPVertex(gDisplayListHead++, &D_800E5210.x, 4, 0);
+    gSPVertex(gDisplayListHead++, &D_800E5210[0], 4, 0);
 
     gSPDisplayList(gDisplayListHead++, common_square_plain_render);
     gSPTexture(gDisplayListHead++, 1, 1, 0, G_TX_RENDERTILE, G_OFF);
@@ -1565,7 +1564,7 @@ void render_player_shadow_credits(Player* player, s8 playerId, s8 arg2) {
     f32 spB0;
     f32 spAC;
     UNUSED Vec3f pad3;
-    Vec3f sp94 = { 9.0f, 7.0f, 5.0f };
+    float sp94[] = { 9.0f, 7.0f, 5.0f };
 
     temp_t9 = (u16) (player->unk_048[arg2] + player->rotation.y + player->unk_0C0) / 128;
     spC0 = -player->rotation.y - player->unk_0C0;
@@ -1596,7 +1595,7 @@ void render_player_shadow_credits(Player* player, s8 playerId, s8 arg2) {
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
     func_8004B414(0, 0, 0, 0x000000D0);
     gDPSetRenderMode(gDisplayListHead++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
-    gSPVertex(gDisplayListHead++, &D_800E51D0.x, 4, 0);
+    gSPVertex(gDisplayListHead++, &D_800E51D0[0], 4, 0);
 
     gSPDisplayList(gDisplayListHead++, common_square_plain_render);
     gDPLoadTextureBlock(gDisplayListHead++, (D_8018D474 + SOME_TEXTURE_POINTER_MATH), G_IM_FMT_I, G_IM_SIZ_8b, 64, 32,
@@ -1604,7 +1603,7 @@ void render_player_shadow_credits(Player* player, s8 playerId, s8 arg2) {
                         G_TX_NOLOD);
     func_8004B414(0, 0, 0, 0x000000D0);
     gDPSetRenderMode(gDisplayListHead++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
-    gSPVertex(gDisplayListHead++, &D_800E5210.x, 4, 0);
+    gSPVertex(gDisplayListHead++, &D_800E5210[0], 4, 0);
 
     gSPDisplayList(gDisplayListHead++, common_square_plain_render);
     gSPTexture(gDisplayListHead++, 1, 1, 0, G_TX_RENDERTILE, G_OFF);
@@ -1926,7 +1925,7 @@ void render_player_ice_reflection(Player* player, s8 playerId, s8 screenId, s8 a
 }
 
 void render_player(Player* player, s8 playerId, s8 screenId) {
-    UNUSED s32 pad.z;
+    UNUSED s32 pad[2];
     s32 temp_t1;
     s32 var_v1;
     OSMesg* sp34;
