@@ -1616,6 +1616,9 @@ void render_kart(Player* player, s8 playerId, s8 screenId, s8 arg3) {
     s16 temp_v1;
     s16 thing;
 
+    FrameInterpolation_RecordMatrixPush(mtx);
+
+
     if (player->unk_044 & 0x2000) {
         sp14C[0] = 0;
         sp14C[1] = player->unk_048[screenId];
@@ -1743,6 +1746,8 @@ void render_kart(Player* player, s8 playerId, s8 screenId, s8 arg3) {
     gSPDisplayList(gDisplayListHead++, common_square_plain_render);
     gSPTexture(gDisplayListHead++, 1, 1, 0, G_TX_RENDERTILE, G_OFF);
     gDPSetAlphaCompare(gDisplayListHead++, G_AC_NONE);
+
+    FrameInterpolation_RecordMatrixPop(mtx);
 }
 
 void render_ghost(Player* player, s8 playerId, s8 screenId, s8 arg3) {
