@@ -19,21 +19,21 @@ UNUSED void func_8003DC50(Player* player, Vec3f arg1) {
     // Praise Fake Match!!
     if (player) {};
     if (player->unk_230 <= player->unk_23C) {
-        if (player->collision.unk48[1] >= 0.1736) {
-            arg1[0] = (player->unk_206 / 182) * 0x78;
-            arg1[2] = -(player->slopeAccel / 182) * 0x78;
+        if (player->collision.unk48.y >= 0.1736) {
+            arg1.x = (player->unk_206 / 182) * 0x78;
+            arg1.z = -(player->slopeAccel / 182) * 0x78;
         } else {
-            arg1[0] = thing1;
-            arg1[2] = thing2;
+            arg1.x = thing1;
+            arg1.z = thing2;
         }
-    } else if (player->collision.unk48[1] >= 0.1736) {
-        arg1[0] = (player->unk_206 / 182) * 0x78;
-        arg1[2] = -(player->slopeAccel / 182) * 0x78;
+    } else if (player->collision.unk48.y >= 0.1736) {
+        arg1.x = (player->unk_206 / 182) * 0x78;
+        arg1.z = -(player->slopeAccel / 182) * 0x78;
     } else {
-        arg1[0] = thing1;
-        arg1[2] = thing2;
+        arg1.x = thing1;
+        arg1.z = thing2;
     }
-    arg1[1] = 0.0f;
+    arg1.y = 0.0f;
     mtxf_translate_vec3f_mat3(arg1, player->orientationMatrix);
 }
 

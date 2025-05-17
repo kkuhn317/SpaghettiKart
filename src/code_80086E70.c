@@ -113,8 +113,8 @@ s32 func_800871AC(s32 objectIndex, s32 arg1) {
 }
 
 UNUSED void func_80087258(s32 objectIndex, UNUSED s32 arg1, f32 arg2) {
-    gObjectList[objectIndex].offset[1] += arg2;
-    gObjectList[objectIndex].offset[2] -= arg2;
+    gObjectList[objectIndex].offset.y += arg2;
+    gObjectList[objectIndex].offset.z -= arg2;
 }
 
 UNUSED s32 get_angle_between_player_object(s32 objectIndex, Player* player) {
@@ -187,33 +187,33 @@ void func_80087620(s32 objectIndex) {
 }
 
 void func_800876A0(s32 objectIndex) {
-    gObjectList[objectIndex].offset[0] +=
+    gObjectList[objectIndex].offset.x +=
         gObjectList[objectIndex].unk_034 * sins(gObjectList[objectIndex].direction_angle[1]);
-    gObjectList[objectIndex].offset[2] +=
+    gObjectList[objectIndex].offset.z +=
         gObjectList[objectIndex].unk_034 * coss(gObjectList[objectIndex].direction_angle[1]);
 }
 
 void object_add_velocity_offset_xyz(s32 objectIndex) {
-    gObjectList[objectIndex].offset[0] += gObjectList[objectIndex].velocity.x;
-    gObjectList[objectIndex].offset[1] += gObjectList[objectIndex].velocity.y;
-    gObjectList[objectIndex].offset[2] += gObjectList[objectIndex].velocity.z;
+    gObjectList[objectIndex].offset.x += gObjectList[objectIndex].velocity.x;
+    gObjectList[objectIndex].offset.y += gObjectList[objectIndex].velocity.y;
+    gObjectList[objectIndex].offset.z += gObjectList[objectIndex].velocity.z;
 }
 
 void object_add_velocity_offset_xz(s32 objectIndex) {
-    gObjectList[objectIndex].offset[0] += gObjectList[objectIndex].velocity.x;
-    gObjectList[objectIndex].offset[2] += gObjectList[objectIndex].velocity.z;
+    gObjectList[objectIndex].offset.x += gObjectList[objectIndex].velocity.x;
+    gObjectList[objectIndex].offset.z += gObjectList[objectIndex].velocity.z;
 }
 
 UNUSED void object_add_velocity_offset_x(s32 objectIndex) {
-    gObjectList[objectIndex].offset[0] += gObjectList[objectIndex].velocity.x;
+    gObjectList[objectIndex].offset.x += gObjectList[objectIndex].velocity.x;
 }
 
 void object_add_velocity_offset_y(s32 objectIndex) {
-    gObjectList[objectIndex].offset[1] += gObjectList[objectIndex].velocity.y;
+    gObjectList[objectIndex].offset.y += gObjectList[objectIndex].velocity.y;
 }
 
 UNUSED void object_add_velocity_offset_z(s32 objectIndex) {
-    gObjectList[objectIndex].offset[2] += gObjectList[objectIndex].velocity.z;
+    gObjectList[objectIndex].offset.z += gObjectList[objectIndex].velocity.z;
 }
 
 void func_8008781C(s32 arg0) {
@@ -280,7 +280,7 @@ bool func_80087A0C(s32 objectIndex, s16 arg1, s16 arg2, s16 arg3, s16 arg4) {
         temp_v0 = arg2 - arg1;
         temp_a0 = arg4 - arg3;
         dist = sqrtf((temp_v0 * temp_v0) + (temp_a0 * temp_a0));
-        gObjectList[objectIndex].origin_pos[1] = 0.0f;
+        gObjectList[objectIndex].origin_pos.y = 0.0f;
         gObjectList[objectIndex].direction_angle[1] = atan2s(temp_v0, temp_a0);
         func_8008751C(objectIndex);
         gObjectList[objectIndex].unk_0B0 = dist / gObjectList[objectIndex].unk_034;

@@ -1211,12 +1211,12 @@ void func_80022BC4(Player* player, UNUSED s8 arg1) {
 void func_80022CA8(Player* player, s8 playerId, UNUSED s8 screenId, s8 arg3) {
     s16 temp_v0 = player->unk_DA4;
 
-    D_800DDBB4[playerId][arg3 + 0x0].v.ob.y = 18 - (temp_v0 * 2.3);
-    D_800DDBB4[playerId][arg3 + 0x1].v.ob.y = 9 - temp_v0;
-    D_800DDBB4[playerId][arg3 + 0x2].v.ob.y = 9 - temp_v0;
-    D_800DDBB4[playerId][arg3 + 0x3].v.ob.y = 18 - (temp_v0 * 2.3);
-    D_800DDBB4[playerId][arg3 + 0x4].v.ob.y = 9 - temp_v0;
-    D_800DDBB4[playerId][arg3 + 0x7].v.ob.y = 9 - temp_v0;
+    D_800DDBB4[playerId][arg3 + 0x0].v.ob[1] = 18 - (temp_v0 * 2.3);
+    D_800DDBB4[playerId][arg3 + 0x1].v.ob[1] = 9 - temp_v0;
+    D_800DDBB4[playerId][arg3 + 0x2].v.ob[1] = 9 - temp_v0;
+    D_800DDBB4[playerId][arg3 + 0x3].v.ob[1] = 18 - (temp_v0 * 2.3);
+    D_800DDBB4[playerId][arg3 + 0x4].v.ob[1] = 9 - temp_v0;
+    D_800DDBB4[playerId][arg3 + 0x7].v.ob[1] = 9 - temp_v0;
 }
 
 /**

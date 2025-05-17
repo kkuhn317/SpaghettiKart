@@ -318,7 +318,7 @@ void func_800C19D0(u8 arg0, u8 arg1, u8 arg2) {
             sp3C = (func_800C1480(arg0, arg1) * *temp_s0->unk14) * D_80192C48[arg0].current;
             sp3B = func_800C15D0(arg0, arg1, arg2);
             sp34 = func_800C1934(arg0, arg1) * *temp_s0->unk10;
-            sp33 = func_800C16E8(*temp_s0->unk00.x, *temp_s0->unk08, temp_s0->cameraId);
+            sp33 = func_800C16E8(*temp_s0->unk00->x, *temp_s0->unk08, temp_s0->cameraId);
             break;
     }
     temp_s0_2 = &D_8018EF18[arg2];
