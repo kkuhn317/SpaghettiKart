@@ -49,7 +49,7 @@ void FrameInterpolation_RecordMatrixPop(Mat4* matrix);
 
 void FrameInterpolation_RecordMatrixTranslate(Mat4* matrix, Vec3f b);
 
-//void FrameInterpolation_RecordMatrixScale(Matrix* matrix, f32 x, f32 y, f32 z, u8 mode);
+void FrameInterpolation_RecordMatrixScale(Mat4* matrix, f32 scale);
 
 void FrameInterpolation_RecordMatrixRotate1Coord(Mat4* matrix, u32 coord, s16 value);
 
@@ -67,8 +67,12 @@ void FrameInterpolation_RecordSkinMatrixMtxFToMtx(MtxF* src, Mtx* dest);
 
 //void FrameInterpolation_RecordMatrixMultVec3fNoTranslate(Matrix* matrix, Vec3f src, Vec3f dest);
 
-void FrameInterpolation_Record_set_transform_matrix(Mat4* dest, Vec3f orientationVector, Vec3f positionVector, u16 rotationAngle,
+void FrameInterpolation_RecordSetTransformMatrix(Mat4* dest, Vec3f orientationVector, Vec3f positionVector, u16 rotationAngle,
                           f32 scaleFactor);
+
+void FrameInterpolation_RecordSetMatrixTransformation(Mat4* dest, Vec3f location, Vec3su rotation, f32 scale);
+
+void FrameInterpolation_RecordCalculateOrientationMatrix(Mat3*, f32, f32, f32, s16);
 
 #ifdef __cplusplus
 }
