@@ -67,7 +67,7 @@ void update_actor_green_shell(struct ShellActor* shell) {
                         somePosVel[0] = 0.0f;
                         somePosVel[1] = 0.0f;
                         somePosVel[2] = -var_f2;
-                        func_802B64C4(somePosVel, player->rotation[1] + player->unk_0C0);
+                        func_802B64C4(somePosVel, player->rotation.y + player->unk_0C0);
                         shell->velocity.x = somePosVel[0];
                         shell->velocity.y = somePosVel[1];
                         shell->velocity.z = somePosVel[2];
@@ -119,7 +119,7 @@ void update_actor_green_shell(struct ShellActor* shell) {
                 somePosVel[0] = 0.0f;
                 somePosVel[1] = 0.0f;
                 somePosVel[2] = var_f2;
-                func_802B64C4(somePosVel, player->rotation[1] + player->unk_0C0);
+                func_802B64C4(somePosVel, player->rotation.y + player->unk_0C0);
                 shell->velocity.x = somePosVel[0];
                 shell->velocity.y = somePosVel[1];
                 shell->velocity.z = somePosVel[2];

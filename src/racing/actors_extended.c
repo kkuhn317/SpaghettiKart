@@ -194,7 +194,7 @@ void func_802B0788(s16 rawStickY, struct BananaBunchParent* banana_bunch, Player
         var_f12 = (player->unk_094 * 0.75f) + 4.5f + var_f0;
     }
     vec3f_set(velocity, 0.0f, var_f0, var_f12);
-    func_802B64C4(velocity, player->rotation[1] + player->unk_0C0);
+    func_802B64C4(velocity, player->rotation.y + player->unk_0C0);
     banana->velocity.x = velocity.x;
     banana->velocity.y = velocity.y;
     banana->velocity.z = velocity.z;
@@ -432,7 +432,7 @@ void update_actor_triple_shell(TripleShellParent* parent, s16 shellType) {
                         someVelocity[0] = 0;
                         someVelocity[1] = 0;
                         someVelocity[2] = 8;
-                        func_802B64C4(someVelocity, player->rotation[1] + player->unk_0C0);
+                        func_802B64C4(someVelocity, player->rotation.y + player->unk_0C0);
                         shell->velocity.x = someVelocity[0];
                         shell->velocity.y = someVelocity[1];
                         shell->velocity.z = someVelocity[2];
@@ -458,7 +458,7 @@ void update_actor_triple_shell(TripleShellParent* parent, s16 shellType) {
                         someVelocity[0] = 0;
                         someVelocity[1] = 0;
                         someVelocity[2] = 8;
-                        func_802B64C4(someVelocity, player->rotation[1] + player->unk_0C0);
+                        func_802B64C4(someVelocity, player->rotation.y + player->unk_0C0);
                         shell->velocity.x = someVelocity[0];
                         shell->velocity.y = someVelocity[1];
                         shell->velocity.z = someVelocity[2];
@@ -484,7 +484,7 @@ void update_actor_triple_shell(TripleShellParent* parent, s16 shellType) {
                         someVelocity[0] = 0;
                         someVelocity[1] = 0;
                         someVelocity[2] = 8;
-                        func_802B64C4(someVelocity, player->rotation[1] + player->unk_0C0);
+                        func_802B64C4(someVelocity, player->rotation.y + player->unk_0C0);
                         shell->velocity.x = someVelocity[0];
                         shell->velocity.y = someVelocity[1];
                         shell->velocity.z = someVelocity[2];
@@ -673,7 +673,7 @@ s32 use_red_shell_item(Player* player) {
     func_802B4E30((struct Actor*) shell);
     shell->state = HELD_SHELL;
     shell->rotVelocity = 0;
-    shell->rotAngle = player->rotation[1] - 0x8000;
+    shell->rotAngle = player->rotation.y - 0x8000;
     shell->playerId = player - gPlayerOne;
     return actorIndex;
 }

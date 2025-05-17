@@ -688,7 +688,7 @@ void func_800065D0(s32 playerId, Player* player) {
     a = (s16) gPathIndexByPlayerId[playerId];
     b = gNearestWaypointByPlayerId[playerId];
 
-    temp_t2 = (s16) ((s16) player->rotation[1] / 182);
+    temp_t2 = (s16) ((s16) player->rotation.y / 182);
     temp_t3 = (s16) ((s16) D_80164590[a][b] / 182);
 
     var_t1 = temp_t2 - temp_t3;
@@ -1775,9 +1775,9 @@ void func_80009B60(s32 playerId) {
                                     func_8000BBD8(stackPadding1A, D_80163090[playerId], D_80163448);
                                 }
                             }
-                            player->rotation[1] = -get_angle_between_two_vectors(player->pos, D_80162FA0);
+                            player->rotation.y = -get_angle_between_two_vectors(player->pos, D_80162FA0);
                         } else {
-                            player->rotation[1] = D_80164590[D_80163448][(D_801630E0 + 4) % D_80164430];
+                            player->rotation.y = D_80164590[D_80163448][(D_801630E0 + 4) % D_80164430];
                         }
                     }
                     func_8003680C(player, 0);
@@ -1900,8 +1900,8 @@ void func_80009B60(s32 playerId) {
                 // MISMATCH2
                 // This fixes part of the register allocation problems, makes fixing others
                 // harder though. Needs more investigation
-                // var_a2 = (-get_angle_between_two_vectors(player->pos, D_80162FA0)) - (var_a1 = player->rotation[1]);
-                stackPadding19 = -get_angle_between_two_vectors(player->pos, D_80162FA0) - player->rotation[1];
+                // var_a2 = (-get_angle_between_two_vectors(player->pos, D_80162FA0)) - (var_a1 = player->rotation.y);
+                stackPadding19 = -get_angle_between_two_vectors(player->pos, D_80162FA0) - player->rotation.y;
                 var_a1 = stackPadding19;
                 var_a2 = var_a1;
                 if ((s16) temp_f2 < var_a1) {
@@ -4846,13 +4846,13 @@ void initialize_toads_turnpike_vehicle(f32 speedA, f32 speedB, s32 numVehicles, 
         } else {
             veh->speed = speedB;
         }
-        veh->rotation[0] = 0;
-        veh->rotation[2] = 0;
+        veh->rotation.x = 0;
+        veh->rotation.z = 0;
         if (D_8016347A == 0) {
-            veh->rotation[1] = func_8000D6D0(veh->position, (s16*) &veh->waypointIndex, veh->speed,
+            veh->rotation.y = func_8000D6D0(veh->position, (s16*) &veh->waypointIndex, veh->speed,
                                              veh->someMultiplierTheSequel, 0, 3);
         } else {
-            veh->rotation[1] =
+            veh->rotation.y =
                 func_8000D940(veh->position, (s16*) &veh->waypointIndex, veh->speed, veh->someMultiplierTheSequel, 0);
         }
     }
@@ -4931,14 +4931,14 @@ void update_vehicle_follow_waypoint(VehicleStuff* vehicle) {
         var_a1 = func_8000D940(vehicle->position, (s16*) &vehicle->waypointIndex, vehicle->speed,
                                vehicle->someMultiplierTheSequel, 0);
     }
-    adjust_angle(&vehicle->rotation[1], var_a1, 100);
+    adjust_angle(&vehicle->rotation.y, var_a1, 100);
     temp_f0_3 = vehicle->position.x - sp5C;
     temp_f2_2 = vehicle->position.z - sp54;
     sp34[0] = vehicle->position.y;
     sp34[1] = 0.0f;
     sp34[2] = sqrtf((temp_f0_3 * temp_f0_3) + (temp_f2_2 * temp_f2_2));
     thing = get_angle_between_two_vectors(sp40, sp34);
-    adjust_angle(&vehicle->rotation[0], -thing, 100);
+    adjust_angle(&vehicle->rotation.x, -thing, 100);
     vehicle->velocity.x = vehicle->position.x - sp5C;
     vehicle->velocity.y = vehicle->position.y - sp58;
     vehicle->velocity.z = vehicle->position.z - sp54;
@@ -4946,13 +4946,13 @@ void update_vehicle_follow_waypoint(VehicleStuff* vehicle) {
     vehicleActor->pos.x = vehicle->position.x;
     vehicleActor->pos.y = vehicle->position.y;
     vehicleActor->pos.z = vehicle->position.z;
-    vehicleActor->rot.x = vehicle->rotation[0];
+    vehicleActor->rot.x = vehicle->rotation.x;
     if (gIsMirrorMode != 0) {
-        vehicleActor->rot.y = -vehicle->rotation[1];
+        vehicleActor->rot.y = -vehicle->rotation.y;
     } else {
-        vehicleActor->rot.y = vehicle->rotation[1];
+        vehicleActor->rot.y = vehicle->rotation.y;
     }
-    vehicleActor->rot.z = vehicle->rotation[2];
+    vehicleActor->rot.z = vehicle->rotation.z;
     vehicleActor->velocity.x = vehicle->velocity.x;
     vehicleActor->velocity.y = vehicle->velocity.y;
     vehicleActor->velocity.z = vehicle->velocity.z;
@@ -5426,7 +5426,7 @@ void func_80015314(s32 playerId, UNUSED f32 arg1, s32 cameraId) {
     temp_a0 = camera1;
     temp_a1 += playerId;
     temp_a0 += cameraId;
-    temp_a0->unk_2C = temp_a1->rotation[1];
+    temp_a0->unk_2C = temp_a1->rotation.y;
     func_80015390(temp_a0, temp_a1, 0);
 }
 
@@ -5459,7 +5459,7 @@ void func_80015390(Camera* camera, UNUSED Player* player, UNUSED s32 arg2) {
         var_a2 = 0xA0 + (temp_s1->unk_078 / 16);
     }
     if (!((temp_s1->effects & 0x80) || (temp_s1->effects & 0x40))) {
-        adjust_angle(&camera->unk_2C, temp_s1->rotation[1], var_a2);
+        adjust_angle(&camera->unk_2C, temp_s1->rotation.y, var_a2);
     }
     func_8001D794(temp_s1, camera, sp64, &sp84, &sp80, &sp7C, camera->unk_2C);
     check_bounding_collision(&camera->collision, 10.0f, sp84, sp80, sp7C);
@@ -7490,7 +7490,7 @@ void func_8001BE78(void) {
         temp_s1->pos.y =
             spawn_actor_on_surface((f32) temp_s0->posX, 2000.0f, (f32) temp_s0->posZ) + temp_s1->boundingBoxSize;
         temp_s1->pos.z = (f32) temp_s0->posZ;
-        temp_s1->rotation[1] = (s16) *D_80164590[i];
+        temp_s1->rotation.y = (s16) *D_80164590[i];
         func_8003680C(temp_s1, 0);
         temp_s1++;
         D_80163410[i] = 0;

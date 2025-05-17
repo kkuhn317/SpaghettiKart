@@ -268,7 +268,7 @@ void func_8008C73C(Player* player, s8 arg1) {
 
         player->unk_0B6 |= 0x80;
         // clang-format off
-        player->unk_0C0 = 0; player->unk_07C = 0; player->unk_078 = 0; player->unk_0AE = player->rotation[1]; player->unk_0B2 = 2;
+        player->unk_0C0 = 0; player->unk_07C = 0; player->unk_078 = 0; player->unk_0AE = player->rotation.y; player->unk_0B2 = 2;
         // clang-format on
         D_80165190[0][arg1] = 1;
         D_80165190[1][arg1] = 1;
@@ -294,7 +294,7 @@ void func_8008C8C4(Player* player, s8 playerId) {
     player->effects &= ~0x80;
     player->effects &= ~0x40;
     player->unk_0A8 = 0;
-    player->rotation[1] = player->unk_0AE;
+    player->rotation.y = player->unk_0AE;
     player->unk_07C = 0;
     player->unk_0C0 = 0;
     player->effects &= ~0x800;
@@ -335,7 +335,7 @@ void func_8008C9EC(Player* player, s8 arg1) {
         }
     }
     if ((player->effects & 0x80) == 0x80) {
-        player->rotation[1] -= sp30[player->unk_0B2];
+        player->rotation.y -= sp30[player->unk_0B2];
         D_8018D920[arg1] -= sp30[player->unk_0B2];
         stackPadding1 = (u16) D_8018D920[arg1] / (0x10000 / (0x168 / (sp30[player->unk_0B2] / 182)));
         if (stackPadding1 == 0) {
@@ -348,7 +348,7 @@ void func_8008C9EC(Player* player, s8 arg1) {
             }
         }
     } else {
-        player->rotation[1] += sp30[player->unk_0B2];
+        player->rotation.y += sp30[player->unk_0B2];
         D_8018D920[arg1] -= sp30[player->unk_0B2];
         stackPadding2 = (u16) D_8018D920[arg1] / (0x10000 / (0x168 / (sp30[player->unk_0B2] / 182)));
         if (stackPadding2 == 0) {
@@ -556,7 +556,7 @@ void remove_boost_effect(Player* player) {
 void func_8008D570(Player* player, s8 arg1) {
     clean_effect(player, arg1);
 
-    player->unk_0AE = player->rotation[1];
+    player->unk_0AE = player->rotation.y;
     player->effects |= 0x80000;
     player->effects &= ~0x10;
     player->soundEffects &= ~0x1000;
@@ -584,10 +584,10 @@ void func_8008D698(Player* player, s8 arg1) {
     s16 temp;
 
     if (player->unk_0B2 == 0) {
-        player->rotation[1] = player->unk_0AE;
+        player->rotation.y = player->unk_0AE;
         temp = 0;
     } else {
-        player->rotation[1] -= 1820;
+        player->rotation.y -= 1820;
         D_8018D920[arg1] -= 1820;
         temp = ((u16) D_8018D920[arg1] / 1820);
     }
@@ -606,7 +606,7 @@ void func_8008D760(Player* player) {
     player->unk_0A8 = 0;
     player->unk_07C = 0;
     player->unk_0C0 = 0;
-    player->rotation[1] = player->unk_0AE;
+    player->rotation.y = player->unk_0AE;
     player->effects &= 0xFFF7FFFF;
     player->kartGravity = gKartGravityTable[player->characterId];
     player->type &= 0xFF7F;
@@ -615,7 +615,7 @@ void func_8008D760(Player* player) {
 void func_8008D7B0(Player* player, s8 arg1) {
     clean_effect(player, arg1);
 
-    player->unk_0AE = player->rotation[1];
+    player->unk_0AE = player->rotation.y;
     player->effects |= 0x800000;
     player->effects &= ~0x10;
     player->soundEffects &= ~0x20000;
@@ -638,10 +638,10 @@ void func_8008D8B4(Player* player, s8 arg1) {
     s16 temp;
 
     if (player->unk_0B2 == 0) {
-        player->rotation[1] = player->unk_0AE;
+        player->rotation.y = player->unk_0AE;
         temp = 0;
     } else {
-        player->rotation[1] -= 1820;
+        player->rotation.y -= 1820;
         D_8018D920[arg1] -= 1820;
         temp = ((u16) (D_8018D920[arg1]) / 1820);
     }
@@ -660,7 +660,7 @@ void func_8008D97C(Player* player) {
     player->unk_0A8 = 0;
     player->unk_07C = 0;
     player->unk_0C0 = 0;
-    player->rotation[1] = player->unk_0AE;
+    player->rotation.y = player->unk_0AE;
     player->effects &= 0xFF7FFFFF;
     player->kartGravity = gKartGravityTable[player->characterId];
 }
@@ -837,7 +837,7 @@ void apply_hit_rotating_sound_effect(Player* player, s8 arg1) {
     player->unk_0B0 = 0;
     player->size = 1.0f;
     D_8018D930[arg1] = gCourseTimer;
-    player->unk_0AE = player->rotation[1];
+    player->unk_0AE = player->rotation.y;
     player->unk_0B2 = 2;
     player->unk_0C0 = 0;
     player->unk_07C = 0;
@@ -868,7 +868,7 @@ void apply_lightning_effect(Player* player, s8 arg1) {
         player->unk_0A8 = 0;
         player->unk_07C = 0;
         player->unk_0C0 = 0;
-        player->rotation[1] = player->unk_0AE;
+        player->rotation.y = player->unk_0AE;
         remove_lightning_effect(player, arg1);
         D_80165190[0][arg1] = 1;
         D_80165190[1][arg1] = 1;
@@ -876,7 +876,7 @@ void apply_lightning_effect(Player* player, s8 arg1) {
         D_80165190[3][arg1] = 1;
         apply_hit_sound_effect(player, arg1);
     } else if ((player->effects & 0x20000) == 0x20000) {
-        player->rotation[1] -= 0x5B0;
+        player->rotation.y -= 0x5B0;
         D_8018D920[arg1] -= 0x5B0;
         test = (u16) D_8018D920[arg1] / 1456;
         if (test == 0) {
@@ -886,7 +886,7 @@ void apply_lightning_effect(Player* player, s8 arg1) {
                 player->effects &= ~0x20000;
                 player->unk_07C = 0;
                 player->unk_0C0 = 0;
-                player->rotation[1] = player->unk_0AE;
+                player->rotation.y = player->unk_0AE;
                 D_80165190[0][arg1] = 1;
                 D_80165190[1][arg1] = 1;
                 D_80165190[2][arg1] = 1;
@@ -925,7 +925,7 @@ void remove_lightning_effect(Player* player, UNUSED s8 arg1) {
     player->effects |= 0x08000000;
 
     if ((player->effects & 0x20000) == 0x20000) {
-        player->rotation[1] = player->unk_0AE;
+        player->rotation.y = player->unk_0AE;
     }
 
     player->effects &= ~0x20000;
@@ -1238,7 +1238,7 @@ void remove_boost_ramp_wood_effect(Player* player) {
 void func_8008F104(Player* player, s8 arg1) {
     clean_effect(player, arg1);
 
-    player->unk_0AE = player->rotation[1];
+    player->unk_0AE = player->rotation.y;
     player->unk_0B2 = 2;
     player->unk_0C0 = 0;
     player->unk_07C = 0;
@@ -1258,7 +1258,7 @@ void func_8008F1B8(Player* player, s8 arg1) {
     player->unk_08C = (player->unk_210 * 0.05);
     if (player->unk_0B2 < 0) {
         if ((player->unk_044 & 0x80) == 0x80) {
-            player->rotation[1] += 182;
+            player->rotation.y += 182;
             D_8018D920[arg1] += 182;
 
             temp = ((u16) D_8018D920[arg1] / 182);
@@ -1269,7 +1269,7 @@ void func_8008F1B8(Player* player, s8 arg1) {
             }
         } else {
 
-            player->rotation[1] -= 182;
+            player->rotation.y -= 182;
             D_8018D920[arg1] -= 182;
             temp = ((u16) D_8018D920[arg1] / 182);
             if (temp == 180) {
@@ -1280,7 +1280,7 @@ void func_8008F1B8(Player* player, s8 arg1) {
         }
     } else {
         if ((player->unk_0B2 & 1) != 0) {
-            player->rotation[1] -= 364;
+            player->rotation.y -= 364;
             D_8018D920[arg1] -= 364;
             temp = ((u16) D_8018D920[arg1] / 364);
             if (temp < 71) {
@@ -1290,7 +1290,7 @@ void func_8008F1B8(Player* player, s8 arg1) {
             player->unk_044 &= ~0x40;
             return;
         }
-        player->rotation[1] += 364;
+        player->rotation.y += 364;
         D_8018D920[arg1] += 364;
         temp = ((u16) D_8018D920[arg1] / 364);
         if (temp >= 110) {
@@ -1774,7 +1774,7 @@ void func_80090778(Player* player) {
             player->unk_0A8 = 0;
             player->unk_07C = 0;
             player->unk_0C0 = 0;
-            player->rotation[1] = player->unk_0AE;
+            player->rotation.y = player->unk_0AE;
         }
         remove_lightning_effect(player, playerIndex);
     }
@@ -1883,7 +1883,7 @@ void func_80090970(Player* player, s8 playerId, s8 arg2) {
         case 2:
             func_80090178(player, playerId, sp44, sp38);
             // Fakematch found by Verti, who knows what's going on here
-            player->rotation[1] = (u16) -get_angle_between_two_vectors(sp44, sp38) & 0xFFFF;
+            player->rotation.y = (u16) -get_angle_between_two_vectors(sp44, sp38) & 0xFFFF;
             player->pos.x = sp44[0];
             player->pos.y = sp44[1] + 40.0f;
             player->pos.z = sp44[2];
@@ -1898,8 +1898,8 @@ void func_80090970(Player* player, s8 playerId, s8 arg2) {
             player->pos.x = sp44[0];
             player->pos.y = sp44[1] + 40.0f;
             player->pos.z = sp44[2];
-            player->pos.z = player->pos.z + coss((playerId * 0x1C70) - player->rotation[1]) * -5.0f;
-            player->pos.x = player->pos.x + sins((playerId * 0x1C70) - player->rotation[1]) * -5.0f;
+            player->pos.z = player->pos.z + coss((playerId * 0x1C70) - player->rotation.y) * -5.0f;
+            player->pos.x = player->pos.x + sins((playerId * 0x1C70) - player->rotation.y) * -5.0f;
             player->unk_0C6 += 8;
             if (player->unk_0C6 >= 0xF0) {
                 player->unk_0C6 = 0x00FF;
@@ -1910,8 +1910,8 @@ void func_80090970(Player* player, s8 playerId, s8 arg2) {
             break;
         case 4:
             if ((player->unk_0C8 == 0x0096) || (player->unk_0C8 == 0x00C8) || (player->unk_0C8 == 0x00FA)) {
-                player->pos.z = player->pos.z + coss(-player->rotation[1]) * -10.0f;
-                player->pos.x = player->pos.x + sins(-player->rotation[1]) * -10.0f;
+                player->pos.z = player->pos.z + coss(-player->rotation.y) * -10.0f;
+                player->pos.x = player->pos.x + sins(-player->rotation.y) * -10.0f;
             }
             if (player->unk_0C8 == 0x00FC) {
                 waypoint = D_80164550[0];
@@ -2002,7 +2002,7 @@ bool prevent_item_use(Player* player) {
 void func_800911B4(Player* player, s8 arg1) {
     s32 temp_v0;
 
-    player->unk_0AE = player->rotation[1];
+    player->unk_0AE = player->rotation.y;
     player->unk_044 |= 0x1800;
     player->unk_044 &= ~0x0400;
     player->unk_044 |= 0x2000;
@@ -2051,7 +2051,7 @@ void func_80091298(Player* player, s8 arg1) {
     if (player->unk_0B2 == 0) {
         var_v1 = 0;
     } else {
-        player->rotation[1] -= 0xE38;
+        player->rotation.y -= 0xE38;
         D_8018D920[arg1] -= 0xE38;
         var_v1 = (u16) D_8018D920[arg1] / 3640;
     }

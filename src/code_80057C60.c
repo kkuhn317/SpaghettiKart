@@ -1454,7 +1454,7 @@ void func_8005A14C(s32 playerId) {
         if (player->effects & 0x03000000) {
             func_80087D24(objectIndex, 6.0f, 1.5f, 0.0f);
         } else {
-            f32_step_towards(&gObjectList[objectIndex].offset[1], 0.0f, 1.0f);
+            f32_step_towards(&gObjectList[objectIndex].offset.y, 0.0f, 1.0f);
         }
         if ((player->type & PLAYER_INVISIBLE_OR_BOMB) || (player->effects & BOO_EFFECT)) {
             gObjectList[objectIndex].primAlpha = 0x0050;
@@ -1465,9 +1465,9 @@ void func_8005A14C(s32 playerId) {
             gObjectList[objectIndex].direction_angle[2] = 0;
             gObjectList[objectIndex].direction_angle[1] = 0;
             gObjectList[objectIndex].direction_angle[0] = 0;
-            gObjectList[objectIndex].offset[2] = 0.0f;
-            gObjectList[objectIndex].offset[1] = 0.0f;
-            gObjectList[objectIndex].offset[0] = 0.0f;
+            gObjectList[objectIndex].offset.z = 0.0f;
+            gObjectList[objectIndex].offset.y = 0.0f;
+            gObjectList[objectIndex].offset.x = 0.0f;
             gObjectList[objectIndex].sizeScaling = 0.6f;
             gObjectList[objectIndex].primAlpha = 0x00FF;
         }
@@ -2807,10 +2807,10 @@ void func_8005D6C0(Player* player) {
 }
 
 void func_8005D794(Player* player, UnkPlayerStruct258* arg1, f32 arg2, f32 arg3, f32 arg4, s8 surfaceType, s8 arg6) {
-    arg1->unk_000[2] = arg4;
-    arg1->unk_000[0] = arg2;
-    arg1->unk_000[1] = arg3;
-    arg1->unk_020 = -player->rotation[1];
+    arg1->unk_000.x = arg2;
+    arg1->unk_000.y = arg3;
+    arg1->unk_000.z = arg4;
+    arg1->unk_020 = -player->rotation.y;
     arg1->unk_014 = surfaceType;
     arg1->unk_010 = arg6;
 }
@@ -2994,7 +2994,7 @@ void func_8005DAF4(Player* player, s16 arg1, s32 arg2, UNUSED s8 arg3, UNUSED s8
                 player->unk_258[10 + arg1].unk_03A -= arg1 * 8;
                 player->unk_258[10 + arg1].unk_03C -= arg1 * 8;
             }
-            player->unk_258[10 + arg1].unk_000[1] -= 1.5;
+            player->unk_258[10 + arg1].unk_000.y -= 1.5;
             break;
         case SAND_OFFROAD:
             if ((arg1 == 0) &&
@@ -3256,7 +3256,7 @@ void func_8005ED48(Player* player, s16 arg1, s32 arg2, UNUSED s8 arg3, UNUSED s8
                 player->unk_258[10 + arg1].unk_03A -= arg1 * 8;
                 player->unk_258[10 + arg1].unk_03C -= arg1 * 8;
             }
-            player->unk_258[10 + arg1].unk_000[1] -= 1.5;
+            player->unk_258[10 + arg1].unk_000.y -= 1.5;
             break;
         case SAND_OFFROAD:
             if ((arg1 == 0) &&
@@ -3455,7 +3455,7 @@ void func_8005F90C(Player* player, s16 arg1, s32 arg2, UNUSED s8 arg3, UNUSED s8
                 player->unk_258[10 + arg1].unk_03A -= arg1 * 8;
                 player->unk_258[10 + arg1].unk_03C -= arg1 * 8;
             }
-            player->unk_258[10 + arg1].unk_000[1] -= 1.5;
+            player->unk_258[10 + arg1].unk_000.y -= 1.5;
             break;
         case SAND_OFFROAD:
             if ((arg1 == 0) &&
@@ -3613,10 +3613,10 @@ void func_80060504(Player* player, s16 arg1, s32 arg2, UNUSED s8 arg3, UNUSED s8
     }
     func_80062B18(&sp50, &sp4C, &sp48, 0.0f, 4.5f, (player->unk_258[arg1].unk_01E * var_f0) + -5.5, -thing2,
                   -player->unk_206 * 2);
-    player->unk_258[arg1].unk_000[0] = player->pos.x + sp50;
+    player->unk_258[arg1].unk_000.x = player->pos.x + sp50;
     sp4C = sp4C + (player->pos.y - player->boundingBoxSize);
-    player->unk_258[arg1].unk_000[2] = player->pos.z + sp48;
-    player->unk_258[arg1].unk_000[1] = player->unk_258[arg1].unk_024 + sp4C;
+    player->unk_258[arg1].unk_000.z = player->pos.z + sp48;
+    player->unk_258[arg1].unk_000.y = player->unk_258[arg1].unk_024 + sp4C;
     player->unk_258[arg1].unk_010 = 0;
 }
 
@@ -3645,9 +3645,9 @@ void func_800608E0(Player* player, s16 arg1, UNUSED s32 arg2, s8 arg3, UNUSED s8
     func_80062B18(&sp50, &sp4C, &sp48, 0.0f, sp4C,
                   ((-player->unk_258[arg1].unk_01E * (player->unk_094 / 18.0f) * 216.0f) / 10.0f) + -4.0f,
                   -player->unk_258[arg1].unk_020, -player->unk_206 * 2);
-    player->unk_258[arg1].unk_000[0] = player->pos.x + sp50;
-    player->unk_258[arg1].unk_000[2] = player->pos.z + sp48;
-    player->unk_258[arg1].unk_000[1] = player->pos.y + sp4C;
+    player->unk_258[arg1].unk_000.x = player->pos.x + sp50;
+    player->unk_258[arg1].unk_000.z = player->pos.z + sp48;
+    player->unk_258[arg1].unk_000.y = player->pos.y + sp4C;
 }
 
 void func_80060B14(Player* player, s16 arg1, s32 arg2, s8 arg3, s8 arg4) {
@@ -3684,18 +3684,18 @@ void func_80060BCC(Player* player, s16 arg1, s32 arg2, UNUSED s8 arg3, UNUSED s8
         func_8005D794(player, &player->unk_258[arg1 + 10], 0.0f, 0.0f, 0.0f, (s8) 0, (s8) 0);
         func_8005D7D8(&player->unk_258[arg1 + 10], 0x0B, 0.4f);
         func_8005D800(&player->unk_258[arg1 + 10], 0x00FFFFFF, 0x00FF);
-        player->unk_258[arg1 + 10].unk_000[2] = player->pos.z + (coss(sp54 * 0xB6) * -1.8);
-        player->unk_258[arg1 + 10].unk_000[0] = player->pos.x + (sins(sp54 * 0xB6) * -1.8);
-        player->unk_258[arg1 + 10].unk_000[1] = (player->pos.y - player->boundingBoxSize) + sp4C + 2.0f;
+        player->unk_258[arg1 + 10].unk_000.z = player->pos.z + (coss(sp54 * 0xB6) * -1.8);
+        player->unk_258[arg1 + 10].unk_000.x = player->pos.x + (sins(sp54 * 0xB6) * -1.8);
+        player->unk_258[arg1 + 10].unk_000.y = (player->pos.y - player->boundingBoxSize) + sp4C + 2.0f;
         player->unk_258[arg1 + 10].unk_018 = sp44 + 1.0f;
         player->unk_258[arg1 + 10].unk_00C = (sp48 + 2.0f) / 10.0f;
     } else if (player->unk_258[arg2 + 10].unk_01E > 0) {
         func_8005D794(player, &player->unk_258[arg1 + 10], 0.0f, 0.0f, 0.0f, (s8) 0, (s8) 0);
         func_8005D7D8(&player->unk_258[arg1 + 10], 0x0B, 0.4f);
         func_8005D800(&player->unk_258[arg1 + 10], 0x00FFFFFF, 0x00FF);
-        player->unk_258[arg1 + 10].unk_000[2] = player->pos.z + (coss(sp54 * 0xB6) * -1.8);
-        player->unk_258[arg1 + 10].unk_000[0] = player->pos.x + (sins(sp54 * 0xB6) * -1.8);
-        player->unk_258[arg1 + 10].unk_000[1] = (player->pos.y - player->boundingBoxSize) + sp4C + 2.0f;
+        player->unk_258[arg1 + 10].unk_000.z = player->pos.z + (coss(sp54 * 0xB6) * -1.8);
+        player->unk_258[arg1 + 10].unk_000.x = player->pos.x + (sins(sp54 * 0xB6) * -1.8);
+        player->unk_258[arg1 + 10].unk_000.y = (player->pos.y - player->boundingBoxSize) + sp4C + 2.0f;
         player->unk_258[arg1 + 10].unk_018 = sp44 + 1.0f;
         player->unk_258[arg1 + 10].unk_00C = (sp48 + 2.0f) / 10.0f;
     }
@@ -3711,9 +3711,9 @@ void func_80060F50(Player* player, s16 arg1, UNUSED s32 arg2, s8 arg3, UNUSED s8
         func_8005D800(&player->unk_258[arg1], 0xFFFFFF, 0xFF);
     }
 
-    player->unk_258[arg1].unk_000[2] = player->pos.z + (coss(player->unk_258[arg1].unk_020) * -5.8);
-    player->unk_258[arg1].unk_000[0] = player->pos.x + (sins(player->unk_258[arg1].unk_020) * -5.8);
-    player->unk_258[arg1].unk_000[1] = D_801652A0[arg3];
+    player->unk_258[arg1].unk_000.z = player->pos.z + (coss(player->unk_258[arg1].unk_020) * -5.8);
+    player->unk_258[arg1].unk_000.x = player->pos.x + (sins(player->unk_258[arg1].unk_020) * -5.8);
+    player->unk_258[arg1].unk_000.y = D_801652A0[arg3];
     player->unk_0DE &= ~0x0008;
 }
 
@@ -3733,9 +3733,9 @@ void func_80061130(Player* player, s16 arg1, UNUSED s32 arg2, UNUSED s8 arg3, UN
     func_8005D7D8(&player->unk_258[arg1], 7, 0.6f);
     func_8005D800(&player->unk_258[arg1], 0xFFFFFF, 0xD0);
 
-    player->unk_258[arg1].unk_000[2] = player->pos.z + (coss(player->unk_258[arg1].unk_020) * 6.0f);
-    player->unk_258[arg1].unk_000[0] = player->pos.x + (sins(player->unk_258[arg1].unk_020) * 6.0f);
-    player->unk_258[arg1].unk_000[1] = player->pos.y - 5.0f;
+    player->unk_258[arg1].unk_000.z = player->pos.z + (coss(player->unk_258[arg1].unk_020) * 6.0f);
+    player->unk_258[arg1].unk_000.x = player->pos.x + (sins(player->unk_258[arg1].unk_020) * 6.0f);
+    player->unk_258[arg1].unk_000.y = player->pos.y - 5.0f;
     player->unk_258[arg1].unk_040 = 0;
     player->unk_258[arg1].unk_024 = 0.0f;
 }
@@ -3757,14 +3757,14 @@ void func_800612F8(Player* player, UNUSED s32 arg1, UNUSED s32 arg2, UNUSED s8 a
     for (var_s2 = 0; var_s2 < 10; var_s2++) {
         player->unk_258[0x1E + var_s2].unk_01C = 1;
         player->unk_258[0x1E + var_s2].unk_028 = player->pos.y + 5.0f;
-        player->unk_258[0x1E + var_s2].unk_020 = (0x1C70 * var_s2) - player->rotation[1];
+        player->unk_258[0x1E + var_s2].unk_020 = (0x1C70 * var_s2) - player->rotation.y;
         player->unk_258[0x1E + var_s2].unk_024 = (random_int(0x0064U) / 100.0f) + 1.5;
         player->unk_258[0x1E + var_s2].unk_03A = 0;
         player->unk_258[0x1E + var_s2].unk_012 = 1;
         player->unk_258[0x1E + var_s2].unk_01E = 0;
         player->unk_258[0x1E + var_s2].unk_03E = 0x00FF;
-        player->unk_258[0x1E + var_s2].unk_000[2] = player->pos.z;
-        player->unk_258[0x1E + var_s2].unk_000[0] = player->pos.x;
+        player->unk_258[0x1E + var_s2].unk_000.z = player->pos.z;
+        player->unk_258[0x1E + var_s2].unk_000.x = player->pos.x;
     }
     player->unk_046 &= ~0x0008;
 }
@@ -3775,7 +3775,7 @@ void func_80061430(Player* player, UNUSED s32 arg1, UNUSED s32 arg2, UNUSED s8 a
     for (var_s2 = 0; var_s2 < 7; var_s2++) {
         player->unk_258[0x1E + var_s2].unk_01C = 1;
         player->unk_258[0x1E + var_s2].unk_028 = player->pos.y - 4.0f;
-        player->unk_258[0x1E + var_s2].unk_020 = (0x1C70 * var_s2) - player->rotation[1];
+        player->unk_258[0x1E + var_s2].unk_020 = (0x1C70 * var_s2) - player->rotation.y;
         // ???
         player->unk_258[0x1E + var_s2].unk_024 = (random_int(0x0064U) / 100.0f) + 1.9;
         player->unk_258[0x1E + var_s2].unk_024 = (random_int(0x0064U) / 100.0f) + 1.5;
@@ -3783,8 +3783,8 @@ void func_80061430(Player* player, UNUSED s32 arg1, UNUSED s32 arg2, UNUSED s8 a
         player->unk_258[0x1E + var_s2].unk_012 = 9;
         player->unk_258[0x1E + var_s2].unk_01E = 0;
         player->unk_258[0x1E + var_s2].unk_03E = 0x00FF;
-        player->unk_258[0x1E + var_s2].unk_000[2] = player->pos.z;
-        player->unk_258[0x1E + var_s2].unk_000[0] = player->pos.x;
+        player->unk_258[0x1E + var_s2].unk_000.z = player->pos.z;
+        player->unk_258[0x1E + var_s2].unk_000.x = player->pos.x;
     }
     player->unk_044 &= ~0x1000;
 }
@@ -3798,14 +3798,14 @@ void func_800615AC(Player* player, s16 arg1, UNUSED s32 arg2, UNUSED s8 arg3, UN
 
     if (random_int(3U) == 2.0f) {
         player->unk_258[0x1E + arg1].unk_01C = 1;
-        player->unk_258[0x1E + arg1].unk_000[0] = player->pos.x;
-        player->unk_258[0x1E + arg1].unk_000[2] = player->pos.z;
-        player->unk_258[0x1E + arg1].unk_020 = -player->rotation[1] + sp28[arg1];
+        player->unk_258[0x1E + arg1].unk_000.x = player->pos.x;
+        player->unk_258[0x1E + arg1].unk_000.z = player->pos.z;
+        player->unk_258[0x1E + arg1].unk_020 = -player->rotation.y + sp28[arg1];
         player->unk_258[0x1E + arg1].unk_018 = random_int(1U) + 2.0f;
         temp_f0 = random_int(4U);
         temp_f0 -= test;
         player->unk_258[0x1E + arg1].unk_014 = temp_f0;
-        player->unk_258[0x1E + arg1].unk_000[1] = player->pos.y + temp_f0;
+        player->unk_258[0x1E + arg1].unk_000.y = player->pos.y + temp_f0;
         player->unk_258[0x1E + arg1].unk_00C = 0.15f;
         player->unk_258[0x1E + arg1].unk_012 = 5;
         player->unk_258[0x1E + arg1].unk_01E = 0;
@@ -3840,9 +3840,9 @@ void func_80061754(Player* player, s16 arg1, UNUSED s32 arg2, UNUSED s32 arg3, U
         player->unk_258[0x1E + arg1].unk_03A += temp_s1;
         player->unk_258[0x1E + arg1].unk_03C += temp_s1;
     }
-    player->unk_258[0x1E + arg1].unk_000[2] = player->pos.z + (coss(sp54 * 0xB6) * -5.0f);
-    player->unk_258[0x1E + arg1].unk_000[0] = player->pos.x + (sins(sp54 * 0xB6) * -5.0f);
-    player->unk_258[0x1E + arg1].unk_000[1] = (player->pos.y - player->boundingBoxSize) + sp4C + 2.0f;
+    player->unk_258[0x1E + arg1].unk_000.z = player->pos.z + (coss(sp54 * 0xB6) * -5.0f);
+    player->unk_258[0x1E + arg1].unk_000.x = player->pos.x + (sins(sp54 * 0xB6) * -5.0f);
+    player->unk_258[0x1E + arg1].unk_000.y = (player->pos.y - player->boundingBoxSize) + sp4C + 2.0f;
     player->unk_258[0x1E + arg1].unk_018 = sp44 + 1.0f;
     player->unk_258[0x1E + arg1].unk_00C = sp48 + 1.0f;
 }
@@ -3870,17 +3870,17 @@ void func_80061A34(Player* player, s16 arg1, s32 arg2, UNUSED s8 arg3, UNUSED s8
         func_8005D794(player, &player->unk_258[0x1E + arg1], 0.0f, 0.0f, 0.0f, (s8) 0, (s8) 0);
         func_8005D7D8(&player->unk_258[0x1E + arg1], 7, 1.0f);
         func_8005D800(&player->unk_258[0x1E + arg1], 0x00FFFFFF, 0x00FF);
-        player->unk_258[0x1E + arg1].unk_000[2] = player->pos.z + (coss(sp54 * 0xB6) * -2.0);
-        player->unk_258[0x1E + arg1].unk_000[0] = player->pos.x + (sins(sp54 * 0xB6) * -2.0);
-        player->unk_258[0x1E + arg1].unk_000[1] = (player->pos.y - player->boundingBoxSize) + sp4C + 2.0f;
+        player->unk_258[0x1E + arg1].unk_000.z = player->pos.z + (coss(sp54 * 0xB6) * -2.0);
+        player->unk_258[0x1E + arg1].unk_000.x = player->pos.x + (sins(sp54 * 0xB6) * -2.0);
+        player->unk_258[0x1E + arg1].unk_000.y = (player->pos.y - player->boundingBoxSize) + sp4C + 2.0f;
         player->unk_258[0x1E + arg1].unk_00C = (sp48 + 2.0f) / 10.0f;
     } else if (player->unk_258[0x1E + arg2].unk_01E > 0) {
         func_8005D794(player, &player->unk_258[0x1E + arg1], 0.0f, 0.0f, 0.0f, (s8) 0, (s8) 0);
         func_8005D7D8(&player->unk_258[0x1E + arg1], 7, 1.0f);
         func_8005D800(&player->unk_258[0x1E + arg1], 0x00FFFFFF, 0x00FF);
-        player->unk_258[0x1E + arg1].unk_000[2] = player->pos.z + (coss(sp54 * 0xB6) * -2.0);
-        player->unk_258[0x1E + arg1].unk_000[0] = player->pos.x + (sins(sp54 * 0xB6) * -2.0);
-        player->unk_258[0x1E + arg1].unk_000[1] = (player->pos.y - player->boundingBoxSize) + (f32) sp4C + 2.0f;
+        player->unk_258[0x1E + arg1].unk_000.z = player->pos.z + (coss(sp54 * 0xB6) * -2.0);
+        player->unk_258[0x1E + arg1].unk_000.x = player->pos.x + (sins(sp54 * 0xB6) * -2.0);
+        player->unk_258[0x1E + arg1].unk_000.y = (player->pos.y - player->boundingBoxSize) + (f32) sp4C + 2.0f;
         player->unk_258[0x1E + arg1].unk_00C = (sp48 + 2.0f) / 10.0f;
     }
 }
@@ -3894,10 +3894,10 @@ void func_80061D4C(Player* player, s16 arg1, UNUSED s32 arg2, UNUSED s8 arg3, UN
 
     if (random_int(3U) == 2.0f) {
         player->unk_258[0x1E + arg1].unk_01C = 1;
-        player->unk_258[0x1E + arg1].unk_000[0] = player->pos.x;
-        player->unk_258[0x1E + arg1].unk_000[1] = player->pos.y + 2.0f;
-        player->unk_258[0x1E + arg1].unk_000[2] = player->pos.z;
-        player->unk_258[0x1E + arg1].unk_020 = -player->rotation[1] + sp20[arg1];
+        player->unk_258[0x1E + arg1].unk_000.x = player->pos.x;
+        player->unk_258[0x1E + arg1].unk_000.y = player->pos.y + 2.0f;
+        player->unk_258[0x1E + arg1].unk_000.z = player->pos.z;
+        player->unk_258[0x1E + arg1].unk_020 = -player->rotation.y + sp20[arg1];
         player->unk_258[0x1E + arg1].unk_018 = random_int(3U) + 2.0f;
         player->unk_258[0x1E + arg1].unk_014 = random_int(4U);
         player->unk_258[0x1E + arg1].unk_014 -= test;
@@ -3940,12 +3940,12 @@ void func_80061EF4(Player* player, s16 arg1, s32 arg2, UNUSED s8 arg3, UNUSED s8
             } else {
                 player->unk_258[0x1E + arg1].unk_020 -= 0x888;
             }
-            player->unk_258[0x1E + arg1].unk_000[2] =
+            player->unk_258[0x1E + arg1].unk_000.z =
                 player->pos.z +
-                (coss(player->unk_258[0x1E + arg1].unk_020 - player->rotation[1] - player->unk_0C0) * 5.0f);
-            player->unk_258[0x1E + arg1].unk_000[0] =
+                (coss(player->unk_258[0x1E + arg1].unk_020 - player->rotation.y - player->unk_0C0) * 5.0f);
+            player->unk_258[0x1E + arg1].unk_000.x =
                 player->pos.x +
-                (sins(player->unk_258[0x1E + arg1].unk_020 - player->rotation[1] - player->unk_0C0) * 5.0f);
+                (sins(player->unk_258[0x1E + arg1].unk_020 - player->rotation.y - player->unk_0C0) * 5.0f);
         } else if (player->unk_258[0x1E + arg2].unk_01E > 0) {
             func_8005D794(player, &player->unk_258[0x1E + arg1], 0.0f, var_f2, 0.0f, (s8) var_t0, (s8) var_t1);
             func_8005D7D8(&player->unk_258[0x1E + arg1], 3, 0.5f);
@@ -3956,12 +3956,12 @@ void func_80061EF4(Player* player, s16 arg1, s32 arg2, UNUSED s8 arg3, UNUSED s8
             } else {
                 player->unk_258[0x1E + arg1].unk_020 -= 0x888;
             }
-            player->unk_258[0x1E + arg1].unk_000[2] =
+            player->unk_258[0x1E + arg1].unk_000.z =
                 player->pos.z +
-                (coss(player->unk_258[0x1E + arg1].unk_020 - player->rotation[1] - player->unk_0C0) * 5.0f);
-            player->unk_258[0x1E + arg1].unk_000[0] =
+                (coss(player->unk_258[0x1E + arg1].unk_020 - player->rotation.y - player->unk_0C0) * 5.0f);
+            player->unk_258[0x1E + arg1].unk_000.x =
                 player->pos.x +
-                (sins(player->unk_258[0x1E + arg1].unk_020 - player->rotation[1] - player->unk_0C0) * 5.0f);
+                (sins(player->unk_258[0x1E + arg1].unk_020 - player->rotation.y - player->unk_0C0) * 5.0f);
         }
     }
 }
@@ -4003,12 +4003,12 @@ void func_800621BC(Player* player, s16 arg1, s32 arg2, UNUSED s8 arg3, UNUSED s8
                 player->unk_258[30 + arg1].unk_020 -= 2184;
             }
 
-            player->unk_258[30 + arg1].unk_000[2] =
+            player->unk_258[30 + arg1].unk_000.z =
                 player->pos.z +
-                (coss((player->unk_258[30 + arg1].unk_020 - player->rotation[1]) - player->unk_0C0) * 5.0f);
-            player->unk_258[30 + arg1].unk_000[0] =
+                (coss((player->unk_258[30 + arg1].unk_020 - player->rotation.y) - player->unk_0C0) * 5.0f);
+            player->unk_258[30 + arg1].unk_000.z =
                 player->pos.x +
-                (sins((player->unk_258[30 + arg1].unk_020 - player->rotation[1]) - player->unk_0C0) * 5.0f);
+                (sins((player->unk_258[30 + arg1].unk_020 - player->rotation.y) - player->unk_0C0) * 5.0f);
             return;
         }
 
@@ -4025,22 +4025,22 @@ void func_800621BC(Player* player, s16 arg1, s32 arg2, UNUSED s8 arg3, UNUSED s8
             }
 
             new_var = new_var2;
-            new_var->unk_258[30 + arg1].unk_000[2] =
+            new_var->unk_258[30 + arg1].unk_000.z =
                 new_var->pos.z +
-                (coss((new_var->unk_258[30 + arg1].unk_020 - new_var->rotation[1]) - new_var->unk_0C0) * 5.0f);
-            new_var->unk_258[30 + arg1].unk_000[0] =
+                (coss((new_var->unk_258[30 + arg1].unk_020 - new_var->rotation.y) - new_var->unk_0C0) * 5.0f);
+            new_var->unk_258[30 + arg1].unk_000.x =
                 new_var->pos.x +
-                (sins((new_var->unk_258[30 + arg1].unk_020 - new_var->rotation[1]) - new_var->unk_0C0) * 5.0f);
+                (sins((new_var->unk_258[30 + arg1].unk_020 - new_var->rotation.y) - new_var->unk_0C0) * 5.0f);
         }
     }
 }
 
 void func_80062484(Player* player, UnkPlayerStruct258* arg1, s32 arg2) {
     arg1->unk_01C = 1;
-    arg1->unk_000[1] = player->unk_074 + 1.0f;
-    arg1->unk_000[2] = player->pos.z;
-    arg1->unk_000[0] = player->pos.x;
-    arg1->unk_020 = (arg2 * 0x1998) - player->rotation[1];
+    arg1->unk_000.x = player->pos.x;
+    arg1->unk_000.y = player->unk_074 + 1.0f;
+    arg1->unk_000.z = player->pos.z;
+    arg1->unk_020 = (arg2 * 0x1998) - player->rotation.y;
     arg1->unk_012 = 4;
     arg1->unk_01E = 0;
 }
@@ -4137,7 +4137,7 @@ void func_800624D8(Player* player, UNUSED s32 arg1, UNUSED s32 arg2, UNUSED s8 a
 
 void func_800628C0(Player* player, UNUSED s8 arg1, UNUSED s8 arg2, s8 arg3) {
     player->unk_258[20 + arg3].unk_01C = 1;
-    player->unk_258[20 + arg3].unk_020 = -player->rotation[1];
+    player->unk_258[20 + arg3].unk_020 = -player->rotation.y;
     player->unk_258[20 + arg3].unk_012 = 2;
     player->unk_258[20 + arg3].unk_01E = 0;
     player->unk_258[20 + arg3].unk_00C = 0.2f;
@@ -4145,7 +4145,7 @@ void func_800628C0(Player* player, UNUSED s8 arg1, UNUSED s8 arg2, s8 arg3) {
 
 void func_80062914(Player* player, UNUSED s8 arg1, UNUSED s8 arg2, s8 arg3) {
     player->unk_258[20 + arg3].unk_01C = 1;
-    player->unk_258[20 + arg3].unk_020 = -player->rotation[1];
+    player->unk_258[20 + arg3].unk_020 = -player->rotation.y;
     player->unk_258[20 + arg3].unk_012 = 4;
     player->unk_258[20 + arg3].unk_01E = 0;
     player->unk_258[20 + arg3].unk_00C = 1.0f;
@@ -4153,7 +4153,7 @@ void func_80062914(Player* player, UNUSED s8 arg1, UNUSED s8 arg2, s8 arg3) {
 
 void func_80062968(Player* player, UNUSED s8 arg1, UNUSED s8 arg2, s8 arg3) {
     player->unk_258[20 + arg3].unk_01C = 1;
-    player->unk_258[20 + arg3].unk_020 = -player->rotation[1];
+    player->unk_258[20 + arg3].unk_020 = -player->rotation.y;
     player->unk_258[20 + arg3].unk_012 = 5;
     player->unk_258[20 + arg3].unk_01E = 0;
     player->unk_258[20 + arg3].unk_00C = 0.2f;
@@ -4161,11 +4161,11 @@ void func_80062968(Player* player, UNUSED s8 arg1, UNUSED s8 arg2, s8 arg3) {
 
 void func_800629BC(Player* player, UNUSED s8 arg1, UNUSED s8 arg2, s8 arg3) {
     player->unk_258[20 + arg3].unk_01C = 1;
-    player->unk_258[20 + arg3].unk_020 = -player->rotation[1];
+    player->unk_258[20 + arg3].unk_020 = -player->rotation.y;
     player->unk_258[20 + arg3].unk_012 = 6;
     player->unk_258[20 + arg3].unk_01E = 0;
     player->unk_258[20 + arg3].unk_00C = 0.2f;
-    player->unk_258[20 + arg3].unk_000[1] = 0.0f;
+    player->unk_258[20 + arg3].unk_000.y = 0.0f;
 }
 
 void func_80062A18(Player* player, s8 arg1, UNUSED s8 arg2, s8 arg3) {
@@ -4175,9 +4175,9 @@ void func_80062A18(Player* player, s8 arg1, UNUSED s8 arg2, s8 arg3) {
     player->unk_258[20 + arg3].unk_01E = 1;
     player->unk_258[20 + arg3].unk_020 = 0;
     player->unk_0B6 &= ~0x0080;
-    player->unk_258[20 + arg3].unk_000[2] = player->pos.z;
-    player->unk_258[20 + arg3].unk_000[0] = player->pos.x;
-    player->unk_258[20 + arg3].unk_000[1] = (player->pos.y + 4.0f);
+    player->unk_258[20 + arg3].unk_000.x = player->pos.x;
+    player->unk_258[20 + arg3].unk_000.y = (player->pos.y + 4.0f);
+    player->unk_258[20 + arg3].unk_000.z = player->pos.z;
 }
 
 void func_80062AA8(Player* player, UNUSED s8 arg1, UNUSED s8 arg2, s8 arg3) {
@@ -4185,7 +4185,7 @@ void func_80062AA8(Player* player, UNUSED s8 arg1, UNUSED s8 arg2, s8 arg3) {
     player->unk_258[20 + arg3].unk_012 = 5;
     player->unk_258[20 + arg3].unk_00C = 0.1f;
     player->unk_258[20 + arg3].unk_01E = 0;
-    player->unk_258[20 + arg3].unk_000[1] = (player->pos.y + player->boundingBoxSize) - 2.5;
+    player->unk_258[20 + arg3].unk_000.y = (player->pos.y + player->boundingBoxSize) - 2.5;
 }
 
 void func_80062B18(f32* outX, f32* outY, f32* outZ, f32 inX, f32 inY, f32 inZ, u16 theta, u16 phi) {
@@ -4260,10 +4260,10 @@ void func_80062C74(Player* player, s16 arg1, UNUSED s32 arg2, UNUSED s32 arg3) {
     }
     func_80062B18(&sp40, &sp38, &sp3C, 0.0f, sp48[player->characterId], (player->unk_258[arg1].unk_01E * var_f6) + -5.5,
                   -thing, -player->unk_206 * 2);
-    player->unk_258[arg1].unk_000[0] = player->pos.x + sp40;
+    player->unk_258[arg1].unk_000.x = player->pos.x + sp40;
     sp38 = (player->pos.y - player->boundingBoxSize) + sp38;
-    player->unk_258[arg1].unk_000[2] = player->pos.z + sp3C;
-    player->unk_258[arg1].unk_000[1] = player->unk_258[arg1].unk_024 + sp38;
+    player->unk_258[arg1].unk_000.z = player->pos.z + sp3C;
+    player->unk_258[arg1].unk_000.y = player->unk_258[arg1].unk_024 + sp38;
 }
 
 void func_80062F98(Player* player, s16 arg1, s8 arg2, UNUSED s8 arg3) {
@@ -4271,17 +4271,17 @@ void func_80062F98(Player* player, s16 arg1, s8 arg2, UNUSED s8 arg3) {
 
     temp_f0 = player->unk_258[10 + arg1].unk_018 / 10.0f;
     ++player->unk_258[10 + arg1].unk_01E;
-    player->unk_258[10 + arg1].unk_000[1] += temp_f0;
+    player->unk_258[10 + arg1].unk_000.y += temp_f0;
     if ((player->unk_0CA & 1) == 1) {
-        player->unk_258[10 + arg1].unk_000[1] += (temp_f0 + 0.3);
+        player->unk_258[10 + arg1].unk_000.y += (temp_f0 + 0.3);
         if ((player->unk_258[10 + arg1].unk_01E == 0x10) ||
-            ((D_801652A0[arg2] - player->unk_258[10 + arg1].unk_000[1]) < 3.0f)) {
+            ((D_801652A0[arg2] - player->unk_258[10 + arg1].unk_000.y) < 3.0f)) {
             player->unk_258[10 + arg1].unk_01C = 0;
             player->unk_258[10 + arg1].unk_01E = 0;
             player->unk_258[10 + arg1].unk_012 = 0;
         }
     } else if ((player->unk_258[10 + arg1].unk_01E == 0xA) ||
-               ((D_801652A0[arg2] - player->unk_258[10 + arg1].unk_000[1]) < 3.0f)) {
+               ((D_801652A0[arg2] - player->unk_258[10 + arg1].unk_000.y) < 3.0f)) {
         player->unk_258[10 + arg1].unk_01C = 0;
         player->unk_258[10 + arg1].unk_01E = 0;
         player->unk_258[10 + arg1].unk_012 = 0;
@@ -4290,9 +4290,9 @@ void func_80062F98(Player* player, s16 arg1, s8 arg2, UNUSED s8 arg3) {
 
 void func_800630C0(Player* player, s16 arg1, s8 arg2, UNUSED s8 arg3) {
     ++player->unk_258[arg1].unk_01E;
-    player->unk_258[arg1].unk_000[2] = player->pos.z + coss(player->unk_258[arg1].unk_020) * -5.8;
-    player->unk_258[arg1].unk_000[0] = player->pos.x + sins(player->unk_258[arg1].unk_020) * -5.8;
-    player->unk_258[arg1].unk_000[1] = D_801652A0[arg2];
+    player->unk_258[arg1].unk_000.z = player->pos.z + coss(player->unk_258[arg1].unk_020) * -5.8;
+    player->unk_258[arg1].unk_000.x = player->pos.x + sins(player->unk_258[arg1].unk_020) * -5.8;
+    player->unk_258[arg1].unk_000.y = D_801652A0[arg2];
     if (player->unk_258[arg1].unk_01E == 15) {
         player->unk_258[arg1].unk_01C = 0;
         player->unk_258[arg1].unk_01E = 0;
@@ -4333,11 +4333,11 @@ void func_80063268(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
     }
 
     player->unk_258[arg1].unk_024 += 0.25;
-    player->unk_258[arg1].unk_000[2] =
+    player->unk_258[arg1].unk_000.z =
         player->pos.z + (coss((player->unk_258[arg1].unk_020 + player->unk_258[arg1].unk_040)) * 5.5);
-    player->unk_258[arg1].unk_000[0] =
+    player->unk_258[arg1].unk_000.x =
         player->pos.x + (sins((player->unk_258[arg1].unk_020 + player->unk_258[arg1].unk_040)) * 5.5);
-    player->unk_258[arg1].unk_000[1] = ((player->pos.y - 5.0f) + player->unk_258[arg1].unk_024);
+    player->unk_258[arg1].unk_000.y = ((player->pos.y - 5.0f) + player->unk_258[arg1].unk_024);
     ++player->unk_258[arg1].unk_01E;
     player->unk_258[arg1].unk_00C += 0.05;
     player->unk_258[arg1].unk_03E -= 5;
@@ -4355,23 +4355,23 @@ void func_80063268(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
 
 void func_80063408(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
     if (player->unk_258[10 + arg1].unk_010 == 1) {
-        player->unk_258[10 + arg1].unk_000[2] =
+        player->unk_258[10 + arg1].unk_000.z =
             player->tyres[BACK_LEFT].pos.z +
             (player->unk_258[10 + arg1].unk_01E * -7) * coss(player->unk_258[10 + arg1].unk_020);
-        player->unk_258[10 + arg1].unk_000[0] =
+        player->unk_258[10 + arg1].unk_000.x =
             player->tyres[BACK_LEFT].pos.x +
             (player->unk_258[10 + arg1].unk_01E * -7) * sins(player->unk_258[10 + arg1].unk_020);
     } else {
-        player->unk_258[10 + arg1].unk_000[2] =
+        player->unk_258[10 + arg1].unk_000.z =
             player->tyres[BACK_RIGHT].pos.z +
             (player->unk_258[10 + arg1].unk_01E * -7) * coss(player->unk_258[10 + arg1].unk_020);
-        player->unk_258[10 + arg1].unk_000[0] =
+        player->unk_258[10 + arg1].unk_000.x =
             player->tyres[BACK_RIGHT].pos.x +
             (player->unk_258[10 + arg1].unk_01E * -7) * sins(player->unk_258[10 + arg1].unk_020);
     }
 
     ++player->unk_258[10 + arg1].unk_01E;
-    player->unk_258[10 + arg1].unk_000[1] += 1.0f;
+    player->unk_258[10 + arg1].unk_000.y += 1.0f;
 
     if (((player->effects & 0x80) != 0) || ((player->effects & 0x40) != 0)) {
         player->unk_258[10 + arg1].unk_01C = 0;
@@ -4404,14 +4404,14 @@ void func_800635D4(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
             func_80062B18(&sp44, &sp40, &sp3C, -2.0f, 0.0f,
                           (-player->unk_258[10 + arg1].unk_01E * (player->unk_094 / 18.0f) * 216.0f) / 16,
                           -player->unk_258[10 + arg1].unk_020, 2 * -player->unk_206);
-            player->unk_258[10 + arg1].unk_000[0] = player->tyres[BACK_LEFT].pos.x + sp44;
-            player->unk_258[10 + arg1].unk_000[2] = player->tyres[BACK_LEFT].pos.z + sp3C;
+            player->unk_258[10 + arg1].unk_000.x = player->tyres[BACK_LEFT].pos.x + sp44;
+            player->unk_258[10 + arg1].unk_000.z = player->tyres[BACK_LEFT].pos.z + sp3C;
         } else {
-            player->unk_258[10 + arg1].unk_000[2] =
+            player->unk_258[10 + arg1].unk_000.z =
                 player->tyres[BACK_LEFT].pos.z +
                 ((-player->unk_258[10 + arg1].unk_01E * (player->unk_094 / 18.0f) * 216.0f) / 16) *
                     coss(player->unk_258[10 + arg1].unk_020);
-            player->unk_258[10 + arg1].unk_000[0] =
+            player->unk_258[10 + arg1].unk_000.x =
                 player->tyres[BACK_LEFT].pos.x +
                 ((-player->unk_258[10 + arg1].unk_01E * (player->unk_094 / 18.0f) * 216.0f) / 16) *
                     sins(player->unk_258[10 + arg1].unk_020);
@@ -4420,21 +4420,21 @@ void func_800635D4(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
         func_80062B18(&sp44, &sp40, &sp3C, 2.0f, 0.0f,
                       (-player->unk_258[10 + arg1].unk_01E * (player->unk_094 / 18.0f) * 216.0f) / 16,
                       -player->unk_258[10 + arg1].unk_020, 2 * -player->unk_206);
-        player->unk_258[10 + arg1].unk_000[0] = player->tyres[BACK_RIGHT].pos.x + sp44;
-        player->unk_258[10 + arg1].unk_000[2] = player->tyres[BACK_RIGHT].pos.z + sp3C;
+        player->unk_258[10 + arg1].unk_000.x = player->tyres[BACK_RIGHT].pos.x + sp44;
+        player->unk_258[10 + arg1].unk_000.z = player->tyres[BACK_RIGHT].pos.z + sp3C;
     } else {
-        player->unk_258[10 + arg1].unk_000[2] =
+        player->unk_258[10 + arg1].unk_000.z =
             player->tyres[BACK_RIGHT].pos.z +
             ((-player->unk_258[10 + arg1].unk_01E * (player->unk_094 / 18.0f) * 216.0f) / 16) *
                 coss(player->unk_258[10 + arg1].unk_020);
-        player->unk_258[10 + arg1].unk_000[0] =
+        player->unk_258[10 + arg1].unk_000.x =
             player->tyres[BACK_RIGHT].pos.x +
             ((-player->unk_258[10 + arg1].unk_01E * (player->unk_094 / 18.0f) * 216.0f) / 16) *
                 sins(player->unk_258[10 + arg1].unk_020);
     }
 
     ++player->unk_258[10 + arg1].unk_01E;
-    player->unk_258[10 + arg1].unk_000[1] += 0.2;
+    player->unk_258[10 + arg1].unk_000.y += 0.2;
     if (((player->effects & 0x80) != 0) || ((player->effects & 0x40) != 0)) {
         player->unk_258[10 + arg1].unk_01C = 0;
         player->unk_258[10 + arg1].unk_01E = 0;
@@ -4466,22 +4466,22 @@ void func_800635D4(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
 
 void func_800639DC(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
     if (player->unk_258[10 + arg1].unk_010 == 1) {
-        player->unk_258[10 + arg1].unk_000[2] =
+        player->unk_258[10 + arg1].unk_000.z =
             player->tyres[BACK_LEFT].pos.z +
             (-1.8f * player->unk_258[10 + arg1].unk_01E) * coss(player->unk_258[10 + arg1].unk_020);
-        player->unk_258[10 + arg1].unk_000[0] =
+        player->unk_258[10 + arg1].unk_000.x =
             player->tyres[BACK_LEFT].pos.x +
             (-1.8f * player->unk_258[10 + arg1].unk_01E) * sins(player->unk_258[10 + arg1].unk_020);
     } else {
-        player->unk_258[10 + arg1].unk_000[2] =
+        player->unk_258[10 + arg1].unk_000.z =
             player->tyres[BACK_RIGHT].pos.z +
             (-1.8f * player->unk_258[10 + arg1].unk_01E) * coss(player->unk_258[10 + arg1].unk_020);
-        player->unk_258[10 + arg1].unk_000[0] =
+        player->unk_258[10 + arg1].unk_000.x =
             player->tyres[BACK_RIGHT].pos.x +
             (-1.8f * player->unk_258[10 + arg1].unk_01E) * sins(player->unk_258[10 + arg1].unk_020);
     }
     ++player->unk_258[10 + arg1].unk_01E;
-    player->unk_258[10 + arg1].unk_000[1] += 0.3;
+    player->unk_258[10 + arg1].unk_000.y += 0.3;
     if (player->unk_258[10 + arg1].unk_01E == 8) {
         player->unk_258[10 + arg1].unk_01C = 0;
         player->unk_258[10 + arg1].unk_01E = 0;
@@ -4509,23 +4509,23 @@ void func_800639DC(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
 
 void func_80063BD4(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
     if (player->unk_258[10 + arg1].unk_010 == 1) {
-        player->unk_258[10 + arg1].unk_000[2] =
+        player->unk_258[10 + arg1].unk_000.z =
             player->tyres[BACK_LEFT].pos.z +
             (-2 * player->unk_258[10 + arg1].unk_01E * coss(player->unk_258[10 + arg1].unk_020));
-        player->unk_258[10 + arg1].unk_000[0] =
+        player->unk_258[10 + arg1].unk_000.x =
             player->tyres[BACK_LEFT].pos.x +
             (-2 * player->unk_258[10 + arg1].unk_01E * sins(player->unk_258[10 + arg1].unk_020));
     } else {
-        player->unk_258[10 + arg1].unk_000[2] =
+        player->unk_258[10 + arg1].unk_000.z =
             player->tyres[BACK_RIGHT].pos.z +
             (-2 * player->unk_258[10 + arg1].unk_01E * coss(player->unk_258[10 + arg1].unk_020));
-        player->unk_258[10 + arg1].unk_000[0] =
+        player->unk_258[10 + arg1].unk_000.x  =
             player->tyres[BACK_RIGHT].pos.x +
             (-2 * player->unk_258[10 + arg1].unk_01E * sins(player->unk_258[10 + arg1].unk_020));
     }
 
     ++player->unk_258[10 + arg1].unk_01E;
-    player->unk_258[10 + arg1].unk_000[1] += 0.2;
+    player->unk_258[10 + arg1].unk_000.y += 0.2;
     if (player->unk_258[10 + arg1].unk_01E == 8) {
         player->unk_258[10 + arg1].unk_01C = 0;
         player->unk_258[10 + arg1].unk_01E = 0;
@@ -4538,20 +4538,20 @@ void func_80063BD4(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
 
 void func_80063D58(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
     if (player->unk_258[10 + arg1].unk_010 == 1) {
-        player->unk_258[10 + arg1].unk_000[2] =
+        player->unk_258[10 + arg1].unk_000.z =
             player->tyres[BACK_LEFT].pos.z +
             ((-player->unk_258[10 + arg1].unk_01E * (player->unk_094 / 18.0f) * 216.0f) / 20.0f) *
                 coss(player->unk_258[10 + arg1].unk_020);
-        player->unk_258[10 + arg1].unk_000[0] =
+        player->unk_258[10 + arg1].unk_000.x =
             player->tyres[BACK_LEFT].pos.x +
             ((-player->unk_258[10 + arg1].unk_01E * (player->unk_094 / 18.0f) * 216.0f) / 20.0f) *
                 sins(player->unk_258[10 + arg1].unk_020);
     } else {
-        player->unk_258[10 + arg1].unk_000[2] =
+        player->unk_258[10 + arg1].unk_000.z =
             player->tyres[BACK_RIGHT].pos.z +
             ((-player->unk_258[10 + arg1].unk_01E * (player->unk_094 / 18.0f) * 216.0f) / 20.0f) *
                 coss(player->unk_258[10 + arg1].unk_020);
-        player->unk_258[10 + arg1].unk_000[0] =
+        player->unk_258[10 + arg1].unk_000.x =
             player->tyres[BACK_RIGHT].pos.x +
             ((-player->unk_258[10 + arg1].unk_01E * (player->unk_094 / 18.0f) * 216.0f) / 20.0f) *
                 sins(player->unk_258[10 + arg1].unk_020);
@@ -4567,9 +4567,9 @@ void func_80063D58(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
     player->unk_258[10 + arg1].unk_00C += 0.2;
     if (player->unk_258[10 + arg1].unk_01E >= 4) {
         player->unk_258[10 + arg1].unk_03E -= 18;
-        player->unk_258[10 + arg1].unk_000[1] -= 0.1;
+        player->unk_258[10 + arg1].unk_000.y -= 0.1;
     } else {
-        player->unk_258[10 + arg1].unk_000[1] += 0.4;
+        player->unk_258[10 + arg1].unk_000.y += 0.4;
     }
 
     if (player->unk_258[10 + arg1].unk_03E <= 0) {
@@ -4591,9 +4591,9 @@ void func_80063FBC(Player* player, s16 arg1, UNUSED s32 arg2, UNUSED s32 arg3) {
                       -5.5 - (player->unk_258[10 + arg1].unk_01E * (((player->unk_094 / 18.0f) * 216.0f) / 15.0f)),
                       -player->unk_258[10 + arg1].unk_020, 0);
     }
-    player->unk_258[10 + arg1].unk_000[0] = player->pos.x + sp3C;
-    player->unk_258[10 + arg1].unk_000[2] = player->pos.z + sp38;
-    player->unk_258[10 + arg1].unk_000[1] = (player->pos.y - player->boundingBoxSize) + sp34;
+    player->unk_258[10 + arg1].unk_000.x = player->pos.x + sp3C;
+    player->unk_258[10 + arg1].unk_000.z = player->pos.z + sp38;
+    player->unk_258[10 + arg1].unk_000.y = (player->pos.y - player->boundingBoxSize) + sp34;
     player->unk_258[10 + arg1].unk_01E++;
     if (player->unk_258[10 + arg1].unk_01E == 6) {
         player->unk_258[10 + arg1].unk_01C = 0;
@@ -4615,9 +4615,9 @@ void func_80064184(Player* player, s16 arg1, s8 arg2, UNUSED s8 arg3) {
     func_80062B18(&sp44, &sp40, &sp3C, 0.0f, sp40,
                   -4.0f + ((-player->unk_258[arg1].unk_01E * (player->unk_094 / 18.0f) * 216.0f) / 10.0f),
                   -player->unk_258[arg1].unk_020, 2 * -player->unk_206);
-    player->unk_258[arg1].unk_000[0] = player->pos.x + sp44;
-    player->unk_258[arg1].unk_000[2] = player->pos.z + sp3C;
-    player->unk_258[arg1].unk_000[1] = player->pos.y + sp40;
+    player->unk_258[arg1].unk_000.x = player->pos.x + sp44;
+    player->unk_258[arg1].unk_000.z = player->pos.z + sp3C;
+    player->unk_258[arg1].unk_000.y = player->pos.y + sp40;
     ++player->unk_258[arg1].unk_01E;
     if ((player->unk_258[arg1].unk_01E == 12) || (D_801652A0[arg2] <= (player->pos.y - player->boundingBoxSize))) {
         player->unk_258[arg1].unk_01C = 0;
@@ -4637,11 +4637,11 @@ void func_80064184(Player* player, s16 arg1, s8 arg2, UNUSED s8 arg3) {
 }
 
 void func_800643A8(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
-    player->unk_258[10 + arg1].unk_000[2] =
+    player->unk_258[10 + arg1].unk_000.z =
         player->pos.z + (-1.2 * player->unk_258[10 + arg1].unk_01E * coss(player->unk_258[10 + arg1].unk_020));
-    player->unk_258[10 + arg1].unk_000[0] =
+    player->unk_258[10 + arg1].unk_000.x =
         player->pos.x + (-1.2 * player->unk_258[10 + arg1].unk_01E * sins(player->unk_258[10 + arg1].unk_020));
-    player->unk_258[10 + arg1].unk_000[1] = player->unk_258[10 + arg1].unk_000[1] + 0.5;
+    player->unk_258[10 + arg1].unk_000.y = player->unk_258[10 + arg1].unk_000.y + 0.5;
 
     ++player->unk_258[10 + arg1].unk_01E;
     if (player->unk_258[10 + arg1].unk_01E == 10) {
@@ -4668,12 +4668,12 @@ void func_800644E8(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
     }
     thing2 = player->unk_258[30 + arg1].unk_024;
     thing = player->unk_258[30 + arg1].unk_01E;
-    player->unk_258[30 + arg1].unk_000[2] =
+    player->unk_258[30 + arg1].unk_000.z =
         player->pos.z + (coss(player->unk_258[30 + arg1].unk_020) * (-0.7 * thing));
-    player->unk_258[30 + arg1].unk_000[0] =
+    player->unk_258[30 + arg1].unk_000.z =
         player->pos.x + (sins(player->unk_258[30 + arg1].unk_020) * (-0.7 * thing));
     player->unk_258[30 + arg1].unk_01E++;
-    player->unk_258[30 + arg1].unk_000[1] =
+    player->unk_258[30 + arg1].unk_000.y =
         player->unk_258[30 + arg1].unk_028 + (f32) ((thing * thing2) - (0.2 * (thing * thing)));
     if (player->unk_258[30 + arg1].unk_01E == 0x000A) {
         player->unk_258[30 + arg1].unk_01E = 0;
@@ -4696,12 +4696,12 @@ void func_80064664(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
 
     temp_v1 = player->unk_258[30 + arg1].unk_01E;
     temp_f4 = player->unk_258[30 + arg1].unk_024;
-    player->unk_258[30 + arg1].unk_000[2] =
+    player->unk_258[30 + arg1].unk_000.z =
         player->pos.z + (coss(player->unk_258[30 + arg1].unk_020) * (-0.6 * temp_v1));
-    player->unk_258[30 + arg1].unk_000[0] =
+    player->unk_258[30 + arg1].unk_000.z =
         player->pos.x + (sins(player->unk_258[30 + arg1].unk_020) * (-0.6 * temp_v1));
     player->unk_258[30 + arg1].unk_01E++;
-    player->unk_258[30 + arg1].unk_000[1] =
+    player->unk_258[30 + arg1].unk_000.y =
         player->unk_258[30 + arg1].unk_028 + (f32) ((temp_v1 * temp_f4) - (0.1 * (temp_v1 * temp_v1)));
     if (player->unk_258[30 + arg1].unk_01E == 0x0019) {
         player->unk_258[30 + arg1].unk_01E = 0;
@@ -4719,11 +4719,11 @@ void func_80064664(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
 void func_800647C8(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
 
     ++player->unk_258[30 + arg1].unk_01E;
-    player->unk_258[30 + arg1].unk_000[2] =
+    player->unk_258[30 + arg1].unk_000.z =
         player->pos.z + ((-0.8 * (player->unk_258[30 + arg1].unk_01E)) * coss(player->unk_258[30 + arg1].unk_020));
-    player->unk_258[30 + arg1].unk_000[0] =
+    player->unk_258[30 + arg1].unk_000.z =
         player->pos.x + ((-0.8 * (player->unk_258[30 + arg1].unk_01E)) * sins(player->unk_258[30 + arg1].unk_020));
-    player->unk_258[30 + arg1].unk_000[1] = (player->unk_074 + 2.0f);
+    player->unk_258[30 + arg1].unk_000.y = (player->unk_074 + 2.0f);
 
     if (player->unk_258[30 + arg1].unk_01E == 14) {
         player->unk_258[30 + arg1].unk_01C = 0;
@@ -4740,7 +4740,7 @@ void func_800647C8(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
 void func_800648E4(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
     ++player->unk_258[30 + arg1].unk_01E;
     player->unk_258[30 + arg1].unk_00C -= 0.06;
-    player->unk_258[30 + arg1].unk_000[1] += 0.1;
+    player->unk_258[30 + arg1].unk_000.y += 0.1;
     player->unk_258[30 + arg1].unk_03E -= 12;
 
     if (player->unk_258[30 + arg1].unk_03E <= 0) {
@@ -4756,7 +4756,7 @@ void func_800648E4(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
 
 void func_80064988(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
     ++player->unk_258[30 + arg1].unk_01E;
-    player->unk_258[30 + arg1].unk_000[1] -= 0.3;
+    player->unk_258[30 + arg1].unk_000.y -= 0.3;
 
     if (player->unk_258[30 + arg1].unk_01E == 10) {
         player->unk_258[30 + arg1].unk_01C = 0;
@@ -4769,11 +4769,11 @@ void func_800649F4(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
     f32 temp;
     temp = player->unk_258[30 + arg1].unk_018;
 
-    player->unk_258[30 + arg1].unk_000[2] =
+    player->unk_258[30 + arg1].unk_000.z =
         player->unk_21C + (((-temp) * player->unk_258[30 + arg1].unk_01E) * coss(player->unk_258[30 + arg1].unk_020));
-    player->unk_258[30 + arg1].unk_000[0] =
+    player->unk_258[30 + arg1].unk_000.z =
         player->unk_218 + (((-temp) * player->unk_258[30 + arg1].unk_01E) * sins(player->unk_258[30 + arg1].unk_020));
-    player->unk_258[30 + arg1].unk_000[1] = player->pos.y + player->unk_258[30 + arg1].unk_014;
+    player->unk_258[30 + arg1].unk_000.y = player->pos.y + player->unk_258[30 + arg1].unk_014;
     player->unk_258[30 + arg1].unk_00C += 0.04;
 
     ++player->unk_258[30 + arg1].unk_01E;
@@ -4795,11 +4795,11 @@ void func_80064B30(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
     f32 temp;
     temp = player->unk_258[30 + arg1].unk_018 * 1.2;
 
-    player->unk_258[30 + arg1].unk_000[2] =
+    player->unk_258[30 + arg1].unk_000.z =
         (player->pos.z + (-temp * player->unk_258[30 + arg1].unk_01E) * (coss(player->unk_258[30 + arg1].unk_020)));
-    player->unk_258[30 + arg1].unk_000[0] =
+    player->unk_258[30 + arg1].unk_000.z =
         (player->pos.x + (-temp * player->unk_258[30 + arg1].unk_01E) * (sins(player->unk_258[30 + arg1].unk_020)));
-    player->unk_258[30 + arg1].unk_000[1] += 0.1;
+    player->unk_258[30 + arg1].unk_000.y += 0.1;
 
     ++player->unk_258[30 + arg1].unk_01E;
     if (player->unk_258[30 + arg1].unk_01E == 10) {
@@ -4825,11 +4825,11 @@ void func_80064C74(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
         player->unk_258[30 + arg1].unk_020 -= 2184;
     }
 
-    player->unk_258[30 + arg1].unk_000[2] =
-        player->pos.z + (coss(player->unk_258[30 + arg1].unk_020 - player->rotation[1] - player->unk_0C0) * 5.0f);
-    player->unk_258[30 + arg1].unk_000[0] =
-        player->pos.x + (sins(player->unk_258[30 + arg1].unk_020 - player->rotation[1] - player->unk_0C0) * 5.0f);
-    player->unk_258[30 + arg1].unk_000[1] = player->pos.y - 1.0f;
+    player->unk_258[30 + arg1].unk_000.z =
+        player->pos.z + (coss(player->unk_258[30 + arg1].unk_020 - player->rotation.y - player->unk_0C0) * 5.0f);
+    player->unk_258[30 + arg1].unk_000.z =
+        player->pos.x + (sins(player->unk_258[30 + arg1].unk_020 - player->rotation.y - player->unk_0C0) * 5.0f);
+    player->unk_258[30 + arg1].unk_000.y = player->pos.y - 1.0f;
     player->unk_258[30 + arg1].unk_00C += 0.4;
     ++player->unk_258[30 + arg1].unk_01E;
 
@@ -4848,7 +4848,7 @@ void func_80064C74(Player* player, s16 arg1, UNUSED s8 arg2, UNUSED s8 arg3) {
 
 void func_80064DEC(Player* player, UNUSED s8 arg1, UNUSED s8 arg2, s8 arg3) {
 
-    player->unk_258[20 + arg3].unk_000[1] = player->pos.y;
+    player->unk_258[20 + arg3].unk_000.y = player->pos.y;
     ++player->unk_258[20 + arg3].unk_01E;
 
     if (player->unk_258[20 + arg3].unk_01E == 9) {
@@ -4900,7 +4900,7 @@ void func_80064F88(Player* player, UNUSED s8 arg1, UNUSED s8 arg2, s8 arg3) {
 void func_80065030(Player* player, UNUSED s8 arg1, UNUSED s8 arg2, s8 arg3) {
     ++player->unk_258[20 + arg3].unk_01E;
 
-    player->unk_258[20 + arg3].unk_000[1] += 0.8;
+    player->unk_258[20 + arg3].unk_000.y += 0.8;
     player->unk_258[20 + arg3].unk_00C += 0.4;
     if (player->unk_258[20 + arg3].unk_00C >= (f64) 1.5) {
         player->unk_258[20 + arg3].unk_00C = 1.5f;
@@ -4915,9 +4915,9 @@ void func_80065030(Player* player, UNUSED s8 arg1, UNUSED s8 arg2, s8 arg3) {
 }
 
 void func_800650FC(Player* player, UNUSED s8 arg1, UNUSED s8 arg2, s8 arg3) {
-    player->unk_258[20 + arg3].unk_000[2] = (f32) player->pos.z;
-    player->unk_258[20 + arg3].unk_000[0] = (f32) player->pos.x;
-    player->unk_258[20 + arg3].unk_000[1] = (f32) (player->pos.y + 4.0f);
+    player->unk_258[20 + arg3].unk_000.x = (f32) player->pos.x;
+    player->unk_258[20 + arg3].unk_000.y = (f32)(player->pos.y + 4.0f);
+    player->unk_258[20 + arg3].unk_000.z = (f32) player->pos.z;
     if ((player->effects & 0x80) == 0x80) {
         player->unk_258[20 + arg3].unk_020 += 4732;
     } else {
@@ -4980,12 +4980,12 @@ void func_8006538C(Player* player, s8 arg1, s16 arg2, s8 arg3) {
     s16 envBlue;
 
     if (player->unk_258[arg2].unk_01C == 1) {
-        spB4[0] = player->unk_258[arg2].unk_000[0];
-        spB4[1] = player->unk_258[arg2].unk_000[1];
-        spB4[2] = player->unk_258[arg2].unk_000[2];
-        spAC[0] = 0;
-        spAC[1] = player->unk_048[arg3];
-        spAC[2] = 0;
+        spB4.x = player->unk_258[arg2].unk_000.x;
+        spB4.y = player->unk_258[arg2].unk_000.y;
+        spB4.z = player->unk_258[arg2].unk_000.z;
+        spAC.x = 0;
+        spAC.y = player->unk_048[arg3];
+        spAC.z = 0;
         if ((player->effects & STAR_EFFECT) && (((s32) gCourseTimer - D_8018D930[arg1]) < 9)) {
             primRed = (primColors[1] >> 0x10) & 0xFF;
             primGreen = (primColors[1] >> 0x08) & 0xFF;
@@ -5035,12 +5035,12 @@ void func_800658A0(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
         green = player->unk_258[arg2].unk_03A;
         blue = player->unk_258[arg2].unk_03C;
         alpha = player->unk_258[arg2].unk_03E;
-        sp54[0] = player->unk_258[arg2].unk_000[0];
-        sp54[1] = player->unk_258[arg2].unk_000[1];
-        sp54[2] = player->unk_258[arg2].unk_000[2];
-        sp4C[0] = 0;
-        sp4C[1] = player->unk_048[arg3];
-        sp4C[2] = 0;
+        sp54.x = player->unk_258[arg2].unk_000.x;
+        sp54.y = player->unk_258[arg2].unk_000.y;
+        sp54.z = player->unk_258[arg2].unk_000.z;
+        sp4C.x = 0;
+        sp4C.y = player->unk_048[arg3];
+        sp4C.z = 0;
         func_800652D4(sp54, sp4C, player->unk_258[arg2].unk_00C * player->size);
         gSPDisplayList(gDisplayListHead++, D_0D008DB8);
         gDPLoadTextureBlock(gDisplayListHead++, D_8018D48C, G_IM_FMT_IA, G_IM_SIZ_8b, 32, 32, 0,
@@ -5197,12 +5197,12 @@ void func_800664E0(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
         green = player->unk_258[10 + arg2].unk_03A;
         blue = player->unk_258[10 + arg2].unk_03C;
         alpha = player->unk_258[10 + arg2].unk_03E;
-        sp54[0] = player->unk_258[10 + arg2].unk_000[0];
-        sp54[1] = player->unk_258[10 + arg2].unk_000[1];
-        sp54[2] = player->unk_258[10 + arg2].unk_000[2];
-        sp4C[0] = 0;
-        sp4C[1] = player->unk_048[arg3];
-        sp4C[2] = 0;
+        sp54.x = player->unk_258[10 + arg2].unk_000.x;
+        sp54.y = player->unk_258[10 + arg2].unk_000.y;
+        sp54.z = player->unk_258[10 + arg2].unk_000.z;
+        sp4C.x = 0;
+        sp4C.y = player->unk_048[arg3];
+        sp4C.z = 0;
         func_800652D4(sp54, sp4C, player->unk_258[10 + arg2].unk_00C * player->size);
         gSPDisplayList(gDisplayListHead++, D_0D008DB8);
         gDPSetAlphaCompare(gDisplayListHead++, G_AC_DITHER);
@@ -5228,12 +5228,12 @@ void func_80066714(Player* player, UNUSED s32 arg1, s16 arg2, s8 arg3) {
         green = player->unk_258[10 + arg2].unk_03A;
         blue = player->unk_258[10 + arg2].unk_03C;
         alpha = player->unk_258[10 + arg2].unk_03E;
-        sp5C[0] = player->unk_258[10 + arg2].unk_000[0];
-        sp5C[1] = player->unk_258[10 + arg2].unk_000[1];
-        sp5C[2] = player->unk_258[10 + arg2].unk_000[2];
-        sp54[0] = 0;
-        sp54[1] = player->unk_048[arg3];
-        sp54[2] = 0;
+        sp5C.x = player->unk_258[10 + arg2].unk_000.x;
+        sp5C.y = player->unk_258[10 + arg2].unk_000.y;
+        sp5C.z = player->unk_258[10 + arg2].unk_000.z;
+        sp54.x = 0;
+        sp54.y = player->unk_048[arg3];
+        sp54.z = 0;
         func_800652D4(sp5C, sp54, player->unk_258[10 + arg2].unk_00C * player->size);
         gSPDisplayList(gDisplayListHead++, D_0D008C90);
         gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
@@ -5261,12 +5261,12 @@ void func_80066998(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
         green = player->unk_258[arg2].unk_03A;
         blue = player->unk_258[arg2].unk_03C;
         alpha = player->unk_258[arg2].unk_03E;
-        sp54[0] = player->unk_258[arg2].unk_000[0];
-        sp54[1] = player->unk_258[arg2].unk_000[1];
-        sp54[2] = player->unk_258[arg2].unk_000[2];
-        sp4C[0] = 0x4000;
-        sp4C[1] = player->unk_048[arg3];
-        sp4C[2] = 0;
+        sp54.x = player->unk_258[arg2].unk_000.x;
+        sp54.y = player->unk_258[arg2].unk_000.y;
+        sp54.z = player->unk_258[arg2].unk_000.z;
+        sp4C.x = 0x4000;
+        sp4C.y = player->unk_048[arg3];
+        sp4C.z = 0;
         func_800652D4(sp54, sp4C, player->unk_258[arg2].unk_00C * player->size);
         gSPDisplayList(gDisplayListHead++, D_0D008DB8);
         gDPLoadTextureBlock(gDisplayListHead++, D_8018D48C, G_IM_FMT_IA, G_IM_SIZ_8b, 32, 32, 0,
@@ -5313,20 +5313,20 @@ void func_80066BAC(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
 
     if ((player->unk_258[arg2].unk_01C == 1) && (player->unk_258[arg2].unk_038 != 0x00FF)) {
 
-        if (player->collision.surfaceDistance[2] >= 300.0f) {
-            spDC[1] = player->pos.y + 5.0f;
+        if (player->collision.surfaceDistance.z >= 300.0f) {
+            spDC.y = player->pos.y + 5.0f;
         } else {
-            spDC[1] = player->pos.y - 3.0f;
+            spDC.y = player->pos.y - 3.0f;
         }
-        spDC[2] = player->pos.z + (coss(player->unk_048[arg3]) * -10.0f);
-        spDC[0] = player->pos.x + (sins(player->unk_048[arg3]) * -10.0f);
-        if (player->collision.surfaceDistance[2] >= 300.0f) {
-            spD4[0] = cameras[arg3].rot.x - 0x4000;
+        spDC.z = player->pos.z + (coss(player->unk_048[arg3]) * -10.0f);
+        spDC.x = player->pos.x + (sins(player->unk_048[arg3]) * -10.0f);
+        if (player->collision.surfaceDistance.z >= 300.0f) {
+            spD4.x = cameras[arg3].rot.x - 0x4000;
         } else {
-            spD4[0] = 0;
+            spD4.x = 0;
         }
-        spD4[1] = player->unk_048[arg3];
-        spD4[2] = 0;
+        spD4.y = player->unk_048[arg3];
+        spD4.z = 0;
         func_800652D4(spDC, spD4, player->unk_258[arg2].unk_00C * player->size);
         if (player->unk_258[arg2].unk_038 == 0) {
             gSPDisplayList(gDisplayListHead++, D_0D008DB8);
@@ -5374,13 +5374,13 @@ void func_80067280(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
         green = player->unk_258[30 + arg2].unk_03A;
         blue = player->unk_258[30 + arg2].unk_03C;
         alpha = player->unk_258[30 + arg2].unk_03E;
-        sp7C[0] = player->unk_258[30 + arg2].unk_000[0];
-        sp7C[1] = player->unk_258[30 + arg2].unk_000[1];
-        sp7C[2] = player->unk_258[30 + arg2].unk_000[2];
-        sp74[0] = -0x071C;
-        sp74[2] = 0;
+        sp7C.x = player->unk_258[30 + arg2].unk_000.x;
+        sp7C.y = player->unk_258[30 + arg2].unk_000.y;
+        sp7C.z = player->unk_258[30 + arg2].unk_000.z;
+        sp74.x = -0x071C;
+        sp74.z = 0;
         if (player->unk_258[30 + arg2].unk_010 == 1) {
-            sp74[1] = player->unk_048[arg3] - 0x2000;
+            sp74.y = player->unk_048[arg3] - 0x2000;
             func_800652D4(sp7C, sp74, player->unk_258[30 + arg2].unk_00C * player->size);
             gSPDisplayList(gDisplayListHead++, D_0D008DB8);
             gDPLoadTextureBlock(gDisplayListHead++, D_8018D48C, G_IM_FMT_IA, G_IM_SIZ_8b, 32, 32, 0,
@@ -5389,7 +5389,7 @@ void func_80067280(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
             func_8004B35C(red, green, blue, alpha);
             gSPDisplayList(gDisplayListHead++, D_0D008E70);
         } else {
-            sp74[1] = player->unk_048[arg3] + 0x2000;
+            sp74.y = player->unk_048[arg3] + 0x2000;
             func_800652D4(sp7C, sp74, player->unk_258[30 + arg2].unk_00C * player->size);
             gSPDisplayList(gDisplayListHead++, D_0D008DB8);
             gDPLoadTextureBlock(gDisplayListHead++, D_8018D48C, G_IM_FMT_IA, G_IM_SIZ_8b, 32, 32, 0,
@@ -5408,12 +5408,12 @@ void func_80067604(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
     UNUSED s32 stackPadding[4];
 
     if (player->unk_258[30 + arg2].unk_01C == 1) {
-        sp8C[0] = player->unk_258[30 + arg2].unk_000[0];
-        sp8C[1] = player->unk_258[30 + arg2].unk_000[1];
-        sp8C[2] = player->unk_258[30 + arg2].unk_000[2];
-        sp84[0] = 0;
-        sp84[1] = player->unk_048[arg3];
-        sp84[2] = 0;
+        sp8C.x = player->unk_258[30 + arg2].unk_000.x;
+        sp8C.y = player->unk_258[30 + arg2].unk_000.y;
+        sp8C.z = player->unk_258[30 + arg2].unk_000.z;
+        sp84.x = 0;
+        sp84.y = player->unk_048[arg3];
+        sp84.z = 0;
         func_800652D4(sp8C, sp84, player->unk_258[30 + arg2].unk_00C * player->size);
         if (player->unk_258[30 + arg2].unk_010 == 1) {
             gSPDisplayList(gDisplayListHead++, D_0D008DB8);
@@ -5440,12 +5440,12 @@ void func_80067964(Player* player, UNUSED s8 arg1, f32 arg2, UNUSED s8 arg3, s8 
     UNUSED s32 stackPadding[2];
 
     if (player->unk_258[20 + arg4].unk_01C == 1) {
-        sp9C[0] = player->unk_258[20 + arg4].unk_000[0];
-        sp9C[1] = player->unk_258[20 + arg4].unk_000[1];
-        sp9C[2] = player->unk_258[20 + arg4].unk_000[2];
-        sp94[0] = 0;
-        sp94[1] = player->unk_258[20 + arg4].unk_020;
-        sp94[2] = 0;
+        sp9C.x = player->unk_258[20 + arg4].unk_000.x;
+        sp9C.y = player->unk_258[20 + arg4].unk_000.y;
+        sp9C.z = player->unk_258[20 + arg4].unk_000.z;
+        sp94.x = 0;
+        sp94.y = player->unk_258[20 + arg4].unk_020;
+        sp94.z = 0;
         func_800652D4(sp9C, sp94, player->size * arg2);
         gSPDisplayList(gDisplayListHead++, D_0D008C90);
         gSPClearGeometryMode(gDisplayListHead++, G_CULL_BOTH);
@@ -5476,12 +5476,12 @@ void func_80067D3C(Player* player, s8 arg1, u8* texture, s8 arg3, f32 arg4, s32 
     // ????????????????????????????????????????
 
     if (player->unk_258[20 + arg3].unk_01C == 1) {
-        sp74[0] = 0;
-        sp74[1] = player->unk_048[arg1];
-        sp74[2] = 0;
-        sp7C[0] = player->pos.x + (sins((0x4000 & 0xFFFFFFFF) - (player->rotation[1] + player->unk_0C0)) * arg4);
-        sp7C[1] = player->pos.y + player->boundingBoxSize - sp54[player->characterId] - 2.0f;
-        sp7C[2] = player->pos.z + (coss((0x4000 & 0xFFFFFFFF) - (player->rotation[1] + player->unk_0C0)) * arg4);
+        sp74.x = 0;
+        sp74.y = player->unk_048[arg1];
+        sp74.z = 0;
+        sp7C.x = player->pos.x + (sins((0x4000 & 0xFFFFFFFF) - (player->rotation.y + player->unk_0C0)) * arg4);
+        sp7C.y = player->pos.y + player->boundingBoxSize - sp54[player->characterId] - 2.0f;
+        sp7C.z = player->pos.z + (coss((0x4000 & 0xFFFFFFFF) - (player->rotation.y + player->unk_0C0)) * arg4);
         func_800652D4(sp7C, sp74, player->unk_258[20 + arg3].unk_00C * player->size);
         gSPDisplayList(gDisplayListHead++, D_0D008DB8);
         gDPLoadTextureBlock(gDisplayListHead++, texture, G_IM_FMT_I, G_IM_SIZ_8b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
@@ -5504,12 +5504,12 @@ void func_8006801C(Player* player, s8 arg1, u8* texture, s8 arg3, f32 arg4, s32 
     // ????????????????????????????????????????
 
     if (player->unk_258[20 + arg3].unk_01C == 1) {
-        sp74[0] = 0;
-        sp74[1] = player->unk_048[arg1];
-        sp74[2] = 0;
-        sp7C[0] = player->pos.x + (sins((0x4000 & 0xFFFFFFFF) - (player->rotation[1] + player->unk_0C0)) * arg4);
-        sp7C[1] = player->pos.y + player->boundingBoxSize - sp54[player->characterId] - 2.0f;
-        sp7C[2] = player->pos.z + (coss((0x4000 & 0xFFFFFFFF) - (player->rotation[1] + player->unk_0C0)) * arg4);
+        sp74.x = 0;
+        sp74.y = player->unk_048[arg1];
+        sp74.z = 0;
+        sp7C.x = player->pos.x + (sins((0x4000 & 0xFFFFFFFF) - (player->rotation.y + player->unk_0C0)) * arg4);
+        sp7C.y = player->pos.y + player->boundingBoxSize - sp54[player->characterId] - 2.0f;
+        sp7C.z = player->pos.z + (coss((0x4000 & 0xFFFFFFFF) - (player->rotation.y + player->unk_0C0)) * arg4);
         func_800652D4(sp7C, sp74, player->unk_258[20 + arg3].unk_00C * player->size * 0.8);
         gSPDisplayList(gDisplayListHead++, D_0D008DB8);
         gDPLoadTextureBlock(gDisplayListHead++, texture, G_IM_FMT_I, G_IM_SIZ_8b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
@@ -5527,12 +5527,12 @@ void func_80068310(Player* player, UNUSED s8 arg1, UNUSED f32 arg2, s8 arg3, s8 
     Vec3s sp94;
 
     if (player->unk_258[20 + arg4].unk_01C == 1) {
-        sp9C[1] = player->unk_258[20 + arg4].unk_000[1];
-        sp9C[2] = player->pos.z + (coss(player->unk_048[arg3]) * -10.0f);
-        sp9C[0] = player->pos.x + (sins(player->unk_048[arg3]) * -10.0f);
-        sp94[0] = 0;
-        sp94[1] = player->unk_048[arg3];
-        sp94[2] = 0;
+        sp9C.x = player->pos.x + (sins(player->unk_048[arg3]) * -10.0f);
+        sp9C.y = player->unk_258[20 + arg4].unk_000.y;
+        sp9C.z = player->pos.z + (coss(player->unk_048[arg3]) * -10.0f);
+        sp94.x = 0;
+        sp94.y = player->unk_048[arg3];
+        sp94.z = 0;
         func_800652D4(sp9C, sp94, player->unk_258[20 + arg4].unk_00C * player->size);
         gSPDisplayList(gDisplayListHead++, D_0D008C90);
         gDPLoadTLUT_pal256(gDisplayListHead++, gTLUTOnomatopoeia);
@@ -5557,12 +5557,12 @@ void func_80068724(Player* player, UNUSED s8 arg1, UNUSED f32 arg2, s8 arg3, s8 
     Vec3s sp7C;
 
     if (player->unk_258[20 + arg4].unk_01C == 1) {
-        sp84[1] = player->pos.y - 3.0f;
-        sp84[2] = player->pos.z + (coss(player->unk_048[arg3]) * -10.0f);
-        sp84[0] = player->pos.x + (sins(player->unk_048[arg3]) * -10.0f);
-        sp7C[0] = 0;
-        sp7C[1] = player->unk_048[arg3];
-        sp7C[2] = 0;
+        sp84.x = player->pos.x + (sins(player->unk_048[arg3]) * -10.0f);
+        sp84.y = player->pos.y - 3.0f;
+        sp84.z = player->pos.z + (coss(player->unk_048[arg3]) * -10.0f);
+        sp7C.x = 0;
+        sp7C.y = player->unk_048[arg3];
+        sp7C.z = 0;
         func_800652D4(sp84, sp7C, player->unk_258[20 + arg4].unk_00C * player->size);
         gSPDisplayList(gDisplayListHead++, D_0D008DB8);
         gDPSetCombineMode(gDisplayListHead++, G_CC_MODULATEIDECALA, G_CC_MODULATEIDECALA);
@@ -5585,19 +5585,19 @@ void func_80068AA4(Player* player, UNUSED s8 arg1, UNUSED f32 arg2, s8 arg3, s8 
     Vec3f sp64;
     Vec3s sp5C;
 
-    sp64[1] = player->pos.y;
-    sp64[2] = player->pos.z;
-    sp64[0] = player->pos.x;
+    sp64.x = player->pos.x;
+    sp64.y = player->pos.y;
+    sp64.z = player->pos.z;
 
     if ((player->unk_258[20 + arg4].unk_01C == 1) && (player->animFrameSelector[arg3] < 0xD)) {
         if (gTickVisuals) {
-            sp64[1] = player->pos.y - 3.0f;
-            sp64[2] = player->pos.z + ((-2.5 * player->unk_258[20 + arg4].unk_01E) * coss(player->unk_048[arg3]));
-            sp64[0] = player->pos.x + ((-2.5 * player->unk_258[20 + arg4].unk_01E) * sins(player->unk_048[arg3]));
+            sp64.x = player->pos.x + ((-2.5 * player->unk_258[20 + arg4].unk_01E) * sins(player->unk_048[arg3]));
+            sp64.y = player->pos.y - 3.0f;
+            sp64.z = player->pos.z + ((-2.5 * player->unk_258[20 + arg4].unk_01E) * coss(player->unk_048[arg3]));
         }
-        sp5C[0] = 0;
-        sp5C[1] = player->unk_048[arg3];
-        sp5C[2] = 0;
+        sp5C.x = 0;
+        sp5C.y = player->unk_048[arg3];
+        sp5C.z = 0;
         func_800652D4(sp64, sp5C, player->unk_258[20 + arg4].unk_00C * player->size);
         gSPDisplayList(gDisplayListHead++, D_0D008D58);
         gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
@@ -5617,12 +5617,12 @@ void func_80068DA0(Player* player, UNUSED s8 arg1, UNUSED f32 arg2, s8 arg3, s8 
     Vec3s sp94;
 
     if ((player->unk_258[20 + arg4].unk_01C == 1) && ((s32) player->animFrameSelector[arg3] < 0xD)) {
-        sp9C[1] = (player->pos.y - 3.0f) + player->unk_258[20 + arg4].unk_000[1];
-        sp9C[2] = player->pos.z + (coss(player->unk_048[arg3]) * -10.0f);
-        sp9C[0] = player->pos.x + (sins(player->unk_048[arg3]) * -10.0f);
-        sp94[0] = 0;
-        sp94[1] = player->unk_048[arg3];
-        sp94[2] = 0;
+        sp9C.x = player->pos.x + (sins(player->unk_048[arg3]) * -10.0f);
+        sp9C.y = (player->pos.y - 3.0f) + player->unk_258[20 + arg4].unk_000.y;
+        sp9C.z = player->pos.z + (coss(player->unk_048[arg3]) * -10.0f);
+        sp94.x = 0;
+        sp94.y = player->unk_048[arg3];
+        sp94.z = 0;
         func_800652D4(sp9C, sp94, player->unk_258[20 + arg4].unk_00C * player->size);
         gSPDisplayList(gDisplayListHead++, D_0D008C90);
         gDPLoadTLUT_pal256(gDisplayListHead++, gTLUTOnomatopoeia);
@@ -5648,13 +5648,13 @@ void func_800691B8(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
 
     if (player->unk_258[30 + arg2].unk_01C == 1) {
         alpha = player->unk_258[30 + arg2].unk_03E;
-        sp5C[0] = player->unk_258[30 + arg2].unk_000[0];
-        sp5C[1] = player->unk_258[30 + arg2].unk_000[1];
-        sp5C[2] = player->unk_258[30 + arg2].unk_000[2];
-        sp54[0] = 0;
-        sp54[1] = player->unk_048[arg3];
+        sp5C.x = player->unk_258[30 + arg2].unk_000.x;
+        sp5C.y = player->unk_258[30 + arg2].unk_000.y;
+        sp5C.z = player->unk_258[30 + arg2].unk_000.z;
+        sp54.y = 0;
+        sp54.z = player->unk_048[arg3];
         player->unk_258[30 + arg2].unk_03A += 0x1C71;
-        sp54[2] = player->unk_258[30 + arg2].unk_03A;
+        sp54.z = player->unk_258[30 + arg2].unk_03A;
         func_800652D4(sp5C, sp54, player->size * 0.5);
         gSPDisplayList(gDisplayListHead++, D_0D008D58);
         gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
@@ -5690,12 +5690,12 @@ void func_80069444(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
         envBlue = D_800E480C[player->unk_258[30 + arg2].unk_038] & 0xFF;
         primAlpha = player->unk_258[30 + arg2].unk_03E;
 
-        sp74[0] = player->unk_258[30 + arg2].unk_000[0];
-        sp74[1] = player->unk_258[30 + arg2].unk_000[1];
-        sp74[2] = player->unk_258[30 + arg2].unk_000[2];
-        sp6C[0] = 0;
-        sp6C[1] = player->unk_048[arg3];
-        sp6C[2] = 0;
+        sp74.x = player->unk_258[30 + arg2].unk_000.x;
+        sp74.y = player->unk_258[30 + arg2].unk_000.y;
+        sp74.z = player->unk_258[30 + arg2].unk_000.z;
+        sp6C.x = 0;
+        sp6C.y = player->unk_048[arg3];
+        sp6C.z = 0;
         func_800652D4(sp74, sp6C, player->size * 1.5);
         gSPDisplayList(gDisplayListHead++, D_0D008DB8);
         gDPLoadTextureBlock(gDisplayListHead++, D_8018D494, G_IM_FMT_I, G_IM_SIZ_8b, 32, 32, 0,
@@ -5719,12 +5719,12 @@ void func_800696CC(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3, f32 arg4) 
 
     if (player->unk_258[30 + arg2].unk_01C == 1) {
         alpha = player->unk_258[30 + arg2].unk_03E;
-        sp5C[0] = player->unk_258[30 + arg2].unk_000[0];
-        sp5C[1] = player->unk_258[30 + arg2].unk_000[1];
-        sp5C[2] = player->unk_258[30 + arg2].unk_000[2];
-        sp54[0] = 0;
-        sp54[1] = player->unk_048[arg3];
-        sp54[2] = 0;
+        sp5C.x = player->unk_258[30 + arg2].unk_000.x;
+        sp5C.y = player->unk_258[30 + arg2].unk_000.y;
+        sp5C.z = player->unk_258[30 + arg2].unk_000.z;
+        sp54.x = 0;
+        sp54.y = player->unk_048[arg3];
+        sp54.z = 0;
 
         // @port: Tag the transform.
         FrameInterpolation_RecordOpenChild("func_800696CC", TAG_OBJECT(arg2));
@@ -5753,12 +5753,12 @@ void func_80069938(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
 
     if (player->unk_258[30 + arg2].unk_01C == 1) {
         alpha = player->unk_258[30 + arg2].unk_03E;
-        sp5C[0] = player->unk_258[30 + arg2].unk_000[0];
-        sp5C[1] = player->unk_258[30 + arg2].unk_000[1];
-        sp5C[2] = player->unk_258[30 + arg2].unk_000[2];
-        sp54[0] = 0;
-        sp54[1] = player->unk_048[arg3];
-        sp54[2] = player->unk_258[30 + arg2].unk_038;
+        sp5C.x = player->unk_258[30 + arg2].unk_000.x;
+        sp5C.y = player->unk_258[30 + arg2].unk_000.y;
+        sp5C.z = player->unk_258[30 + arg2].unk_000.z;
+        sp54.x = 0;
+        sp54.y = player->unk_048[arg3];
+        sp54.z = player->unk_258[30 + arg2].unk_038;
         func_800652D4(sp5C, sp54, player->unk_258[30 + arg2].unk_00C * player->size);
         gSPDisplayList(gDisplayListHead++, D_0D008D58);
         gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
@@ -5786,12 +5786,12 @@ void func_80069BA8(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
         green = player->unk_258[30 + arg2].unk_03A;
         blue = player->unk_258[30 + arg2].unk_03C;
         alpha = player->unk_258[30 + arg2].unk_03E;
-        sp54[0] = player->unk_258[30 + arg2].unk_000[0];
-        sp54[1] = player->unk_258[30 + arg2].unk_000[1];
-        sp54[2] = player->unk_258[30 + arg2].unk_000[2];
-        sp4C[0] = 0;
-        sp4C[1] = player->unk_048[arg3];
-        sp4C[2] = 0;
+        sp54.x = player->unk_258[30 + arg2].unk_000.x;
+        sp54.y = player->unk_258[30 + arg2].unk_000.y;
+        sp54.z = player->unk_258[30 + arg2].unk_000.z;
+        sp4C.x = 0;
+        sp4C.y = player->unk_048[arg3];
+        sp4C.z = 0;
         func_800652D4(sp54, sp4C, player->unk_258[30 + arg2].unk_00C * player->size);
         gSPDisplayList(gDisplayListHead++, D_0D008DB8);
         gDPLoadTextureBlock(gDisplayListHead++, D_8018D48C, G_IM_FMT_IA, G_IM_SIZ_8b, 32, 32, 0,
@@ -5809,12 +5809,12 @@ void func_80069DB8(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
     UNUSED s32 stackPadding[2];
 
     if (player->unk_258[30 + arg2].unk_01C == 1) {
-        sp5C[0] = player->unk_258[30 + arg2].unk_000[0];
-        sp5C[1] = player->unk_258[30 + arg2].unk_000[1];
-        sp5C[2] = player->unk_258[30 + arg2].unk_000[2];
-        sp54[0] = 0;
-        sp54[1] = player->unk_048[arg3];
-        sp54[2] = 0;
+        sp5C.x = player->unk_258[30 + arg2].unk_000.x;
+        sp5C.y = player->unk_258[30 + arg2].unk_000.y;
+        sp5C.z = player->unk_258[30 + arg2].unk_000.z;
+        sp54.x = 0;
+        sp54.y = player->unk_048[arg3];
+        sp54.z = 0;
         func_800652D4(sp5C, sp54, player->unk_258[30 + arg2].unk_00C * player->size);
         gSPDisplayList(gDisplayListHead++, D_0D008D58);
         gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
@@ -5834,12 +5834,12 @@ void func_8006A01C(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
     Vec3s sp4C;
 
     if (player->unk_258[arg2].unk_01C == 1) {
-        sp54[0] = player->unk_258[10 + arg2].unk_000[0];
-        sp54[1] = player->unk_258[10 + arg2].unk_000[1];
-        sp54[2] = player->unk_258[10 + arg2].unk_000[2];
-        sp4C[0] = 0;
-        sp4C[1] = player->unk_048[arg3];
-        sp4C[2] = 0;
+        sp54.x = player->unk_258[10 + arg2].unk_000.x;
+        sp54.y = player->unk_258[10 + arg2].unk_000.y;
+        sp54.z = player->unk_258[10 + arg2].unk_000.z;
+        sp4C.x = 0;
+        sp4C.y = player->unk_048[arg3];
+        sp4C.z = 0;
         func_800652D4(sp54, sp4C, player->unk_258[10 + arg2].unk_00C * player->size);
 
         gSPDisplayList(gDisplayListHead++, D_0D008D58);
@@ -5866,12 +5866,12 @@ void func_8006A280(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
         red = player->unk_258[arg2].unk_038;
         green = player->unk_258[arg2].unk_03A;
         blue = player->unk_258[arg2].unk_03C;
-        sp5C[0] = player->unk_258[arg2].unk_000[0];
-        sp5C[1] = player->unk_258[arg2].unk_000[1];
-        sp5C[2] = player->unk_258[arg2].unk_000[2];
-        sp54[0] = 0;
-        sp54[1] = player->unk_048[arg3];
-        sp54[2] = 0;
+        sp5C.x = player->unk_258[arg2].unk_000.x;
+        sp5C.y = player->unk_258[arg2].unk_000.y;
+        sp5C.z = player->unk_258[arg2].unk_000.z;
+        sp54.x = 0;
+        sp54.y = player->unk_048[arg3];
+        sp54.z = 0;
         func_800652D4(sp5C, sp54, player->unk_258[arg2].unk_00C * player->size);
         gSPDisplayList(gDisplayListHead++, D_0D008D58);
         gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
@@ -5900,8 +5900,8 @@ void func_8006A50C(Player* player, f32 arg1, f32 arg2, s8 arg3, s8 arg4, s16 arg
     D_8018D7D0[arg3][arg4] = 0;
     D_8018D800[arg3][arg4] = 5;
     D_8018D830[arg3][arg4] = 1;
-    D_8018D620[arg3][arg4] = -player->rotation[1] - player->unk_0C0;
-    func_80062B18(&someX, &someY, &someZ, arg1, 4.0f, arg2 + -3.8, -player->rotation[1], 0);
+    D_8018D620[arg3][arg4] = -player->rotation.y - player->unk_0C0;
+    func_80062B18(&someX, &someY, &someZ, arg1, 4.0f, arg2 + -3.8, -player->rotation.y, 0);
     D_8018D4D0[arg3][arg4] = player->pos.x + someX;
     D_8018D590[arg3][arg4] = player->pos.z + someZ;
     D_8018D530[arg3][arg4] = (player->pos.y - player->boundingBoxSize) + someY;
@@ -5944,7 +5944,7 @@ void func_8006A7C0(Player* player, f32 arg1, f32 arg2, s8 arg3, s8 arg4) {
             D_8018D6B0[arg3][arg4] = 0.0f;
             D_8018D710[arg3][arg4] = 0.0f;
         }
-        D_8018D620[arg3][arg4] = -player->rotation[1] - player->unk_0C0;
+        D_8018D620[arg3][arg4] = -player->rotation.y - player->unk_0C0;
         move_s16_towards(&D_8018D890[arg3][arg4], player->unk_094 * 182.0f, 0.1f);
     }
     if (D_8018D830[arg3][arg4] == 1) {
@@ -6026,7 +6026,7 @@ void render_battle_balloon(Player* player, s8 arg1, s16 arg2, s8 arg3) {
     envRed = (envColors[player->characterId] >> 0x10) & 0xFF;
     envGreen = (envColors[player->characterId] >> 0x08) & 0xFF;
     envBlue = (envColors[player->characterId] >> 0x00) & 0xFF;
-    temp_t1 = (((player->unk_048[arg3] + player->rotation[1] + player->unk_0C0) & 0xFFFF) / 128);
+    temp_t1 = (((player->unk_048[arg3] + player->rotation.y + player->unk_0C0) & 0xFFFF) / 128);
     temp_t1 <<= 7;
     if (arg3 == arg1) {
         var_f20 = 0.3f;
@@ -6046,12 +6046,12 @@ void render_battle_balloon(Player* player, s8 arg1, s16 arg2, s8 arg3) {
             var_f20 = 0.3f;
         }
     }
-    sp134[0] = D_8018D4D0[arg1][arg2];
-    sp134[1] = D_8018D530[arg1][arg2];
-    sp134[2] = D_8018D590[arg1][arg2];
-    sp12C[0] = -((D_8018D890[arg1][arg2] * 4) * coss(temp_t1));
-    sp12C[1] = player->unk_048[arg3];
-    sp12C[2] = D_8018D7D0[arg1][arg2] - (D_8018D860[arg1][arg2] * coss(temp_t1)) -
+    sp134.x = D_8018D4D0[arg1][arg2];
+    sp134.y = D_8018D530[arg1][arg2];
+    sp134.z = D_8018D590[arg1][arg2];
+    sp12C.x = -((D_8018D890[arg1][arg2] * 4) * coss(temp_t1));
+    sp12C.y = player->unk_048[arg3];
+    sp12C.z = D_8018D7D0[arg1][arg2] - (D_8018D860[arg1][arg2] * coss(temp_t1)) -
                ((D_8018D890[arg1][arg2] * 8) * sins(temp_t1));
     mtxf_translate_rotate(mtx, sp134, sp12C);
     mtxf_scale2(mtx, var_f20);
@@ -6172,12 +6172,12 @@ void render_balloon(Vec3f arg0, f32 arg1, s16 arg2, s16 arg3) {
     envRed = (envColors[arg3] >> 0x10) & 0xFF;
     envGreen = (envColors[arg3] >> 0x08) & 0xFF;
     envBlue = (envColors[arg3] >> 0x00) & 0xFF;
-    spFC[0] = arg0[0];
-    spFC[1] = arg0[1];
-    spFC[2] = arg0[2];
-    spF4[0] = 0;
-    spF4[1] = camera1->rot.y;
-    spF4[2] = arg2;
+    spFC.x = arg0.x;
+    spFC.y = arg0.y;
+    spFC.z = arg0.z;
+    spF4.x = 0;
+    spF4.y = camera1->rot.y;
+    spF4.z = arg2;
     mtxf_translate_rotate(mtx, spFC, spF4);
     mtxf_scale2(mtx, arg1);
     // convert_to_fixed_point_matrix(&gGfxPool->mtxEffect[gMatrixEffectCount], sp108);
@@ -6217,12 +6217,12 @@ void func_8006C0C8(Vec3f arg0, f32 arg1, s32 rgb, s16 alpha) {
     s16 green;
     s16 blue;
 
-    sp4C[0] = arg0[0];
-    sp4C[1] = arg0[1];
-    sp4C[2] = arg0[2];
-    sp44[0] = 0;
-    sp44[1] = camera1->rot.y;
-    sp44[2] = 0;
+    sp4C.x = arg0.x;
+    sp4C.y = arg0.y;
+    sp4C.z = arg0.z;
+    sp44.x = 0;
+    sp44.y = camera1->rot.y;
+    sp44.z = 0;
     func_800652D4(sp4C, sp44, arg1);
     gSPDisplayList(gDisplayListHead++, D_0D008DB8);
     gDPLoadTextureBlock(gDisplayListHead++, D_8018D48C, G_IM_FMT_IA, G_IM_SIZ_8b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
@@ -6246,12 +6246,12 @@ void func_8006C294(Vec3f arg0, f32 arg1, s32 rgb, s16 alpha) {
     s16 blue = ((rgb >> 0x00) & 0xFF) & 0xFF;
     // ???????????????????????????????????????
 
-    sp5C[0] = arg0[0];
-    sp5C[1] = arg0[1];
-    sp5C[2] = arg0[2];
-    sp54[0] = 0;
-    sp54[1] = camera1->rot.y;
-    sp54[2] = 0;
+    sp5C.x = arg0.x;
+    sp5C.y = arg0.y;
+    sp5C.z = arg0.z;
+    sp54.x = 0;
+    sp54.y = camera1->rot.y;
+    sp54.z = 0;
     func_800652D4(sp5C, sp54, arg1);
     gSPDisplayList(gDisplayListHead++, D_0D008D58);
     gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
@@ -6273,12 +6273,12 @@ void func_8006C4D4(Vec3f arg0, f32 arg1, s32 rgb, s16 alpha, s16 arg4) {
     s16 blue = ((rgb >> 0x00) & 0xFF) & 0xFF;
     // ???????????????????????????????????????
 
-    sp4C[0] = arg0[0];
-    sp4C[1] = arg0[1];
-    sp4C[2] = arg0[2];
-    sp44[0] = 0;
-    sp44[1] = camera1->rot.y;
-    sp44[2] = 0;
+    sp4C.x = arg0.x;
+    sp4C.y = arg0.y;
+    sp4C.z = arg0.z;
+    sp44.x = 0;
+    sp44.y = camera1->rot.y;
+    sp44.z = 0;
     func_800652D4(sp4C, sp44, arg1);
     gSPDisplayList(gDisplayListHead++, D_0D008DB8);
     gDPLoadTextureBlock(gDisplayListHead++, common_texture_particle_spark[arg4], G_IM_FMT_I, G_IM_SIZ_8b, 32, 32, 0,

@@ -72,7 +72,7 @@ void update_actor_banana(struct BananaActor* banana) {
                             temp_f0 = (player->unk_094 * 0.75f) + 3.5f + pad3;
                         }
                         vec3f_set(someVelocity, 0, pad3, temp_f0);
-                        func_802B64C4(someVelocity, player->rotation[1] + player->unk_0C0);
+                        func_802B64C4(someVelocity, player->rotation.y + player->unk_0C0);
                         banana->velocity.x = someVelocity[0];
                         banana->velocity.y = someVelocity[1];
                         banana->velocity.z = someVelocity[2];
@@ -121,7 +121,7 @@ void update_actor_banana(struct BananaActor* banana) {
             someVelocity[0] = 0.0f;
             someVelocity[1] = 0.0f;
             someVelocity[2] = -5.0f;
-            func_802B64C4(someVelocity, player->rotation[1] + player->unk_0C0);
+            func_802B64C4(someVelocity, player->rotation.y + player->unk_0C0);
             unkX = player->pos.x + someVelocity[0];
             unkY = player->pos.y + someVelocity[1];
             unkZ = player->pos.z + someVelocity[2];

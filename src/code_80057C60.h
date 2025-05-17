@@ -615,25 +615,25 @@ extern u8* D_8018D4BC;
 extern u8* D_8018D4C0;
 extern u8* D_8018D4C4;
 extern u8* D_8018D4C8;
-extern Vec3f D_8018D4D0[];
-extern Vec3f D_8018D530[];
-extern Vec3f D_8018D590[];
+extern Vec3fa D_8018D4D0[];
+extern Vec3fa D_8018D530[];
+extern Vec3fa D_8018D590[];
 extern u16 gPlayerBalloonStatus[8][3];
-extern Vec3s D_8018D620[];
-extern Vec3f D_8018D650[];
-extern Vec3f D_8018D6B0[];
+extern Vec3sa D_8018D620[];
+extern Vec3fa D_8018D650[];
+extern Vec3fa D_8018D6B0[];
 
-extern Vec3f D_8018D710[];
-extern Vec3s D_8018D770[];
-extern Vec3s D_8018D7A0[];
-extern Vec3s D_8018D7D0[];
+extern Vec3fa D_8018D710[];
+extern Vec3sa D_8018D770[];
+extern Vec3sa D_8018D7A0[];
+extern Vec3sa D_8018D7D0[];
 
-extern Vec3s D_8018D800[];
-extern Vec3s D_8018D830[];
-extern Vec3s D_8018D860[];
-extern Vec3s D_8018D890[];
+extern Vec3sa D_8018D800[];
+extern Vec3sa D_8018D830[];
+extern Vec3sa D_8018D860[];
+extern Vec3sa D_8018D890[];
 extern s16 gPlayerBalloonCount[]; // D_8018D8C0
-extern Vec3s D_8018D8D0[];
+extern Vec3sa D_8018D8D0[];
 
 /** @endcond */
 

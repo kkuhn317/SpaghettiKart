@@ -153,7 +153,7 @@ void OTrophy::Tick() { // func_80086D80
 
                 // Get the player's yaw
                 Player *player = &gPlayers[0];
-                float yaw = (player->rotation[1] + 0x4000) * (M_PI / 32768.0f);   // Convert degrees to radians
+                float yaw = (player->rotation.y + 0x4000) * (M_PI / 32768.0f);   // Convert degrees to radians
 
                 // Calculate forward direction based on yaw (same as before)
                 float lookAtX = player->pos.x + cos(yaw);

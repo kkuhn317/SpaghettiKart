@@ -2791,21 +2791,21 @@ void func_8004F168(s32 arg0, s32 playerId, s32 characterId) {
         if (characterId != 8) {
             if ((gGPCurrentRaceRankByPlayerId[playerId] == 0) && (gModeSelection != 3) && (gModeSelection != 1)) {
 #if EXPLICIT_AND == 1
-                func_80046424(temp_a0, temp_a1, (player->rotation[1] + 0x8000) & 0xFFFF, 1.0f,
+                func_80046424(temp_a0, temp_a1, (player->rotation.y + 0x8000) & 0xFFFF, 1.0f,
                               (u8*) common_texture_minimap_kart_character[characterId], common_vtx_player_minimap_icon,
                               8, 8, 8, 8);
 #else
-                func_80046424(temp_a0, temp_a1, player->rotation[1] + 0x8000, 1.0f,
+                func_80046424(temp_a0, temp_a1, player->rotation.y + 0x8000, 1.0f,
                               (u8*) common_texture_minimap_kart_character[characterId], common_vtx_player_minimap_icon,
                               8, 8, 8, 8);
 #endif
             } else {
 #if EXPLICIT_AND == 1
-                func_800463B0(temp_a0, temp_a1, (player->rotation[1] + 0x8000) & 0xFFFF, 1.0f,
+                func_800463B0(temp_a0, temp_a1, (player->rotation.y + 0x8000) & 0xFFFF, 1.0f,
                               (u8*) common_texture_minimap_kart_character[characterId], common_vtx_player_minimap_icon,
                               8, 8, 8, 8);
 #else
-                func_800463B0(temp_a0, temp_a1, player->rotation[1] + 0x8000, 1.0f,
+                func_800463B0(temp_a0, temp_a1, player->rotation.y + 0x8000, 1.0f,
                               (u8*) common_texture_minimap_kart_character[characterId], common_vtx_player_minimap_icon,
                               8, 8, 8, 8);
 #endif

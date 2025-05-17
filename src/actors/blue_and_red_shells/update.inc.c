@@ -27,7 +27,7 @@ void func_802B3B44(struct ShellActor* shell) {
     f32 temp_f18_3;
     f32 temp_f16_3;
     f32 temp_f26;
-    Vec3f origPos;
+    Vec3fa origPos;
 
     currentWaypoint = shell->pathIndex;
     temp_f2 = D_80164490[currentWaypoint].posX;
@@ -116,7 +116,7 @@ void func_802B3E7C(struct ShellActor* shell, Player* player) {
     f32 x_velocity;
     f32 z_velocity;
     f32 xz_dist;
-    Vec3f newPosition;
+    Vec3fa newPosition;
 
     x_velocity = player->pos.x;
     x_velocity -= shell->pos.x;
@@ -186,13 +186,13 @@ s16 func_802B3FD0(Player* owner, struct ShellActor* shell) {
 }
 
 void func_802B4104(struct ShellActor* shell) {
-    if ((shell->unk30.surfaceDistance[0] < 0.0f) &&
-        ((shell->unk30.unk48[1] < 0.25f) || (shell->unk30.unk48[1] > -0.25f))) {
+    if ((shell->unk30.surfaceDistance.x < 0.0f) &&
+        ((shell->unk30.unk48.y < 0.25f) || (shell->unk30.unk48.y > -0.25f))) {
         destroy_destructable_actor((struct Actor*) shell);
         func_800C98B8(shell->pos, shell->velocity, SOUND_ARG_LOAD(0x19, 0x00, 0x80, 0x54));
         shell->flags |= 0x80;
-    } else if ((shell->unk30.surfaceDistance[1] < 0.0f) &&
-               ((shell->unk30.unk54[1] < 0.25f) || (shell->unk30.unk54[1] < -0.25f))) {
+    } else if ((shell->unk30.surfaceDistance.y < 0.0f) &&
+               ((shell->unk30.unk54.y < 0.25f) || (shell->unk30.unk54.y < -0.25f))) {
         destroy_destructable_actor((struct Actor*) shell);
         func_800C98B8(shell->pos, shell->velocity, SOUND_ARG_LOAD(0x19, 0x00, 0x80, 0x54));
         shell->flags |= 0x80;
@@ -212,7 +212,7 @@ void update_actor_red_blue_shell(struct ShellActor* shell) {
     f32 temp_f2;
     s16 temp_v0;
     UNUSED s16 pad3;
-    Vec3f somePosVel;
+    Vec3fa somePosVel;
     struct Controller* controller;
     TripleShellParent* parent;
     UNUSED f32 pad0;
@@ -232,7 +232,7 @@ void update_actor_red_blue_shell(struct ShellActor* shell) {
     UNUSED f32 pad15;
     UNUSED f32 pad16;
     UNUSED f32 pad17;
-    Vec3f origPos;
+    Vec3fa origPos;
 
     pad1 = shell->pos.x;
     pad0 = shell->pos.z;
@@ -324,7 +324,7 @@ void update_actor_red_blue_shell(struct ShellActor* shell) {
                 somePosVel[0] = 0.0f;
                 somePosVel[1] = 0.0f;
                 somePosVel[2] = height;
-                func_802B64C4(somePosVel, (s16) (player->rotation[1] + player->unk_0C0));
+                func_802B64C4(somePosVel, (s16) (player->rotation.y + player->unk_0C0));
                 shell->velocity.x = somePosVel[0];
                 shell->velocity.y = somePosVel[1];
                 shell->velocity.z = somePosVel[2];

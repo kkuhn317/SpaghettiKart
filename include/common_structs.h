@@ -20,11 +20,15 @@ typedef struct {
     /* 0x8 */ f32 z;
 } Vec3f; // size = 0xC
 
+typedef f32 Vec3fa[3];
+
 typedef struct {
     /* 0x0 */ s16 x;
     /* 0x2 */ s16 y;
     /* 0x4 */ s16 z;
 } Vec3s; // size = 0x6;
+
+typedef s16 Vec3sa[3];
 
 typedef s32 Vec3iu[3];
 

@@ -727,7 +727,7 @@ void func_8002934C(Player* player, Camera* camera, s8 screenId, s8 playerId) {
 
     player->unk_048[screenId] = atan2s(player->pos.x - camera->pos.x, player->pos.z - camera->pos.z);
     player->animFrameSelector[screenId] =
-        (u16) ((((player->unk_048[screenId]) + player->rotation[1] + player->unk_0C0))) / 128;
+        (u16) ((((player->unk_048[screenId]) + player->rotation.y + player->unk_0C0))) / 128;
 
     temp_f2 = (gCharacterSize[player->characterId] * 18.0f) * player->size;
     temp_f0 = player->unk_230 - player->unk_23C;
@@ -756,7 +756,7 @@ void func_8002934C(Player* player, Camera* camera, s8 screenId, s8 playerId) {
         player->unk_0D4[screenId] = (s16) ((s32) player->unk_D9C);
     }
     func_80029200(player, screenId);
-    temp_a0 = ((player->unk_048[screenId] + player->rotation[1]) + player->unk_0C0);
+    temp_a0 = ((player->unk_048[screenId] + player->rotation.y) + player->unk_0C0);
     temp_a0 = (s16) player->unk_0D4[screenId] * sins((u16) temp_a0) + player->unk_0CC[screenId] * coss((u16) temp_a0);
     move_s16_towards(&player->unk_050[screenId], temp_a0, 0.5f);
     var_a0 = player->animFrameSelector[screenId];
@@ -786,7 +786,7 @@ void func_8002934C(Player* player, Camera* camera, s8 screenId, s8 playerId) {
     if (((player->effects & 8) == 8) && ((player->unk_0CA & 2) == 2)) {
         player->unk_050[screenId] = 0;
     }
-    var_a0 = (player->unk_048[screenId] + player->rotation[1] + player->unk_0C0);
+    var_a0 = (player->unk_048[screenId] + player->rotation.y + player->unk_0C0);
     if (((player->effects & 0x80) == 0x80) || ((player->effects & 0x40) == 0x40) ||
         ((player->effects & 0x80000) == 0x80000) || ((player->effects & 0x800000) == 0x800000) ||
         ((player->effects & 0x20000) == 0x20000) || (player->unk_044 & 0x800)) {
@@ -874,7 +874,7 @@ void func_80029B4C(Player* player, UNUSED f32 arg1, f32 arg2, UNUSED f32 arg3) {
         var_f12 = 18.0f * (gCharacterSize[player->characterId] / 2);
     }
 
-    calculate_orientation_matrix(sp5C, 0.0f, 1.0f, 0.0f, (player->rotation[1] + player->unk_0C0));
+    calculate_orientation_matrix(sp5C, 0.0f, 1.0f, 0.0f, (player->rotation.y + player->unk_0C0));
     sp8C[0] = var_f12 - 3.6;
     sp8C[1] = -player->boundingBoxSize;
     sp8C[2] = var_f12 - 2.0f;
@@ -978,7 +978,7 @@ void func_8002A194(Player* player, f32 arg1, f32 arg2, f32 arg3) {
     UNUSED s32 pad2;
     f32 temp_f0;
 
-    temp_v1 = -player->rotation[1] - player->unk_0C0;
+    temp_v1 = -player->rotation.y - player->unk_0C0;
     if ((player->effects & LIGHTNING_EFFECT) == LIGHTNING_EFFECT) {
         var_f20 = (((gCharacterSize[player->characterId] * 18) / 2) * (player->size * 1.5)) - 1;
     } else {
@@ -1282,8 +1282,8 @@ void func_8002AE38(Player* player, s8 arg1, f32 arg2, f32 arg3, f32 arg4, f32 ar
     s16 temp_a0;
     s32 var_v1;
 
-    sp28 = (sins(-player->rotation[1]) * player->unk_094) + arg2;
-    temp_f16 = (coss(-player->rotation[1]) * player->unk_094) + arg3;
+    sp28 = (sins(-player->rotation.y) * player->unk_094) + arg2;
+    temp_f16 = (coss(-player->rotation.y) * player->unk_094) + arg3;
     if (((player->effects & 0x800) != 0x800) && ((player->effects & 0x10) != 0x10) && !(player->unk_044 & 0x4000) &&
         ((((player->unk_094 / 18.0f) * 216.0f) <= 8.0f) ||
          (((player->unk_07C >> 0x10) < 5) && ((player->unk_07C >> 0x10) > -5)))) {
@@ -1550,7 +1550,7 @@ void func_8002B9CC(Player* player, s8 arg1, UNUSED s32 arg2) {
             }
         }
         temp = (-(s16) get_angle_between_two_vectors(player->pos, &player->oldPos[0]));
-        temp2 = (player->rotation[1] - player->unk_0C0);
+        temp2 = (player->rotation.y - player->unk_0C0);
         temp = temp - temp2;
         player->unk_234 = temp / 182;
     }
@@ -1592,7 +1592,7 @@ void func_8002BB9C(Player* player, f32* arg1, f32* arg2, UNUSED s8 arg3, UNUSED 
     mtxf_translate_vec3f_mat3(sp4C, sp64);
 
     var_v0 = -(s16) get_angle_between_two_vectors(sp58, sp4C);
-    t0 = player->rotation[1];
+    t0 = player->rotation.y;
     var_v0 = 0x10000 + (t0 - var_v0);
     var_v0 /= 182;
 
@@ -1611,9 +1611,9 @@ void func_8002BB9C(Player* player, f32* arg1, f32* arg2, UNUSED s8 arg3, UNUSED 
     }
 
     if ((player->unk_07C >> 0x10) < 0) {
-        player->rotation[1] -= sp30[var_v0];
+        player->rotation.y -= sp30[var_v0];
     } else {
-        player->rotation[1] += sp30[var_v0];
+        player->rotation.y += sp30[var_v0];
     }
 }
 
@@ -2001,7 +2001,7 @@ void func_8002D028(Player* player, s8 arg1) {
     sp4C[2] = D_80165230[D_80165270[arg1]];
 
     temp = -(s16) get_angle_between_two_vectors(player->pos, sp4C);
-    temp2 = player->rotation[1];
+    temp2 = player->rotation.y;
     temp = (temp - temp2);
 
     thing0 = 8;
@@ -2020,8 +2020,8 @@ void func_8002D028(Player* player, s8 arg1) {
     temp_f18 = sqrtf((sp4C[0] - player->pos.x) * (sp4C[0] - player->pos.x) +
                      (sp4C[2] - player->pos.z) * (sp4C[2] - player->pos.z));
     if (temp_f18 <= 8.0f) {
-        adjust_angle(&player->rotation[1], -0x8000, 0x016C);
-        if ((player->rotation[1] < (-0x7F41)) || (player->rotation[1] > 0x7F41)) {
+        adjust_angle(&player->rotation.y, -0x8000, 0x016C);
+        if ((player->rotation.y < (-0x7F41)) || (player->rotation.y > 0x7F41)) {
             player->type &= ~0x0200;
         }
         player->unk_08C = 0;
@@ -2117,8 +2117,8 @@ void func_8002D268(Player* player, UNUSED Camera* camera, s8 screenId, s8 player
         spB0 = -1 * player->kartGravity;
         spAC = 0 * (player->unk_064[2] + sp16C[2]);
     }
-    temp_f2_2 = ((player->oldPos[2] - player->pos.z) * coss(player->rotation[1] + player->unk_0C0)) +
-                (-(player->oldPos[0] - player->pos.x) * sins(player->rotation[1] + player->unk_0C0));
+    temp_f2_2 = ((player->oldPos[2] - player->pos.z) * coss(player->rotation.y + player->unk_0C0)) +
+                (-(player->oldPos[0] - player->pos.x) * sins(player->rotation.y + player->unk_0C0));
     if (temp_f2_2 > 0.1) {
         player->unk_044 |= 8;
     } else {
@@ -2206,10 +2206,10 @@ void func_8002D268(Player* player, UNUSED Camera* camera, s8 screenId, s8 player
     player->unk_05C = 1.0f;
     if ((player->unk_044 & 1) != 1) {
         calculate_orientation_matrix(player->orientationMatrix, player->unk_058, player->unk_05C, player->unk_060,
-                                     player->rotation[1]);
+                                     player->rotation.y);
     } else {
         calculate_orientation_matrix(player->orientationMatrix, player->unk_058, player->unk_05C, player->unk_060,
-                                     player->rotation[1] + 0x8000);
+                                     player->rotation.y + 0x8000);
     }
     player->effects |= 8;
     player->unk_0C2 += 1;
@@ -2426,12 +2426,12 @@ void func_8002E594(Player* player, UNUSED Camera* camera, s8 screenId, s8 player
     func_8002C7E4(player, playerId, screenId);
     if (sp46 == 1) {
         calculate_orientation_matrix(player->orientationMatrix, player->unk_058, player->unk_05C, player->unk_060,
-                                     (s16) ((s32) player->rotation[1]));
+                                     (s16) ((s32) player->rotation.y));
         calculate_orientation_matrix(player->unk_150, player->unk_058, player->unk_05C, player->unk_060,
                                      (s16) ((s32) player->unk_0AE));
     } else {
         calculate_orientation_matrix(player->orientationMatrix, player->unk_058, player->unk_05C, player->unk_060,
-                                     (s16) ((s32) player->rotation[1]));
+                                     (s16) ((s32) player->rotation.y));
     }
     spEC[2] = func_80030150(player, playerId);
     if (sp46 == 1) {
@@ -2670,7 +2670,7 @@ void control_kart_ai_movement(Player* player, UNUSED Camera* camera, s8 arg2, s8
     player->kartHopAcceleration = 0;
     player->kartHopVelocity = 0;
     calculate_orientation_matrix(player->orientationMatrix, player->unk_058, player->unk_05C, player->unk_060,
-                                 player->rotation[1]);
+                                 player->rotation.y);
     player->unk_0C2 = 0;
     player->effects &= ~2;
     player->effects &= ~8;
@@ -2757,7 +2757,7 @@ void func_8002F730(Player* player, UNUSED Camera* camera, UNUSED s8 screenId, s8
     player->unk_058 = 0.0f;
     player->unk_05C = 1.0f;
     player->unk_060 = 0.0f;
-    calculate_orientation_matrix(player->orientationMatrix, 0.0f, 1.0f, 0.0f, (s16) (s32) player->rotation[1]);
+    calculate_orientation_matrix(player->orientationMatrix, 0.0f, 1.0f, 0.0f, (s16) (s32) player->rotation.y);
     player->effects &= ~8;
     sp78 = player->collision.surfaceDistance[2];
     if (sp78 <= 0.0f) {
@@ -4454,7 +4454,7 @@ void func_80037BB4(Player* player, Vec3f arg1) {
     } else {
         if (player->unk_078 < 0) {
             if (((player->effects & 0x20000000) != 0x20000000) || (player->unk_228 >= 0x64)) {
-                player->rotation[1] += player->unk_078;
+                player->rotation.y += player->unk_078;
             }
             if (!(player->type & PLAYER_KART_AI)) {
                 if (gModeSelection == BATTLE) {
@@ -4467,7 +4467,7 @@ void func_80037BB4(Player* player, Vec3f arg1) {
             }
         } else {
             if (((player->effects & 0x20000000) != 0x20000000) || (player->unk_228 >= 0x64)) {
-                player->rotation[1] += player->unk_078;
+                player->rotation.y += player->unk_078;
             }
             if (!(player->type & PLAYER_KART_AI)) {
                 if (gModeSelection == BATTLE) {
@@ -4817,7 +4817,7 @@ void func_80038C6C(Player* player, UNUSED Camera* camera, s8 arg2, s8 playerId) 
     player->topSpeed = 250.0f;
     func_8002B830(player, playerId, arg2);
     apply_effect(player, playerId, arg2);
-    player->rotation[1] += player->unk_078;
+    player->rotation.y += player->unk_078;
     spF0[0] = 0;
     spF0[1] = 0;
     spF0[2] = 0;
@@ -4864,7 +4864,7 @@ void func_80038C6C(Player* player, UNUSED Camera* camera, s8 arg2, s8 playerId) 
     player->unk_058 = 0;
     player->unk_060 = 0;
     player->unk_05C = 1.0f;
-    calculate_orientation_matrix(player->orientationMatrix, 0, 1.0f, 0, player->rotation[1]);
+    calculate_orientation_matrix(player->orientationMatrix, 0, 1.0f, 0, player->rotation.y);
     player->effects |= 8;
     player->unk_0C2 += 1;
     sp98 = player->collision.surfaceDistance[2];
