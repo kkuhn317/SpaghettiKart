@@ -12,6 +12,7 @@ extern "C" {
 #include "math_util.h"
 #include "math_util_2.h"
 #include "menus.h"
+#include "port/interpolation/FrameInterpolation.h"
 }
 
 size_t OGrandPrixBalloons::_count = 0;
@@ -105,6 +106,8 @@ void OGrandPrixBalloons::func_80053D74(s32 objectIndex, UNUSED s32 arg1, s32 ver
 
     Vtx* vtx = (Vtx*) LOAD_ASSET_RAW(common_vtx_hedgehog);
 
+    FrameInterpolation_RecordOpenChild("Balloon", TAG_ITEM_ADDR(object)); //Not working properly just yet
+
     if (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX) {
         object = &gObjectList[objectIndex];
         D_80183E80[2] = (s16) (object->unk_084[6] + 0x8000);
@@ -115,6 +118,8 @@ void OGrandPrixBalloons::func_80053D74(s32 objectIndex, UNUSED s32 arg1, s32 ver
         gSPVertex(gDisplayListHead++, (uintptr_t)&vtx[vertexIndex], 4, 0);
         gSPDisplayList(gDisplayListHead++, (Gfx*)common_rectangle_display);
     }
+
+    FrameInterpolation_RecordCloseChild();
 }
 
 void OGrandPrixBalloons::func_80074924(s32 objectIndex) {
