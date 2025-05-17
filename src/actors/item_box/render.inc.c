@@ -1,6 +1,7 @@
 #include <actors.h>
 #include <main.h>
 #include <macros.h>
+#include "port/interpolation/FrameInterpolation.h"
 
 /**
  * @brief Renders the item box actor.
@@ -25,6 +26,9 @@ void render_actor_item_box(Camera* camera, struct ItemBox* item_box) {
     f32 temp_f2;
     f32 temp_f2_2;
     f32 someMultiplier;
+
+    FrameInterpolation_RecordMatrixPush(someMatrix1);
+    FrameInterpolation_RecordMatrixPush(someMatrix2);
 
     temp_f0 = is_within_render_distance(camera->pos, item_box->pos, camera->rot[1], 0.0f, gCameraZoom[camera - camera1],
                                         4000000.0f);
@@ -179,4 +183,7 @@ void render_actor_item_box(Camera* camera, struct ItemBox* item_box) {
         }
         gSPTexture(gDisplayListHead++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
     }
+
+    FrameInterpolation_RecordMatrixPop(someMatrix1);
+    FrameInterpolation_RecordMatrixPop(someMatrix2);
 }
