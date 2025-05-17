@@ -34,6 +34,7 @@
 #include <assets/wario_stadium_data.h>
 #include <assets/frappe_snowland_data.h>
 #include "port/Game.h"
+#include "port/interpolation/FrameInterpolation.h"
 
 // Appears to be textures
 // or tluts
@@ -707,6 +708,9 @@ void render_actor_shell(Camera* camera, Mat4 matrix, struct ShellActor* shell) {
     //! @todo Is this making the shell spin?
     // Is it doing this by modifying a an address?
     uintptr_t phi_t3;
+    
+    // @port: Tag the transform.
+    FrameInterpolation_RecordOpenChild("Shell", TAG_ITEM_ADDR(shell));
 
     f32 temp_f0 =
         is_within_render_distance(camera->pos, shell->pos, camera->rot[1], 0, gCameraZoom[camera - camera1], 490000.0f);
@@ -749,6 +753,9 @@ void render_actor_shell(Camera* camera, Mat4 matrix, struct ShellActor* shell) {
     } else {
         gSPDisplayList(gDisplayListHead++, D_0D005368);
     }
+
+    // @port Pop the transform id.
+    FrameInterpolation_RecordCloseChild();
 }
 
 UNUSED s16 D_802B8808[] = { 0x0014, 0x0028, 0x0000, 0x0000 };
