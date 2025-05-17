@@ -39,6 +39,7 @@
 #include <assets/some_data.h>
 #include "port/Game.h"
 #include "engine/Matrix.h"
+#include "port/interpolation/FrameInterpolation.h"
 
 //! @warning this macro is undef'd at the end of this file
 #define MAKE_RGB(r, g, b) (((r) << 0x10) | ((g) << 0x08) | (b << 0x00))
@@ -769,7 +770,7 @@ void render_object_for_player(s32 cameraId) {
     render_object_leaf_particle(cameraId);
 
     if (D_80165730 != 0) {
-        //render_balloons_grand_prix(cameraId);
+        // render_balloons_grand_prix(cameraId);
     }
     if (gModeSelection == BATTLE) {
         CM_DrawBattleBombKarts(cameraId);
@@ -1632,7 +1633,7 @@ void update_object(void) {
     //         update_ferries_smoke_particle();
     //         break;
     // }
-    //if (D_80165730 != 0) {
+    // if (D_80165730 != 0) {
     //    func_80074EE8(); // Grand prix balloons
     //}
     func_80076F2C();
@@ -5737,6 +5738,10 @@ void func_800696CC(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3, f32 arg4) 
         sp54[0] = 0;
         sp54[1] = player->unk_048[arg3];
         sp54[2] = 0;
+
+        // @port: Tag the transform.
+        FrameInterpolation_RecordOpenChild("func_800696CC", TAG_OBJECT(arg2));
+
         func_800652D4(sp5C, sp54, player->size * arg4);
         gSPDisplayList(gDisplayListHead++, D_0D008D58);
         gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
@@ -5748,6 +5753,9 @@ void func_800696CC(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3, f32 arg4) 
         gSPVertex(gDisplayListHead++, D_800E87C0, 4, 0);
         gSPDisplayList(gDisplayListHead++, D_0D008DA0);
         gMatrixEffectCount += 1;
+
+        // @port Pop the transform id.
+        FrameInterpolation_RecordCloseChild();
     }
 }
 

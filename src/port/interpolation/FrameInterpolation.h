@@ -10,10 +10,15 @@
 
 #include <unordered_map>
 
+
+
 std::unordered_map<Mtx*, MtxF> FrameInterpolation_Interpolate(float step);
 
 extern "C" {
 #endif
+
+#define TAG_ITEM_ADDR(x) ((u32) 0x10000000 | (u32) x)
+#define TAG_OBJECT(x) ((u32) 0x40000000 | (u32) (x))
 
 void FrameInterpolation_ShouldInterpolateFrame(bool shouldInterpolate);
 

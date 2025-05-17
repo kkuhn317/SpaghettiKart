@@ -3,7 +3,7 @@
 #include <macros.h>
 #include "port/interpolation/FrameInterpolation.h"
 
-#define TAG_ITEM_ADDR(x) ((u32) 0x10000000 | (u32) x)
+
 
 /**
  * @brief Renders the item box actor.
