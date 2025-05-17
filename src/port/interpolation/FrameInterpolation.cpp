@@ -67,7 +67,8 @@ enum class Op {
     MatrixMtxFToMtx,
     MatrixToMtx,
     MatrixRotateAxis,
-    SkinMatrixMtxFToMtx
+    SkinMatrixMtxFToMtx,
+    SetTransformMatrix
 };
 
 typedef pair<const void*, int> label;
@@ -159,6 +160,14 @@ union Data {
         Vec3f axis;
         u8 mode;
     } matrix_rotate_axis;
+
+    struct {
+        Mat4 dest;
+        Vec3f orientationVector;
+        Vec3f positionVector;
+        u16 rotationAngle;
+        f32 scaleFactor;
+    } set_transform_matrix_data;
 
     struct {
         label key;
@@ -330,11 +339,11 @@ struct InterpolateCtx {
                             break;
 
                         case Op::MatrixPush:
-                            Matrix_Push((Matrix**)&gInterpolationMatrix);
+                            Matrix_Push((Matrix**) &gInterpolationMatrix);
                             break;
 
                         case Op::MatrixPop:
-                            Matrix_Pop((Matrix**)&gInterpolationMatrix);
+                            Matrix_Pop((Matrix**) &gInterpolationMatrix);
                             break;
 
                             // Unused on SF64
@@ -366,9 +375,12 @@ struct InterpolateCtx {
                             tempF[1] = lerp(old_op.matrix_pos_rot_xyz.pos.y, new_op.matrix_pos_rot_xyz.pos.y);
                             tempF[2] = lerp(old_op.matrix_pos_rot_xyz.pos.z, new_op.matrix_pos_rot_xyz.pos.z);
 
-                            tempS[0] = lerp(old_op.matrix_pos_rot_xyz.orientation.x, new_op.matrix_pos_rot_xyz.orientation.x);
-                            tempS[1] = lerp(old_op.matrix_pos_rot_xyz.orientation.y, new_op.matrix_pos_rot_xyz.orientation.y);
-                            tempS[2] = lerp(old_op.matrix_pos_rot_xyz.orientation.z, new_op.matrix_pos_rot_xyz.orientation.z);
+                            tempS[0] =
+                                lerp(old_op.matrix_pos_rot_xyz.orientation.x, new_op.matrix_pos_rot_xyz.orientation.x);
+                            tempS[1] =
+                                lerp(old_op.matrix_pos_rot_xyz.orientation.y, new_op.matrix_pos_rot_xyz.orientation.y);
+                            tempS[2] =
+                                lerp(old_op.matrix_pos_rot_xyz.orientation.z, new_op.matrix_pos_rot_xyz.orientation.z);
 
                             mtxf_pos_rotation_xyz(*gInterpolationMatrix, tempF, tempS);
                             break;
@@ -382,7 +394,7 @@ struct InterpolateCtx {
 
                         case Op::MatrixRotate1Coord: {
                             s16 v = interpolate_angle(old_op.matrix_rotate_1_coord.value,
-                                                        new_op.matrix_rotate_1_coord.value);
+                                                      new_op.matrix_rotate_1_coord.value);
                             switch (new_op.matrix_rotate_1_coord.coord) {
                                 case 0:
                                     mtxf_rotate_x(*gInterpolationMatrix, v);
@@ -439,6 +451,30 @@ struct InterpolateCtx {
                                 interpolate_angle(old_op.matrix_rotate_axis.angle, new_op.matrix_rotate_axis.angle);
                             // Matrix_RotateAxis((Matrix*) &tmp_vec3f, tmp, 1.0f, 1.0f, 1.0f,
                             // new_op.matrix_rotate_axis.mode);
+                            break;
+                        }
+
+                        case Op::SetTransformMatrix: {
+                            /*
+                             Mat4 dest, Vec3f orientationVector, Vec3f positionVector, u16 rotationAngle,
+                                f32 scaleFactor
+
+                                set_transform_matrix_data
+                             */
+                            interpolate_mtxf(&tmp_mtxf, (MtxF *)&old_op.set_transform_matrix_data.dest, (MtxF *)&new_op.set_transform_matrix_data.dest);
+                            Vec3f orientationVectorTemp;
+                            lerp_vec3f(&orientationVectorTemp, &old_op.set_transform_matrix_data.orientationVector,
+                                       &new_op.set_transform_matrix_data.orientationVector);
+                            Vec3f positionVector;
+                            lerp_vec3f(&orientationVectorTemp, &old_op.set_transform_matrix_data.positionVector,
+                                       &new_op.set_transform_matrix_data.positionVector);
+
+                            u16 rotationAngleTemp = lerp_s16(old_op.set_transform_matrix_data.rotationAngle,
+                                       new_op.set_transform_matrix_data.rotationAngle);
+                            f32 scaleFactorTemp = lerp(old_op.set_transform_matrix_data.scaleFactor, new_op.set_transform_matrix_data.scaleFactor);
+
+                            set_transform_matrix(tmp_mtxf.mf, orientationVectorTemp, positionVector, rotationAngleTemp, scaleFactorTemp);
+
                             break;
                         }
                     }
@@ -523,7 +559,7 @@ void FrameInterpolation_RecordMatrixPush(Mat4* matrix) {
     if (!is_recording)
         return;
 
-    append(Op::MatrixPush).matrix_ptr = { (Mat4**)matrix };
+    append(Op::MatrixPush).matrix_ptr = { (Mat4**) matrix };
 }
 
 void FrameInterpolation_RecordMarker(const char* file, int line) {
@@ -536,7 +572,7 @@ void FrameInterpolation_RecordMarker(const char* file, int line) {
 void FrameInterpolation_RecordMatrixPop(Mat4* matrix) {
     if (!is_recording)
         return;
-    append(Op::MatrixPop).matrix_ptr = { (Mat4**)matrix };
+    append(Op::MatrixPop).matrix_ptr = { (Mat4**) matrix };
 }
 
 void FrameInterpolation_RecordMatrixPut(MtxF* src) {
@@ -554,7 +590,7 @@ void FrameInterpolation_RecordMatrixMult(Mat4* matrix, MtxF* mf, u8 mode) {
 void FrameInterpolation_RecordMatrixTranslate(Mat4* matrix, Vec3f b) {
     if (!is_recording)
         return;
-    
+
     append(Op::MatrixTranslate).matrix_translate = { matrix, *((Vec3fInterp*) &b) };
 }
 
@@ -567,11 +603,17 @@ void FrameInterpolation_RecordMatrixScale(Mat4* matrix, f32 x, f32 y, f32 z, u8 
 void FrameInterpolation_RecordMatrixMultVec3fNoTranslate(Mat4* matrix, Vec3f src, Vec3f dest) {
     if (!is_recording)
         return;
-    //append(Op::MatrixMultVec3fNoTranslate).matrix_vec_no_translate = { matrix, src, dest };
+    // append(Op::MatrixMultVec3fNoTranslate).matrix_vec_no_translate = { matrix, src, dest };
+}
+
+void FrameInterpolation_Record_set_transform_matrix(Mat4 dest, Vec3f orientationVector, Vec3f positionVector, u16 rotationAngle,
+                          f32 scaleFactor) {
+    if (!is_recording)
+        return;
+    append(Op::SetTransformMatrix).set_transform_matrix_data = { dest[0][0], orientationVector[0], positionVector[0], rotationAngle, scaleFactor};
 }
 
 // Make a template for deref
-
 
 void FrameInterpolation_RecordMatrixPosRotXYZ(Mat4 out, Vec3f pos, Vec3s orientation) {
     if (!is_recording)
