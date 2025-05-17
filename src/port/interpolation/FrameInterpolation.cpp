@@ -520,6 +520,10 @@ void FrameInterpolation_RecordActorPosRotMatrix(void) {
 }
 
 void FrameInterpolation_RecordMatrixPush(Mat4* matrix) {
+    if (is_recording) {
+        append(Op::MatrixPop).matrix_ptr = { (Mat4**)matrix };
+    }
+
     if (!is_recording)
         return;
 
