@@ -4,7 +4,6 @@
 // #include "sf64math.h"
 #include <libultraship.h>
 #include <common_structs.h>
-#include <math_util_2.h>
 
 #ifdef __cplusplus
 

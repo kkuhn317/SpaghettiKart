@@ -2,6 +2,7 @@
 #include <libultra/gbi.h>
 #include "Lakitu.h"
 #include <vector>
+#include "port/interpolation/FrameInterpolation.h"
 
 #include "port/Game.h"
 
@@ -10,6 +11,7 @@ extern "C" {
 #include "main.h"
 #include "actors.h"
 #include "math_util.h"
+#include "math_util_2.h"
 #include "sounds.h"
 #include "update_objects.h"
 #include "render_player.h"
@@ -21,7 +23,6 @@ extern "C" {
 #include "code_80057C60.h"
 #include "defines.h"
 #include "code_80005FD0.h"
-#include "math_util_2.h"
 #include "collision.h"
 #include "assets/bowsers_castle_data.h"
 #include "ceremony_and_credits.h"
@@ -95,6 +96,8 @@ void OLakitu::Draw(s32 cameraId) {
     s32 objectIndex;
     Object* object;
 
+    FrameInterpolation_RecordOpenChild("Lakitu",(u32) 3939848893);
+
     objectIndex = gIndexLakituList[cameraId];
     camera = &camera1[cameraId];
     if (is_obj_flag_status_active(objectIndex, 0x00000010) != 0) {
@@ -126,6 +129,7 @@ void OLakitu::Draw(s32 cameraId) {
             }
         }
     }
+    FrameInterpolation_RecordCloseChild();
 }
 
 void OLakitu::func_80079114(s32 objectIndex, s32 playerId, s32 arg2) {

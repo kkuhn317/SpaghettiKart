@@ -603,7 +603,6 @@ void func_80041D24(void) {
 }
 
 void guOrtho(Mtx*, f32, f32, f32, f32, f32, f32, f32); /* extern */
-extern s8 D_801658FE;
 
 void func_80041D34(void) {
     guOrtho(&D_80183D60, 0.0f, 320.0f, 240.0f, 0.0f, -1.0f, 1.0f, 1.0f);
