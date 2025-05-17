@@ -134,16 +134,16 @@ u16 check_player_camera_collision(Player* player, Camera* camera, f32 arg2, f32 
             var_v0 = 0x1FFE;
             break;
     }
-    sp4C = (arg2 * coss((camera->rot[1] - var_v0))) + camera->pos[2];
-    sp58 = (arg2 * sins((camera->rot[1] - var_v0))) + camera->pos[0];
-    sp48 = (arg2 * coss((camera->rot[1] + var_v0))) + camera->pos[2];
-    sp54 = (arg2 * sins((camera->rot[1] + var_v0))) + camera->pos[0];
-    sp44 = (arg3 * coss((camera->rot[1] + 0x5FFA))) + camera->pos[2];
-    sp50 = (arg3 * sins((camera->rot[1] + 0x5FFA))) + camera->pos[0];
+    sp4C = (arg2 * coss((camera->rot.y - var_v0))) + camera->pos.z;
+    sp58 = (arg2 * sins((camera->rot.y - var_v0))) + camera->pos.x;
+    sp48 = (arg2 * coss((camera->rot.y + var_v0))) + camera->pos.z;
+    sp54 = (arg2 * sins((camera->rot.y + var_v0))) + camera->pos.x;
+    sp44 = (arg3 * coss((camera->rot.y + 0x5FFA))) + camera->pos.z;
+    sp50 = (arg3 * sins((camera->rot.y + 0x5FFA))) + camera->pos.x;
 
-    sp64 = ((sp4C - player->pos[2]) * (sp54 - player->pos[0])) - ((sp48 - player->pos[2]) * (sp58 - player->pos[0]));
-    sp60 = ((sp48 - player->pos[2]) * (sp50 - player->pos[0])) - ((sp44 - player->pos[2]) * (sp54 - player->pos[0]));
-    sp5C = ((sp44 - player->pos[2]) * (sp58 - player->pos[0])) - ((sp4C - player->pos[2]) * (sp50 - player->pos[0]));
+    sp64 = ((sp4C - player->pos.z) * (sp54 - player->pos.x)) - ((sp48 - player->pos.z) * (sp58 - player->pos.x));
+    sp60 = ((sp48 - player->pos.z) * (sp50 - player->pos.x)) - ((sp44 - player->pos.z) * (sp54 - player->pos.x));
+    sp5C = ((sp44 - player->pos.z) * (sp58 - player->pos.x)) - ((sp4C - player->pos.z) * (sp50 - player->pos.x));
 
     if (((sp64 >= 0) && (sp60 >= 0) && (sp5C >= 0)) || (((sp64) <= 0) && (sp60 <= 0) && (sp5C <= 0))) {
         ret = true;
@@ -165,12 +165,12 @@ u16 func_8001FD78(Player* player, f32 posX, UNUSED f32 arg2, f32 posZ) {
 
     ret = false;
 
-    sp58 = (70.0f * coss(((player->unk_0C0 - player->rotation[1]) - 0x71C))) + player->pos[2];
-    sp64 = (70.0f * sins(((player->unk_0C0 - player->rotation[1]) - 0x71C))) + player->pos[0];
-    sp54 = (70.0f * coss(((player->unk_0C0 - player->rotation[1]) + 0x71C))) + player->pos[2];
-    sp60 = (70.0f * sins(((player->unk_0C0 - player->rotation[1]) + 0x71C))) + player->pos[0];
-    sp50 = (10.0f * coss(((player->unk_0C0 - player->rotation[1]) + 0x1C70))) + player->pos[2];
-    sp5c = (10.0f * sins(((player->unk_0C0 - player->rotation[1]) + 0x1C70))) + player->pos[0];
+    sp58 = (70.0f * coss(((player->unk_0C0 - player->rotation.y) - 0x71C))) + player->pos.z;
+    sp64 = (70.0f * sins(((player->unk_0C0 - player->rotation.y) - 0x71C))) + player->pos.x;
+    sp54 = (70.0f * coss(((player->unk_0C0 - player->rotation.y) + 0x71C))) + player->pos.z;
+    sp60 = (70.0f * sins(((player->unk_0C0 - player->rotation.y) + 0x71C))) + player->pos.x;
+    sp50 = (10.0f * coss(((player->unk_0C0 - player->rotation.y) + 0x1C70))) + player->pos.z;
+    sp5c = (10.0f * sins(((player->unk_0C0 - player->rotation.y) + 0x1C70))) + player->pos.x;
 
     temp_f14 = ((sp58 - posZ) * (sp60 - posX)) - ((sp54 - posZ) * (sp64 - posX));
     thing0 = ((sp54 - posZ) * (sp5c - posX)) - ((sp50 - posZ) * (sp60 - posX));
@@ -266,9 +266,9 @@ void init_render_player(Player* player, Camera* camera, s8 playerId, s8 screenId
 void load_kart_texture_and_render_kart_particle_on_screen_one(void) {
     s16 i;
 
-    load_kart_texture_non_blocking(gPlayersToRenderPlayer[0], gPlayersToRenderPlayerId[0], gPlayersToRenderScreenId[0],
-                                   gPlayersToRenderScreenId[0],
-                                   D_801651D0[gPlayersToRenderScreenId[0]][gPlayersToRenderPlayerId[0]]);
+    load_kart_texture_non_blocking(gPlayersToRenderPlayer.x, gPlayersToRenderPlayerId.x, gPlayersToRenderScreenId.x,
+                                   gPlayersToRenderScreenId.x,
+                                   D_801651D0[gPlayersToRenderScreenId.x][gPlayersToRenderPlayerId.x]);
 
     osRecvMesg(&gDmaMesgQueue, &gMainReceivedMesg, OS_MESG_BLOCK);
 
@@ -328,9 +328,9 @@ void load_kart_texture_and_render_kart_particle_on_screen_one(void) {
 void load_kart_texture_and_render_kart_particle_on_screen_two(void) {
     s16 var_s0;
 
-    load_kart_texture_non_blocking(gPlayersToRenderPlayer[0], gPlayersToRenderPlayerId[0], gPlayersToRenderScreenId[0],
-                                   gPlayersToRenderScreenId[0],
-                                   D_801651D0[gPlayersToRenderScreenId[0]][gPlayersToRenderPlayerId[0]]);
+    load_kart_texture_non_blocking(gPlayersToRenderPlayer.x, gPlayersToRenderPlayerId.x, gPlayersToRenderScreenId.x,
+                                   gPlayersToRenderScreenId.x,
+                                   D_801651D0[gPlayersToRenderScreenId.x][gPlayersToRenderPlayerId.x]);
     osRecvMesg(&gDmaMesgQueue, &gMainReceivedMesg, OS_MESG_BLOCK);
     for (var_s0 = 1; var_s0 < gPlayersToRenderCount; var_s0++) {
         load_kart_texture_non_blocking(gPlayersToRenderPlayer[var_s0], gPlayersToRenderPlayerId[var_s0],
@@ -388,9 +388,9 @@ void load_kart_texture_and_render_kart_particle_on_screen_two(void) {
 void load_kart_texture_and_render_kart_particle_on_screen_three(void) {
     s16 var_s0;
 
-    load_kart_texture_non_blocking(gPlayersToRenderPlayer[0], gPlayersToRenderPlayerId[0] + 4,
-                                   gPlayersToRenderScreenId[0], gPlayersToRenderScreenId[0] - 2,
-                                   D_801651D0[gPlayersToRenderScreenId[0]][gPlayersToRenderPlayerId[0]]);
+    load_kart_texture_non_blocking(gPlayersToRenderPlayer.x, gPlayersToRenderPlayerId.x + 4,
+                                   gPlayersToRenderScreenId.x, gPlayersToRenderScreenId.x - 2,
+                                   D_801651D0[gPlayersToRenderScreenId.x][gPlayersToRenderPlayerId.x]);
     osRecvMesg(&gDmaMesgQueue, &gMainReceivedMesg, OS_MESG_BLOCK);
     for (var_s0 = 1; var_s0 < gPlayersToRenderCount; var_s0++) {
         load_kart_texture_non_blocking(gPlayersToRenderPlayer[var_s0], gPlayersToRenderPlayerId[var_s0] + 4,
@@ -448,9 +448,9 @@ void load_kart_texture_and_render_kart_particle_on_screen_three(void) {
 void load_kart_texture_and_render_kart_particle_on_screen_four(void) {
     s16 var_s0;
 
-    load_kart_texture_non_blocking(gPlayersToRenderPlayer[0], gPlayersToRenderPlayerId[0] + 4,
-                                   gPlayersToRenderScreenId[0], gPlayersToRenderScreenId[0] - 2,
-                                   D_801651D0[gPlayersToRenderScreenId[0]][gPlayersToRenderPlayerId[0]]);
+    load_kart_texture_non_blocking(gPlayersToRenderPlayer.x, gPlayersToRenderPlayerId.x + 4,
+                                   gPlayersToRenderScreenId.x, gPlayersToRenderScreenId.x - 2,
+                                   D_801651D0[gPlayersToRenderScreenId.x][gPlayersToRenderPlayerId.x]);
     osRecvMesg(&gDmaMesgQueue, &gMainReceivedMesg, OS_MESG_BLOCK);
     for (var_s0 = 1; var_s0 < gPlayersToRenderCount; var_s0++) {
         load_kart_texture_non_blocking(gPlayersToRenderPlayer[var_s0], gPlayersToRenderPlayerId[var_s0] + 4,
@@ -896,47 +896,47 @@ void func_80021DA8(void) {
 
 void mtxf_translate_rotate(Mat4 dest, Vec3f pos, Vec3s orientation) {
     UNUSED f32 pad[3];
-    f32 sinX = sins(orientation[0]);
-    f32 cosX = coss(orientation[0]);
-    f32 sinY = sins(orientation[1]);
-    f32 cosY = coss(orientation[1]);
-    f32 sinZ = sins(orientation[2]);
-    f32 cosZ = coss(orientation[2]);
+    f32 sinX = sins(orientation.x);
+    f32 cosX = coss(orientation.x);
+    f32 sinY = sins(orientation.y);
+    f32 cosY = coss(orientation.y);
+    f32 sinZ = sins(orientation.z);
+    f32 cosZ = coss(orientation.z);
 
-    dest[0][0] = (cosY * cosZ) + ((sinX * sinY) * sinZ);
-    dest[1][0] = (-cosY * sinZ) + ((sinX * sinY) * cosZ);
-    dest[2][0] = cosX * sinY;
-    dest[3][0] = pos[0];
-    dest[0][1] = cosX * sinZ;
-    dest[1][1] = cosX * cosZ;
-    dest[2][1] = -sinX;
-    dest[3][1] = pos[1];
-    dest[0][2] = (-sinY * cosZ) + ((sinX * cosY) * sinZ);
-    dest[1][2] = (sinY * sinZ) + ((sinX * cosY) * cosZ);
-    dest[2][2] = cosX * cosY;
-    dest[3][2] = pos[2];
-    dest[0][3] = 0.0f;
-    dest[1][3] = 0.0f;
-    dest[2][3] = 0.0f;
+    dest.x.x = (cosY * cosZ) + ((sinX * sinY) * sinZ);
+    dest.y.x = (-cosY * sinZ) + ((sinX * sinY) * cosZ);
+    dest.z.x = cosX * sinY;
+    dest[3].x = pos.x;
+    dest.x.y = cosX * sinZ;
+    dest.y.y = cosX * cosZ;
+    dest.z.y = -sinX;
+    dest[3].y = pos.y;
+    dest.x.z = (-sinY * cosZ) + ((sinX * cosY) * sinZ);
+    dest.y.z = (sinY * sinZ) + ((sinX * cosY) * cosZ);
+    dest.z.z = cosX * cosY;
+    dest[3].z = pos.z;
+    dest.x[3] = 0.0f;
+    dest.y[3] = 0.0f;
+    dest.z[3] = 0.0f;
     dest[3][3] = 1.0f;
 }
 
 UNUSED void func_80021F50(Mat4 arg0, Vec3f arg1) {
-    arg0[3][0] += arg1[0];
-    arg0[3][1] += arg1[1];
-    arg0[3][2] += arg1[2];
+    arg0[3].x += arg1.x;
+    arg0[3].y += arg1.y;
+    arg0[3].z += arg1.z;
 }
 
 void mtxf_scale2(Mat4 arg0, f32 scale) {
-    arg0[0][0] *= scale;
-    arg0[1][0] *= scale;
-    arg0[2][0] *= scale;
-    arg0[0][1] *= scale;
-    arg0[1][1] *= scale;
-    arg0[2][1] *= scale;
-    arg0[0][2] *= scale;
-    arg0[1][2] *= scale;
-    arg0[2][2] *= scale;
+    arg0.x.x *= scale;
+    arg0.y.x *= scale;
+    arg0.z.x *= scale;
+    arg0.x.y *= scale;
+    arg0.y.y *= scale;
+    arg0.z.y *= scale;
+    arg0.x.z *= scale;
+    arg0.y.z *= scale;
+    arg0.z.z *= scale;
 }
 
 /**
@@ -949,21 +949,21 @@ void mtxf_scale2(Mat4 arg0, f32 scale) {
  */
 UNUSED void failed_fixed_point_matrix_conversion(Mtx* dest, Mat4 src) {
     f32 toFixed = 65536.0f;
-    dest->m[0][0] = src[0][0] * toFixed;
-    dest->m[0][1] = src[0][1] * toFixed;
-    dest->m[0][2] = src[0][2] * toFixed;
-    dest->m[0][3] = src[0][3] * toFixed;
-    dest->m[1][0] = src[1][0] * toFixed;
-    dest->m[1][1] = src[1][1] * toFixed;
-    dest->m[1][2] = src[1][2] * toFixed;
-    dest->m[1][3] = src[1][3] * toFixed;
-    dest->m[2][0] = src[2][0] * toFixed;
-    dest->m[2][1] = src[2][1] * toFixed;
-    dest->m[2][2] = src[2][2] * toFixed;
-    dest->m[2][3] = src[2][3] * toFixed;
-    dest->m[3][0] = src[3][0] * toFixed;
-    dest->m[3][1] = src[3][1] * toFixed;
-    dest->m[3][2] = src[3][2] * toFixed;
+    dest->m.x.x = src.x.x * toFixed;
+    dest->m.x.y = src.x.y * toFixed;
+    dest->m.x.z = src.x.z * toFixed;
+    dest->m.x[3] = src.x[3] * toFixed;
+    dest->m.y.x = src.y.x * toFixed;
+    dest->m.y.y = src.y.y * toFixed;
+    dest->m.y.z = src.y.z * toFixed;
+    dest->m.y[3] = src.y[3] * toFixed;
+    dest->m.z.x = src.z.x * toFixed;
+    dest->m.z.y = src.z.y * toFixed;
+    dest->m.z.z = src.z.z * toFixed;
+    dest->m.z[3] = src.z[3] * toFixed;
+    dest->m[3].x = src[3].x * toFixed;
+    dest->m[3].y = src[3].y * toFixed;
+    dest->m[3].z = src[3].z * toFixed;
     dest->m[3][3] = src[3][3] * toFixed;
 }
 
@@ -984,22 +984,22 @@ void convert_to_fixed_point_matrix(Mtx* dest, Mat4 src) {
     guMtxF2L(src, dest);
 #else
     f32 toFixed = 65536.0f; // 2 ^ 16
-    dest->m[0][0] = ((s32) (src[0][0] * toFixed) & 0xFFFF0000) | (((s32) (src[0][1] * toFixed) >> 0x10) & 0xFFFF);
-    dest->m[0][1] = ((s32) (src[0][2] * toFixed) & 0xFFFF0000) | (((s32) (src[0][3] * toFixed) >> 0x10) & 0xFFFF);
-    dest->m[0][2] = ((s32) (src[1][0] * toFixed) & 0xFFFF0000) | (((s32) (src[1][1] * toFixed) >> 0x10) & 0xFFFF);
-    dest->m[0][3] = ((s32) (src[1][2] * toFixed) & 0xFFFF0000) | (((s32) (src[1][3] * toFixed) >> 0x10) & 0xFFFF);
-    dest->m[1][0] = ((s32) (src[2][0] * toFixed) & 0xFFFF0000) | (((s32) (src[2][1] * toFixed) >> 0x10) & 0xFFFF);
-    dest->m[1][1] = ((s32) (src[2][2] * toFixed) & 0xFFFF0000) | (((s32) (src[2][3] * toFixed) >> 0x10) & 0xFFFF);
-    dest->m[1][2] = ((s32) (src[3][0] * toFixed) & 0xFFFF0000) | (((s32) (src[3][1] * toFixed) >> 0x10) & 0xFFFF);
-    dest->m[1][3] = ((s32) (src[3][2] * toFixed) & 0xFFFF0000) | (((s32) (src[3][3] * toFixed) >> 0x10) & 0xFFFF);
-    dest->m[2][0] = ((s32) (src[0][0] * toFixed) << 0x10) | ((s32) (src[0][1] * toFixed) & 0xFFFF);
-    dest->m[2][1] = ((s32) (src[0][2] * toFixed) << 0x10) | ((s32) (src[0][3] * toFixed) & 0xFFFF);
-    dest->m[2][2] = ((s32) (src[1][0] * toFixed) << 0x10) | ((s32) (src[1][1] * toFixed) & 0xFFFF);
-    dest->m[2][3] = ((s32) (src[1][2] * toFixed) << 0x10) | ((s32) (src[1][3] * toFixed) & 0xFFFF);
-    dest->m[3][0] = ((s32) (src[2][0] * toFixed) << 0x10) | ((s32) (src[2][1] * toFixed) & 0xFFFF);
-    dest->m[3][1] = ((s32) (src[2][2] * toFixed) << 0x10) | ((s32) (src[2][3] * toFixed) & 0xFFFF);
-    dest->m[3][2] = ((s32) (src[3][0] * toFixed) << 0x10) | ((s32) (src[3][1] * toFixed) & 0xFFFF);
-    dest->m[3][3] = ((s32) (src[3][2] * toFixed) << 0x10) | ((s32) (src[3][3] * toFixed) & 0xFFFF);
+    dest->m.x.x = ((s32) (src.x.x * toFixed) & 0xFFFF0000) | (((s32) (src.x.y * toFixed) >> 0x10) & 0xFFFF);
+    dest->m.x.y = ((s32) (src.x.z * toFixed) & 0xFFFF0000) | (((s32) (src.x[3] * toFixed) >> 0x10) & 0xFFFF);
+    dest->m.x.z = ((s32) (src.y.x * toFixed) & 0xFFFF0000) | (((s32) (src.y.y * toFixed) >> 0x10) & 0xFFFF);
+    dest->m.x[3] = ((s32) (src.y.z * toFixed) & 0xFFFF0000) | (((s32) (src.y[3] * toFixed) >> 0x10) & 0xFFFF);
+    dest->m.y.x = ((s32) (src.z.x * toFixed) & 0xFFFF0000) | (((s32) (src.z.y * toFixed) >> 0x10) & 0xFFFF);
+    dest->m.y.y = ((s32) (src.z.z * toFixed) & 0xFFFF0000) | (((s32) (src.z[3] * toFixed) >> 0x10) & 0xFFFF);
+    dest->m.y.z = ((s32) (src[3].x * toFixed) & 0xFFFF0000) | (((s32) (src[3].y * toFixed) >> 0x10) & 0xFFFF);
+    dest->m.y[3] = ((s32) (src[3].z * toFixed) & 0xFFFF0000) | (((s32) (src[3][3] * toFixed) >> 0x10) & 0xFFFF);
+    dest->m.z.x = ((s32) (src.x.x * toFixed) << 0x10) | ((s32) (src.x.y * toFixed) & 0xFFFF);
+    dest->m.z.y = ((s32) (src.x.z * toFixed) << 0x10) | ((s32) (src.x[3] * toFixed) & 0xFFFF);
+    dest->m.z.z = ((s32) (src.y.x * toFixed) << 0x10) | ((s32) (src.y.y * toFixed) & 0xFFFF);
+    dest->m.z[3] = ((s32) (src.y.z * toFixed) << 0x10) | ((s32) (src.y[3] * toFixed) & 0xFFFF);
+    dest->m[3].x = ((s32) (src.z.x * toFixed) << 0x10) | ((s32) (src.z.y * toFixed) & 0xFFFF);
+    dest->m[3].y = ((s32) (src.z.z * toFixed) << 0x10) | ((s32) (src.z[3] * toFixed) & 0xFFFF);
+    dest->m[3].z = ((s32) (src[3].x * toFixed) << 0x10) | ((s32) (src[3].y * toFixed) & 0xFFFF);
+    dest->m[3][3] = ((s32) (src[3].z * toFixed) << 0x10) | ((s32) (src[3][3] * toFixed) & 0xFFFF);
 #endif
 }
 
@@ -1211,12 +1211,12 @@ void func_80022BC4(Player* player, UNUSED s8 arg1) {
 void func_80022CA8(Player* player, s8 playerId, UNUSED s8 screenId, s8 arg3) {
     s16 temp_v0 = player->unk_DA4;
 
-    D_800DDBB4[playerId][arg3 + 0x0].v.ob[1] = 18 - (temp_v0 * 2.3);
-    D_800DDBB4[playerId][arg3 + 0x1].v.ob[1] = 9 - temp_v0;
-    D_800DDBB4[playerId][arg3 + 0x2].v.ob[1] = 9 - temp_v0;
-    D_800DDBB4[playerId][arg3 + 0x3].v.ob[1] = 18 - (temp_v0 * 2.3);
-    D_800DDBB4[playerId][arg3 + 0x4].v.ob[1] = 9 - temp_v0;
-    D_800DDBB4[playerId][arg3 + 0x7].v.ob[1] = 9 - temp_v0;
+    D_800DDBB4[playerId][arg3 + 0x0].v.ob.y = 18 - (temp_v0 * 2.3);
+    D_800DDBB4[playerId][arg3 + 0x1].v.ob.y = 9 - temp_v0;
+    D_800DDBB4[playerId][arg3 + 0x2].v.ob.y = 9 - temp_v0;
+    D_800DDBB4[playerId][arg3 + 0x3].v.ob.y = 18 - (temp_v0 * 2.3);
+    D_800DDBB4[playerId][arg3 + 0x4].v.ob.y = 9 - temp_v0;
+    D_800DDBB4[playerId][arg3 + 0x7].v.ob.y = 9 - temp_v0;
 }
 
 /**
@@ -1224,8 +1224,8 @@ void func_80022CA8(Player* player, s8 playerId, UNUSED s8 screenId, s8 arg3) {
  * short period of time. Perhaps does not do anything
  **/
 void func_80022D60(UNUSED Player* player, s8 playerId, UNUSED s8 screenId, s8 arg3) {
-    D_800DDBB4[playerId][arg3].v.ob[1] = 21;
-    D_800DDBB4[playerId][arg3 + 0x3].v.ob[1] = 21;
+    D_800DDBB4[playerId][arg3].v.ob.y = 21;
+    D_800DDBB4[playerId][arg3 + 0x3].v.ob.y = 21;
 }
 
 void func_80022DB4(Player* player, UNUSED s8 arg1) {
@@ -1255,12 +1255,12 @@ void func_80022DB4(Player* player, UNUSED s8 arg1) {
 void func_80022E84(Player* player, s8 playerId, UNUSED s8 screenId, s8 arg3) {
     s16 temp_v0 = player->unk_DB4.unk1E;
 
-    D_800DDBB4[playerId][arg3 + 0x0].v.ob[1] = 18 - temp_v0;
-    D_800DDBB4[playerId][arg3 + 0x1].v.ob[1] = 9 - temp_v0;
-    D_800DDBB4[playerId][arg3 + 0x2].v.ob[1] = 9 - temp_v0;
-    D_800DDBB4[playerId][arg3 + 0x3].v.ob[1] = 18 - temp_v0;
-    D_800DDBB4[playerId][arg3 + 0x4].v.ob[1] = 9 - temp_v0;
-    D_800DDBB4[playerId][arg3 + 0x7].v.ob[1] = 9 - temp_v0;
+    D_800DDBB4[playerId][arg3 + 0x0].v.ob.y = 18 - temp_v0;
+    D_800DDBB4[playerId][arg3 + 0x1].v.ob.y = 9 - temp_v0;
+    D_800DDBB4[playerId][arg3 + 0x2].v.ob.y = 9 - temp_v0;
+    D_800DDBB4[playerId][arg3 + 0x3].v.ob.y = 18 - temp_v0;
+    D_800DDBB4[playerId][arg3 + 0x4].v.ob.y = 9 - temp_v0;
+    D_800DDBB4[playerId][arg3 + 0x7].v.ob.y = 9 - temp_v0;
 }
 
 /**
@@ -1310,7 +1310,7 @@ void render_light_environment_on_player(Player* player, s8 arg1) {
         if (((gNearestWaypointByPlayerId[arg1] >= 0x15) && (gNearestWaypointByPlayerId[arg1] < 0x2A)) ||
             ((gNearestWaypointByPlayerId[arg1] >= 0x14D) && (gNearestWaypointByPlayerId[arg1] < 0x15C)) ||
             ((gNearestWaypointByPlayerId[arg1] >= 0x1D1) && (gNearestWaypointByPlayerId[arg1] < 0x1E4)) ||
-            (player->collision.surfaceDistance[2] >= 500.0f)) { // over lava
+            (player->collision.surfaceDistance.z >= 500.0f)) { // over lava
             change_player_color_effect_rgb(player, arg1, COLOR_LAVA, 0.3f);
             change_player_color_effect_cmy(player, arg1, 0x004040, 0.3f);
             D_80164B80[arg1] = 0;
@@ -1486,8 +1486,8 @@ void render_player_shadow(Player* player, s8 playerId, s8 screenId) {
 
     // @port: Tag the transform.
     FrameInterpolation_RecordOpenChild("Kart Shadow", TAG_ITEM_ADDR(player));
-    temp_t9 = (u16) (player->unk_048[screenId] + player->rotation[1] + player->unk_0C0) / 128; // << 7) & 0xFFFF;
-    spC0 = -player->rotation[1] - player->unk_0C0;
+    temp_t9 = (u16) (player->unk_048[screenId] + player->rotation.y + player->unk_0C0) / 128; // << 7) & 0xFFFF;
+    spC0 = -player->rotation.y - player->unk_0C0;
 
     spB0 = -coss(temp_t9 << 7) * 2;
     spAC = -sins(temp_t9 << 7) * 2;
@@ -1498,30 +1498,30 @@ void render_player_shadow(Player* player, s8 playerId, s8 screenId) {
         ((player->effects & HIT_BY_ITEM_EFFECT) == HIT_BY_ITEM_EFFECT) || ((player->effects & 0x10000) == 0x10000) ||
         ((player->effects & 8) == 8)) {
 
-        var_f2 = (f32) (1.0 - ((f64) player->collision.surfaceDistance[2] * 0.02));
+        var_f2 = (f32) (1.0 - ((f64) player->collision.surfaceDistance.z * 0.02));
         if (var_f2 < 0.0f) {
             var_f2 = 0.0f;
         }
         if (var_f2 > 1.0f) {
             var_f2 = 1.0f;
         }
-        spB4[0] = player->collision.orientationVector[0];
-        spB4[2] = player->collision.orientationVector[2];
-        spB4[1] = player->collision.orientationVector[1];
+        spB4.x = player->collision.orientationVector.x;
+        spB4.z = player->collision.orientationVector.z;
+        spB4.y = player->collision.orientationVector.y;
 
-        spCC[0] = player->pos[0] + ((spB0 * sins(spC0)) + (spAC * coss(spC0)));
-        spCC[1] = player->unk_074 + 1.0f;
-        spCC[2] = player->pos[2] + ((spB0 * coss(spC0)) - (spAC * sins(spC0)));
+        spCC.x = player->pos.x + ((spB0 * sins(spC0)) + (spAC * coss(spC0)));
+        spCC.y = player->unk_074 + 1.0f;
+        spCC.z = player->pos.z + ((spB0 * coss(spC0)) - (spAC * sins(spC0)));
         set_transform_matrix(mtx, spB4, spCC, (spC0 + player->unk_042),
                              gCharacterSize[player->characterId] * player->size * var_f2);
     } else {
-        spC4[0] = player->slopeAccel;
-        spC4[1] = spC0;
-        spC4[2] = player->unk_206 * 2;
+        spC4.x = player->slopeAccel;
+        spC4.y = spC0;
+        spC4.z = player->unk_206 * 2;
 
-        spCC[0] = player->pos[0] + ((spB0 * sins(spC0)) + (spAC * coss(spC0)));
-        spCC[1] = player->unk_074 + 1.0f;
-        spCC[2] = player->pos[2] + ((spB0 * coss(spC0)) - (spAC * sins(spC0)));
+        spCC.x = player->pos.x + ((spB0 * sins(spC0)) + (spAC * coss(spC0)));
+        spCC.y = player->unk_074 + 1.0f;
+        spCC.z = player->pos.z + ((spB0 * coss(spC0)) - (spAC * sins(spC0)));
         mtxf_translate_rotate(mtx, spCC, spC4);
         mtxf_scale2(mtx, gCharacterSize[player->characterId] * player->size);
     }
@@ -1537,7 +1537,7 @@ void render_player_shadow(Player* player, s8 playerId, s8 screenId) {
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
     func_8004B414(0, 0, 0, 0xFF);
     gDPSetRenderMode(gDisplayListHead++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
-    gSPVertex(gDisplayListHead++, &D_800E51D0[0], 4, 0);
+    gSPVertex(gDisplayListHead++, &D_800E51D0.x, 4, 0);
 
     gSPDisplayList(gDisplayListHead++, common_square_plain_render);
     gDPLoadTextureBlock(gDisplayListHead++, (D_8018D474 + SOME_TEXTURE_POINTER_MATH), G_IM_FMT_I, G_IM_SIZ_8b, 64, 32,
@@ -1545,7 +1545,7 @@ void render_player_shadow(Player* player, s8 playerId, s8 screenId) {
                         G_TX_NOLOD);
     func_8004B414(0, 0, 0, 0xFF);
     gDPSetRenderMode(gDisplayListHead++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
-    gSPVertex(gDisplayListHead++, &D_800E5210[0], 4, 0);
+    gSPVertex(gDisplayListHead++, &D_800E5210.x, 4, 0);
 
     gSPDisplayList(gDisplayListHead++, common_square_plain_render);
     gSPTexture(gDisplayListHead++, 1, 1, 0, G_TX_RENDERTILE, G_OFF);
@@ -1567,19 +1567,19 @@ void render_player_shadow_credits(Player* player, s8 playerId, s8 arg2) {
     UNUSED Vec3f pad3;
     Vec3f sp94 = { 9.0f, 7.0f, 5.0f };
 
-    temp_t9 = (u16) (player->unk_048[arg2] + player->rotation[1] + player->unk_0C0) / 128;
-    spC0 = -player->rotation[1] - player->unk_0C0;
+    temp_t9 = (u16) (player->unk_048[arg2] + player->rotation.y + player->unk_0C0) / 128;
+    spC0 = -player->rotation.y - player->unk_0C0;
 
     spB0 = -coss(temp_t9 << 7) * 3;
     spAC = -sins(temp_t9 << 7) * 3;
 
-    spC4[0] = 0;
-    spC4[1] = spC0;
-    spC4[2] = 0;
+    spC4.x = 0;
+    spC4.y = spC0;
+    spC4.z = 0;
 
-    spCC[0] = player->pos[0] + ((spB0 * sins(spC0)) + (spAC * coss(spC0)));
-    spCC[2] = player->pos[2] + ((spB0 * coss(spC0)) - (spAC * sins(spC0)));
-    spCC[1] = gObjectList[indexObjectList1[playerId]].pos[1] + sp94[playerId];
+    spCC.x = player->pos.x + ((spB0 * sins(spC0)) + (spAC * coss(spC0)));
+    spCC.z = player->pos.z + ((spB0 * coss(spC0)) - (spAC * sins(spC0)));
+    spCC.y = gObjectList[indexObjectList1[playerId]].pos.y + sp94[playerId];
 
     mtxf_translate_rotate(mtx, spCC, spC4);
     mtxf_scale2(mtx, gCharacterSize[player->characterId] * player->size);
@@ -1596,7 +1596,7 @@ void render_player_shadow_credits(Player* player, s8 playerId, s8 arg2) {
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
     func_8004B414(0, 0, 0, 0x000000D0);
     gDPSetRenderMode(gDisplayListHead++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
-    gSPVertex(gDisplayListHead++, &D_800E51D0[0], 4, 0);
+    gSPVertex(gDisplayListHead++, &D_800E51D0.x, 4, 0);
 
     gSPDisplayList(gDisplayListHead++, common_square_plain_render);
     gDPLoadTextureBlock(gDisplayListHead++, (D_8018D474 + SOME_TEXTURE_POINTER_MATH), G_IM_FMT_I, G_IM_SIZ_8b, 64, 32,
@@ -1604,7 +1604,7 @@ void render_player_shadow_credits(Player* player, s8 playerId, s8 arg2) {
                         G_TX_NOLOD);
     func_8004B414(0, 0, 0, 0x000000D0);
     gDPSetRenderMode(gDisplayListHead++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
-    gSPVertex(gDisplayListHead++, &D_800E5210[0], 4, 0);
+    gSPVertex(gDisplayListHead++, &D_800E5210.x, 4, 0);
 
     gSPDisplayList(gDisplayListHead++, common_square_plain_render);
     gSPTexture(gDisplayListHead++, 1, 1, 0, G_TX_RENDERTILE, G_OFF);
@@ -1623,35 +1623,35 @@ void render_kart(Player* player, s8 playerId, s8 screenId, s8 arg3) {
     s16 thing;
 
     if (player->unk_044 & 0x2000) {
-        sp14C[0] = 0;
-        sp14C[1] = player->unk_048[screenId];
-        sp14C[2] = 0;
+        sp14C.x = 0;
+        sp14C.y = player->unk_048[screenId];
+        sp14C.z = 0;
         func_80062B18(&sp148, &sp144, &sp140, 0.0f, 1.5f, 0.0f, -player->unk_048[screenId], player->unk_050[screenId]);
-        sp154[1] = (player->pos[1] - player->boundingBoxSize) + (sp144 - 2.0);
-        sp154[0] = player->pos[0] + sp148;
-        sp154[2] = player->pos[2] + sp140;
+        sp154.y = (player->pos.y - player->boundingBoxSize) + (sp144 - 2.0);
+        sp154.x = player->pos.x + sp148;
+        sp154.z = player->pos.z + sp140;
     } else {
-        thing = (u16) (player->unk_048[screenId] + player->rotation[1] + player->unk_0C0);
+        thing = (u16) (player->unk_048[screenId] + player->rotation.y + player->unk_0C0);
         temp_v1 = player->unk_0CC[screenId] * sins(thing);
         if ((player->effects & 8) == 8) {
-            sp14C[0] = cameras[screenId].rot[0] - 0x4000;
+            sp14C.x = cameras[screenId].rot.x - 0x4000;
         } else {
-            sp14C[0] = -temp_v1 * 0.8;
+            sp14C.x = -temp_v1 * 0.8;
         }
-        sp14C[1] = player->unk_048[screenId];
-        sp14C[2] = player->unk_050[screenId];
+        sp14C.y = player->unk_048[screenId];
+        sp14C.z = player->unk_050[screenId];
         if (((s32) player->effects & HIT_EFFECT) == HIT_EFFECT) {
             func_80062B18(&sp148, &sp144, &sp140, 0.0f, 8.0f, 0.0f, -player->unk_048[screenId],
                           player->unk_050[screenId]);
-            sp154[1] = (player->pos[1] - player->boundingBoxSize) + player->unk_108;
-            sp154[0] = player->pos[0] + sp148;
-            sp154[2] = player->pos[2] + sp140;
+            sp154.y = (player->pos.y - player->boundingBoxSize) + player->unk_108;
+            sp154.x = player->pos.x + sp148;
+            sp154.z = player->pos.z + sp140;
         } else {
             func_80062B18(&sp148, &sp144, &sp140, 0.0f, 1.5f, 0.0f, -player->unk_048[screenId],
                           player->unk_050[screenId]);
-            sp154[1] = (player->pos[1] - player->boundingBoxSize) + player->unk_108 + (sp144 - 2.0);
-            sp154[0] = player->pos[0] + sp148;
-            sp154[2] = player->pos[2] + sp140;
+            sp154.y = (player->pos.y - player->boundingBoxSize) + player->unk_108 + (sp144 - 2.0);
+            sp154.x = player->pos.x + sp148;
+            sp154.z = player->pos.z + sp140;
         }
     }
 #ifdef AVOID_UB
@@ -1776,14 +1776,14 @@ void render_ghost(Player* player, s8 playerId, s8 screenId, s8 arg3) {
     } else {
         spC2 = 0x0070;
     }
-    thing = (u16) (player->unk_048[screenId] - player->rotation[1]);
-    spD4[0] = (-(s16) (sins(thing) * (0.0f * 0.0f)) * 0.8);
-    spD4[1] = player->unk_048[screenId];
-    spD4[2] = player->unk_050[screenId];
+    thing = (u16) (player->unk_048[screenId] - player->rotation.y);
+    spD4.x = (-(s16) (sins(thing) * (0.0f * 0.0f)) * 0.8);
+    spD4.y = player->unk_048[screenId];
+    spD4.z = player->unk_050[screenId];
     func_80062B18(&spD0, &spCC, &spC8, 0, 1.5f, 0, -player->unk_048[screenId], player->unk_050[screenId]);
-    spDC[1] = (player->pos[1] - player->boundingBoxSize) + (spCC - 2.0);
-    spDC[0] = player->pos[0] + spD0;
-    spDC[2] = player->pos[2] + spC8;
+    spDC.y = (player->pos.y - player->boundingBoxSize) + (spCC - 2.0);
+    spDC.x = player->pos.x + spD0;
+    spDC.z = player->pos.z + spC8;
 #ifdef AVOID_UB
     gPlayerPalette = &gPlayerPalettesList[D_801651D0[screenId][playerId]][screenId][playerId];
 #else
@@ -1839,12 +1839,12 @@ void func_80025DE8(Player* player, s8 playerId, s8 screenId, s8 arg3) {
     Vec3f sp9C;
     Vec3s sp94;
 
-    sp9C[0] = player->pos[0] + (sins(-player->rotation[1]) * -1.5);
-    sp9C[1] = ((player->pos[1] - player->boundingBoxSize) + player->unk_108) + 0.1;
-    sp9C[2] = player->pos[2] + (coss(-player->rotation[1]) * -1.5);
-    sp94[0] = -0x00B6;
-    sp94[1] = player->unk_048[screenId];
-    sp94[2] = player->unk_050[screenId];
+    sp9C.x = player->pos.x + (sins(-player->rotation.y) * -1.5);
+    sp9C.y = ((player->pos.y - player->boundingBoxSize) + player->unk_108) + 0.1;
+    sp9C.z = player->pos.z + (coss(-player->rotation.y) * -1.5);
+    sp94.x = -0x00B6;
+    sp94.y = player->unk_048[screenId];
+    sp94.z = player->unk_050[screenId];
 
     mtxf_translate_rotate(mtx, sp9C, sp94);
     mtxf_scale2(mtx, gCharacterSize[player->characterId] * player->size);
@@ -1884,12 +1884,12 @@ void render_player_ice_reflection(Player* player, s8 playerId, s8 screenId, s8 a
     Vec3f sp9C;
     Vec3s sp94;
 
-    sp94[0] = 0;
-    sp94[1] = player->unk_048[screenId];
-    sp94[2] = player->unk_050[screenId] + 0x8000; // invert Y
-    sp9C[0] = player->pos[0];
-    sp9C[1] = player->unk_074 + (4.0f * player->size);
-    sp9C[2] = player->pos[2];
+    sp94.x = 0;
+    sp94.y = player->unk_048[screenId];
+    sp94.z = player->unk_050[screenId] + 0x8000; // invert Y
+    sp9C.x = player->pos.x;
+    sp9C.y = player->unk_074 + (4.0f * player->size);
+    sp9C.z = player->pos.z;
     if (!(player->unk_002 & (4 << (screenId * 4)))) {
         arg3 = 8;
     } else {
@@ -1926,7 +1926,7 @@ void render_player_ice_reflection(Player* player, s8 playerId, s8 screenId, s8 a
 }
 
 void render_player(Player* player, s8 playerId, s8 screenId) {
-    UNUSED s32 pad[2];
+    UNUSED s32 pad.z;
     s32 temp_t1;
     s32 var_v1;
     OSMesg* sp34;
@@ -1939,7 +1939,7 @@ void render_player(Player* player, s8 playerId, s8 screenId) {
     }
     func_80023BF0(player, playerId, screenId, var_v1);
     temp_t1 = 8 << (screenId * 4);
-    if ((temp_t1 == (player->unk_002 & temp_t1)) && (player->collision.surfaceDistance[2] <= 50.0f) &&
+    if ((temp_t1 == (player->unk_002 & temp_t1)) && (player->collision.surfaceDistance.z <= 50.0f) &&
         (player->surfaceType != ICE)) {
         if ((player->effects & BOO_EFFECT) == BOO_EFFECT) {
             if (playerId == screenId) {
@@ -1956,7 +1956,7 @@ void render_player(Player* player, s8 playerId, s8 screenId) {
     }
     osRecvMesg(&gDmaMesgQueue, (OSMesg*) &sp34, OS_MESG_BLOCK);
     if ((temp_t1 == (player->unk_002 & temp_t1)) && (player->surfaceType == ICE) && ((player->unk_0CA & 1) != 1) &&
-        (player->collision.surfaceDistance[2] <= 30.0f)) {
+        (player->collision.surfaceDistance.z <= 30.0f)) {
         render_player_ice_reflection(player, playerId, screenId, var_v1);
     }
     if (player->boostPower >= 2.0f) {

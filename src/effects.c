@@ -762,7 +762,7 @@ void apply_hit_effect(Player* player, s8 arg1) {
             break;
         case 1:
             player->unk_DB4.unk10 = 4.5f;
-            player->pos[1] += 0.13;
+            player->pos.y += 0.13;
             ++player->unk_238;
 
             if ((player->unk_046 & 0x80) != 0) {
@@ -799,7 +799,7 @@ void apply_hit_effect(Player* player, s8 arg1) {
             }
 
             player->unk_DB4.unk10 = 4.5f;
-            player->pos[1] -= 0.085;
+            player->pos.y -= 0.085;
 
             if ((player->effects & 8) != 8) {
                 D_8018D990[arg1] = 3;
@@ -940,8 +940,8 @@ void func_8008E4A4(Player* player, s8 arg1) {
     player->unk_042 += 0xAAA;
     player->unk_08C = 0.0f;
     player->currentSpeed = 0.0f;
-    player->velocity[0] = 0.0f;
-    player->velocity[2] = 0.0f;
+    player->velocity.x = 0.0f;
+    player->velocity.z = 0.0f;
     player->effects &= ~0xC0;
 
     if ((player->effects & 8) != 8) {
@@ -1837,18 +1837,18 @@ void func_80090970(Player* player, s8 playerId, s8 arg2) {
                         player->unk_0C8 = 0x003C;
                     }
                 } else {
-                    move_f32_towards(&player->pos[1], D_801652A0[playerId] + 100.0f, 0.012f);
+                    move_f32_towards(&player->pos.y, D_801652A0[playerId] + 100.0f, 0.012f);
                     move_s16_towards(&player->unk_0CC[arg2], 0, 0.2f);
-                    if ((D_801652A0[playerId] + 40.0f) <= player->pos[1]) {
+                    if ((D_801652A0[playerId] + 40.0f) <= player->pos.y) {
                         player->unk_222 = 1;
                         player->unk_0CA |= 4;
                         player->unk_0C6 = 0x00FF;
                     }
                 }
             } else if ((player->unk_0CA & 2) == 2) {
-                move_f32_towards(&player->pos[1], player->unk_074 + 100.0f, 0.025f);
+                move_f32_towards(&player->pos.y, player->unk_074 + 100.0f, 0.025f);
                 move_s16_towards(&player->unk_0CC[arg2], 0, 0.2f);
-                if ((player->unk_074 + 40.0f) <= player->pos[1]) {
+                if ((player->unk_074 + 40.0f) <= player->pos.y) {
                     player->unk_222 = 1;
                     player->unk_0CA |= 4;
                     player->unk_0C6 = 0x00FF;
@@ -1863,7 +1863,7 @@ void func_80090970(Player* player, s8 playerId, s8 arg2) {
                 func_8009E088(playerId, 0xA);
             }
             if ((player->unk_0CA & 1) == 1) {
-                move_f32_towards(&player->pos[1], D_801652A0[playerId] + 40.0f, 0.02f);
+                move_f32_towards(&player->pos.y, D_801652A0[playerId] + 40.0f, 0.02f);
                 player->unk_0C6 -= 8;
                 if (player->unk_0C6 < 9) {
                     player->unk_0C6 = 0;
@@ -1871,7 +1871,7 @@ void func_80090970(Player* player, s8 playerId, s8 arg2) {
                     player->unk_0CA &= ~0x0001;
                 }
             } else {
-                move_f32_towards(&player->pos[1], player->oldPos[1] + 40.0f, 0.02f);
+                move_f32_towards(&player->pos.y, player->oldPos[1] + 40.0f, 0.02f);
                 player->unk_0C6 -= 8;
                 if (player->unk_0C6 < 9) {
                     player->unk_0C6 = 0;
@@ -1884,9 +1884,9 @@ void func_80090970(Player* player, s8 playerId, s8 arg2) {
             func_80090178(player, playerId, sp44, sp38);
             // Fakematch found by Verti, who knows what's going on here
             player->rotation[1] = (u16) -get_angle_between_two_vectors(sp44, sp38) & 0xFFFF;
-            player->pos[0] = sp44[0];
-            player->pos[1] = sp44[1] + 40.0f;
-            player->pos[2] = sp44[2];
+            player->pos.x = sp44[0];
+            player->pos.y = sp44[1] + 40.0f;
+            player->pos.z = sp44[2];
             player->unk_222 = 3;
             break;
         case 3:
@@ -1895,11 +1895,11 @@ void func_80090970(Player* player, s8 playerId, s8 arg2) {
                 func_8009E020(playerId, 0x14);
             }
             func_80090178(player, playerId, sp44, sp38);
-            player->pos[0] = sp44[0];
-            player->pos[1] = sp44[1] + 40.0f;
-            player->pos[2] = sp44[2];
-            player->pos[2] = player->pos[2] + coss((playerId * 0x1C70) - player->rotation[1]) * -5.0f;
-            player->pos[0] = player->pos[0] + sins((playerId * 0x1C70) - player->rotation[1]) * -5.0f;
+            player->pos.x = sp44[0];
+            player->pos.y = sp44[1] + 40.0f;
+            player->pos.z = sp44[2];
+            player->pos.z = player->pos.z + coss((playerId * 0x1C70) - player->rotation[1]) * -5.0f;
+            player->pos.x = player->pos.x + sins((playerId * 0x1C70) - player->rotation[1]) * -5.0f;
             player->unk_0C6 += 8;
             if (player->unk_0C6 >= 0xF0) {
                 player->unk_0C6 = 0x00FF;
@@ -1910,16 +1910,16 @@ void func_80090970(Player* player, s8 playerId, s8 arg2) {
             break;
         case 4:
             if ((player->unk_0C8 == 0x0096) || (player->unk_0C8 == 0x00C8) || (player->unk_0C8 == 0x00FA)) {
-                player->pos[2] = player->pos[2] + coss(-player->rotation[1]) * -10.0f;
-                player->pos[0] = player->pos[0] + sins(-player->rotation[1]) * -10.0f;
+                player->pos.z = player->pos.z + coss(-player->rotation[1]) * -10.0f;
+                player->pos.x = player->pos.x + sins(-player->rotation[1]) * -10.0f;
             }
             if (player->unk_0C8 == 0x00FC) {
                 waypoint = D_80164550[0];
-                player->pos[0] = waypoint->posX;
-                player->pos[1] = waypoint->posY;
-                player->pos[2] = waypoint->posZ;
+                player->pos.x = waypoint->posX;
+                player->pos.y = waypoint->posY;
+                player->pos.z = waypoint->posZ;
             }
-            move_f32_towards(&player->pos[1], (player->unk_074 + player->boundingBoxSize) - 2.0f, 0.04f);
+            move_f32_towards(&player->pos.y, (player->unk_074 + player->boundingBoxSize) - 2.0f, 0.04f);
             player->unk_0C8++;
             if (((player->effects & 8) != 8) || (player->effects & 0x8000)) {
                 player->unk_0CA &= ~0x1000;
@@ -2062,8 +2062,8 @@ void func_80091298(Player* player, s8 arg1) {
             player->unk_0B2 = 0;
         }
         if (player->unk_0B2 == 0) {
-            if ((player->pos[1] - (player->boundingBoxSize + 1.0f)) <= spC[arg1]) {
-                player->pos[1] = (f32) ((f64) (spC[arg1] + player->boundingBoxSize) + 1.08);
+            if ((player->pos.y - (player->boundingBoxSize + 1.0f)) <= spC[arg1]) {
+                player->pos.y = (f32) ((f64) (spC[arg1] + player->boundingBoxSize) + 1.08);
                 player->unk_DB4.unk18 = 0;
                 player->unk_0A8 = 0;
                 player->unk_07C = 0;

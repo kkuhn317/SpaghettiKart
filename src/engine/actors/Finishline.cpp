@@ -60,7 +60,7 @@ void AFinishline::Draw(Camera *camera) {
         return;
     }
 
-    if (temp < camera->pos[2]) {
+    if (temp < camera->pos.z) {
         if (D_800DC5BC != 0) {
 
             gDPSetFogColor(gDisplayListHead++, D_801625EC, D_801625F4, D_801625F0, 0xFF);

@@ -22,9 +22,9 @@ OHedgehog::OHedgehog(const FVector& pos, const FVector2D& patrolPoint, s16 unk) 
     s32 objectId = indexObjectList2[_idx];
     _objectIndex = objectId;
     init_object(objectId, 0);
-    gObjectList[objectId].pos[0] = gObjectList[objectId].origin_pos[0] = pos.x * xOrientation;
-    gObjectList[objectId].pos[1] = gObjectList[objectId].surfaceHeight = pos.y + 6.0;
-    gObjectList[objectId].pos[2] = gObjectList[objectId].origin_pos[2] = pos.z;
+    gObjectList[objectId].pos.x = gObjectList[objectId].origin_pos[0] = pos.x * xOrientation;
+    gObjectList[objectId].pos.y = gObjectList[objectId].surfaceHeight = pos.y + 6.0;
+    gObjectList[objectId].pos.z = gObjectList[objectId].origin_pos[2] = pos.z;
     gObjectList[objectId].unk_0D5 = (u8)unk;
     gObjectList[objectId].unk_09C = patrolPoint.x * xOrientation;
     gObjectList[objectId].unk_09E = patrolPoint.z;
@@ -75,7 +75,7 @@ void OHedgehog::func_800555BC(s32 objectIndex, s32 cameraId) {
         camera = &camera1[cameraId];
         OHedgehog::func_8004A870(objectIndex, 0.7f);
         gObjectList[objectIndex].orientation[1] =
-            func_800418AC(gObjectList[objectIndex].pos[0], gObjectList[objectIndex].pos[2], camera->pos);
+            func_800418AC(gObjectList[objectIndex].pos.x, gObjectList[objectIndex].pos.z, camera->pos);
         draw_2d_texture_at(gObjectList[objectIndex].pos, gObjectList[objectIndex].orientation,
                            gObjectList[objectIndex].sizeScaling, (u8*) gObjectList[objectIndex].activeTLUT,
                            (u8*)gObjectList[objectIndex].activeTexture, gObjectList[objectIndex].vertex, 64, 64, 64, 32);
@@ -89,9 +89,9 @@ void OHedgehog::func_8004A870(s32 objectIndex, f32 arg1) {
     if ((is_obj_flag_status_active(objectIndex, 0x00000020) != 0) &&
         (is_obj_flag_status_active(objectIndex, 0x00800000) != 0)) {
         object = &gObjectList[objectIndex];
-        D_80183E50[0] = object->pos[0];
+        D_80183E50[0] = object->pos.x;
         D_80183E50[1] = object->surfaceHeight + 0.8;
-        D_80183E50[2] = object->pos[2];
+        D_80183E50[2] = object->pos.z;
         set_transform_matrix(mtx, object->unk_01C, D_80183E50, 0U, arg1);
         // convert_to_fixed_point_matrix(&gGfxPool->mtxHud[gMatrixHudCount], mtx);
         // gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(&gGfxPool->mtxHud[gMatrixHudCount++]),
@@ -154,7 +154,7 @@ void OHedgehog::func_80083248(s32 objectIndex) {
         if (is_obj_flag_status_active(objectIndex, 0x00400000) != 0) {
             func_8008861C(objectIndex);
         }
-        gObjectList[objectIndex].pos[1] = gObjectList[objectIndex].surfaceHeight + 6.0;
+        gObjectList[objectIndex].pos.y = gObjectList[objectIndex].surfaceHeight + 6.0;
     }
 }
 

@@ -14,9 +14,9 @@ extern "C" {
 void PlayerBombKart::Draw(size_t playerId, s32 cameraId) { // render_player_bomb_kart
     Player* player = &gPlayerOne[playerId];
     if (state != PlayerBombKartState::DISABLED) {
-        pos.x = player->pos[0];
-        pos.y = player->pos[1] - 2.0;
-        pos.z = player->pos[2];
+        pos.x = player->pos.x;
+        pos.y = player->pos.y - 2.0;
+        pos.z = player->pos.z;
         surfaceHeight = player->unk_074;
         PlayerBombKart::func_800563DC(cameraId, _primAlpha);
         PlayerBombKart::func_8005669C(_primAlpha);

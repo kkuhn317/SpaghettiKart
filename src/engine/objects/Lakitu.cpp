@@ -103,7 +103,7 @@ void OLakitu::Draw(s32 cameraId) {
     if (is_obj_flag_status_active(objectIndex, 0x00000010) != 0) {
         object = &gObjectList[objectIndex];
         object->orientation[0] = 0;
-        object->orientation[1] = func_800418AC(object->pos[0], object->pos[2], camera->pos);
+        object->orientation[1] = func_800418AC(object->pos.x, object->pos.z, camera->pos);
         object->orientation[2] = 0x8000;
         if (func_80072354(objectIndex, 2) != 0) {
             draw_2d_texture_at(object->pos, object->orientation, object->sizeScaling, (u8*) object->activeTLUT,
@@ -116,8 +116,8 @@ void OLakitu::Draw(s32 cameraId) {
                           (s32) object->textureHeight, (s32) object->textureWidth, (s32) object->textureHeight / 2);
         }
         if (gScreenModeSelection == SCREEN_MODE_1P) {
-            var_f0 = object->pos[0] - camera->pos[0];
-            var_f2 = object->pos[2] - camera->pos[2];
+            var_f0 = object->pos.x - camera->pos.x;
+            var_f2 = object->pos.z - camera->pos.z;
             if (var_f0 < 0.0f) {
                 var_f0 = -var_f0;
             }
@@ -331,9 +331,9 @@ void OLakitu::init_obj_lakitu_checkered_flag(s32 objectIndex, s32 playerIndex) {
     object = &gObjectList[objectIndex];
     object->activeTexture = *gObjectList[objectIndex].textureList;
     object->vertex = vtx;
-    object->pos[2] = 5000.0f;
-    object->pos[1] = 5000.0f;
-    object->pos[0] = 5000.0f;
+    object->pos.z = 5000.0f;
+    object->pos.y = 5000.0f;
+    object->pos.x = 5000.0f;
     object->sizeScaling = 0.15f;
     func_80086F10(objectIndex, 2, &D_800E6834);
     clear_object_flag(objectIndex, 0x00000010);
@@ -595,9 +595,9 @@ void OLakitu::func_8007A060(s32 objectIndex, s32 playerIndex) {
     object = &gObjectList[objectIndex];
     object->activeTexture = *gObjectList[objectIndex].textureList;
     object->vertex = vtx;
-    object->pos[2] = 5000.0f;
-    object->pos[1] = 5000.0f;
-    object->pos[0] = 5000.0f;
+    object->pos.z = 5000.0f;
+    object->pos.y = 5000.0f;
+    object->pos.x = 5000.0f;
     object->sizeScaling = 0.15f;
     clear_object_flag(objectIndex, 0x00000010);
     func_80086F10(objectIndex, 5, &D_800E694C);
@@ -654,9 +654,9 @@ void OLakitu::func_8007A228(s32 objectIndex, s32 playerIndex) {
     object = &gObjectList[objectIndex];
     object->activeTexture = *gObjectList[objectIndex].textureList;
     object->vertex = vtx;
-    object->pos[2] = 5000.0f;
-    object->pos[1] = 5000.0f;
-    object->pos[0] = 5000.0f;
+    object->pos.z = 5000.0f;
+    object->pos.y = 5000.0f;
+    object->pos.x = 5000.0f;
     object->sizeScaling = 0.15f;
     clear_object_flag(objectIndex, 0x00000010);
     func_80086F10(objectIndex, 5, &D_800E694C);
@@ -711,9 +711,9 @@ void OLakitu::func_8007A3F0(s32 objectIndex, s32 arg1) {
     init_texture_object(objectIndex, tlut, sLakituReverseTextures, 72, (u16) 56);
     gObjectList[objectIndex].activeTexture = *gObjectList[objectIndex].textureList;
     gObjectList[objectIndex].vertex = vtx;
-    gObjectList[objectIndex].pos[2] = var;
-    gObjectList[objectIndex].pos[1] = var;
-    gObjectList[objectIndex].pos[0] = var;
+    gObjectList[objectIndex].pos.z = var;
+    gObjectList[objectIndex].pos.y = var;
+    gObjectList[objectIndex].pos.x = var;
     gObjectList[objectIndex].sizeScaling = 0.15f;
     clear_object_flag(objectIndex, 0x00000010);
     func_80086F10(objectIndex, 6, &D_800E69B0);
@@ -766,16 +766,16 @@ void OLakitu::update_object_lakitu_reverse(s32 objectIndex, s32 playerId) {
 void OLakitu::func_8007A66C(s32 objectIndex) {
     Player* player = &gPlayers[_playerId];
     Camera* camera = &cameras[_playerId];
-    u16 rot = 0x8000 - camera->rot[1];
+    u16 rot = 0x8000 - camera->rot.y;
 
-    gObjectList[objectIndex].pos[0] =
-        (player->pos[0] +
+    gObjectList[objectIndex].pos.x =
+        (player->pos.x +
          (coss(rot) * (gObjectList[objectIndex].origin_pos[0] + gObjectList[objectIndex].offset[0]))) -
         (sins(rot) * (gObjectList[objectIndex].origin_pos[2] + gObjectList[objectIndex].offset[2]));
-    gObjectList[objectIndex].pos[1] =
+    gObjectList[objectIndex].pos.y =
         player->unk_074 + gObjectList[objectIndex].origin_pos[1] + gObjectList[objectIndex].offset[1];
-    gObjectList[objectIndex].pos[2] =
-        (player->pos[2] +
+    gObjectList[objectIndex].pos.z =
+        (player->pos.z +
          (sins(rot) * (gObjectList[objectIndex].origin_pos[0] + gObjectList[objectIndex].offset[0]))) +
         (coss(rot) * (gObjectList[objectIndex].origin_pos[2] + gObjectList[objectIndex].offset[2]));
 }
@@ -783,16 +783,16 @@ void OLakitu::func_8007A66C(s32 objectIndex) {
 void OLakitu::func_8007A778(s32 objectIndex) {
     Player* player = &gPlayers[_playerId];
     Camera* camera = &cameras[_playerId];
-    u16 rot = 0x8000 - camera->rot[1];
+    u16 rot = 0x8000 - camera->rot.y;
     
-    gObjectList[objectIndex].pos[0] =
-        (player->pos[0] +
+    gObjectList[objectIndex].pos.x =
+        (player->pos.x +
          (coss(rot) * (gObjectList[objectIndex].origin_pos[0] + gObjectList[objectIndex].offset[0]))) -
         (sins(rot) * (gObjectList[objectIndex].origin_pos[2] + gObjectList[objectIndex].offset[2]));
-    gObjectList[objectIndex].pos[1] =
-        player->pos[1] + gObjectList[objectIndex].origin_pos[1] + gObjectList[objectIndex].offset[1];
-    gObjectList[objectIndex].pos[2] =
-        (player->pos[2] +
+    gObjectList[objectIndex].pos.y =
+        player->pos.y + gObjectList[objectIndex].origin_pos[1] + gObjectList[objectIndex].offset[1];
+    gObjectList[objectIndex].pos.z =
+        (player->pos.z +
          (sins(rot) * (gObjectList[objectIndex].origin_pos[0] + gObjectList[objectIndex].offset[0]))) +
         (coss(rot) * (gObjectList[objectIndex].origin_pos[2] + gObjectList[objectIndex].offset[2]));
 }

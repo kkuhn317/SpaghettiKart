@@ -61,11 +61,11 @@ void OBoos::Tick() {
             func_8008B78C(objectIndex);
             player = &gPlayerOne[object->unk_0D1];
             camera = &camera1[object->unk_0D1];
-            temp_t4 = (0x8000 - camera->rot[1]);
-            object->pos[0] = player->pos[0] + (coss(temp_t4) * (object->origin_pos[0] + object->offset[0])) -
+            temp_t4 = (0x8000 - camera->rot.y);
+            object->pos.x = player->pos.x + (coss(temp_t4) * (object->origin_pos[0] + object->offset[0])) -
                              (sins(temp_t4) * (object->origin_pos[2] + object->offset[2]));
-            object->pos[1] = 6.5 + player->unk_074 + object->origin_pos[1] + object->offset[1];
-            object->pos[2] = player->pos[2] + (sins(temp_t4) * (object->origin_pos[0] + object->offset[0])) +
+            object->pos.y = 6.5 + player->unk_074 + object->origin_pos[1] + object->offset[1];
+            object->pos.z = player->pos.z + (sins(temp_t4) * (object->origin_pos[0] + object->offset[0])) +
                              (coss(temp_t4) * (object->origin_pos[2] + object->offset[2]));
             OBoos::func_8007C550(objectIndex);
             if (is_obj_flag_status_active(objectIndex, 0x00000080) != 0) {
@@ -101,7 +101,7 @@ void OBoos::func_800523B8(s32 objectIndex, s32 arg1, u32 arg2) {
     Camera* camera = &camera1[arg1];
 
     object = &gObjectList[objectIndex];
-    object->orientation[1] = func_800418AC(object->pos[0], object->pos[2], camera->pos);
+    object->orientation[1] = func_800418AC(object->pos.x, object->pos.z, camera->pos);
     func_800484BC(object->pos, object->orientation, object->sizeScaling, object->primAlpha, (u8*) object->activeTLUT,
                   (u8*)object->activeTexture, object->vertex, 0x00000030, 0x00000028, 0x00000030, 0x00000028);
     if ((is_obj_flag_status_active(objectIndex, 0x00000020) != 0) && (arg2 < 0x15F91U)) {
@@ -140,9 +140,9 @@ void OBoos::func_8007C5B4(s32 objectIndex) {
 
     init_texture_object(objectIndex, (u8*)d_course_banshee_boardwalk_boo_tlut, gTextureGhosts, 48, 40);
     object = &gObjectList[objectIndex];
-    object->pos[0] = 0.0f;
-    object->pos[1] = 0.0f;
-    object->pos[2] = 0.0f;
+    object->pos.x = 0.0f;
+    object->pos.y = 0.0f;
+    object->pos.z = 0.0f;
     set_object_flag(objectIndex, 0x00000020);
     object_next_state(objectIndex);
     object->primAlpha = 0;
@@ -204,7 +204,7 @@ void OBoos::func_8007C4A4(s32 objectIndex) {
 void OBoos::func_8007C550(s32 objectIndex) {
     gObjectList[objectIndex].direction_angle[1] =
         func_800417B4(gObjectList[objectIndex].direction_angle[1],
-                      atan2s(gObjectList[objectIndex].velocity[0], gObjectList[objectIndex].velocity[2]));
+                      atan2s(gObjectList[objectIndex].velocity.x, gObjectList[objectIndex].velocity.z));
     OBoos::func_8007C4A4(objectIndex);
 }
 

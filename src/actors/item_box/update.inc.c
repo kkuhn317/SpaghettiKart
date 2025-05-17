@@ -10,9 +10,9 @@
 void update_actor_item_box_hot_air_balloon(struct ItemBox* itemBox) {
     switch (itemBox->state) {
         case 5:
-            itemBox->rot[0] += 0xB6;
-            itemBox->rot[1] -= 0x16C;
-            itemBox->rot[2] += 0xB6;
+            itemBox->rot.x += 0xB6;
+            itemBox->rot.y -= 0x16C;
+            itemBox->rot.z += 0xB6;
             break;
         case 3:
             if (itemBox->someTimer == 0x14) {
@@ -20,9 +20,9 @@ void update_actor_item_box_hot_air_balloon(struct ItemBox* itemBox) {
                 itemBox->flags = -0x4000;
             } else {
                 itemBox->someTimer++;
-                itemBox->rot[0] += 0x444;
-                itemBox->rot[1] -= 0x2D8;
-                itemBox->rot[2] += 0x16C;
+                itemBox->rot.x += 0x444;
+                itemBox->rot.y -= 0x2D8;
+                itemBox->rot.z += 0x16C;
             }
             break;
     }
@@ -39,29 +39,29 @@ void update_actor_item_box(struct ItemBox* itemBox) {
             itemBox->state = 1;
             break;
         case 1:
-            if ((itemBox->pos[1] - itemBox->origY) < 8.66f) {
-                itemBox->pos[1] += 0.45f;
+            if ((itemBox->pos.y - itemBox->origY) < 8.66f) {
+                itemBox->pos.y += 0.45f;
             } else {
-                itemBox->pos[1] = itemBox->origY + 8.66f;
+                itemBox->pos.y = itemBox->origY + 8.66f;
                 itemBox->state = 2;
                 itemBox->flags = 0xC000;
             }
             break;
         case 2:
-            itemBox->rot[0] += 0xB6;
-            itemBox->rot[1] -= 0x16C;
-            itemBox->rot[2] += 0xB6;
+            itemBox->rot.x += 0xB6;
+            itemBox->rot.y -= 0x16C;
+            itemBox->rot.z += 0xB6;
             break;
         case 3:
             if (itemBox->someTimer == 20) {
                 itemBox->state = 0;
-                itemBox->pos[1] = itemBox->resetDistance - 20.0f;
+                itemBox->pos.y = itemBox->resetDistance - 20.0f;
                 itemBox->flags = 0xC000;
             } else {
                 itemBox->someTimer++;
-                itemBox->rot[0] += 0x444;
-                itemBox->rot[1] -= 0x2D8;
-                itemBox->rot[2] += 0x16C;
+                itemBox->rot.x += 0x444;
+                itemBox->rot.y -= 0x2D8;
+                itemBox->rot.z += 0x16C;
             }
             break;
     }

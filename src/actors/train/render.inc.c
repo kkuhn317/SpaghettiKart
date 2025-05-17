@@ -19,7 +19,7 @@ void render_actor_train_engine(Camera* camera, struct TrainCar* actor) {
     Mat4 objectMtx;
     Mat4 resultMtx;
 
-    f32 distance = is_within_render_distance(camera->pos, actor->pos, camera->rot[1], 2500.0f,
+    f32 distance = is_within_render_distance(camera->pos, actor->pos, camera->rot.y, 2500.0f,
                                              gCameraZoom[camera - camera1], 9000000.0f);
 
     if (CVarGetInteger("gNoCulling", 0) == 1) {
@@ -174,7 +174,7 @@ void render_actor_train_tender(Camera* camera, struct TrainCar* actor) {
     Mat4 spE0;
     Mat4 spA0;
 
-    f32 temp_f0 = is_within_render_distance(camera->pos, actor->pos, camera->rot[1], 625.0f,
+    f32 temp_f0 = is_within_render_distance(camera->pos, actor->pos, camera->rot.y, 625.0f,
                                             gCameraZoom[camera - camera1], 9000000.0f);
 
     if (CVarGetInteger("gNoCulling", 0) == 1) {
@@ -267,7 +267,7 @@ void render_actor_train_passenger_car(Camera* camera, struct TrainCar* actor) {
     Mat4 spE0;
     Mat4 spA0;
 
-    f32 temp_f0 = is_within_render_distance(camera->pos, actor->pos, camera->rot[1], 2025.0f,
+    f32 temp_f0 = is_within_render_distance(camera->pos, actor->pos, camera->rot.y, 2025.0f,
                                             gCameraZoom[camera - camera1], 9000000.0f);
 
     if (CVarGetInteger("gNoCulling", 0) == 1) {

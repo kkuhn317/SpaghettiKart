@@ -34,7 +34,7 @@ void ObjectPicker::Tick() {
 
 void ObjectPicker::SelectObject(std::vector<GameObject*> objects) {
     Ray ray;
-    ray.Origin = FVector(cameras[0].pos[0], cameras[0].pos[1], cameras[0].pos[2]);
+    ray.Origin = FVector(cameras[0].pos.x, cameras[0].pos.y, cameras[0].pos.z);
 
     // This allows selection of objects in the scene explorer.
     // Otherwise this would still run when selecting buttons in editor windows.
@@ -56,7 +56,7 @@ void ObjectPicker::SelectObject(std::vector<GameObject*> objects) {
 
 void ObjectPicker::DragHandle() {
     Ray ray;
-    ray.Origin = FVector(cameras[0].pos[0], cameras[0].pos[1], cameras[0].pos[2]);
+    ray.Origin = FVector(cameras[0].pos.x, cameras[0].pos.y, cameras[0].pos.z);
     ray.Direction = ScreenRayTrace();
 
     // Skip if a drag is already in progress
@@ -136,9 +136,9 @@ void ObjectPicker::Draw() {
         FVector scale = FVector(0.1, 0.1, 0.1);
         FVector ray = ScreenRayTrace();
 
-        float x = (cameras[0].pos[0] + ray.x * 800);
-        float y = (cameras[0].pos[1] + ray.y * 800);
-        float z = (cameras[0].pos[2] + ray.z * 800);
+        float x = (cameras[0].pos.x + ray.x * 800);
+        float y = (cameras[0].pos.y + ray.y * 800);
+        float z = (cameras[0].pos.z + ray.z * 800);
 
         ApplyMatrixTransformations((float(*)[4])&CursorMtx, FVector(x, y, z), rot, scale);
         Editor_AddMatrix((float(*)[4])&CursorMtx, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);

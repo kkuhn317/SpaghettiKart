@@ -28,11 +28,11 @@ UNUSED s32 func_802B4F60(UNUSED s32 arg0, Vec3f arg1, UNUSED s32 arg2, UNUSED f3
     f32 sp28;
     Vec3f sp1C;
     vec3f_copy_return(sp1C, arg1);
-    sp28 = sp1C[0];
-    sp2C = sp1C[1];
+    sp28 = sp1C.x;
+    sp2C = sp1C.y;
     // wut?
     if (sp2C && sp2C) {};
-    sp2C = ((sp30[0][3] * sp28) + (sp30[1][3] * sp2C) + (sp30[2][3] * sp1C[2])) + sp30[3][3];
+    sp2C = ((sp30[0][3] * sp28) + (sp30[1][3] * sp2C) + (sp30[2][3] * sp1C.z)) + sp30[3][3];
     // double wut?
     if (sp28 && sp28) {};
     mtxf_translate_vec3f_mat4(sp1C, sp30);
@@ -86,17 +86,17 @@ f32 func_802B51E8(Vec3f arg0, Vec3f arg1) {
     f32 sub_z;
     f32 sub_x;
 
-    sub_x = arg1[0] - arg0[0];
-    sub_y = arg1[1] - arg0[1];
-    sub_z = arg1[2] - arg0[2];
+    sub_x = arg1.x - arg0.x;
+    sub_y = arg1.y - arg0.y;
+    sub_z = arg1.z - arg0.z;
     return (sub_x * sub_x) + (sub_y * sub_y) + sub_z + sub_z;
 }
 
 s32 get_angle_between_two_vectors(Vec3f arg0, Vec3f arg1) {
     f32 temp_v1;
     f32 temp_v2;
-    temp_v1 = arg1[0] - arg0[0];
-    temp_v2 = arg1[2] - arg0[2];
+    temp_v1 = arg1.x - arg0.x;
+    temp_v2 = arg1.z - arg0.z;
 
     return atan2s(temp_v1, temp_v2);
 }
@@ -105,22 +105,22 @@ s32 get_angle_between_two_vectors(Vec3f arg0, Vec3f arg1) {
 u32 func_802B5258(Vec3f arg0, Vec3s arg1) {
     f32 temp_v1;
     f32 temp_v2;
-    temp_v1 = arg1[0] - arg0[0];
-    temp_v2 = arg1[2] - arg0[2];
+    temp_v1 = arg1.x - arg0.x;
+    temp_v2 = arg1.z - arg0.z;
 
     return atan2s(temp_v1, temp_v2);
 }
 
 void vec3f_set(Vec3f arg0, f32 arg1, f32 arg2, f32 arg3) {
-    arg0[0] = arg1;
-    arg0[1] = arg2;
-    arg0[2] = arg3;
+    arg0.x = arg1;
+    arg0.y = arg2;
+    arg0.z = arg3;
 }
 
 void vec3s_set(Vec3s arg0, s16 arg1, s16 arg2, s16 arg3) {
-    arg0[0] = arg1;
-    arg0[1] = arg2;
-    arg0[2] = arg3;
+    arg0.x = arg1;
+    arg0.y = arg2;
+    arg0.z = arg3;
 }
 
 // These functions have bogus return values.
@@ -136,23 +136,23 @@ void vec3s_set(Vec3s arg0, s16 arg1, s16 arg2, s16 arg3) {
 #endif
 
 void* vec3f_copy_return(Vec3f dest, Vec3f src) {
-    dest[0] = src[0];
-    dest[1] = src[1];
-    dest[2] = src[2];
+    dest.x = src.x;
+    dest.y = src.y;
+    dest.z = src.z;
     //! @warning function returns address of local variable
     return &dest;
 }
 
 void vec3s_copy(Vec3s dest, Vec3s src) {
-    dest[0] = src[0];
-    dest[1] = src[1];
-    dest[2] = src[2];
+    dest.x = src.x;
+    dest.y = src.y;
+    dest.z = src.z;
 }
 
 UNUSED void* vec3f_set_return(Vec3f dest, f32 x, f32 y, f32 z) {
-    dest[0] = x;
-    dest[1] = y;
-    dest[2] = z;
+    dest.x = x;
+    dest.y = y;
+    dest.z = z;
     return &dest;
 }
 
@@ -191,9 +191,9 @@ void mtxf_identity(Mat4 mtx) {
 // translation vector
 void add_translate_mat4_vec3f(Mat4 mat, Mat4 dest, Vec3f pos) {
     FrameInterpolation_RecordMatrixTranslate(dest, pos);
-    dest[3][0] = mat[3][0] + pos[0];
-    dest[3][1] = mat[3][1] + pos[1];
-    dest[3][2] = mat[3][2] + pos[2];
+    dest[3][0] = mat[3][0] + pos.x;
+    dest[3][1] = mat[3][1] + pos.y;
+    dest[3][2] = mat[3][2] + pos.z;
     dest[3][3] = mat[3][3];
     dest[0][0] = mat[0][0];
     dest[0][1] = mat[0][1];
@@ -218,9 +218,9 @@ void add_translate_mat4_vec3f(Mat4 mat, Mat4 dest, Vec3f pos) {
 
 // Light version of add_translate_mat4_vec3f
 UNUSED void add_translate_mat4_vec3f_lite(Mat4 mat, Mat4 dest, Vec3f pos) {
-    dest[3][0] = mat[3][0] + pos[0];
-    dest[3][1] = mat[3][1] + pos[1];
-    dest[3][2] = mat[3][2] + pos[2];
+    dest[3][0] = mat[3][0] + pos.x;
+    dest[3][1] = mat[3][1] + pos.y;
+    dest[3][2] = mat[3][2] + pos.z;
 }
 
 // create a translation matrix
@@ -497,15 +497,15 @@ void mtxf_pos_rotation_xyz(Mat4 out, Vec3f pos, Vec3s orientation) {
     out[0][0] = (cosine2 * cosine3) + ((sine1 * sine2) * sine3);
     out[1][0] = (-cosine2 * sine3) + ((sine1 * sine2) * cosine3);
     out[2][0] = cosine1 * sine2;
-    out[3][0] = pos[0];
+    out[3][0] = pos.x;
     out[0][1] = cosine1 * sine3;
     out[1][1] = cosine1 * cosine3;
     out[2][1] = -sine1;
-    out[3][1] = pos[1];
+    out[3][1] = pos.y;
     out[0][2] = (-sine2 * cosine3) + ((sine1 * cosine2) * sine3);
     out[1][2] = (sine2 * sine3) + ((sine1 * cosine2) * cosine3);
     out[2][2] = cosine1 * cosine2;
-    out[3][2] = pos[2];
+    out[3][2] = pos.z;
     out[0][3] = 0.0f;
     out[1][3] = 0.0f;
     out[2][3] = 0.0f;
@@ -591,13 +591,13 @@ void mtxf_translate_vec3f_mat3(Vec3f pos, Mat3 mat) {
     f32 new_y;
     f32 new_z;
 
-    new_x = (mat[0][0] * pos[0]) + (mat[0][1] * pos[1]) + (mat[0][2] * pos[2]);
-    new_y = (mat[1][0] * pos[0]) + (mat[1][1] * pos[1]) + (mat[1][2] * pos[2]);
-    new_z = (mat[2][0] * pos[0]) + (mat[2][1] * pos[1]) + (mat[2][2] * pos[2]);
+    new_x = (mat[0][0] * pos.x) + (mat[0][1] * pos.y) + (mat[0][2] * pos.z);
+    new_y = (mat[1][0] * pos.x) + (mat[1][1] * pos.y) + (mat[1][2] * pos.z);
+    new_z = (mat[2][0] * pos.x) + (mat[2][1] * pos.y) + (mat[2][2] * pos.z);
 
-    pos[0] = new_x;
-    pos[1] = new_y;
-    pos[2] = new_z;
+    pos.x = new_x;
+    pos.y = new_y;
+    pos.z = new_z;
 }
 
 // translate the vector with a matrix (with a matrix 4x4)
@@ -606,13 +606,13 @@ void mtxf_translate_vec3f_mat4(Vec3f pos, Mat4 mat) {
     f32 new_y;
     f32 new_z;
 
-    new_x = (mat[0][0] * pos[0]) + (mat[0][1] * pos[1]) + (mat[0][2] * pos[2]);
-    new_y = (mat[1][0] * pos[0]) + (mat[1][1] * pos[1]) + (mat[1][2] * pos[2]);
-    new_z = (mat[2][0] * pos[0]) + (mat[2][1] * pos[1]) + (mat[2][2] * pos[2]);
+    new_x = (mat[0][0] * pos.x) + (mat[0][1] * pos.y) + (mat[0][2] * pos.z);
+    new_y = (mat[1][0] * pos.x) + (mat[1][1] * pos.y) + (mat[1][2] * pos.z);
+    new_z = (mat[2][0] * pos.x) + (mat[2][1] * pos.y) + (mat[2][2] * pos.z);
 
-    pos[0] = new_x;
-    pos[1] = new_y;
-    pos[2] = new_z;
+    pos.x = new_x;
+    pos.y = new_y;
+    pos.z = new_z;
 }
 
 UNUSED void func_802B64B0(UNUSED s32 arg0, UNUSED s32 arg1, UNUSED s32 arg2, UNUSED s32 arg3) {
@@ -1076,17 +1076,17 @@ s16 func_802B7F34(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
 }
 
 void func_802B7F7C(Vec3f arg0, Vec3f arg1, Vec3s dest) {
-    f32 x1 = arg0[0];
-    f32 y1 = arg0[1];
-    f32 z1 = arg0[2];
+    f32 x1 = arg0.x;
+    f32 y1 = arg0.y;
+    f32 z1 = arg0.z;
 
-    f32 x2 = arg1[0];
-    f32 y2 = arg1[1];
-    f32 z2 = arg1[2];
+    f32 x2 = arg1.x;
+    f32 y2 = arg1.y;
+    f32 z2 = arg1.z;
 
-    dest[1] = func_802B7F34(z1, x1, z2, x2);
-    dest[0] = func_802B7F34(y1, z1, y2, z2);
-    dest[2] = func_802B7F34(x1, y1, x2, y2);
+    dest.y = func_802B7F34(z1, x1, z2, x2);
+    dest.x = func_802B7F34(y1, z1, y2, z2);
+    dest.z = func_802B7F34(x1, y1, x2, y2);
 }
 
 f32 sins(u16 arg0) {
@@ -1207,9 +1207,9 @@ UNUSED void func_802B8414(uintptr_t addr, Mat4 arg1, s16 arg2, s16 arg3, s32 arg
     sp40[0] = 0.0f;
     sp40[1] = 0.0f;
     sp40[2] = 1.0f;
-    sp3C[0] = ((sp40[0] * arg1[0][0]) + (sp40[1] * arg1[1][0]) + (sp40[2] * arg1[2][0])) * 127.0f;
-    sp3C[1] = ((sp40[0] * arg1[0][1]) + (sp40[1] * arg1[1][1]) + (sp40[2] * arg1[2][1])) * 127.0f;
-    sp3C[2] = ((sp40[0] * arg1[0][2]) + (sp40[1] * arg1[1][2]) + (sp40[2] * arg1[2][2])) * 127.0f;
+    sp3C[0] = ((sp40[0] * arg1[0][0]) + (sp40.y * arg1[1][0]) + (sp40.z * arg1[2][0])) * 127.0f;
+    sp3C[1] = ((sp40[0] * arg1[0][1]) + (sp40[1] * arg1[1][1]) + (sp40.z * arg1[2][1])) * 127.0f;
+    sp3C[2] = ((sp40[0] * arg1[0][2]) + (sp40[1] * arg1[1][2]) + (sp40.z * arg1[2][2])) * 127.0f;
     for (var_v0 = 0; var_v0 < arg4; var_v0++, var_s0++) {
         var_s0->l[0].l.dir[0] = sp3C[0];
         var_s0->l[0].l.dir[1] = sp3C[1];
@@ -1238,16 +1238,16 @@ void func_802B8614(Player* arg0) {
     f64 temp_f4;
     f64 temp_f6;
 
-    temp_f6 = (f64) arg0->tyres[FRONT_RIGHT].pos[0];
+    temp_f6 = (f64) arg0->tyres[FRONT_RIGHT].pos.x;
     sp78 = temp_f6;
     sp70 = (f64) arg0->tyres[FRONT_RIGHT].baseHeight;
-    sp68 = (f64) arg0->tyres[FRONT_RIGHT].pos[2];
-    temp_f30 = (f64) arg0->tyres[FRONT_LEFT].pos[0];
+    sp68 = (f64) arg0->tyres[FRONT_RIGHT].pos.z;
+    temp_f30 = (f64) arg0->tyres[FRONT_LEFT].pos.x;
     sp58 = (f64) arg0->tyres[FRONT_LEFT].baseHeight;
-    sp50 = (f64) arg0->tyres[FRONT_LEFT].pos[2];
-    sp48 = (f64) arg0->tyres[BACK_RIGHT].pos[0];
+    sp50 = (f64) arg0->tyres[FRONT_LEFT].pos.z;
+    sp48 = (f64) arg0->tyres[BACK_RIGHT].pos.x;
     sp40 = (f64) arg0->tyres[BACK_RIGHT].baseHeight;
-    temp_f4 = (f64) arg0->tyres[BACK_RIGHT].pos[2];
+    temp_f4 = (f64) arg0->tyres[BACK_RIGHT].pos.z;
     temp_f2 = sp58 - sp70;
     sp38 = temp_f4;
     temp_f12 = temp_f4 - sp50;

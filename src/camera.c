@@ -70,13 +70,13 @@ void camera_init(f32 posX, f32 posY, f32 posZ, UNUSED s16 rot, u32 arg4, s32 cam
         case 9:
         case 10:
             D_80164A89 = 0;
-            camera->pos[0] = posX;
-            camera->pos[1] = posY;
-            camera->pos[2] = posZ;
+            camera->pos.x = posX;
+            camera->pos.y = posY;
+            camera->pos.z = posZ;
             camera->someBitFlags = 0;
-            camera->lookAt[0] = 0.0f;
-            camera->lookAt[2] = 150.0f;
-            camera->lookAt[1] = posY - 3.0;
+            camera->lookAt.x = 0.0f;
+            camera->lookAt.z = 150.0f;
+            camera->lookAt.y = posY - 3.0;
             camera->up[0] = 0.0f;
             camera->up[1] = 1.0f;
             camera->up[2] = 0.0f;
@@ -237,9 +237,9 @@ void func_8001CA78(UNUSED Player* player, Camera* camera, Vec3f arg2, f32* arg3,
     sp5C[0] = camera->unk_3C[0];
     sp5C[1] = camera->unk_3C[1];
     sp5C[2] = camera->unk_3C[2];
-    arg2[0] = camera->lookAt[0];
-    arg2[1] = camera->lookAt[1];
-    arg2[2] = camera->lookAt[2];
+    arg2[0] = camera->lookAt.x;
+    arg2[1] = camera->lookAt.y;
+    arg2[2] = camera->lookAt.z;
     calculate_orientation_matrix(sp74, 0, 1, 0, -0x00008000);
     mtxf_translate_vec3f_mat3(sp5C, sp74);
     if (GetCourse() == GetToadsTurnpike()) {
@@ -249,9 +249,9 @@ void func_8001CA78(UNUSED Player* player, Camera* camera, Vec3f arg2, f32* arg3,
     }
     temp_f16 = D_80165230[7] + sp5C[2];
     temp_f18 = sp5C[1] + (temp_s2->posY + D_80164A30);
-    arg2[0] += (var_f14 - camera->lookAt[0]) * 1;
-    arg2[1] += (temp_f18 - camera->lookAt[1]) * 1;
-    arg2[2] += (temp_f16 - camera->lookAt[2]) * 1;
+    arg2[0] += (var_f14 - camera->lookAt.x) * 1;
+    arg2[1] += (temp_f18 - camera->lookAt.y) * 1;
+    arg2[2] += (temp_f16 - camera->lookAt.z) * 1;
     mtxf_translate_vec3f_mat3(sp68, sp74);
     if (GetCourse() == GetToadsTurnpike()) {
         var_f14 = sp68[0];
@@ -261,11 +261,11 @@ void func_8001CA78(UNUSED Player* player, Camera* camera, Vec3f arg2, f32* arg3,
     temp_f16 = D_80165230[7] + sp68[2];
     temp_f18 = sp68[1] + (temp_s2->posY + D_80164A30 + 6.0f);
     move_f32_towards(&D_80164A30, 0, 0.02f);
-    posX = camera->pos[0];
+    posX = camera->pos.x;
     *arg3 = ((var_f14 - posX) * 1) + posX;
-    posY = camera->pos[1];
+    posY = camera->pos.y;
     *arg4 = ((temp_f18 - posY) * 1) + posY;
-    posZ = camera->pos[2];
+    posZ = camera->pos.z;
     *arg5 = ((temp_f16 - posZ) * 1) + posZ;
 }
 
@@ -366,45 +366,45 @@ void func_8001CCEC(Player* player, Camera* camera, Vec3f arg2, f32* arg3, f32* a
     sp84[0] = camera->unk_3C[0];
     sp84[1] = camera->unk_3C[1] + (player->unk_DB4.unk1E * 0.85) + temp_f12;
     sp84[2] = camera->unk_3C[2] + temp_f0 - D_80164A90[index];
-    arg2[0] = camera->lookAt[0];
-    arg2[1] = camera->lookAt[1];
-    arg2[2] = camera->lookAt[2];
+    arg2[0] = camera->lookAt.x;
+    arg2[1] = camera->lookAt.y;
+    arg2[2] = camera->lookAt.z;
     if ((player->effects & 0x01000000) == 0x01000000) {
         sp84[2] /= 3.0f;
     }
     calculate_orientation_matrix(sp9C, 0, 1, 0, arg7);
     mtxf_translate_vec3f_mat3(sp84, sp9C);
 
-    x = player->pos[0] + sp84[0];
-    z = player->pos[2] + sp84[2];
-    y = player->pos[1] + sp84[1];
+    x = player->pos.x + sp84[0];
+    z = player->pos.z + sp84[2];
+    y = player->pos.y + sp84[1];
 
-    arg2[0] += (x - camera->lookAt[0]) * D_80164A78[index];
-    arg2[2] += ((z - camera->lookAt[2]) * D_80164A78[index]);
+    arg2[0] += (x - camera->lookAt.x) * D_80164A78[index];
+    arg2[2] += ((z - camera->lookAt.z) * D_80164A78[index]);
 
     if ((((player->unk_094 / 18) * 216) <= 5.0f) && ((player->effects & 2) == 2)) {
-        arg2[1] += ((y - camera->lookAt[1]) * 0.02);
+        arg2[1] += ((y - camera->lookAt.y) * 0.02);
     } else {
-        arg2[1] += ((y - camera->lookAt[1]) * 0.5);
+        arg2[1] += ((y - camera->lookAt.y) * 0.5);
     }
     mtxf_translate_vec3f_mat3(sp90, sp9C);
-    x = player->pos[0] + sp90[0];
-    z = player->pos[2] + sp90[2];
+    x = player->pos.x + sp90[0];
+    z = player->pos.z + sp90[2];
     if ((player->effects & 0x01000000) != 0x01000000) {
-        var_f0 = player->pos[1] + sp90[1];
+        var_f0 = player->pos.y + sp90[1];
         // permute
         y = var_f0;
     } else {
         y = player->unk_074 + player->boundingBoxSize + sp90[1];
     }
 
-    *arg3 = camera->pos[0] + ((x - camera->pos[0]) * D_80164A78[index]);
-    *arg5 = camera->pos[2] + ((z - camera->pos[2]) * D_80164A78[index]);
+    *arg3 = camera->pos.x + ((x - camera->pos.x) * D_80164A78[index]);
+    *arg5 = camera->pos.z + ((z - camera->pos.z) * D_80164A78[index]);
 
     if ((((player->unk_094 / 18) * 216) <= 5.0f) && ((player->effects & 2) == 2)) {
-        *arg4 = camera->pos[1] + (((y - camera->pos[1]) * 0.01));
+        *arg4 = camera->pos.y + (((y - camera->pos.y) * 0.01));
     } else {
-        *arg4 = camera->pos[1] + (((y - camera->pos[1]) * 0.15));
+        *arg4 = camera->pos.y + (((y - camera->pos.y) * 0.15));
     }
 
     if ((player->unk_0DE & 1) != 0) {
@@ -437,20 +437,20 @@ void func_8001D53C(Player* player, Camera* camera, Vec3f arg2, f32* arg3, f32* a
     sp5C[0] = camera->unk_3C[0];
     sp5C[1] = camera->unk_3C[1] + camera->unk_A0;
     sp5C[2] = camera->unk_3C[2];
-    arg2[0] = camera->lookAt[0];
-    arg2[1] = camera->lookAt[1];
-    arg2[2] = camera->lookAt[2];
+    arg2[0] = camera->lookAt.x;
+    arg2[1] = camera->lookAt.y;
+    arg2[2] = camera->lookAt.z;
     calculate_orientation_matrix(sp74, 0.0f, 1.0f, 0.0f, arg6);
     mtxf_translate_vec3f_mat3(sp5C, sp74);
-    stackPadding0 = player->pos[0] + sp5C[0];
-    stackPadding2 = player->pos[2] + sp5C[2];
-    stackPadding1 = player->pos[1] + sp5C[1];
-    arg2[0] += (stackPadding0 - camera->lookAt[0]) * 1;
-    arg2[2] += (stackPadding2 - camera->lookAt[2]) * 1;
-    arg2[1] += (stackPadding1 - camera->lookAt[1]) * 1;
+    stackPadding0 = player->pos.x + sp5C[0];
+    stackPadding2 = player->pos.z + sp5C[2];
+    stackPadding1 = player->pos.y + sp5C[1];
+    arg2[0] += (stackPadding0 - camera->lookAt.x) * 1;
+    arg2[2] += (stackPadding2 - camera->lookAt.z) * 1;
+    arg2[1] += (stackPadding1 - camera->lookAt.y) * 1;
     mtxf_translate_vec3f_mat3(sp68, sp74);
-    stackPadding0 = player->pos[0] + sp68[0];
-    stackPadding2 = player->pos[2] + sp68[2];
+    stackPadding0 = player->pos.x + sp68[0];
+    stackPadding2 = player->pos.z + sp68[2];
     stackPadding1 = sp68[1] + (player->unk_074 + 1.5);
     if ((player->unk_0CA & 1) == 1) {
         stackPadding1 = sp68[1] + (thing + 10.0f);
@@ -479,28 +479,28 @@ void func_8001D794(Player* player, Camera* camera, Vec3f arg2, f32* arg3, f32* a
     sp54[1] = camera->unk_3C[1];
     sp54[2] = camera->unk_3C[2];
 
-    arg2[0] = camera->lookAt[0];
-    arg2[1] = camera->lookAt[1];
-    arg2[2] = camera->lookAt[2];
+    arg2[0] = camera->lookAt.x;
+    arg2[1] = camera->lookAt.y;
+    arg2[2] = camera->lookAt.z;
 
     calculate_orientation_matrix(sp6C, 0, 1, 0, arg6);
     mtxf_translate_vec3f_mat3(sp54, sp6C);
 
-    test1 = player->pos[0] + sp54[0];
-    test3 = player->pos[2] + sp54[2];
-    test2 = player->pos[1] + sp54[1];
-    arg2[0] += (test1 - camera->lookAt[0]) * 1;
-    arg2[1] += (test2 - camera->lookAt[1]) * 1;
-    arg2[2] += (test3 - camera->lookAt[2]) * 1;
+    test1 = player->pos.x + sp54[0];
+    test3 = player->pos.z + sp54[2];
+    test2 = player->pos.y + sp54[1];
+    arg2[0] += (test1 - camera->lookAt.x) * 1;
+    arg2[1] += (test2 - camera->lookAt.y) * 1;
+    arg2[2] += (test3 - camera->lookAt.z) * 1;
 
     mtxf_translate_vec3f_mat3(sp60, sp6C);
 
-    test1 = player->pos[0] + sp60[0];
-    test3 = player->pos[2] + sp60[2];
-    test2 = player->pos[1] + sp60[1];
-    *arg3 = camera->pos[0] + ((test1 - camera->pos[0]) * 1);
-    *arg4 = camera->pos[1] + ((test2 - camera->pos[1]) * 1);
-    *arg5 = camera->pos[2] + ((test3 - camera->pos[2]) * 1);
+    test1 = player->pos.x + sp60[0];
+    test3 = player->pos.z + sp60[2];
+    test2 = player->pos.y + sp60[1];
+    *arg3 = camera->pos.x + ((test1 - camera->pos.x) * 1);
+    *arg4 = camera->pos.y + ((test2 - camera->pos.y) * 1);
+    *arg5 = camera->pos.z + ((test3 - camera->pos.z) * 1);
 }
 
 void func_8001D944(Player* player, Camera* camera, Vec3f arg2, f32* arg3, f32* arg4, f32* arg5, UNUSED s32* arg6,
@@ -586,45 +586,45 @@ void func_8001D944(Player* player, Camera* camera, Vec3f arg2, f32* arg3, f32* a
     sp84[0] = camera->unk_3C[0];
     sp84[1] = camera->unk_3C[1] + (player->unk_DB4.unk1E * 0.85) + temp_f12;
     sp84[2] = camera->unk_3C[2] + temp_f0 - D_80164A90[index];
-    arg2[0] = camera->lookAt[0];
-    arg2[1] = camera->lookAt[1];
-    arg2[2] = camera->lookAt[2];
+    arg2[0] = camera->lookAt.x;
+    arg2[1] = camera->lookAt.y;
+    arg2[2] = camera->lookAt.z;
     if ((player->effects & 0x01000000) == 0x01000000) {
         sp84[2] /= 3.0f;
     }
     calculate_orientation_matrix(sp9C, 0, 1, 0, arg7);
     mtxf_translate_vec3f_mat3(sp84, sp9C);
 
-    x = player->pos[0] + sp84[0];
-    z = player->pos[2] + sp84[2];
-    y = player->pos[1] + sp84[1];
+    x = player->pos.x + sp84[0];
+    z = player->pos.z + sp84[2];
+    y = player->pos.y + sp84[1];
 
-    arg2[0] += (x - camera->lookAt[0]) * D_80164A78[index];
-    arg2[2] += ((z - camera->lookAt[2]) * D_80164A78[index]);
+    arg2[0] += (x - camera->lookAt.x) * D_80164A78[index];
+    arg2[2] += ((z - camera->lookAt.z) * D_80164A78[index]);
 
     if ((((player->unk_094 / 18) * 216) <= 5.0f) && ((player->effects & 2) == 2)) {
-        arg2[1] += ((y - camera->lookAt[1]) * 0.02);
+        arg2[1] += ((y - camera->lookAt.y) * 0.02);
     } else {
-        arg2[1] += ((y - camera->lookAt[1]) * 0.5);
+        arg2[1] += ((y - camera->lookAt.y) * 0.5);
     }
     mtxf_translate_vec3f_mat3(sp90, sp9C);
-    x = player->pos[0] + sp90[0];
-    z = player->pos[2] + sp90[2];
+    x = player->pos.x + sp90[0];
+    z = player->pos.z + sp90[2];
     if ((player->effects & 0x01000000) != 0x01000000) {
-        var_f0 = player->pos[1] + sp90[1];
+        var_f0 = player->pos.y + sp90[1];
         // permute
         y = var_f0;
     } else {
         y = player->unk_074 + player->boundingBoxSize + sp90[1];
     }
 
-    *arg3 = camera->pos[0] + ((x - camera->pos[0]) * D_80164A78[index]);
-    *arg5 = camera->pos[2] + ((z - camera->pos[2]) * D_80164A78[index]);
+    *arg3 = camera->pos.x + ((x - camera->pos.x) * D_80164A78[index]);
+    *arg5 = camera->pos.z + ((z - camera->pos.z) * D_80164A78[index]);
 
     if ((((player->unk_094 / 18) * 216) <= 5.0f) && ((player->effects & 2) == 2)) {
-        *arg4 = camera->pos[1] + (((y - camera->pos[1]) * 0.01));
+        *arg4 = camera->pos.y + (((y - camera->pos.y) * 0.01));
     } else {
-        *arg4 = camera->pos[1] + (((y - camera->pos[1]) * 0.15));
+        *arg4 = camera->pos.y + (((y - camera->pos.y) * 0.15));
     }
 
     if ((player->unk_0DE & 1) != 0) {
@@ -678,18 +678,18 @@ void func_8001E0C4(Camera* camera, Player* player, s8 arg2) {
     if ((temp_t7 == 0) && ((camera->someBitFlags & 2) != 2)) {
         camera->unk_AC = camera->unk_2C;
     }
-    camera->lookAt[0] = sp60[0];
-    camera->lookAt[1] = sp60[1];
-    camera->lookAt[2] = sp60[2];
-    camera->pos[0] = sp74;
-    camera->pos[1] = sp70;
-    camera->pos[2] = sp6C;
-    temp_f12 = camera->lookAt[0] - camera->pos[0];
-    sp80 = camera->lookAt[1] - camera->pos[1];
-    temp_f14 = camera->lookAt[2] - camera->pos[2];
-    camera->rot[1] = atan2s(temp_f12, temp_f14);
-    camera->rot[0] = atan2s(sqrtf((temp_f12 * temp_f12) + (temp_f14 * temp_f14)), sp80);
-    camera->rot[2] = 0;
+    camera->lookAt.x = sp60[0];
+    camera->lookAt.y = sp60[1];
+    camera->lookAt.z = sp60[2];
+    camera->pos.x = sp74;
+    camera->pos.y = sp70;
+    camera->pos.z = sp6C;
+    temp_f12 = camera->lookAt.x - camera->pos.x;
+    sp80 = camera->lookAt.y - camera->pos.y;
+    temp_f14 = camera->lookAt.z - camera->pos.z;
+    camera->rot.y = atan2s(temp_f12, temp_f14);
+    camera->rot.x = atan2s(sqrtf((temp_f12 * temp_f12) + (temp_f14 * temp_f14)), sp80);
+    camera->rot.z = 0;
 }
 
 // This function has a few stack variables.
@@ -767,21 +767,21 @@ void func_8001E45C(Camera* camera, Player* player, s8 arg2) {
     camera->someBitFlags &= 0xFFFB;
     check_bounding_collision(&camera->collision, temp, sp84, sp80, sp7C);
 
-    camera->pos[0] = sp84;
-    camera->pos[1] = sp80;
-    camera->pos[2] = sp7C;
+    camera->pos.x = sp84;
+    camera->pos.y = sp80;
+    camera->pos.z = sp7C;
 
-    camera->lookAt[0] = sp64[0];
-    camera->lookAt[1] = sp64[1];
-    camera->lookAt[2] = sp64[2];
+    camera->lookAt.x = sp64[0];
+    camera->lookAt.y = sp64[1];
+    camera->lookAt.z = sp64[2];
 
-    temp_f12 = camera->lookAt[0] - camera->pos[0];
-    sp90 = camera->lookAt[1] - camera->pos[1];
-    temp_f14 = camera->lookAt[2] - camera->pos[2];
+    temp_f12 = camera->lookAt.x - camera->pos.x;
+    sp90 = camera->lookAt.y - camera->pos.y;
+    temp_f14 = camera->lookAt.z - camera->pos.z;
 
-    camera->rot[1] = atan2s(temp_f12, temp_f14);
-    camera->rot[0] = atan2s(sqrtf((temp_f12 * temp_f12) + (temp_f14 * temp_f14)), sp90);
-    camera->rot[2] = 0;
+    camera->rot.y = atan2s(temp_f12, temp_f14);
+    camera->rot.x = atan2s(sqrtf((temp_f12 * temp_f12) + (temp_f14 * temp_f14)), sp90);
+    camera->rot.z = 0;
 }
 
 void func_8001E8E8(Camera* camera, Player* player, s8 arg2) {
@@ -801,18 +801,18 @@ void func_8001E8E8(Camera* camera, Player* player, s8 arg2) {
     camera->unk_2C = player->rotation[1];
     func_8001D53C(player, camera, sp5C, &sp7C, &sp78, &sp74, (s16) (s32) player->rotation[1], (s16) (s32) arg2);
     check_bounding_collision(&camera->collision, 5.0f, sp7C, sp78, sp74);
-    camera->lookAt[0] = sp5C[0];
-    camera->lookAt[1] = sp5C[1];
-    camera->lookAt[2] = sp5C[2];
-    camera->pos[0] = sp7C;
-    camera->pos[1] = sp78;
-    camera->pos[2] = sp74;
-    temp_f12 = camera->lookAt[0] - camera->pos[0];
-    sp88 = camera->lookAt[1] - camera->pos[1];
-    temp_f14 = camera->lookAt[2] - camera->pos[2];
-    camera->rot[1] = atan2s(temp_f12, temp_f14);
-    camera->rot[0] = atan2s(sqrtf((temp_f12 * temp_f12) + (temp_f14 * temp_f14)), sp88);
-    camera->rot[2] = 0;
+    camera->lookAt.x = sp5C[0];
+    camera->lookAt.y = sp5C[1];
+    camera->lookAt.z = sp5C[2];
+    camera->pos.x = sp7C;
+    camera->pos.y = sp78;
+    camera->pos.z = sp74;
+    temp_f12 = camera->lookAt.x - camera->pos.x;
+    sp88 = camera->lookAt.y - camera->pos.y;
+    temp_f14 = camera->lookAt.z - camera->pos.z;
+    camera->rot.y = atan2s(temp_f12, temp_f14);
+    camera->rot.x = atan2s(sqrtf((temp_f12 * temp_f12) + (temp_f14 * temp_f14)), sp88);
+    camera->rot.z = 0;
 }
 
 void func_8001EA0C(Camera* camera, Player* player, s8 arg2) {
@@ -890,21 +890,21 @@ void func_8001EA0C(Camera* camera, Player* player, s8 arg2) {
     camera->someBitFlags &= 0xFFFB;
     check_bounding_collision(&camera->collision, temp, sp84, sp80, sp7C);
 
-    camera->pos[0] = sp84;
-    camera->pos[1] = sp80;
-    camera->pos[2] = sp7C;
+    camera->pos.x = sp84;
+    camera->pos.y = sp80;
+    camera->pos.z = sp7C;
 
-    camera->lookAt[0] = sp64[0];
-    camera->lookAt[1] = sp64[1];
-    camera->lookAt[2] = sp64[2];
+    camera->lookAt.x = sp64[0];
+    camera->lookAt.y = sp64[1];
+    camera->lookAt.z = sp64[2];
 
-    temp_f12 = camera->lookAt[0] - camera->pos[0];
-    sp90 = camera->lookAt[1] - camera->pos[1];
-    temp_f14 = camera->lookAt[2] - camera->pos[2];
+    temp_f12 = camera->lookAt.x - camera->pos.x;
+    sp90 = camera->lookAt.y - camera->pos.y;
+    temp_f14 = camera->lookAt.z - camera->pos.z;
 
-    camera->rot[1] = atan2s(temp_f12, temp_f14);
-    camera->rot[0] = atan2s(sqrtf((temp_f12 * temp_f12) + (temp_f14 * temp_f14)), sp90);
-    camera->rot[2] = 0;
+    camera->rot.y = atan2s(temp_f12, temp_f14);
+    camera->rot.x = atan2s(sqrtf((temp_f12 * temp_f12) + (temp_f14 * temp_f14)), sp90);
+    camera->rot.z = 0;
 }
 
 void func_8001EE98(Player* player, Camera* camera, s8 index) {
@@ -1160,7 +1160,7 @@ void func_8001F87C(s32 cameraId) {
                 if ((playerIndex == 7) && (D_80164A2C == 0x0000003C)) {
                     D_80164A28 = 2;
                     D_80152300[id] = 1;
-                    cameras[id].rot[1] = gPlayerOne[playerIndex].rotation[1];
+                    cameras[id].rot.y = gPlayerOne[playerIndex].rotation[1];
                     cameras[id].unk_2C = gPlayerOne[playerIndex].rotation[1];
                 }
             }

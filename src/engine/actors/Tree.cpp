@@ -11,9 +11,9 @@ extern "C" {
 
 ATree::ATree(Vec3f pos, Gfx* displaylist, f32 drawDistance, f32 minDrawDistance, const char* tlut = nullptr) {
     Name = "Tree";
-    Pos[0] = pos[0];
-    Pos[1] = pos[1];
-    Pos[2] = pos[2];
+    Pos[0] = pos.x;
+    Pos[1] = pos.y;
+    Pos[2] = pos.z;
 
     Displaylist = displaylist;
     Tlut = tlut;
@@ -37,7 +37,7 @@ void ATree::Draw(Camera* camera) {
         return;
     }
 
-    dist = is_within_render_distance(camera->pos, Pos, camera->rot[1], 0, gCameraZoom[camera - camera1],
+    dist = is_within_render_distance(camera->pos, Pos, camera->rot.y, 0, gCameraZoom[camera - camera1],
                                         DrawDistance);
 
     if (CVarGetInteger("gNoCulling", 0) == 1) {

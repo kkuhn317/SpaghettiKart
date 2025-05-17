@@ -708,7 +708,7 @@ void display_debug_info(void) {
             (gControllerOne->button & B_BUTTON)) {
             D_800DC514 = false;
         }
-        rotY = camera1->rot[1];
+        rotY = camera1->rot.y;
         gDebugPathCount = D_800DC5EC->pathCounter;
 
     if (rotY < 0x2000) {

@@ -121,17 +121,17 @@ void OPodium::func_80086424(s32 objectIndex) {
         case 0:
             break;
         case 1:
-            gObjectList[objectIndex].velocity[1] = 0.75f;
+            gObjectList[objectIndex].velocity.y = 0.75f;
             func_80086FD4(objectIndex);
             break;
         case 2:
             if (gObjectList[objectIndex].offset[1] >= -2.0) {
-                gObjectList[objectIndex].velocity[1] -= 0.1;
+                gObjectList[objectIndex].velocity.y -= 0.1;
             }
             object_add_velocity_offset_y(objectIndex);
             if (gObjectList[objectIndex].offset[1] >= 0.0) {
                 gObjectList[objectIndex].offset[1] = 0.0f;
-                gObjectList[objectIndex].velocity[1] = 0.0f;
+                gObjectList[objectIndex].velocity.y = 0.0f;
                 func_80086F60(objectIndex);
             }
             break;

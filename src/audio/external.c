@@ -318,7 +318,7 @@ void func_800C19D0(u8 arg0, u8 arg1, u8 arg2) {
             sp3C = (func_800C1480(arg0, arg1) * *temp_s0->unk14) * D_80192C48[arg0].current;
             sp3B = func_800C15D0(arg0, arg1, arg2);
             sp34 = func_800C1934(arg0, arg1) * *temp_s0->unk10;
-            sp33 = func_800C16E8(*temp_s0->unk00[0], *temp_s0->unk08, temp_s0->cameraId);
+            sp33 = func_800C16E8(*temp_s0->unk00.x, *temp_s0->unk08, temp_s0->cameraId);
             break;
     }
     temp_s0_2 = &D_8018EF18[arg2];
@@ -340,7 +340,7 @@ void func_800C19D0(u8 arg0, u8 arg1, u8 arg2) {
     }
 }
 
-struct Unk_8018EFD8* func_800C1C88(u8 arg0, Vec3f position, f32* velocity, f32* arg3, u8 arg4, u32 soundBits) {
+struct Unk_8018EFD8* func_800C1C88(u8 arg0, Vec3f position, Vec3f velocity, f32* arg3, u8 arg4, u32 soundBits) {
     struct Unk_8018EFD8* temp_a1;
     struct Unk_8018EFD8* temp_v1;
     u8 temp_t7;
@@ -355,14 +355,14 @@ struct Unk_8018EFD8* func_800C1C88(u8 arg0, Vec3f position, f32* velocity, f32* 
         D_8018FB91 = why1;
         D_8018FB90 = D_8018EFD8[D_8018FB90].next;
         D_8018EFD8[D_8018FB90].prev = 0xFF;
-        D_8018EFD8[why1].posX = &position[0];
-        D_8018EFD8[why1].posY = &position[1];
-        D_8018EFD8[why1].posZ = &position[2];
+        D_8018EFD8[why1].posX = &position.x;
+        D_8018EFD8[why1].posY = &position.y;
+        D_8018EFD8[why1].posZ = &position.z;
         D_8018EFD8[why1].next = 0xFF;
-        D_8018EFD8[why1].velX = &velocity[0];
-        D_8018EFD8[why1].velY = &velocity[1];
-        D_8018EFD8[why1].velZ = &velocity[2];
-        D_8018EFD8[why1].unk18[1] = 0.0f;
+        D_8018EFD8[why1].velX = &velocity.x;
+        D_8018EFD8[why1].velY = &velocity.y;
+        D_8018EFD8[why1].velZ = &velocity.z;
+        D_8018EFD8[why1].unk18.y = 0.0f;
         D_8018EFD8[why1].unk24 = arg3;
         D_8018EFD8[why1].cameraId = arg4;
         D_8018EFD8[why1].unk30 = arg0;
@@ -376,10 +376,10 @@ void func_800C1DA4(Camera* arg0, Vec3s rot, struct Unk_8018EFD8* arg2) {
     f32 x;
     f32 y;
 
-    x = arg0->pos[0] - *arg2->posX;
-    y = arg0->pos[2] - *arg2->posZ;
-    arg2->unk18[0] = func_800416D8(x, y, rot[1]);
-    arg2->unk18[2] = func_80041724(x, y, rot[1]);
+    x = arg0->pos.x - *arg2->posX;
+    y = arg0->pos.z - *arg2->posZ;
+    arg2->unk18.x = func_800416D8(x, y, rot.y);
+    arg2->unk18.z = func_80041724(x, y, rot.y);
 }
 
 void func_800C1E2C(Camera* camera, Vec3f velocity, struct Unk_8018EFD8* arg2) {
@@ -393,11 +393,11 @@ void func_800C1E2C(Camera* camera, Vec3f velocity, struct Unk_8018EFD8* arg2) {
     f32 thing1;
     f32 temp_f2;
 
-    x = (*arg2->posX) - camera->pos[0];
-    y = (*arg2->posZ) - camera->pos[2];
+    x = (*arg2->posX) - camera->pos.x;
+    y = (*arg2->posZ) - camera->pos.z;
 
-    sp44 = (*arg2->velX) - velocity[0];
-    temp_f6 = (*arg2->velZ) - velocity[2];
+    sp44 = (*arg2->velX) - velocity.x;
+    temp_f6 = (*arg2->velZ) - velocity.z;
 
     thing0 = x + sp44;
     thing1 = y + temp_f6;
@@ -414,7 +414,7 @@ void func_800C1E2C(Camera* camera, Vec3f velocity, struct Unk_8018EFD8* arg2) {
     }
 
     if ((*arg2->unk24) != 0.0f) {
-        arg2->unk2C *= (((*arg2->unk24) / D_800EA06C[arg2->unk30].unk00[1]) + D_800EA06C[arg2->unk30].unk00[0]) +
+        arg2->unk2C *= (((*arg2->unk24) / D_800EA06C[arg2->unk30].unk00.y) + D_800EA06C[arg2->unk30].unk00.x) +
                        D_800E9F34[arg2->unk30];
     }
 }
@@ -427,16 +427,16 @@ void func_800C1F8C(void) {
 
     var_a1 = D_800EA1C0 + 1;
     for (var_s1 = 0; var_s1 < var_a1; var_s1++) {
-        gVelocityCamera[var_s1][0] = gCopyCamera[var_s1]->pos[0] - gCameraLastPos[var_s1][0];
-        gVelocityCamera[var_s1][2] = gCopyCamera[var_s1]->pos[2] - gCameraLastPos[var_s1][2];
-        gCameraLastPos[var_s1][0] = gCopyCamera[var_s1]->pos[0];
-        gCameraLastPos[var_s1][2] = gCopyCamera[var_s1]->pos[2];
+        gVelocityCamera[var_s1].x = gCopyCamera[var_s1]->pos.x - gCameraLastPos[var_s1].x;
+        gVelocityCamera[var_s1].z = gCopyCamera[var_s1]->pos.z - gCameraLastPos[var_s1].z;
+        gCameraLastPos[var_s1].x = gCopyCamera[var_s1]->pos.x;
+        gCameraLastPos[var_s1].z = gCopyCamera[var_s1]->pos.z;
     }
 
     var_a1 = 0;
     var_s1 = D_8018EFD8[0].next;
     while (var_s1 != 0xFF) {
-        if (D_8018EFD8[var_s1].unk18[1] == 100000.0f) {
+        if (D_8018EFD8[var_s1].unk18.y == 100000.0f) {
             if (D_8018FB91 == var_s1) {
                 D_8018FB91 = D_8018EFD8[var_s1].prev;
             } else {
@@ -452,7 +452,7 @@ void func_800C1F8C(void) {
             // Why? Why would you do it this way? For what possible reason?
             camera = &gCopyCamera[cameraId];
             func_800C1DA4(*camera, (*camera)->rot, &D_8018EFD8[var_s1]);
-            if (D_800EA1C8 != D_8018EFD8[var_s1].velX) {
+            if (&D_800EA1C8 != D_8018EFD8[var_s1].velX) {
                 func_800C1E2C(*camera, gVelocityCamera[0], &D_8018EFD8[var_s1]);
             }
             var_a1 = var_s1;
@@ -468,7 +468,7 @@ Vec3f* func_800C21E8(Vec3f pos, u32 soundBits) {
     u8 it; // iterator
     Vec3f* ret;
     // Only here to force a match
-    UNUSED f32* thing = pos;
+    UNUSED f32* thing = &pos;
     struct Unk_8018EFD8* temp_a1;
 
     ret = 0;
@@ -477,10 +477,10 @@ Vec3f* func_800C21E8(Vec3f pos, u32 soundBits) {
         temp_a1 = &D_8018EFD8[it];
         // It doesn't matter what you set var_v0 to here actually
         it = D_8018EFD8[0].next;
-        if ((pos == temp_a1->posX) && (soundBits == temp_a1->soundBits)) {
+        if ((&pos == temp_a1->posX) && (soundBits == temp_a1->soundBits)) {
             // I suspect all this weirdness here is a result of someone not knowing the 'break' keyword
             it = 0xFF;
-            if (temp_a1->unk18[1] != 100000.0f) {
+            if (temp_a1->unk18.y != 100000.0f) {
                 ret = &temp_a1->unk18;
             } else {
                 goto test;
@@ -575,12 +575,12 @@ void func_800C2474(void) {
     for (var_v0 = 0; var_v0 < 4; var_v0++) {
         D_800E9DB4[var_v0] = 0;
         D_800E9DF4[var_v0] = 0; // This is an f32 FYI, but 0.0f doesn't match right :)
-        gVelocityCamera[var_v0][0] = 0.0f;
-        gVelocityCamera[var_v0][1] = 0.0f;
-        gVelocityCamera[var_v0][2] = 0.0f;
-        gCameraLastPos[var_v0][0] = 0.0f;
-        gCameraLastPos[var_v0][1] = 0.0f;
-        gCameraLastPos[var_v0][2] = 0.0f;
+        gVelocityCamera[var_v0].x = 0.0f;
+        gVelocityCamera[var_v0].y = 0.0f;
+        gVelocityCamera[var_v0].z = 0.0f;
+        gCameraLastPos[var_v0].x = 0.0f;
+        gCameraLastPos[var_v0].y = 0.0f;
+        gCameraLastPos[var_v0].z = 0.0f;
         D_800EA0EC[var_v0] = 0;
         D_800E9EA4[var_v0] = 0;
         D_800E9F7C[var_v0].unk_14 = 0;
@@ -1237,8 +1237,8 @@ void func_800C41CC(u8 arg0, struct SoundCharacteristics* arg1) {
         }
         if (found) {
             sound->soundBits = 0;
-            if (*sound->position != D_800EA1C8) {
-                (*sound->position)[1] = 100000.0f;
+            if (sound->position != &D_800EA1C8) {
+                sound->position.y = 100000.0f;
             }
         }
     }
@@ -1307,9 +1307,9 @@ void func_800C4398(void) {
     }
     if ((sSoundBanks[bank][sSoundBankFreeListFront[bank]].next != 0xFF) && (soundIndex != 0)) {
         soundIndex = sSoundBankFreeListFront[bank];
-        sSoundBanks[bank][soundIndex].unk00 = &(*var_a2->position)[0];
-        sSoundBanks[bank][soundIndex].unk04 = &(*var_a2->position)[1];
-        sSoundBanks[bank][soundIndex].unk08 = &(*var_a2->position)[2];
+        sSoundBanks[bank][soundIndex].unk00 = &(*var_a2->position).x;
+        sSoundBanks[bank][soundIndex].unk04 = &(*var_a2->position).y;
+        sSoundBanks[bank][soundIndex].unk08 = &(*var_a2->position).z;
         sSoundBanks[bank][soundIndex].cameraId = var_a2->cameraId;
         sSoundBanks[bank][soundIndex].unk10 = var_a2->unk0C;
         sSoundBanks[bank][soundIndex].unk14 = var_a2->unk10;
@@ -1324,8 +1324,8 @@ void func_800C4398(void) {
         sSoundBanks[bank][sSoundBankFreeListFront[bank]].prev = 0xFF;
         sSoundBanks[bank][soundIndex].next = 0xFF;
     } else if (sSoundBanks[bank][sSoundBankFreeListFront[bank]].next == 0xFF) {
-        if (D_800EA1C8 != *var_a2->position) {
-            (*var_a2->position)[1] = 100000.0f;
+        if (&D_800EA1C8 != var_a2->position) {
+            (*var_a2->position).y = 100000.0f;
         }
     }
 }
@@ -1336,7 +1336,7 @@ GLOBAL_ASM("asm/non_matchings/audio/external/func_800C4398.s")
 void delete_sound_from_bank(u8 bankId, u8 soundId) {
     UNUSED s32 stackPadding;
     struct SoundCharacteristics* temp = &sSoundBanks[bankId][soundId];
-    if (*temp->unk00 != D_800EA1C8) {
+    if (temp->unk00->x != D_800EA1C8.x) {
         *temp->unk04 = 100000.0f;
     }
     if (temp->soundBits & 0x80000) {
@@ -1393,10 +1393,10 @@ void func_800C4888(u8 bankId) {
         if (temp_t2->freshness == 0) {
             delete_sound_from_bank(bankId, soundIndex);
         } else if (temp_t2->soundStatus != 0) {
-            if (D_800EA1C8 == *temp_t2->unk00) {
+            if (D_800EA1C8.x == temp_t2->unk00->x) {
                 temp_t2->distance = 0.0f;
             } else {
-                temp_t2->distance = ((*temp_t2->unk00)[0] * (*temp_t2->unk00)[0]) + (*temp_t2->unk08 * *temp_t2->unk08);
+                temp_t2->distance = (temp_t2->unk00->x * temp_t2->unk00->x) + (*temp_t2->unk08 * *temp_t2->unk08);
             }
             requestedPriority = ((u32) (temp_t2->soundBits & 0xFF00) >> 8) & 0xFF;
             if (temp_t2->soundBits & 0x100000) {
@@ -1581,7 +1581,7 @@ void func_800C5384(u8 arg0, Vec3f* arg1) {
     next = sSoundBanks[arg0][0].next;
 
     while (next != 0xff) {
-        if (*arg1 == *sSoundBanks[arg0][next].unk00) {
+        if (arg1->x == sSoundBanks[arg0][next].unk00->x) {
             if (sSoundBanks[arg0][next].soundStatus >= 3) {
                 func_800CBBE8((0x06020000 | ((sSoundBanks[arg0][next].unk2C & 0xff) << 8)), 0);
             }
@@ -2789,7 +2789,7 @@ void func_800C8AE4(void) {
 }
 
 void func_800C8C7C(u8 arg0) {
-    D_800EA06C[arg0].unk00[2] = (1.0f - D_800E9F54[arg0]) - D_800EA130[arg0];
+    D_800EA06C[arg0].unk00.z = (1.0f - D_800E9F54[arg0]) - D_800EA130[arg0];
 }
 
 void func_800C8CCC() {
@@ -2913,7 +2913,7 @@ void func_800C92CC(u8 playerId, u32 soundBits) {
 
     if ((D_800EA108 == 0) && (D_800EA0F0 == 0) && ((s32) D_800EA1C0 < 2)) {
         for (var_s0 = 0; var_s0 < D_800EA1C0 + 1; var_s0++) {
-            temp_v0 = func_800C1C88(playerId, gPlayers[playerId].pos, gPlayers[playerId].velocity, D_800EA1C8,
+            temp_v0 = func_800C1C88(playerId, gPlayers[playerId].pos, gPlayers[playerId].velocity, &D_800EA1C8,
                                     (u8) var_s0, soundBits);
             if (temp_v0 != NULL) {
                 temp_v0->unk34 = 170.0f;
@@ -3072,26 +3072,26 @@ void func_800C9A88(u8 playerId) {
                 switch (gPlayers[playerId].characterId) {
                     case 0:
                     case 1:
-                        D_800EA06C[playerId].unk00[0] = 0.35f;
-                        D_800EA06C[playerId].unk00[1] = 1568.9796f;
+                        D_800EA06C[playerId].unk00.x = 0.35f;
+                        D_800EA06C[playerId].unk00.y = 1568.9796f;
                         break;
                     case 2:
                     case 6:
-                        D_800EA06C[playerId].unk00[0] = 0.6f;
-                        D_800EA06C[playerId].unk00[1] = 1478.4615f;
+                        D_800EA06C[playerId].unk00.x = 0.6f;
+                        D_800EA06C[playerId].unk00.y = 1478.4615f;
                         break;
                     case 3:
-                        D_800EA06C[playerId].unk00[0] = 0.6f;
-                        D_800EA06C[playerId].unk00[1] = 1747.2728f;
+                        D_800EA06C[playerId].unk00.x = 0.6f;
+                        D_800EA06C[playerId].unk00.y = 1747.2728f;
                         break;
                     case 4:
-                        D_800EA06C[playerId].unk00[0] = 0.2f;
-                        D_800EA06C[playerId].unk00[1] = 2135.5557f;
+                        D_800EA06C[playerId].unk00.x = 0.2f;
+                        D_800EA06C[playerId].unk00.y = 2135.5557f;
                         break;
                     case 5:
                     case 7:
-                        D_800EA06C[playerId].unk00[0] = 0.4f;
-                        D_800EA06C[playerId].unk00[1] = 1922.0f;
+                        D_800EA06C[playerId].unk00.x = 0.4f;
+                        D_800EA06C[playerId].unk00.y = 1922.0f;
                 }
                 if (D_800EA1C0 < 2) {
                     for (var_s0 = 0; var_s0 < D_800EA1C0 + 1; var_s0++) {
@@ -3101,7 +3101,7 @@ void func_800C9A88(u8 playerId) {
                         if (temp_v0_6 != NULL) {
                             temp_v0_6->unk34 = 40.0f;
                             play_sound(soundBits, &temp_v0_6->unk18, var_s0, &temp_v0_6->unk2C,
-                                       &D_800EA06C[playerId].unk00[2], &D_800EA06C[playerId].unk0C);
+                                       &D_800EA06C[playerId].unk00.z, &D_800EA06C[playerId].unk0C);
                         }
                     }
                 }

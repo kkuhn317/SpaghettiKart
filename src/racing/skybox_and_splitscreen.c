@@ -842,8 +842,8 @@ void render_screens(s32 mode, s32 cameraId, s32 playerId) {
     gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(&gGfxPool->mtxPersp[cameraId]),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 
-    guLookAt(&gGfxPool->mtxLookAt[cameraId], camera->pos[0], camera->pos[1], camera->pos[2], camera->lookAt[0],
-             camera->lookAt[1], camera->lookAt[2], camera->up[0], camera->up[1], camera->up[2]);
+    guLookAt(&gGfxPool->mtxLookAt[cameraId], camera->pos.x, camera->pos.y, camera->pos.z, camera->lookAt.x,
+             camera->lookAt.y, camera->lookAt.z, camera->up[0], camera->up[1], camera->up[2]);
     if (D_800DC5C8 == 0) {
         gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(&gGfxPool->mtxLookAt[cameraId]),
                   G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);

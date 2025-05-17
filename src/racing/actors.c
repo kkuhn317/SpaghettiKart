@@ -150,16 +150,16 @@ void actor_init(struct Actor* actor, Vec3f startingPos, Vec3s startingRot, Vec3f
             actor->flags |= 0x4000;
             actor->unk_08 = 70.0f;
             actor->boundingBoxSize = 20.0f;
-            actor->velocity[0] = actor->pos[0];
-            actor->velocity[1] = actor->pos[1];
-            actor->velocity[2] = actor->pos[2] + 70.0f;
+            actor->velocity.x = actor->pos.x;
+            actor->velocity.y = actor->pos.y;
+            actor->velocity.z = actor->pos.z + 70.0f;
             actor->model = d_course_yoshi_valley_dl_egg_lod0;
             break;
         case ACTOR_KIWANO_FRUIT:
             actor->state = 0;
-            actor->rot[0] = 0;
-            actor->rot[1] = 0;
-            actor->rot[2] = 0;
+            actor->rot.x = 0;
+            actor->rot.y = 0;
+            actor->rot.z = 0;
             actor->boundingBoxSize = 2.0f;
             actor->model = d_course_dks_jungle_parkway_dl_kiwano_fruit;
             break;
@@ -279,7 +279,7 @@ void actor_init(struct Actor* actor, Vec3f startingPos, Vec3s startingRot, Vec3f
             actor->flags = actor->flags | 0x4000 | 0x1000;
             actor->unk_08 = 0.35f;
             actor->boundingBoxSize = 1.925f;
-            check_bounding_collision(&actor->unk30, 1.925f, actor->pos[0], actor->pos[1], actor->pos[2]);
+            check_bounding_collision(&actor->unk30, 1.925f, actor->pos.x, actor->pos.y, actor->pos.z);
             break;
         case ACTOR_HOT_AIR_BALLOON_ITEM_BOX:
             actor->flags |= 0x4000;
@@ -356,7 +356,7 @@ void func_80297340(Camera* arg0) {
         return;
     }
 
-    if (temp < arg0->pos[2]) {
+    if (temp < arg0->pos.z) {
         if (D_800DC5BC != 0) {
 
             gDPSetFogColor(gDisplayListHead++, D_801625EC, D_801625F4, D_801625F0, 0xFF);
@@ -404,9 +404,9 @@ void func_802976EC(Collision* arg0, Vec3s arg1) {
 }
 
 void func_80297760(struct Actor* arg0, Vec3f arg1) {
-    arg1[0] = arg0->pos[0];
-    arg1[1] = arg0->pos[1];
-    arg1[2] = arg0->pos[2];
+    arg1[0] = arg0->pos.x;
+    arg1[1] = arg0->pos.y;
+    arg1[2] = arg0->pos.z;
     arg1[1] = calculate_surface_height(arg1[0], arg1[1], arg1[2], arg0->unk30.meshIndexZX);
 }
 
@@ -449,13 +449,13 @@ UNUSED void func_80297944(void) {};
 
 void func_8029794C(Vec3f pos, Vec3s rot, f32 scale) {
     Mat4 sp20;
-    pos[1] += 2.0f;
+    pos.y += 2.0f;
 
     mtxf_pos_rotation_xyz(sp20, pos, rot);
     mtxf_scale(sp20, scale);
     if (render_set_position(sp20, 0) != 0) {
         gSPDisplayList(gDisplayListHead++, D_0D007B20);
-        pos[1] -= 2.0f;
+        pos.y -= 2.0f;
     }
 }
 
@@ -477,8 +477,8 @@ void func_802979F8(struct Actor* arg0, UNUSED f32 arg1) {
 
 void update_actor_static_plant(struct Actor* arg0) {
     if (((arg0->flags & 0x800) == 0) && ((arg0->flags & 0x400) != 0)) {
-        arg0->pos[1] = arg0->pos[1] + 4.0f;
-        if (arg0->pos[1] > 800.0f) {
+        arg0->pos.y = arg0->pos.y + 4.0f;
+        if (arg0->pos.y > 800.0f) {
             arg0->flags |= 0x800;
         }
     }
@@ -510,11 +510,11 @@ void render_cows(Camera* camera, Mat4 arg1) {
     gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
     var_s5 = NULL;
     var_s1 = var_t1;
-    while (var_s1->pos[0] != END_OF_SPAWN_DATA) {
-        sp88[0] = var_s1->pos[0] * gCourseDirection;
-        sp88[1] = var_s1->pos[1];
-        sp88[2] = var_s1->pos[2];
-        temp_f0 = is_within_render_distance(camera->pos, sp88, camera->rot[1], 0.0f, gCameraZoom[camera - camera1],
+    while (var_s1->pos.x != END_OF_SPAWN_DATA) {
+        sp88[0] = var_s1->pos.x * gCourseDirection;
+        sp88[1] = var_s1->pos.y;
+        sp88[2] = var_s1->pos.z;
+        temp_f0 = is_within_render_distance(camera->pos, sp88, camera->rot.y, 0.0f, gCameraZoom[camera - camera1],
                                             4000000.0f);
         if (temp_f0 > 0.0f) {
             if (temp_f0 < D_8015F704) {
@@ -554,9 +554,9 @@ void render_cows(Camera* camera, Mat4 arg1) {
             temp_s1 = var_s5 - var_t1;
             if ((temp_s1 != D_8015F702) && (D_8015F704 < 160000.0f)) {
                 func_800C99E0(D_8015F708, soundThing);
-                D_8015F708[0] = var_s5->pos[0] * gCourseDirection;
-                D_8015F708[1] = var_s5->pos[1];
-                D_8015F708[2] = var_s5->pos[2];
+                D_8015F708[0] = var_s5->pos.x * gCourseDirection;
+                D_8015F708[1] = var_s5->pos.y;
+                D_8015F708[2] = var_s5->pos.z;
                 D_8015F702 = temp_s1;
                 func_800C98B8(D_8015F708, D_802B91C8, soundThing);
                 D_8015F700 = 0x00F0;
@@ -571,10 +571,10 @@ void evaluate_collision_player_palm_trees(Player* player) {
     Vec3f pos;
     struct UnkActorSpawnData* data = (struct UnkActorSpawnData*) LOAD_ASSET(d_course_dks_jungle_parkway_tree_spawn);
 
-    while (data->pos[0] != END_OF_SPAWN_DATA) {
-        pos[0] = data->pos[0] * gCourseDirection;
-        pos[1] = data->pos[1];
-        pos[2] = data->pos[2];
+    while (data->pos.x != END_OF_SPAWN_DATA) {
+        pos.x = data->pos.x * gCourseDirection;
+        pos.y = data->pos.y;
+        pos.z = data->pos.z;
         if (query_and_resolve_collision_player_actor(player, pos, 5.0f, 40.0f, 0.8f) == COLLISION) {
             if ((player->effects & STAR_EFFECT) != 0) {
                 func_800C98B8(player->pos, player->velocity, SOUND_ARG_LOAD(0x19, 0x01, 0x80, 0x10));
@@ -605,8 +605,8 @@ void evaluate_collision_players_palm_trees(void) {
 void func_80298D10(void) {
     struct UnkActorSpawnData* temp_v1 = (struct UnkActorSpawnData*) LOAD_ASSET(d_course_dks_jungle_parkway_tree_spawn);
 
-    while (temp_v1->pos[0] != END_OF_SPAWN_DATA) {
-        temp_v1->pos[1] = temp_v1->unk8;
+    while (temp_v1->pos.x != END_OF_SPAWN_DATA) {
+        temp_v1->pos.y = temp_v1->unk8;
         temp_v1->someId &= 0xF;
         temp_v1++;
     }
@@ -631,7 +631,7 @@ void render_palm_trees(Camera* camera, Mat4 arg1) {
     gDPSetCombineMode(gDisplayListHead++, G_CC_MODULATEIDECALA, G_CC_MODULATEIDECALA);
     gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
 
-    while (var_s1->pos[0] != END_OF_SPAWN_DATA) {
+    while (var_s1->pos.x != END_OF_SPAWN_DATA) {
         test = var_s1->someId;
         if (test & 0x0800) {
             var_s1++;
@@ -639,16 +639,16 @@ void render_palm_trees(Camera* camera, Mat4 arg1) {
         }
 
         if ((test & 0x0400) && ((gIsGamePaused == 0) || (camera == camera1))) {
-            var_s1->pos[1] += 0xA;
-            if (var_s1->pos[1] >= 0x321) {
+            var_s1->pos.y += 0xA;
+            if (var_s1->pos.y >= 0x321) {
                 var_s1->someId |= 0x0800;
             }
         }
-        spD4[0] = var_s1->pos[0] * gCourseDirection;
-        spD4[1] = var_s1->pos[1];
-        spD4[2] = var_s1->pos[2];
+        spD4[0] = var_s1->pos.x * gCourseDirection;
+        spD4[1] = var_s1->pos.y;
+        spD4[2] = var_s1->pos.z;
 
-        if (is_within_render_distance(camera->pos, spD4, camera->rot[1], 0.0f, gCameraZoom[camera - camera1], var_f22) <
+        if (is_within_render_distance(camera->pos, spD4, camera->rot.y, 0.0f, gCameraZoom[camera - camera1], var_f22) <
                 0.0f &&
             CVarGetInteger("gNoCulling", 0) == 0) {
             var_s1++;
@@ -713,7 +713,7 @@ void render_actor_shell(Camera* camera, Mat4 matrix, struct ShellActor* shell) {
     FrameInterpolation_RecordOpenChild("Shell", TAG_ITEM_ADDR(shell));
 
     f32 temp_f0 =
-        is_within_render_distance(camera->pos, shell->pos, camera->rot[1], 0, gCameraZoom[camera - camera1], 490000.0f);
+        is_within_render_distance(camera->pos, shell->pos, camera->rot.y, 0, gCameraZoom[camera - camera1], 490000.0f);
     if (CVarGetInteger("gNoCulling", 0) == 1) {
         temp_f0 = CLAMP(temp_f0, 0.0f, 40000.0f);
     }
@@ -735,9 +735,9 @@ void render_actor_shell(Camera* camera, Mat4 matrix, struct ShellActor* shell) {
     temp_t8 = (u16) shell->rotVelocity / 4369; // Give a number between 0-15
     phi_t3 += sp58[temp_t8];                   // Select sprite
 
-    matrix[3][0] = shell->pos[0];
-    matrix[3][1] = (shell->pos[1] - shell->boundingBoxSize) + 1.0f;
-    matrix[3][2] = shell->pos[2];
+    matrix[3][0] = shell->pos.x;
+    matrix[3][1] = (shell->pos.y - shell->boundingBoxSize) + 1.0f;
+    matrix[3][2] = shell->pos.z;
 
     maxObjectsReached = render_set_position(matrix, 0) == 0;
     if (maxObjectsReached) {
@@ -782,15 +782,15 @@ UNUSED void func_8029ABD4(f32* pos, s16 state) {
 }
 
 void func_8029AC18(Camera* camera, Mat4 arg1, struct Actor* arg2) {
-    if (is_within_render_distance(camera->pos, arg2->pos, camera->rot[1], 0, gCameraZoom[camera - camera1],
+    if (is_within_render_distance(camera->pos, arg2->pos, camera->rot.y, 0, gCameraZoom[camera - camera1],
                                   4000000.0f) < 0 &&
         CVarGetInteger("gNoCulling", 0) == 0) {
         return;
     }
 
-    arg1[3][0] = arg2->pos[0];
-    arg1[3][1] = arg2->pos[1] - arg2->boundingBoxSize;
-    arg1[3][2] = arg2->pos[2];
+    arg1[3][0] = arg2->pos.x;
+    arg1[3][1] = arg2->pos.y - arg2->boundingBoxSize;
+    arg1[3][2] = arg2->pos.z;
 
     if (render_set_position(arg1, 0) != 0) {
         gSPDisplayList(gDisplayListHead++, D_0D001750);
@@ -857,10 +857,10 @@ void spawn_piranha_plants(struct ActorSpawnData* spawnData) {
     vec3f_set(startingVelocity, 0, 0, 0);
     vec3s_set(startingRot, 0, 0, 0);
 
-    while (temp_s0->pos[0] != END_OF_SPAWN_DATA) {
-        startingPos[0] = temp_s0->pos[0] * gCourseDirection;
-        startingPos[1] = temp_s0->pos[1];
-        startingPos[2] = temp_s0->pos[2];
+    while (temp_s0->pos.x != END_OF_SPAWN_DATA) {
+        startingPos[0] = temp_s0->pos.x * gCourseDirection;
+        startingPos[1] = temp_s0->pos.y;
+        startingPos[2] = temp_s0->pos.z;
         temp = add_actor_to_empty_slot(startingPos, startingRot, startingVelocity, ACTOR_PIRANHA_PLANT);
         temp_v1 = (struct PiranhaPlant*) CM_GetActor(temp);
         temp_v1->visibilityStates[0] = 0;
@@ -886,15 +886,15 @@ void spawn_palm_trees(struct ActorSpawnData* spawnData) {
     vec3f_set(startingVelocity, 0, 0, 0);
     vec3s_set(startingRot, 0, 0, 0);
 
-    while (temp_s0->pos[0] != END_OF_SPAWN_DATA) {
-        startingPos[0] = temp_s0->pos[0] * gCourseDirection;
-        startingPos[1] = temp_s0->pos[1];
-        startingPos[2] = temp_s0->pos[2];
+    while (temp_s0->pos.x != END_OF_SPAWN_DATA) {
+        startingPos[0] = temp_s0->pos.x * gCourseDirection;
+        startingPos[1] = temp_s0->pos.y;
+        startingPos[2] = temp_s0->pos.z;
         temp = add_actor_to_empty_slot(startingPos, startingRot, startingVelocity, ACTOR_PALM_TREE);
         temp_v1 = (struct PalmTree*) CM_GetActor(temp);
 
         temp_v1->variant = temp_s0->someId;
-        check_bounding_collision((Collision*) &temp_v1->unk30, 5.0f, temp_v1->pos[0], temp_v1->pos[1], temp_v1->pos[2]);
+        check_bounding_collision((Collision*) &temp_v1->unk30, 5.0f, temp_v1->pos.x, temp_v1->pos.y, temp_v1->pos.z);
         func_802976EC((Collision*) &temp_v1->unk30, temp_v1->rot);
         temp_s0++;
     }
@@ -922,10 +922,10 @@ void spawn_foliage(struct ActorSpawnData* actor) {
         return;
     }
 
-    while (var_s3->pos[0] != END_OF_SPAWN_DATA) {
-        position[0] = var_s3->pos[0] * gCourseDirection;
-        position[2] = var_s3->pos[2];
-        position[1] = var_s3->pos[1];
+    while (var_s3->pos.x != END_OF_SPAWN_DATA) {
+        position.x = var_s3->pos.x * gCourseDirection;
+        position.z = var_s3->pos.z;
+        position.y = var_s3->pos.y;
 
         if (GetCourse() == GetMarioRaceway()) {
             actorType = 2;
@@ -966,9 +966,9 @@ void spawn_foliage(struct ActorSpawnData* actor) {
         if (gGamestate == CREDITS_SEQUENCE) {
             func_802976D8(temp_s0->rot);
         } else {
-            check_bounding_collision(&temp_s0->unk30, 5.0f, temp_s0->pos[0], temp_s0->pos[1], temp_s0->pos[2]);
+            check_bounding_collision(&temp_s0->unk30, 5.0f, temp_s0->pos.x, temp_s0->pos.y, temp_s0->pos.z);
             if (temp_s0->unk30.surfaceDistance[2] < 0.0f) {
-                temp_s0->pos[1] = calculate_surface_height(temp_s0->pos[0], temp_s0->pos[1], temp_s0->pos[2],
+                temp_s0->pos.y = calculate_surface_height(temp_s0->pos.x, temp_s0->pos.y, temp_s0->pos.z,
                                                            temp_s0->unk30.meshIndexZX);
             }
             func_802976EC(&temp_s0->unk30, temp_s0->rot);
@@ -991,10 +991,10 @@ void spawn_all_item_boxes(struct ActorSpawnData* spawnData) {
     }
 
     vec3f_set(startingVelocity, 0, 0, 0);
-    while (temp_s0->pos[0] != END_OF_SPAWN_DATA) {
-        startingPos[0] = temp_s0->pos[0] * gCourseDirection;
-        startingPos[1] = temp_s0->pos[1];
-        startingPos[2] = temp_s0->pos[2];
+    while (temp_s0->pos.x != END_OF_SPAWN_DATA) {
+        startingPos[0] = temp_s0->pos.x * gCourseDirection;
+        startingPos[1] = temp_s0->pos.y;
+        startingPos[2] = temp_s0->pos.z;
         startingRot[0] = random_u16();
         startingRot[1] = random_u16();
         startingRot[2] = random_u16();
@@ -1008,11 +1008,11 @@ void spawn_all_item_boxes(struct ActorSpawnData* spawnData) {
         CM_GetActor(temp_s1)->unk_08 = temp_f0;
         // itemBox->resetDistance = temp_f0;
 
-        CM_GetActor(temp_s1)->velocity[0] = startingPos[1];
+        CM_GetActor(temp_s1)->velocity.x = startingPos[1];
         // itemBox->origY = startingPos[1];
 
-        CM_GetActor(temp_s1)->pos[1] = temp_f0 - 20.0f;
-        // itemBox->pos[1] = temp_f0 - 20.0f;
+        CM_GetActor(temp_s1)->pos.y = temp_f0 - 20.0f;
+        // itemBox->pos.y = temp_f0 - 20.0f;
 
         temp_s0++;
     }
@@ -1079,10 +1079,10 @@ void spawn_course_actors(void) {
     //         // spawn_piranha_plants(d_course_mario_raceway_piranha_plant_spawns);
     //         // spawn_all_item_boxes(d_course_mario_raceway_item_box_spawns);
     //         // vec3f_set(position, 150.0f, 40.0f, -1300.0f);
-    //         // position[0] *= gCourseDirection;
+    //         // position.x *= gCourseDirection;
     //         // add_actor_to_empty_slot(position, rotation, velocity, ACTOR_MARIO_SIGN);
     //         // vec3f_set(position, 2520.0f, 0.0f, 1240.0f);
-    //         // position[0] *= gCourseDirection;
+    //         // position.x *= gCourseDirection;
     //         // actor = GET_ACTOR(add_actor_to_empty_slot(position, rotation, velocity, ACTOR_MARIO_SIGN));
     //         // actor->flags |= 0x4000;
     //         break;
@@ -1101,7 +1101,7 @@ void spawn_course_actors(void) {
     //         spawn_foliage(d_course_yoshi_valley_tree_spawn);
     //         spawn_all_item_boxes(d_course_yoshi_valley_item_box_spawns);
     //         vec3f_set(position, -2300.0f, 0.0f, 634.0f);
-    //         position[0] *= gCourseDirection;
+    //         position.x *= gCourseDirection;
     //         add_actor_to_empty_slot(position, rotation, velocity, ACTOR_YOSHI_EGG);
     //         break;
     //     case COURSE_FRAPPE_SNOWLAND:
@@ -1135,23 +1135,23 @@ void spawn_course_actors(void) {
     //         spawn_foliage(d_course_kalimari_desert_cactus_spawn);
     //         spawn_all_item_boxes(d_course_kalimari_desert_item_box_spawns);
     //         vec3f_set(position, -1680.0f, 2.0f, 35.0f);
-    //         position[0] *= gCourseDirection;
+    //         position.x *= gCourseDirection;
     //         rrxing = (struct RailroadCrossing*) &gActorList[add_actor_to_empty_slot(position, rotation, velocity,
     //                                                                                 ACTOR_RAILROAD_CROSSING)];
     //         rrxing->crossingId = 1;
     //         vec3f_set(position, -1600.0f, 2.0f, 35.0f);
-    //         position[0] *= gCourseDirection;
+    //         position.x *= gCourseDirection;
     //         rrxing = (struct RailroadCrossing*) &gActorList[add_actor_to_empty_slot(position, rotation, velocity,
     //                                                                                 ACTOR_RAILROAD_CROSSING)];
     //         rrxing->crossingId = 1;
     //         vec3s_set(rotation, 0, -0x2000, 0);
     //         vec3f_set(position, -2459.0f, 2.0f, 2263.0f);
-    //         position[0] *= gCourseDirection;
+    //         position.x *= gCourseDirection;
     //         rrxing = (struct RailroadCrossing*) &gActorList[add_actor_to_empty_slot(position, rotation, velocity,
     //                                                                                 ACTOR_RAILROAD_CROSSING)];
     //         rrxing->crossingId = 0;
     //         vec3f_set(position, -2467.0f, 2.0f, 2375.0f);
-    //         position[0] *= gCourseDirection;
+    //         position.x *= gCourseDirection;
     //         rrxing = (struct RailroadCrossing*) &gActorList[add_actor_to_empty_slot(position, rotation, velocity,
     //                                                                                 ACTOR_RAILROAD_CROSSING)];
     //         rrxing->crossingId = 0;
@@ -1165,13 +1165,13 @@ void spawn_course_actors(void) {
     //     case COURSE_WARIO_STADIUM:
     //         spawn_all_item_boxes(d_course_wario_stadium_item_box_spawns);
     //         vec3f_set(position, -131.0f, 83.0f, 286.0f);
-    //         position[0] *= gCourseDirection;
+    //         position.x *= gCourseDirection;
     //         add_actor_to_empty_slot(position, rotation, velocity, ACTOR_WARIO_SIGN);
     //         vec3f_set(position, -2353.0f, 72.0f, -1608.0f);
-    //         position[0] *= gCourseDirection;
+    //         position.x *= gCourseDirection;
     //         add_actor_to_empty_slot(position, rotation, velocity, ACTOR_WARIO_SIGN);
     //         vec3f_set(position, -2622.0f, 79.0f, 739.0f);
-    //         position[0] *= gCourseDirection;
+    //         position.x *= gCourseDirection;
     //         add_actor_to_empty_slot(position, rotation, velocity, ACTOR_WARIO_SIGN);
     //         break;
     //     case COURSE_BLOCK_FORT:
@@ -1462,21 +1462,21 @@ bool query_and_resolve_collision_player_actor(Player* player, Vec3f pos, f32 min
 
     minDist = player->boundingBoxSize + minDist;
     dist = player->boundingBoxSize + dist;
-    xDist = pos[0] - player->pos[0];
+    xDist = pos.x - player->pos.x;
     if (minDist < xDist) {
         return NO_COLLISION;
     }
     if (xDist < -minDist) {
         return NO_COLLISION;
     }
-    yDist = pos[1] - player->pos[1];
+    yDist = pos.y - player->pos.y;
     if (dist < yDist) {
         return NO_COLLISION;
     }
     if (yDist < -dist) {
         return NO_COLLISION;
     }
-    zDist = pos[2] - player->pos[2];
+    zDist = pos.z - player->pos.z;
     if (minDist < zDist) {
         return NO_COLLISION;
     }
@@ -1492,8 +1492,8 @@ bool query_and_resolve_collision_player_actor(Player* player, Vec3f pos, f32 min
     }
     sqrtDist = sqrtf(dist);
     sp28 = sqrtDist - minDist;
-    xVelocity = player->velocity[0];
-    zVelocity = player->velocity[2];
+    xVelocity = player->velocity.x;
+    zVelocity = player->velocity.z;
     if (player->effects & STAR_EFFECT) {
         return COLLISION;
     }
@@ -1502,10 +1502,10 @@ bool query_and_resolve_collision_player_actor(Player* player, Vec3f pos, f32 min
         if (temp_f0_4 < 0.5f) {
             temp_f0_4 = 0.5f;
         }
-        player->velocity[0] = 0;
-        player->velocity[2] = 0;
-        player->pos[0] += (xVelocity / temp_f0_4) * minDist;
-        player->pos[2] += (zVelocity / temp_f0_4) * minDist;
+        player->velocity.x = 0;
+        player->velocity.z = 0;
+        player->pos.x += (xVelocity / temp_f0_4) * minDist;
+        player->pos.z += (zVelocity / temp_f0_4) * minDist;
     } else {
         player->effects |= 0x8000;
         xDist /= sqrtDist;
@@ -1513,18 +1513,18 @@ bool query_and_resolve_collision_player_actor(Player* player, Vec3f pos, f32 min
         temp_f0_5 = sqrtf((xVelocity * xVelocity) + (zVelocity * zVelocity));
         if (temp_f0_5 < 0.25f) {
             temp_f0_6 = 1.2f;
-            player->pos[0] = pos[0] - (xDist * minDist * temp_f0_6);
-            player->pos[2] = pos[2] - (zDist * minDist * temp_f0_6);
-            player->velocity[0] = 0.0f;
-            player->velocity[2] = 0.0f;
+            player->pos.x = pos.x - (xDist * minDist * temp_f0_6);
+            player->pos.z = pos.z - (zDist * minDist * temp_f0_6);
+            player->velocity.x = 0.0f;
+            player->velocity.z = 0.0f;
             return COLLISION;
         }
         temp_f2_2 = ((xDist * xVelocity) + (zDist * zVelocity)) / temp_f0_5;
         temp_f2_2 = temp_f0_5 * temp_f2_2 * arg4 * 1.3f;
-        player->velocity[0] -= xDist * temp_f2_2;
-        player->velocity[2] -= zDist * temp_f2_2;
-        player->pos[0] += xDist * sp28 * 0.5f;
-        player->pos[2] += zDist * sp28 * 0.5f;
+        player->velocity.x -= xDist * temp_f2_2;
+        player->velocity.z -= zDist * temp_f2_2;
+        player->pos.x += xDist * sp28 * 0.5f;
+        player->pos.z += zDist * sp28 * 0.5f;
     }
     return COLLISION;
 }
@@ -1574,7 +1574,7 @@ bool collision_yoshi_egg(Player* player, struct YoshiValleyEgg* egg) {
     f32 maxDist = 60.0f;
     f32 minDist = 0.0f;
 
-    x_dist = egg->pos[0] - player->pos[0];
+    x_dist = egg->pos.x - player->pos.x;
     if ((x_dist < minDist) && (x_dist < -maxDist)) {
         return false;
     }
@@ -1582,7 +1582,7 @@ bool collision_yoshi_egg(Player* player, struct YoshiValleyEgg* egg) {
         return false;
     }
 
-    z_dist = egg->pos[2] - player->pos[2];
+    z_dist = egg->pos.z - player->pos.z;
     if ((z_dist < minDist) && (z_dist < -maxDist)) {
         return false;
     }
@@ -1596,7 +1596,7 @@ bool collision_yoshi_egg(Player* player, struct YoshiValleyEgg* egg) {
     }
     func_802977B0(player);
 
-    y_dist = player->pos[1] - egg->pos[1];
+    y_dist = player->pos.y - egg->pos.y;
     if (y_dist < minDist) {
         return false;
     }
@@ -1640,21 +1640,21 @@ bool collision_tree(Player* player, struct Actor* actor) {
     f32 temp_f2;
 
     var_f16 = actor->unk_08;
-    x_dist = actor->pos[0] - player->pos[0];
+    x_dist = actor->pos.x - player->pos.x;
     if ((x_dist < 0.0f) && (x_dist < -var_f16)) {
         return false;
     }
     if (var_f16 < x_dist) {
         return false;
     }
-    z_dist = actor->pos[2] - player->pos[2];
+    z_dist = actor->pos.z - player->pos.z;
     if ((z_dist < 0.0f) && (z_dist < -var_f16)) {
         return false;
     }
     if (var_f16 < z_dist) {
         return false;
     }
-    y_dist = player->pos[1] - actor->pos[1];
+    y_dist = player->pos.y - actor->pos.y;
     if (y_dist < 0.0f) {
         return false;
     }
@@ -1670,8 +1670,8 @@ bool collision_tree(Player* player, struct Actor* actor) {
     if (var_f16 < xz_dist) {
         return false;
     }
-    sp48 = player->velocity[0];
-    sp44 = player->velocity[2];
+    sp48 = player->velocity.x;
+    sp44 = player->velocity.z;
     if (player->type & PLAYER_HUMAN) {
         if (player->effects & STAR_EFFECT) {
             actor->flags |= 0x400;
@@ -1686,9 +1686,9 @@ bool collision_tree(Player* player, struct Actor* actor) {
     if (!(player->effects & STAR_EFFECT)) {
         player->effects |= 0x8000;
     }
-    actorPos[0] = actor->pos[0];
-    actorPos[1] = actor->pos[1];
-    actorPos[2] = actor->pos[2];
+    actorPos[0] = actor->pos.x;
+    actorPos[1] = actor->pos.y;
+    actorPos[2] = actor->pos.z;
     if (((GetCourse() == GetMarioRaceway()) || (GetCourse() == GetYoshiValley()) ||
          (GetCourse() == GetRoyalRaceway()) || (GetCourse() == GetLuigiRaceway())) &&
         (player->unk_094 > 1.0f)) {
@@ -1697,28 +1697,28 @@ bool collision_tree(Player* player, struct Actor* actor) {
     if (xz_dist < 0.1f) {
         sqrtf((sp48 * sp48) + (sp44 * sp44));
         if (xz_dist) {}
-        player->velocity[0] = 0;
-        player->velocity[2] = 0;
-        player->pos[0] = actorPos[0] - (x_dist * var_f16 * 1.2f);
-        player->pos[2] = actorPos[2] - (z_dist * var_f16 * 1.2f);
+        player->velocity.x = 0;
+        player->velocity.z = 0;
+        player->pos.x = actorPos[0] - (x_dist * var_f16 * 1.2f);
+        player->pos.z = actorPos[2] - (z_dist * var_f16 * 1.2f);
     } else {
         temp_f0_4 = sqrtf((sp48 * sp48) + (sp44 * sp44));
         x_dist /= xz_dist;
         z_dist /= xz_dist;
         if (temp_f0_4 < 0.25f) {
-            player->pos[0] = actorPos[0] - (x_dist * var_f16 * 1.2f);
-            player->pos[2] = actorPos[2] - (z_dist * var_f16 * 1.2f);
-            player->velocity[0] = 0;
-            player->velocity[2] = 0;
+            player->pos.x = actorPos[0] - (x_dist * var_f16 * 1.2f);
+            player->pos.z = actorPos[2] - (z_dist * var_f16 * 1.2f);
+            player->velocity.x = 0;
+            player->velocity.z = 0;
             return true;
         }
         temp_f12 = ((x_dist * sp48) + (z_dist * sp44)) / temp_f0_4;
         temp_f12 = temp_f0_4 * temp_f12 * 1.5f;
-        player->velocity[0] -= x_dist * temp_f12;
-        player->velocity[2] -= z_dist * temp_f12;
+        player->velocity.x -= x_dist * temp_f12;
+        player->velocity.z -= z_dist * temp_f12;
         temp_f2 = xz_dist - var_f16;
-        player->pos[0] += x_dist * temp_f2 * 0.5f;
-        player->pos[2] += z_dist * temp_f2 * 0.5f;
+        player->pos.x += x_dist * temp_f2 * 0.5f;
+        player->pos.z += z_dist * temp_f2 * 0.5f;
     }
     return true;
 }
@@ -1731,21 +1731,21 @@ bool query_collision_player_vs_actor_item(Player* arg0, struct Actor* arg1) {
     f32 xDist;
 
     temp_f0 = arg0->boundingBoxSize + arg1->boundingBoxSize;
-    xDist = arg1->pos[0] - arg0->pos[0];
+    xDist = arg1->pos.x - arg0->pos.x;
     if (temp_f0 < xDist) {
         return NO_COLLISION;
     }
     if (xDist < -temp_f0) {
         return NO_COLLISION;
     }
-    yDist = arg1->pos[1] - arg0->pos[1];
+    yDist = arg1->pos.y - arg0->pos.y;
     if (temp_f0 < yDist) {
         return NO_COLLISION;
     }
     if (yDist < -temp_f0) {
         return NO_COLLISION;
     }
-    zDist = arg1->pos[2] - arg0->pos[2];
+    zDist = arg1->pos.z - arg0->pos.z;
     if (temp_f0 < zDist) {
         return NO_COLLISION;
     }
@@ -1770,21 +1770,21 @@ bool query_collision_actor_vs_actor(struct Actor* arg0, struct Actor* arg1) {
     f32 dist_x;
 
     temp_f0 = arg0->boundingBoxSize + arg1->boundingBoxSize;
-    dist_x = arg0->pos[0] - arg1->pos[0];
+    dist_x = arg0->pos.x - arg1->pos.x;
     if (temp_f0 < dist_x) {
         return NO_COLLISION;
     }
     if (dist_x < -temp_f0) {
         return NO_COLLISION;
     }
-    dist_y = arg0->pos[1] - arg1->pos[1];
+    dist_y = arg0->pos.y - arg1->pos.y;
     if (temp_f0 < dist_y) {
         return NO_COLLISION;
     }
     if (dist_y < -temp_f0) {
         return NO_COLLISION;
     }
-    dist_z = arg0->pos[2] - arg1->pos[2];
+    dist_z = arg0->pos.z - arg1->pos.z;
     if (temp_f0 < dist_z) {
         return NO_COLLISION;
     }
@@ -1823,7 +1823,7 @@ void destroy_destructable_actor(struct Actor* actor) {
                     banana->flags = -0x8000;
                     banana->unk_04 = 0x003C;
                     banana->state = DESTROYED_BANANA;
-                    banana->velocity[1] = 3.0f;
+                    banana->velocity.y = 3.0f;
                     break;
                 case DROPPED_BANANA:
                 case DESTROYED_BANANA:
@@ -1844,7 +1844,7 @@ void destroy_destructable_actor(struct Actor* actor) {
                         shell->rotAngle = 0;
                         shell->someTimer = 0x003C;
                         shell->state = GREEN_SHELL_HIT_A_RACER;
-                        shell->velocity[1] = 3.0f;
+                        shell->velocity.y = 3.0f;
                         break;
                     case TRIPLE_GREEN_SHELL:
                         triple_shell_actor_collide_with_player(shell, ACTOR_GREEN_SHELL);
@@ -1873,7 +1873,7 @@ void destroy_destructable_actor(struct Actor* actor) {
                         shell->rotAngle = 0;
                         shell->someTimer = 0x003C;
                         shell->state = DESTROYED_SHELL;
-                        shell->velocity[1] = 3.0f;
+                        shell->velocity.y = 3.0f;
                         break;
                     default:
                         break;
@@ -1898,7 +1898,7 @@ void destroy_destructable_actor(struct Actor* actor) {
                         shell->rotAngle = 0;
                         shell->someTimer = 0x003C;
                         shell->state = DESTROYED_SHELL;
-                        shell->velocity[1] = 3.0f;
+                        shell->velocity.y = 3.0f;
                         break;
                     case TRIPLE_RED_SHELL:
                         triple_shell_actor_collide_with_player(shell, ACTOR_RED_SHELL);
@@ -2040,7 +2040,7 @@ void evaluate_collision_between_player_actor(Player* player, struct Actor* actor
             if (player->soundEffects & 1) {
                 break;
             }
-            temp_v1 = actor->rot[0];
+            temp_v1 = actor->rot.x;
             if (((temp_lo == temp_v1) && (actor->flags & 0x1000)) ||
                 (query_collision_player_vs_actor_item(player, actor) != COLLISION)) {
                 break;
@@ -2053,8 +2053,8 @@ void evaluate_collision_between_player_actor(Player* player, struct Actor* actor
                         func_800C90F4(temp_v1, (owner->characterId * 0x10) + SOUND_ARG_LOAD(0x29, 0x00, 0x80, 0x06));
                     }
                 } else {
-                    temp_f0 = actor->pos[0] - owner->pos[0];
-                    temp_f2 = actor->pos[2] - owner->pos[2];
+                    temp_f0 = actor->pos.x - owner->pos.x;
+                    temp_f2 = actor->pos.z - owner->pos.z;
                     if ((((temp_f0 * temp_f0) + (temp_f2 * temp_f2)) < 360000.0f) && (temp_lo != temp_v1)) {
                         func_800C90F4(temp_v1, (owner->characterId * 0x10) + SOUND_ARG_LOAD(0x29, 0x00, 0x80, 0x06));
                     }
@@ -2069,7 +2069,7 @@ void evaluate_collision_between_player_actor(Player* player, struct Actor* actor
             if (player->soundEffects & 4) {
                 break;
             }
-            temp_v1 = actor->rot[2];
+            temp_v1 = actor->rot.z;
             if (((temp_lo == temp_v1) && (actor->flags & 0x1000)) ||
                 (query_collision_player_vs_actor_item(player, actor) != COLLISION)) {
                 break;
@@ -2086,7 +2086,7 @@ void evaluate_collision_between_player_actor(Player* player, struct Actor* actor
             if (player->soundEffects & 2) {
                 break;
             }
-            temp_v1 = actor->rot[2];
+            temp_v1 = actor->rot.z;
             if (((temp_lo == temp_v1) && (actor->flags & 0x1000)) ||
                 (query_collision_player_vs_actor_item(player, actor) != COLLISION)) {
                 break;
@@ -2104,14 +2104,14 @@ void evaluate_collision_between_player_actor(Player* player, struct Actor* actor
             }
             break;
         case ACTOR_RED_SHELL:
-            temp_v1 = actor->rot[2];
+            temp_v1 = actor->rot.z;
             if (player->effects & 0x01000000) {
                 break;
             }
             if (player->soundEffects & 2) {
                 break;
             }
-            temp_v1 = actor->rot[2];
+            temp_v1 = actor->rot.z;
             if (((temp_lo == temp_v1) && (actor->flags & 0x1000)) ||
                 (query_collision_player_vs_actor_item(player, actor) != COLLISION)) {
                 break;
@@ -2160,7 +2160,7 @@ void evaluate_collision_between_player_actor(Player* player, struct Actor* actor
                         D_80162DF8 = 1;
                     }
                     if (player->effects & STAR_EFFECT) {
-                        actor->velocity[1] = 10.0f;
+                        actor->velocity.y = 10.0f;
                     } else {
                         apply_hit_sound_effect(player, player - gPlayerOne);
                     }
@@ -2168,11 +2168,11 @@ void evaluate_collision_between_player_actor(Player* player, struct Actor* actor
             }
             break;
         case ACTOR_FAKE_ITEM_BOX:
-            temp_v1 = actor->velocity[0];
+            temp_v1 = actor->velocity.x;
             if (player->effects & BOO_EFFECT) {
                 break;
             }
-            temp_v1 = actor->velocity[0];
+            temp_v1 = actor->velocity.x;
             if (((temp_lo == temp_v1) && (actor->flags & 0x1000)) ||
                 (query_collision_player_vs_actor_item(player, actor) != COLLISION)) {
                 break;
@@ -2185,8 +2185,8 @@ void evaluate_collision_between_player_actor(Player* player, struct Actor* actor
                         func_800C90F4(temp_v1, (owner->characterId * 0x10) + SOUND_ARG_LOAD(0x29, 0x00, 0x80, 0x06));
                     }
                 } else {
-                    temp_f0 = actor->pos[0] - owner->pos[0];
-                    temp_f2 = actor->pos[2] - owner->pos[2];
+                    temp_f0 = actor->pos.x - owner->pos.x;
+                    temp_f2 = actor->pos.z - owner->pos.z;
                     if ((((temp_f0 * temp_f0) + (temp_f2 * temp_f2)) < 360000.0f) && (temp_lo != temp_v1)) {
                         func_800C90F4(temp_v1, (owner->characterId * 0x10) + SOUND_ARG_LOAD(0x29, 0x00, 0x80, 0x06));
                     }
@@ -2304,7 +2304,7 @@ void evaluate_collision_for_destructible_actors(void) {
                             break;
                         case ACTOR_GREEN_SHELL:
                             if (actor1->type == ACTOR_GREEN_SHELL) {
-                                if (actor1->rot[2] == actor2->rot[2]) {
+                                if (actor1->rot.z == actor2->rot.z) {
                                     continue;
                                 }
                             }
@@ -2312,7 +2312,7 @@ void evaluate_collision_for_destructible_actors(void) {
                             break;
                         case ACTOR_RED_SHELL:
                             if (actor1->type == ACTOR_RED_SHELL) {
-                                if (actor1->rot[2] == actor2->rot[2]) {
+                                if (actor1->rot.z == actor2->rot.z) {
                                     continue;
                                 }
                             }
@@ -2354,9 +2354,9 @@ void init_actor_hot_air_balloon_item_box(f32 x, f32 y, f32 z) {
 
     vec3s_set(rot, 0, 0, 0);
     vec3f_set(velocity, 0, 0, 0);
-    pos[0] = x;
-    pos[1] = y;
-    pos[2] = z;
+    pos.x = x;
+    pos.y = y;
+    pos.z = z;
     id = add_actor_to_empty_slot(pos, rot, velocity, ACTOR_HOT_AIR_BALLOON_ITEM_BOX);
     gActorHotAirBalloonItemBox = CM_GetActor(id);
 }
@@ -2412,8 +2412,8 @@ void render_course_actors(struct UnkStruct_800DC5EC* arg0) {
 
     struct Actor* actor;
     UNUSED Vec3f sp4C = { 0.0f, 5.0f, 10.0f };
-    f32 sp48 = sins(camera->rot[1] - 0x8000); // unk26;
-    f32 temp_f0 = coss(camera->rot[1] - 0x8000);
+    f32 sp48 = sins(camera->rot.y - 0x8000); // unk26;
+    f32 temp_f0 = coss(camera->rot.y - 0x8000);
 
     sBillBoardMtx[0][0] = temp_f0;
     sBillBoardMtx[0][2] = -sp48;
@@ -2552,7 +2552,7 @@ void render_course_actors(struct UnkStruct_800DC5EC* arg0) {
                 render_actor_yoshi_egg(camera, sBillBoardMtx, (struct YoshiValleyEgg*) actor, pathCounter);
                 break;
         }
-        FrameInterpolation_RecordCloseChild(actor, i);
+        FrameInterpolation_RecordCloseChild();
     }
     if (GetCourse() == GetMooMooFarm()) {
         render_cows(camera, sBillBoardMtx);

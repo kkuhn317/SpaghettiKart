@@ -63,9 +63,9 @@ void mtxf_translate_rotate2(Mat4 dest, Vec3f pos, Vec3s angle) {
     dest[2][2] = cx * cy;
     dest[2][3] = 0.0f;
 
-    dest[3][0] = pos[0];
-    dest[3][1] = pos[1];
-    dest[3][2] = pos[2];
+    dest[3][0] = pos.x;
+    dest[3][1] = pos.y;
+    dest[3][2] = pos.z;
     dest[3][3] = 1.0f;
 }
 

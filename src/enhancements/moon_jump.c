@@ -5,8 +5,8 @@
 
 void moon_jump(Player* player, struct Controller* controller) {
     if (controller->button & L_TRIG) {
-        if (player->velocity[1] <= 3.2f) {
-            player->velocity[1] += 0.5f;
+        if (player->velocity.y <= 3.2f) {
+            player->velocity.y += 0.5f;
         }
     }
 }

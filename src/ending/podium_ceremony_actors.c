@@ -83,9 +83,9 @@ void func_80280650(void) {
 void set_initial_position(CeremonyActor* actor) {
     ActorInitParams* params = actor->initParams;
 
-    actor->pos[0] = params->unk2[0];
-    actor->pos[1] = params->unk2[1];
-    actor->pos[2] = params->unk2[2];
+    actor->pos.x = params->unk2[0];
+    actor->pos.y = params->unk2[1];
+    actor->pos.z = params->unk2[2];
 
     // Place value in the high bits of s16.
     // Example: 85, 0b01010101 -> 0b0101010100000000
@@ -174,7 +174,7 @@ void func_80280884(void) {
 
 void balloon_update(CeremonyActor* actor) {
     render_balloon(actor->pos, 1.0f, actor->unk2E, actor->unk2C);
-    actor->pos[1] += 0.8f;
+    actor->pos.y += 0.8f;
     actor->unk2E = sins(actor->unk30) * actor->unk34;
     actor->unk30 += actor->unk32;
     actor->timer++;
@@ -194,14 +194,14 @@ void balloon_update(CeremonyActor* actor) {
  */
 void firework_cone_update_and_spawn_burst(Firework* cone) {
     if (cone->unk44 < 30) {
-        cone->pos[1] += 2.5f;
-        cone->pos[0] += random_who_knows(0.2f);
-        cone->pos[2] += random_who_knows(0.2f);
+        cone->pos.y += 2.5f;
+        cone->pos.x += random_who_knows(0.2f);
+        cone->pos.z += random_who_knows(0.2f);
     } else if (cone->unk2C == 4) {
         Firework* burst = (Firework*) new_actor(&initCone);
-        burst->pos[0] = cone->pos[0];
-        burst->pos[1] = cone->pos[1];
-        burst->pos[2] = cone->pos[2];
+        burst->pos.x = cone->pos.x;
+        burst->pos.y = cone->pos.y;
+        burst->pos.z = cone->pos.z;
         burst->unk30 = fireworkConeColour[cone->unk48];
         burst->unk3C = 0xFF;
         burst->unk40 = -0x11;
@@ -243,7 +243,7 @@ void render_fireworks(Vec3f arg0, f32 arg1, s32 rgb, s16 alpha) {
     sp4C[1] = arg0[1];
     sp4C[2] = arg0[2];
     sp44[0] = 0;
-    sp44[1] = camera1->rot[1];
+    sp44[1] = camera1->rot.y;
     sp44[2] = 0;
     func_80280A28(sp4C, sp44, arg1);
     gSPDisplayList(gDisplayListHead++, D_0D008DB8);
@@ -264,9 +264,9 @@ void firework_update(Firework* actor) {
     Vec3f pos;
     if (actor->unk44 < 30) {
         for (i = 0; i < 10; i++) {
-            pos[0] = actor->pos[0];
-            pos[1] = actor->pos[1] - i * 2;
-            pos[2] = actor->pos[2];
+            pos.x = actor->pos.x;
+            pos.y = actor->pos.y - i * 2;
+            pos.z = actor->pos.z;
             render_fireworks(pos, ((10 - i) / 10.0f) * 2, fireworkColour[actor->unk48],
                              (((((30 - actor->unk44) * 100)) / 30.0f)));
         }
@@ -322,9 +322,9 @@ void spawn_balloons(s32 arg0, s32 arg1, s32 arg2) {
     for (i = 0; i < 100; i++) {
         CeremonyActor* balloon;
         balloon = new_actor(&initBalloon);
-        balloon->pos[0] = random_who_knows(200.0f) + arg0;
-        balloon->pos[1] = random_who_knows(380.0f) + arg1;
-        balloon->pos[2] = random_who_knows(600.0f) + arg2;
+        balloon->pos.x = random_who_knows(200.0f) + arg0;
+        balloon->pos.y = random_who_knows(380.0f) + arg1;
+        balloon->pos.z = random_who_knows(600.0f) + arg2;
         balloon->unk2C = (s16) (s32) (random_float_between_0_and_1() * 7.0f);
         balloon->unk30 = random_u16_credits();
         balloon->unk32 = (s16) (s32) (random_who_knows(400.0f) + 900.0f);
@@ -349,9 +349,9 @@ void spawn_firework_cone(s32 arg0, s32 arg1, s32 arg2) {
     if (((f32) random_float_between_0_and_1() * (D_802874B0[7] + 0xD)) < 1.0f) {
         Firework* cone;
         cone = (Firework*) new_actor(&initBurst);
-        cone->pos[0] = random_who_knows(0.0f) + arg0;
-        cone->pos[1] = random_who_knows((f32) (D_802874B0[11] + 100)) + (f32) arg1;
-        cone->pos[2] = random_who_knows((f32) (D_802874B0[12] + 700)) + (f32) arg2;
+        cone->pos.x = random_who_knows(0.0f) + arg0;
+        cone->pos.y = random_who_knows((f32) (D_802874B0[11] + 100)) + (f32) arg1;
+        cone->pos.z = random_who_knows((f32) (D_802874B0[12] + 700)) + (f32) arg2;
 
         num = 1.1f;
 
@@ -377,12 +377,12 @@ void spawn_timer(void) {
     Camera* camera = &cameras[0];
     f32 lookAtY;
 
-    guLookAtF(D_80287500, camera->pos[0], camera->pos[1], camera->pos[2], camera->lookAt[0], camera->lookAt[1],
-              camera->lookAt[2], camera->up[0], camera->up[1], camera->up[2]);
+    guLookAtF(D_80287500, camera->pos.x, camera->pos.y, camera->pos.z, camera->lookAt.x, camera->lookAt.y,
+              camera->lookAt.z, camera->up[0], camera->up[1], camera->up[2]);
     if (D_802874D8.unk1D < 3) {
         if (D_802874D8.actorTimer < 300) {
-            lookAtY = camera->lookAt[1];
-            spawn_firework_cone(-0xE0E, (s32) (((lookAtY - camera->pos[1]) * 1.5f) + lookAtY), -0x258);
+            lookAtY = camera->lookAt.y;
+            spawn_firework_cone(-0xE0E, (s32) (((lookAtY - camera->pos.y) * 1.5f) + lookAtY), -0x258);
         }
         if (D_802874D8.actorTimer == 120) {
             spawn_balloons(-0xC6C, (s32) ((f32) D_802874B0[10] + 210.0f), -0x1EF);

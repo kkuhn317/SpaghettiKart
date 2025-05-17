@@ -367,9 +367,9 @@ void freecam_keyboard_manager(Camera* camera, Vec3f forwardVector) {
     if (Down) {
         totalMove[1] -= moveSpeed; // Move down
     }
-    freeCam.velocity[0] += totalMove[0];
-    freeCam.velocity[1] += totalMove[1];
-    freeCam.velocity[2] += totalMove[2];
+    freeCam.velocity.x += totalMove[0];
+    freeCam.velocity.y += totalMove[1];
+    freeCam.velocity.z += totalMove[2];
 }
 
 void freecam_update_controller(void) {
@@ -402,8 +402,8 @@ void freecam_render_setup(void) {
                   CM_GetProps()->NearPersp, CM_GetProps()->FarPersp, 1.0f);
     gSPPerspNormalize(gDisplayListHead++, perspNorm);
     gSPMatrix(gDisplayListHead++, (&gGfxPool->mtxPersp[0]), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-    guLookAt(&gGfxPool->mtxLookAt[0], camera1->pos[0], camera1->pos[1], camera1->pos[2], camera1->lookAt[0],
-             camera1->lookAt[1], camera1->lookAt[2], camera1->up[0], camera1->up[1], camera1->up[2]);
+    guLookAt(&gGfxPool->mtxLookAt[0], camera1->pos.x, camera1->pos.y, camera1->pos.z, camera1->lookAt.x,
+             camera1->lookAt.y, camera1->lookAt.z, camera1->up[0], camera1->up[1], camera1->up[2]);
     gSPMatrix(gDisplayListHead++, (&gGfxPool->mtxLookAt[0]), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
     mtxf_identity(matrix);
     gSPSetGeometryMode(gDisplayListHead++, G_CULL_BACK);

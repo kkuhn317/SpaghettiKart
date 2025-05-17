@@ -66,9 +66,9 @@ namespace Editor {
                     rot[i] = (rot[i] % 65536 + 65536) % 65536;
                 }
 
-                selected->Rot->pitch = static_cast<uint16_t>(rot[0]);
-                selected->Rot->yaw   = static_cast<uint16_t>(rot[1]);
-                selected->Rot->roll  = static_cast<uint16_t>(rot[2]);
+                selected->Rot->pitch = static_cast<uint16_t>(rot.x);
+                selected->Rot->yaw   = static_cast<uint16_t>(rot.y);
+                selected->Rot->roll  = static_cast<uint16_t>(rot.z);
             }
 
             ImGui::SameLine();

@@ -31,9 +31,9 @@ OMole::OMole(FVector pos, OMoleGroup* group) {
 
     find_unused_obj_index(&_objectIndex);
 
-    gObjectList[_objectIndex].pos[0] = pos.x * xOrientation;
-    gObjectList[_objectIndex].pos[1] = pos.y;
-    gObjectList[_objectIndex].pos[2] = pos.z;
+    gObjectList[_objectIndex].pos.x = pos.x * xOrientation;
+    gObjectList[_objectIndex].pos.y = pos.y;
+    gObjectList[_objectIndex].pos.z = pos.z;
 
     gObjectList[_objectIndex].origin_pos[0] = pos.x * xOrientation;
     gObjectList[_objectIndex].origin_pos[1] = pos.y - 9.0;
@@ -42,8 +42,8 @@ OMole::OMole(FVector pos, OMoleGroup* group) {
     // This is probably the mole particles
     find_unused_obj_index(&_moleIndex);
     init_object(_moleIndex, 0);
-    gObjectList[_moleIndex].pos[0] = pos.x * xOrientation;
-    gObjectList[_moleIndex].pos[2] = pos.z;
+    gObjectList[_moleIndex].pos.x = pos.x * xOrientation;
+    gObjectList[_moleIndex].pos.z = pos.z;
     func_800887C0(_moleIndex);
     gObjectList[_moleIndex].sizeScaling = 0.7f;
 
@@ -77,7 +77,7 @@ void OMole::func_80081790(s32 objectIndex) {
         case 0:
             break;
         case 1:
-            if (func_80087E08(objectIndex, gObjectList[objectIndex].velocity[1], 0.3f, gObjectList[objectIndex].unk_034,
+            if (func_80087E08(objectIndex, gObjectList[objectIndex].velocity.y, 0.3f, gObjectList[objectIndex].unk_034,
                               gObjectList[objectIndex].orientation[1], 0x00000032) != 0) {
                 object_next_state(objectIndex);
             }
@@ -183,8 +183,8 @@ void OMole::func_8008153C(s32 objectIndex) {
                 gObjectList[loopObjectIndex].activeTLUT = d_course_moo_moo_farm_mole_dirt;
                 gObjectList[loopObjectIndex].tlutList = mole;
                 gObjectList[loopObjectIndex].sizeScaling = 0.15f;
-                gObjectList[loopObjectIndex].velocity[1] = random_int(0x000AU);
-                gObjectList[loopObjectIndex].velocity[1] = (gObjectList[loopObjectIndex].velocity[1] * 0.1) + 4.8;
+                gObjectList[loopObjectIndex].velocity.y = random_int(0x000AU);
+                gObjectList[loopObjectIndex].velocity.y = (gObjectList[loopObjectIndex].velocity.y * 0.1) + 4.8;
                 gObjectList[loopObjectIndex].unk_034 = random_int(5U);
                 gObjectList[loopObjectIndex].unk_034 = (gObjectList[loopObjectIndex].unk_034 * 0.01) + 0.8;
                 gObjectList[loopObjectIndex].orientation[1] = (0x10000 / sp70) * var_s1;
@@ -219,14 +219,14 @@ void OMole::func_80081D34(s32 objectIndex) {
                 } else {
                     player->soundEffects |= 2;
                 }
-                object->direction_angle[1] = camera->rot[1];
-                object->velocity[1] = (player->unk_094 / 2) + 3.0;
+                object->direction_angle[1] = camera->rot.y;
+                object->velocity.y = (player->unk_094 / 2) + 3.0;
                 object->unk_034 = player->unk_094 + 1.0;
-                if (object->velocity[1] >= 5.0) {
-                    object->velocity[1] = 5.0f;
+                if (object->velocity.y >= 5.0) {
+                    object->velocity.y = 5.0f;
                 }
                 if (object->unk_034 >= 4.0) {
-                    object->velocity[1] = 4.0f;
+                    object->velocity.y = 4.0f;
                 }
             }
         }
@@ -235,7 +235,7 @@ void OMole::func_80081D34(s32 objectIndex) {
         object = &gObjectList[objectIndex];
         clear_object_flag(objectIndex, 0x00000200);
         func_80086F60(objectIndex);
-        set_obj_origin_pos(objectIndex, object->pos[0], object->pos[1], object->pos[2]);
+        set_obj_origin_pos(objectIndex, object->pos.x, object->pos.y, object->pos.z);
         set_obj_origin_offset(objectIndex, 0.0f, 0.0f, 0.0f);
         func_80086EAC(objectIndex, 2, 0x000A);
         func_800726CC(objectIndex, 0x0000000A);
@@ -265,7 +265,7 @@ void OMole::func_80081848(s32 objectIndex) {
     set_obj_direction_angle(objectIndex, 0U, 0U, 0U);
     set_obj_orientation(objectIndex, 0U, 0U, 0x8000U);
     gObjectList[objectIndex].boundingBoxSize = 6;
-    gObjectList[objectIndex].velocity[1] = 4.0f;
+    gObjectList[objectIndex].velocity.y = 4.0f;
     set_object_flag(objectIndex, 0x04000000);
     object_next_state(objectIndex);
 }
@@ -294,10 +294,10 @@ void OMole::func_80081924(s32 objectIndex) {
             break;
         case 10:
             gObjectList[objectIndex].orientation[2] += 0x1000;
-            gObjectList[objectIndex].velocity[1] -= 0.184;
+            gObjectList[objectIndex].velocity.y -= 0.184;
             func_8008751C(objectIndex);
             object_add_velocity_offset_xyz(objectIndex);
-            if (gObjectList[objectIndex].pos[1] <= -10.0) {
+            if (gObjectList[objectIndex].pos.y <= -10.0) {
                 func_80086F60(objectIndex);
             }
             break;
@@ -333,12 +333,12 @@ void OMole::func_800821AC(s32 objectIndex, s32 arg1) {
 void OMole::func_80054E10(s32 objectIndex) {
     if (gObjectList[objectIndex].state > 0) {
         if (is_obj_flag_status_active(objectIndex, 0x00800000) != 0) {
-            D_80183E50[0] = gObjectList[objectIndex].pos[0];
+            D_80183E50[0] = gObjectList[objectIndex].pos.x;
             D_80183E50[1] = gObjectList[objectIndex].surfaceHeight + 0.8;
-            D_80183E50[2] = gObjectList[objectIndex].pos[2];
-            D_80183E70[0] = gObjectList[objectIndex].velocity[0];
-            D_80183E70[1] = gObjectList[objectIndex].velocity[1];
-            D_80183E70[2] = gObjectList[objectIndex].velocity[2];
+            D_80183E50[2] = gObjectList[objectIndex].pos.z;
+            D_80183E70[0] = gObjectList[objectIndex].velocity.x;
+            D_80183E70[1] = gObjectList[objectIndex].velocity.y;
+            D_80183E70[2] = gObjectList[objectIndex].velocity.z;
             func_8004A9B8(gObjectList[objectIndex].sizeScaling);
         }
     }
@@ -362,7 +362,7 @@ void OMole::func_80054D00(s32 objectIndex, s32 cameraId) {
         if (is_obj_flag_status_active(objectIndex, VISIBLE) != 0) {
             D_80183E80[0] = (s16) gObjectList[objectIndex].orientation[0];
             D_80183E80[1] =
-                func_800418AC(gObjectList[objectIndex].pos[0], gObjectList[objectIndex].pos[2], camera->pos);
+                func_800418AC(gObjectList[objectIndex].pos.x, gObjectList[objectIndex].pos.z, camera->pos);
             D_80183E80[2] = (u16) gObjectList[objectIndex].orientation[2];
             func_80048130(gObjectList[objectIndex].pos, (u16*) D_80183E80, gObjectList[objectIndex].sizeScaling,
                           (u8*) gObjectList[objectIndex].activeTLUT, (u8*)gObjectList[objectIndex].activeTexture,
@@ -384,7 +384,7 @@ if (_idx == 0) {
         if (object->state > 0) {
             func_8008A364(objectIndex, cameraId, 0x2AABU, 0x000000C8);
             if ((is_obj_flag_status_active(objectIndex, VISIBLE) != 0) && (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX)) {
-                object->orientation[1] = func_800418AC(object->pos[0], object->pos[2], camera->pos);
+                object->orientation[1] = func_800418AC(object->pos.x, object->pos.z, camera->pos);
                 rsp_set_matrix_gObjectList(objectIndex);
                 gSPDisplayList(gDisplayListHead++, (Gfx*)D_0D006980);
             }

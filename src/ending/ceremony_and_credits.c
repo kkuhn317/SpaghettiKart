@@ -427,8 +427,8 @@ void func_80282F44(s32 arg0, CinematicCamera* arg1, Camera* camera) {
     Vec3f pos;
     Vec3f lookat;
 
-    vec3f_set_dupe(pos, camera->pos[0], camera->pos[1], camera->pos[2]);
-    vec3f_set_dupe(lookat, camera->lookAt[0], camera->lookAt[1], camera->lookAt[2]);
+    vec3f_set_dupe(pos, camera->pos.x, camera->pos.y, camera->pos.z);
+    vec3f_set_dupe(lookat, camera->lookAt.x, camera->lookAt.y, camera->lookAt.z);
     if ((arg0 == 0) || (arg0 == 1)) {
         if ((arg1->unk48[0] != 0) || (arg1->unk48[1] != 0)) {
             calculate_distance_angle_y_and_angle_y_to_xz(pos, lookat, &distance, &angleCam[0], &angleCam[1]);
@@ -441,9 +441,9 @@ void func_80282F44(s32 arg0, CinematicCamera* arg1, Camera* camera) {
                 arg1->unk4E[arg0] = 0;
             }
         }
-        camera->lookAt[0] = lookat[0];
-        camera->lookAt[1] = lookat[1];
-        camera->lookAt[2] = lookat[2];
+        camera->lookAt.x = lookat[0];
+        camera->lookAt.y = lookat[1];
+        camera->lookAt.z = lookat[2];
     }
 }
 
@@ -627,8 +627,8 @@ s32 func_80283648(Camera* camera) {
         vec3f_copy_return_dupe(camera->pos, cinematicCamera->lookAt);
         vec3f_copy_return_dupe(camera->lookAt, cinematicCamera->pos);
         if ((gGamestate == CREDITS_SEQUENCE) && (gIsMirrorMode != 0)) {
-            camera->pos[0] = -camera->pos[0];
-            camera->lookAt[0] = -camera->lookAt[0];
+            camera->pos.x = -camera->pos.x;
+            camera->lookAt.x = -camera->lookAt.x;
         }
     }
     func_80282F44(0, cinematicCamera, camera);
@@ -947,9 +947,9 @@ void copy_player_two_in_camera(CinematicCamera* camera) {
 }
 
 void lerp_player_two_in_camera(CinematicCamera* camera) {
-    f32_lerp(&camera->pos[0], gPlayerTwo->pos[0], 0.12f);
-    f32_lerp(&camera->pos[1], gPlayerTwo->pos[1], 0.12f);
-    f32_lerp(&camera->pos[2], gPlayerTwo->pos[2], 0.12f);
+    f32_lerp(&camera->pos.x, gPlayerTwo->pos.x, 0.12f);
+    f32_lerp(&camera->pos.y, gPlayerTwo->pos.y, 0.12f);
+    f32_lerp(&camera->pos.z, gPlayerTwo->pos.z, 0.12f);
 }
 
 void func_80283F6C(CinematicCamera* camera) {
@@ -963,9 +963,9 @@ void copy_player_three_in_camera(CinematicCamera* camera) {
 }
 
 void lerp_player_three_in_camera(CinematicCamera* camera) {
-    f32_lerp(&camera->pos[0], gPlayerThree->pos[0], 0.12f);
-    f32_lerp(&camera->pos[1], gPlayerThree->pos[1], 0.12f);
-    f32_lerp(&camera->pos[2], gPlayerThree->pos[2], 0.12f);
+    f32_lerp(&camera->pos.x, gPlayerThree->pos.x, 0.12f);
+    f32_lerp(&camera->pos.y, gPlayerThree->pos.y, 0.12f);
+    f32_lerp(&camera->pos.z, gPlayerThree->pos.z, 0.12f);
 }
 
 void func_80284068(CinematicCamera* camera) {
@@ -999,8 +999,8 @@ void func_80284184(CinematicCamera* camera) {
     f32 trophy;
 
     if (gTrophyIndex != NULL) {
-        trophy = ((gObjectList[gTrophyIndex].pos[1] - camera->lookAt[1]) * 0.9f) + camera->lookAt[1];
-        f32_lerp(&camera->pos[1], trophy, 0.5);
+        trophy = ((gObjectList[gTrophyIndex].pos.y - camera->lookAt.y) * 0.9f) + camera->lookAt.y;
+        f32_lerp(&camera->pos.y, trophy, 0.5);
     }
 }
 
@@ -1039,16 +1039,16 @@ void func_80284308(CinematicCamera* camera) {
 
     ply = *(sp30[0] + D_802874D8.unk1D);
 
-    x = ply->pos[0] - gPlayerOne->pos[0];
-    y = ply->pos[1] - gPlayerOne->pos[1];
-    z = ply->pos[2] - gPlayerOne->pos[2];
+    x = ply->pos.x - gPlayerOne->pos.x;
+    y = ply->pos.y - gPlayerOne->pos.y;
+    z = ply->pos.z - gPlayerOne->pos.z;
 
-    camera->lookAt[0] += x;
-    camera->lookAt[2] += z;
-    camera->pos[0] += x;
-    camera->pos[2] += z;
-    camera->lookAt[1] += y;
-    camera->pos[1] += y;
+    camera->lookAt.x += x;
+    camera->lookAt.z += z;
+    camera->pos.x += x;
+    camera->pos.z += z;
+    camera->lookAt.y += y;
+    camera->pos.y += y;
 }
 
 struct struct_80282C40 D_80285A10[] = {
@@ -1225,12 +1225,12 @@ void func_802846E4(CinematicCamera* camera) {
 
     move_cinematic_camera_along_spline(camera, (struct struct_80286A04*) D_80285CB0,
                                        (struct struct_80286A04*) D_80285CE0, 0);
-    camera->lookAt[0] += (gPlayerFour->pos[0] - -2796.0f); // <-- rodata
-    camera->lookAt[1] += (gPlayerFour->pos[1] - -29.0f);
-    camera->lookAt[2] += (gPlayerFour->pos[2] - -97.0f);
-    camera->pos[0] += (gPlayerFour->pos[0] - -2796.0f);
-    camera->pos[1] += (gPlayerFour->pos[1] - -29.0f);
-    camera->pos[2] += (gPlayerFour->pos[2] - -97.0f);
+    camera->lookAt.x += (gPlayerFour->pos.x - -2796.0f); // <-- rodata
+    camera->lookAt.y += (gPlayerFour->pos.y - -29.0f);
+    camera->lookAt.z += (gPlayerFour->pos.z - -97.0f);
+    camera->pos.x += (gPlayerFour->pos.x - -2796.0f);
+    camera->pos.y += (gPlayerFour->pos.y - -29.0f);
+    camera->pos.z += (gPlayerFour->pos.z - -97.0f);
 }
 
 struct Cutscene D_80285D58[] = {

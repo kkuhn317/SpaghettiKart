@@ -39,18 +39,18 @@ void func_802B3B44(struct ShellActor* shell) {
         nextWaypoint -= D_80164430;
     }
 
-    temp_f20 = temp_f2 - shell->pos[0];
-    temp_f22 = temp_f12 - shell->pos[1];
-    temp_f24 = temp_f28 - shell->pos[2];
+    temp_f20 = temp_f2 - shell->pos.x;
+    temp_f22 = temp_f12 - shell->pos.y;
+    temp_f24 = temp_f28 - shell->pos.z;
     temp_f0 = (temp_f20 * temp_f20) + (temp_f22 * temp_f22) + (temp_f24 * temp_f24);
     if (temp_f0 > 400.0f) {
         temp_f18_3 = D_80164490[nextWaypoint].posX;
         temp_f16_3 = D_80164490[nextWaypoint].posY;
         temp_f26 = D_80164490[nextWaypoint].posZ;
 
-        temp_f12_0 = temp_f18_3 - shell->pos[0];
-        temp_f12_1 = temp_f16_3 - shell->pos[1];
-        temp_f12_2 = temp_f26 - shell->pos[2];
+        temp_f12_0 = temp_f18_3 - shell->pos.x;
+        temp_f12_1 = temp_f16_3 - shell->pos.y;
+        temp_f12_2 = temp_f26 - shell->pos.z;
 
         temp_f0_3 = (temp_f12_0 * temp_f12_0) + (temp_f12_1 * temp_f12_1) + (temp_f12_2 * temp_f12_2);
         if (temp_f0_3 < temp_f0) {
@@ -61,9 +61,9 @@ void func_802B3B44(struct ShellActor* shell) {
             temp_f22 /= temp_f0_2;
             temp_f24 /= temp_f0_2;
 
-            temp_f12_3 = shell->velocity[0];
-            temp_f14_2 = shell->velocity[1];
-            temp_f16_2 = shell->velocity[2];
+            temp_f12_3 = shell->velocity.x;
+            temp_f14_2 = shell->velocity.y;
+            temp_f16_2 = shell->velocity.z;
 
             temp_f12_3 += temp_f20;
             temp_f14_2 += temp_f22;
@@ -75,39 +75,39 @@ void func_802B3B44(struct ShellActor* shell) {
                 temp_f14_2 /= temp_f0;
                 temp_f16_2 /= temp_f0;
             }
-            shell->velocity[0] = temp_f12_3;
-            shell->velocity[1] = temp_f14_2;
-            shell->velocity[2] = temp_f16_2;
+            shell->velocity.x = temp_f12_3;
+            shell->velocity.y = temp_f14_2;
+            shell->velocity.z = temp_f16_2;
 
-            origPos[0] = shell->pos[0];
-            origPos[1] = shell->pos[1];
-            origPos[2] = shell->pos[2];
+            origPos[0] = shell->pos.x;
+            origPos[1] = shell->pos.y;
+            origPos[2] = shell->pos.z;
 
-            shell->pos[0] += temp_f12_3;
-            shell->pos[1] += temp_f14_2;
-            shell->pos[2] += temp_f16_2;
-            actor_terrain_collision(&shell->unk30, 4.0f, shell->pos[0], shell->pos[1], shell->pos[2], origPos[0],
+            shell->pos.x += temp_f12_3;
+            shell->pos.y += temp_f14_2;
+            shell->pos.z += temp_f16_2;
+            actor_terrain_collision(&shell->unk30, 4.0f, shell->pos.x, shell->pos.y, shell->pos.z, origPos[0],
                                     origPos[1], origPos[2]);
             func_802B4E30((struct Actor*) shell);
         }
     } else {
         if (temp_f0 > 5.0f) {
-            shell->pos[0] = temp_f2;
-            shell->pos[1] = shell->boundingBoxSize + temp_f12;
-            shell->pos[2] = temp_f28;
+            shell->pos.x = temp_f2;
+            shell->pos.y = shell->boundingBoxSize + temp_f12;
+            shell->pos.z = temp_f28;
             shell->pathIndex = nextWaypoint;
         } else {
             temp_f18_3 = D_80164490[nextWaypoint].posX;
             temp_f16_3 = D_80164490[nextWaypoint].posY;
             temp_f26 = D_80164490[nextWaypoint].posZ;
 
-            shell->pos[0] = (temp_f2 + temp_f18_3) * 0.5f;
-            shell->pos[1] = ((temp_f12 + temp_f16_3) * 0.5f) + shell->boundingBoxSize;
-            shell->pos[2] = (temp_f28 + temp_f26) * 0.5f;
+            shell->pos.x = (temp_f2 + temp_f18_3) * 0.5f;
+            shell->pos.y = ((temp_f12 + temp_f16_3) * 0.5f) + shell->boundingBoxSize;
+            shell->pos.z = (temp_f28 + temp_f26) * 0.5f;
 
-            shell->velocity[0] = (temp_f18_3 - temp_f2) * 0.5f;
-            shell->velocity[1] = (temp_f16_3 - temp_f12) * 0.5f;
-            shell->velocity[2] = (temp_f26 - temp_f28) * 0.5f;
+            shell->velocity.x = (temp_f18_3 - temp_f2) * 0.5f;
+            shell->velocity.y = (temp_f16_3 - temp_f12) * 0.5f;
+            shell->velocity.z = (temp_f26 - temp_f28) * 0.5f;
         }
     }
 }
@@ -118,10 +118,10 @@ void func_802B3E7C(struct ShellActor* shell, Player* player) {
     f32 xz_dist;
     Vec3f newPosition;
 
-    x_velocity = player->pos[0];
-    x_velocity -= shell->pos[0];
-    z_velocity = player->pos[2];
-    z_velocity -= shell->pos[2];
+    x_velocity = player->pos.x;
+    x_velocity -= shell->pos.x;
+    z_velocity = player->pos.z;
+    z_velocity -= shell->pos.z;
     xz_dist = sqrtf((x_velocity * x_velocity) + (z_velocity * z_velocity)) / 8;
     if (xz_dist == 0.0f) {
         x_velocity = 0.0f;
@@ -131,20 +131,20 @@ void func_802B3E7C(struct ShellActor* shell, Player* player) {
         z_velocity /= xz_dist;
     }
 
-    newPosition[0] = shell->pos[0];
-    newPosition[1] = shell->pos[1];
-    newPosition[2] = shell->pos[2];
-    shell->pos[0] += x_velocity;
-    shell->pos[1] -= 2.0f;
-    shell->pos[2] += z_velocity;
-    shell->velocity[0] = x_velocity;
-    shell->velocity[1] = -2.0f;
-    shell->velocity[2] = z_velocity;
+    newPosition[0] = shell->pos.x;
+    newPosition[1] = shell->pos.y;
+    newPosition[2] = shell->pos.z;
+    shell->pos.x += x_velocity;
+    shell->pos.y -= 2.0f;
+    shell->pos.z += z_velocity;
+    shell->velocity.x = x_velocity;
+    shell->velocity.y = -2.0f;
+    shell->velocity.z = z_velocity;
 
     if (player->effects & BOO_EFFECT) {
         destroy_destructable_actor((struct Actor*) shell);
     } else {
-        actor_terrain_collision(&shell->unk30, 4.0f, shell->pos[0], shell->pos[1], shell->pos[2], newPosition[0],
+        actor_terrain_collision(&shell->unk30, 4.0f, shell->pos.x, shell->pos.y, shell->pos.z, newPosition[0],
                                 newPosition[1], newPosition[2]);
         func_802B4E30((struct Actor*) shell);
         func_802B4104(shell);
@@ -234,9 +234,9 @@ void update_actor_red_blue_shell(struct ShellActor* shell) {
     UNUSED f32 pad17;
     Vec3f origPos;
 
-    pad1 = shell->pos[0];
-    pad0 = shell->pos[2];
-    pad2 = shell->pos[1];
+    pad1 = shell->pos.x;
+    pad0 = shell->pos.z;
+    pad2 = shell->pos.y;
     pad13 = shell->type;
     if ((pad0 < (f32) gCourseMinZ) || ((f32) gCourseMaxZ < pad0) || (pad1 < (f32) gCourseMinX) ||
         ((f32) gCourseMaxX < pad1) || (pad2 < (f32) gCourseMinY)) {
@@ -252,16 +252,16 @@ void update_actor_red_blue_shell(struct ShellActor* shell) {
             somePosVel[1] = player->boundingBoxSize;
             somePosVel[2] = -(player->boundingBoxSize + shell->boundingBoxSize + 2.0f);
             mtxf_translate_vec3f_mat3(somePosVel, player->orientationMatrix);
-            shell->pos[0] = player->pos[0] + somePosVel[0];
-            pad7 = player->pos[1] - somePosVel[1];
-            shell->pos[2] = player->pos[2] + somePosVel[2];
-            height = calculate_surface_height(shell->pos[0], pad7, shell->pos[2], player->collision.meshIndexZX);
+            shell->pos.x = player->pos.x + somePosVel[0];
+            pad7 = player->pos.y - somePosVel[1];
+            shell->pos.z = player->pos.z + somePosVel[2];
+            height = calculate_surface_height(shell->pos.x, pad7, shell->pos.z, player->collision.meshIndexZX);
             temp_f2 = pad7 - height;
 
             if ((temp_f2 < 5.0f) && (temp_f2 > -5.0f)) {
-                shell->pos[1] = shell->boundingBoxSize + height;
+                shell->pos.y = shell->boundingBoxSize + height;
             } else {
-                shell->pos[1] = pad7;
+                shell->pos.y = pad7;
             }
 
             if ((player->type & PLAYER_HUMAN) != 0) {
@@ -325,17 +325,17 @@ void update_actor_red_blue_shell(struct ShellActor* shell) {
                 somePosVel[1] = 0.0f;
                 somePosVel[2] = height;
                 func_802B64C4(somePosVel, (s16) (player->rotation[1] + player->unk_0C0));
-                shell->velocity[0] = somePosVel[0];
-                shell->velocity[1] = somePosVel[1];
-                shell->velocity[2] = somePosVel[2];
+                shell->velocity.x = somePosVel[0];
+                shell->velocity.y = somePosVel[1];
+                shell->velocity.z = somePosVel[2];
             } else {
                 somePosVel[0] = sins(shell->rotAngle) * 8.0f;
                 somePosVel[1] = shell->boundingBoxSize - player->boundingBoxSize;
                 somePosVel[2] = coss(shell->rotAngle) * 8.0f;
                 mtxf_translate_vec3f_mat3(somePosVel, player->orientationMatrix);
-                shell->pos[0] = player->pos[0] + somePosVel[0];
-                shell->pos[1] = player->pos[1] + somePosVel[1];
-                shell->pos[2] = player->pos[2] + somePosVel[2];
+                shell->pos.x = player->pos.x + somePosVel[0];
+                shell->pos.y = player->pos.y + somePosVel[1];
+                shell->pos.z = player->pos.z + somePosVel[2];
             }
             break;
         case MOVING_SHELL:
@@ -357,7 +357,7 @@ void update_actor_red_blue_shell(struct ShellActor* shell) {
                     shell->targetPlayer = func_802B3FD0(player, shell);
                     if (shell->targetPlayer < 0) {
                         shell->flags = 0x8000;
-                        shell->velocity[1] = 3.0f;
+                        shell->velocity.y = 3.0f;
                         shell->pathIndex = 0;
                         shell->someTimer = 0x003C;
                         shell->state = DESTROYED_SHELL;
@@ -389,17 +389,17 @@ void update_actor_red_blue_shell(struct ShellActor* shell) {
                     }
                 }
             }
-            shell->velocity[1] -= 0.5;
-            if (shell->velocity[1] < -2.0f) {
-                shell->velocity[1] = -2.0f;
+            shell->velocity.y -= 0.5;
+            if (shell->velocity.y < -2.0f) {
+                shell->velocity.y = -2.0f;
             }
-            origPos[0] = shell->pos[0];
-            origPos[1] = shell->pos[1];
-            origPos[2] = shell->pos[2];
-            shell->pos[0] += shell->velocity[0];
-            shell->pos[1] += shell->velocity[1];
-            shell->pos[2] += shell->velocity[2];
-            actor_terrain_collision(&shell->unk30, 4.0f, shell->pos[0], shell->pos[1], shell->pos[2], origPos[0],
+            origPos[0] = shell->pos.x;
+            origPos[1] = shell->pos.y;
+            origPos[2] = shell->pos.z;
+            shell->pos.x += shell->velocity.x;
+            shell->pos.y += shell->velocity.y;
+            shell->pos.z += shell->velocity.z;
+            actor_terrain_collision(&shell->unk30, 4.0f, shell->pos.x, shell->pos.y, shell->pos.z, origPos[0],
                                     origPos[1], origPos[2]);
             func_802B4E30((struct Actor*) shell);
             func_802B4104(shell);
@@ -420,10 +420,10 @@ void update_actor_red_blue_shell(struct ShellActor* shell) {
         case GREEN_SHELL_HIT_A_RACER:
             func_802B3B44(shell);
             player = &gPlayers[shell->targetPlayer];
-            height = player->pos[0];
-            height -= shell->pos[0];
-            temp_f2 = player->pos[2];
-            temp_f2 -= shell->pos[2];
+            height = player->pos.x;
+            height -= shell->pos.x;
+            temp_f2 = player->pos.z;
+            temp_f2 -= shell->pos.z;
             if (((height * height) + (temp_f2 * temp_f2)) < 40000.0f) {
                 shell->state = RED_SHELL_LOCK_ON;
             }
@@ -439,25 +439,25 @@ void update_actor_red_blue_shell(struct ShellActor* shell) {
                 somePosVel[1] = shell->boundingBoxSize - player->boundingBoxSize;
                 somePosVel[2] = coss(shell->rotAngle) * 8.0f;
                 mtxf_translate_vec3f_mat3(somePosVel, player->orientationMatrix);
-                origPos[0] = shell->pos[0];
-                origPos[1] = shell->pos[1];
-                origPos[2] = shell->pos[2];
-                shell->pos[0] = player->pos[0] + somePosVel[0];
-                shell->pos[1] = player->pos[1] + somePosVel[1];
-                shell->pos[2] = player->pos[2] + somePosVel[2];
-                actor_terrain_collision(&shell->unk30, 4.0f, shell->pos[0], shell->pos[1], shell->pos[2], origPos[0],
+                origPos[0] = shell->pos.x;
+                origPos[1] = shell->pos.y;
+                origPos[2] = shell->pos.z;
+                shell->pos.x = player->pos.x + somePosVel[0];
+                shell->pos.y = player->pos.y + somePosVel[1];
+                shell->pos.z = player->pos.z + somePosVel[2];
+                actor_terrain_collision(&shell->unk30, 4.0f, shell->pos.x, shell->pos.y, shell->pos.z, origPos[0],
                                         origPos[1], origPos[2]);
                 func_802B4E30((struct Actor*) shell);
             }
             break;
         case DESTROYED_SHELL:
-            shell->velocity[1] -= 0.3f;
-            if (shell->velocity[1] < -5.0f) {
-                shell->velocity[1] = -5.0f;
+            shell->velocity.y -= 0.3f;
+            if (shell->velocity.y < -5.0f) {
+                shell->velocity.y = -5.0f;
             }
             shell->rotAngle += 0x5B0;
             shell->someTimer -= 1;
-            shell->pos[1] += shell->velocity[1];
+            shell->pos.y += shell->velocity.y;
             if (shell->someTimer == 0) {
                 destroy_actor((struct Actor*) shell);
             }
@@ -466,10 +466,10 @@ void update_actor_red_blue_shell(struct ShellActor* shell) {
             func_802B3B44(shell);
             shell->targetPlayer = gPlayerPositionLUT[0];
             player = &gPlayers[gPlayerPositionLUT[0]];
-            height = player->pos[0];
-            height -= shell->pos[0];
-            temp_f2 = player->pos[2];
-            temp_f2 -= shell->pos[2];
+            height = player->pos.x;
+            height -= shell->pos.x;
+            temp_f2 = player->pos.z;
+            temp_f2 -= shell->pos.z;
             if (((height * height) + (temp_f2 * temp_f2)) < 40000.0f) {
                 shell->state = BLUE_SHELL_TARGET_ELIMINATED;
             }

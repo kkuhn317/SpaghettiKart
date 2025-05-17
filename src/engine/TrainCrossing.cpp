@@ -15,9 +15,9 @@ extern "C" {
 }
 
 TrainCrossing::TrainCrossing(Vec3f position, u32 waypointMin, u32 waypointMax, f32 approachRadius, f32 exitRadius) {
-    Position[0] = position[0] * xOrientation;
-    Position[1] = position[1];
-    Position[2] = position[2];
+    Position[0] = position.x * xOrientation;
+    Position[1] = position.y;
+    Position[2] = position.z;
     ApproachRadius = approachRadius;
     ExitRadius = exitRadius;
     WaypointMin = waypointMin;

@@ -221,12 +221,12 @@ void OThwomp::func_80080E8C(s32 objectIndex1, s32 objectIndex2, s32 arg2) {
     anAngle = gObjectList[objectIndex2].direction_angle[1];
     thing1 = func_800416D8(temp_v1[1], temp_v1[0], anAngle);
     thing0 = func_80041724(temp_v1[1], temp_v1[0], anAngle);
-    gObjectList[objectIndex1].origin_pos[0] = gObjectList[objectIndex2].pos[0] + thing0;
+    gObjectList[objectIndex1].origin_pos[0] = gObjectList[objectIndex2].pos.x + thing0;
     gObjectList[objectIndex1].origin_pos[1] = gObjectList[objectIndex2].surfaceHeight - 9.0;
-    gObjectList[objectIndex1].origin_pos[2] = gObjectList[objectIndex2].pos[2] + thing1;
+    gObjectList[objectIndex1].origin_pos[2] = gObjectList[objectIndex2].pos.z + thing1;
     anAngle = D_800E597C[arg2] + gObjectList[objectIndex2].direction_angle[1];
-    gObjectList[objectIndex1].velocity[0] = sins(anAngle) * 0.6;
-    gObjectList[objectIndex1].velocity[2] = coss(anAngle) * 0.6;
+    gObjectList[objectIndex1].velocity.x = sins(anAngle) * 0.6;
+    gObjectList[objectIndex1].velocity.z = coss(anAngle) * 0.6;
 }
 #else
 GLOBAL_ASM("asm/non_matchings/update_objects/func_80080E8C.s")
@@ -291,7 +291,7 @@ void OThwomp::func_80074FD8(s32 objectIndex) {
         case 0:
             break;
         case 1:
-            if (func_80087E08(objectIndex, gObjectList[objectIndex].velocity[1], 0.12f,
+            if (func_80087E08(objectIndex, gObjectList[objectIndex].velocity.y, 0.12f,
                               gObjectList[objectIndex].unk_034, gObjectList[objectIndex].direction_angle[1],
                               0x00000064) != 0) {
                 object_next_state(objectIndex);
@@ -596,7 +596,7 @@ void OThwomp::func_8007F6C4(s32 objectIndex, s32 playerId) {
     func_800722A4(objectIndex, 8);
     func_80086E70(objectIndex);
     gObjectList[objectIndex].unk_0DD = 2;
-    gObjectList[objectIndex].unk_01C[0] = player->pos[0] - gObjectList[objectIndex].origin_pos[0];
+    gObjectList[objectIndex].unk_01C[0] = player->pos.x - gObjectList[objectIndex].origin_pos[0];
     gObjectList[objectIndex].unk_0D1 = playerId;
 }
 
@@ -713,7 +713,7 @@ void OThwomp::Draw(s32 cameraId) {
             object = &gObjectList[objectIndex];
             if ((object->state >= 2) && (State == MOVE_AND_ROTATE) && (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX)) {
                 func_8004B138(0x000000FF, 0x000000FF, 0x000000FF, (s32) object->primAlpha);
-                D_80183E80[1] = func_800418AC(object->pos[0], object->pos[2], camera->pos);
+                D_80183E80[1] = func_800418AC(object->pos.x, object->pos.z, camera->pos);
                 func_800431B0(object->pos, D_80183E80, object->sizeScaling, (Vtx*)D_0D005AE0);
             }
         }
@@ -932,7 +932,7 @@ void OThwomp::func_8007FA08(s32 objectIndex) {
     } else {
         set_obj_orientation(objectIndex, 0U, 0x4000U, 0U);
     }
-    object->velocity[0] = 0.0f;
+    object->velocity.x = 0.0f;
     object->direction_angle[1] = object->orientation[1];
     object->unk_0DD = 1;
     object->unk_0DF = 8;
@@ -963,25 +963,25 @@ void OThwomp::func_8007FB48(s32 objectIndex) {
             gObjectList[objectIndex].unk_0B0 = 0x00A0;
             gObjectList[objectIndex].offset[0] = 0.0f;
             gObjectList[objectIndex].offset[2] = 0.0f;
-            gObjectList[objectIndex].velocity[2] = 0.0f;
+            gObjectList[objectIndex].velocity.z = 0.0f;
             func_80086FD4(objectIndex);
             break;
         case 2:
-            gObjectList[objectIndex].velocity[0] = player->unk_094 * xOrientation * 1.25;
+            gObjectList[objectIndex].velocity.x = player->unk_094 * xOrientation * 1.25;
             if (gObjectList[objectIndex].unk_048 >= gObjectList[objectIndex].unk_0B0) {
                 if (gObjectList[objectIndex].unk_0B0 == gObjectList[objectIndex].unk_048) {
                     if (D_8018D400 & 1) {
-                        gObjectList[objectIndex].velocity[2] = 1.5f;
+                        gObjectList[objectIndex].velocity.z = 1.5f;
                     } else {
-                        gObjectList[objectIndex].velocity[2] = -1.5f;
+                        gObjectList[objectIndex].velocity.z = -1.5f;
                     }
                 }
-                if (gObjectList[objectIndex].velocity[2] >= 0.0) {
+                if (gObjectList[objectIndex].velocity.z >= 0.0) {
                     if (gObjectList[objectIndex].offset[2] >= 40.0) {
-                        gObjectList[objectIndex].velocity[2] = -1.5f;
+                        gObjectList[objectIndex].velocity.z = -1.5f;
                     }
                 } else if ((f64) gObjectList[objectIndex].offset[2] <= -40.0) {
-                    gObjectList[objectIndex].velocity[2] = 1.5f;
+                    gObjectList[objectIndex].velocity.z = 1.5f;
                 }
             }
             object_add_velocity_offset_xz(objectIndex);
@@ -1223,16 +1223,16 @@ void OThwomp::func_800806BC(s32 objectIndex) {
         case 0:
             break;
         case 1:
-            if (f32_step_towards(&gObjectList[objectIndex].offset[2], 250.0f, gObjectList[objectIndex].velocity[2]) !=
+            if (f32_step_towards(&gObjectList[objectIndex].offset[2], 250.0f, gObjectList[objectIndex].velocity.z) !=
                 0) {
-                gObjectList[objectIndex].velocity[2] = -gObjectList[objectIndex].velocity[2];
+                gObjectList[objectIndex].velocity.z = -gObjectList[objectIndex].velocity.z;
                 func_80086FD4(objectIndex);
             }
             break;
         case 2:
-            if (f32_step_towards(&gObjectList[objectIndex].offset[2], 0.0f, gObjectList[objectIndex].velocity[2]) !=
+            if (f32_step_towards(&gObjectList[objectIndex].offset[2], 0.0f, gObjectList[objectIndex].velocity.z) !=
                 0) {
-                gObjectList[objectIndex].velocity[2] = -gObjectList[objectIndex].velocity[2];
+                gObjectList[objectIndex].velocity.z = -gObjectList[objectIndex].velocity.z;
                 func_8008701C(objectIndex, 1);
             }
             break;
@@ -1244,16 +1244,16 @@ void OThwomp::func_8008078C(s32 objectIndex) {
         case 0:
             break;
         case 1:
-            if (f32_step_towards(&gObjectList[objectIndex].offset[2], -250.0f, gObjectList[objectIndex].velocity[2]) !=
+            if (f32_step_towards(&gObjectList[objectIndex].offset[2], -250.0f, gObjectList[objectIndex].velocity.z) !=
                 0) {
-                gObjectList[objectIndex].velocity[2] = -gObjectList[objectIndex].velocity[2];
+                gObjectList[objectIndex].velocity.z = -gObjectList[objectIndex].velocity.z;
                 func_80086FD4(objectIndex);
             }
             break;
         case 2:
-            if (f32_step_towards(&gObjectList[objectIndex].offset[2], 0.0f, gObjectList[objectIndex].velocity[2]) !=
+            if (f32_step_towards(&gObjectList[objectIndex].offset[2], 0.0f, gObjectList[objectIndex].velocity.z) !=
                 0) {
-                gObjectList[objectIndex].velocity[2] = -gObjectList[objectIndex].velocity[2];
+                gObjectList[objectIndex].velocity.z = -gObjectList[objectIndex].velocity.z;
                 func_8008701C(objectIndex, 1);
             }
             break;
@@ -1286,11 +1286,11 @@ void OThwomp::func_80080524(s32 objectIndex) {
     switch (object->primAlpha) { /* irregular */
         case 0:
             object->unk_0DD = 2;
-            object->velocity[2] = -1.0f;
+            object->velocity.z = -1.0f;
             break;
         case 1:
             object->unk_0DD = 2;
-            object->velocity[2] = -1.5f;
+            object->velocity.z = -1.5f;
             break;
     }
     func_800722A4(objectIndex, 0x00000080);

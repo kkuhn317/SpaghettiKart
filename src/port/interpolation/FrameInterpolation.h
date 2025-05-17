@@ -47,6 +47,9 @@ void FrameInterpolation_RecordMatrixPop(Mat4* matrix);
 
 //void FrameInterpolation_RecordMatrixMult(Matrix* matrix, MtxF* mf, u8 mode);
 
+void FrameInterpolation_RecordMatrixMultKart(f32* outX, f32* outY, f32* outZ, f32 inX, f32 inY,
+                                             f32 inZ, u16 theta, u16 phi);
+
 void FrameInterpolation_RecordMatrixTranslate(Mat4* matrix, Vec3f b);
 
 //void FrameInterpolation_RecordMatrixScale(Matrix* matrix, f32 x, f32 y, f32 z, u8 mode);

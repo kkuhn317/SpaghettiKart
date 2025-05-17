@@ -61,8 +61,8 @@ void func_80280038(void) {
     gSPPerspNormalize(gDisplayListHead++, perspNorm);
     gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(&gGfxPool->mtxPersp[0]),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-    guLookAt(&gGfxPool->mtxLookAt[0], camera->pos[0], camera->pos[1], camera->pos[2], camera->lookAt[0],
-             camera->lookAt[1], camera->lookAt[2], camera->up[0], camera->up[1], camera->up[2]);
+    guLookAt(&gGfxPool->mtxLookAt[0], camera->pos.x, camera->pos.y, camera->pos.z, camera->lookAt.x,
+             camera->lookAt.y, camera->lookAt.z, camera->up[0], camera->up[1], camera->up[2]);
     gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(&gGfxPool->mtxLookAt[0]),
               G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
     gCurrentCourseId = gCreditsCourseId;
@@ -110,12 +110,12 @@ void credits_loop(void) {
 
         D_802874FC = 0;
         func_80283648(camera);
-        temp_f12 = camera->lookAt[0] - camera->pos[0];
-        temp = camera->lookAt[1] - camera->pos[1];
-        temp_f14 = camera->lookAt[2] - camera->pos[2];
-        camera->rot[1] = atan2s(temp_f12, temp_f14);
-        camera->rot[0] = atan2s(sqrtf((temp_f12 * temp_f12) + (temp_f14 * temp_f14)), temp);
-        camera->rot[2] = 0;
+        temp_f12 = camera->lookAt.x - camera->pos.x;
+        temp = camera->lookAt.y - camera->pos.y;
+        temp_f14 = camera->lookAt.z - camera->pos.z;
+        camera->rot.y = atan2s(temp_f12, temp_f14);
+        camera->rot.x = atan2s(sqrtf((temp_f12 * temp_f12) + (temp_f14 * temp_f14)), temp);
+        camera->rot.z = 0;
         if (D_802874A0 != 0) {
             D_800DC5E4++;
         } else {
@@ -168,12 +168,12 @@ void load_credits(void) {
     D_800DC5BC = 0;
     D_800DC5C8 = 0;
     gCollisionMesh = (CollisionTriangle*) gNextFreeMemoryAddress;
-    camera->pos[0] = 1400.0f;
-    camera->pos[1] = 300.0f;
-    camera->pos[2] = 1400.0f;
-    camera->lookAt[0] = 0.0f;
-    camera->lookAt[1] = 0.0f;
-    camera->lookAt[2] = 0.0f;
+    camera->pos.x = 1400.0f;
+    camera->pos.y = 300.0f;
+    camera->pos.z = 1400.0f;
+    camera->lookAt.x = 0.0f;
+    camera->lookAt.y = 0.0f;
+    camera->lookAt.z = 0.0f;
     camera->up[0] = 0.0f;
     camera->up[1] = 1.0f;
     camera->up[2] = 0.0f;

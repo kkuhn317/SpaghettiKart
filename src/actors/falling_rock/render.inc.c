@@ -24,7 +24,7 @@ void render_actor_falling_rock(Camera* camera, struct FallingRock* rock) {
         return;
     }
 
-    height = is_within_render_distance(camera->pos, rock->pos, camera->rot[1], 400.0f, gCameraZoom[camera - camera1],
+    height = is_within_render_distance(camera->pos, rock->pos, camera->rot.y, 400.0f, gCameraZoom[camera - camera1],
                                        4000000.0f);
 
     if (CVarGetInteger("gNoCulling", 0) == 1) {
@@ -38,9 +38,9 @@ void render_actor_falling_rock(Camera* camera, struct FallingRock* rock) {
     if (height < 250000.0f) {
 
         if (rock->unk30.unk34 == 1) {
-            sp8C[0] = rock->pos[0];
-            sp8C[2] = rock->pos[2];
-            height = calculate_surface_height(sp8C[0], rock->pos[1], sp8C[2], rock->unk30.meshIndexZX);
+            sp8C[0] = rock->pos.x;
+            sp8C[2] = rock->pos.z;
+            height = calculate_surface_height(sp8C[0], rock->pos.y, sp8C[2], rock->unk30.meshIndexZX);
             sp98[0] = 0;
             sp98[1] = 0;
             sp98[2] = 0;

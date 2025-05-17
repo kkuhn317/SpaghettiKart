@@ -68,7 +68,7 @@ FVector ScreenRayTrace() {
         FVector4 rayEye = MultiplyMatrixVector(inversePerspMtx, (float*)&rayClip.x);
 
         Mat4 lookAtMtx;
-        guLookAtF(lookAtMtx, camera->pos[0], camera->pos[1], camera->pos[2], camera->lookAt[0], camera->lookAt[1], camera->lookAt[2], camera->up[0], camera->up[1], camera->up[2]);
+        guLookAtF(lookAtMtx, camera->pos.x, camera->pos.y, camera->pos.z, camera->lookAt.x, camera->lookAt.y, camera->lookAt.z, camera->up[0], camera->up[1], camera->up[2]);
         Mat4 inverseViewMtx;
         if (InverseMatrix((float*)&lookAtMtx, (float*)&inverseViewMtx[0][0]) != 2) {
             rayEye.w = 0;
@@ -411,10 +411,10 @@ void SetRotatorFromDirection(FVector direction, IRotator* rot) {
 }
 
 FVector GetPositionAheadOfCamera(f32 dist) {
-    FVector pos = FVector(cameras[0].pos[0], cameras[0].pos[1], cameras[0].pos[2]);
+    FVector pos = FVector(cameras[0].pos.x, cameras[0].pos.y, cameras[0].pos.z);
 
-    f32 pitch = (cameras[0].rot[2] / 65535.0f) * 360.0f;
-    f32 yaw = (cameras[0].rot[1] / 65535.0f) * 360.0f;
+    f32 pitch = (cameras[0].rot.z / 65535.0f) * 360.0f;
+    f32 yaw = (cameras[0].rot.y / 65535.0f) * 360.0f;
 
     // Convert degrees to radians
     pitch = pitch * M_PI / 180.0f;

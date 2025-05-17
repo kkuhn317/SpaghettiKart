@@ -86,24 +86,24 @@ ATrain::ATrain(ATrain::TenderStatus tender, size_t numCarriages, f32 speed, uint
     f32 origZPos;
 
     tempLocomotive = &Locomotive;
-    origXPos = tempLocomotive->position[0];
-    origZPos = tempLocomotive->position[2];
+    origXPos = tempLocomotive->position.x;
+    origZPos = tempLocomotive->position.z;
     trainCarYRot = update_vehicle_following_waypoint(
         tempLocomotive->position, (s16*) &tempLocomotive->waypointIndex, Speed);
-    tempLocomotive->velocity[0] = tempLocomotive->position[0] - origXPos;
-    tempLocomotive->velocity[2] = tempLocomotive->position[2] - origZPos;
+    tempLocomotive->velocity.x = tempLocomotive->position.x - origXPos;
+    tempLocomotive->velocity.z = tempLocomotive->position.z - origZPos;
     vec3s_set(trainCarRot, 0, trainCarYRot, 0);
     tempLocomotive->actorIndex = add_actor_to_empty_slot(tempLocomotive->position, trainCarRot,
                                                             tempLocomotive->velocity, ACTOR_TRAIN_ENGINE);
 
     tempTender = &Tender;
     if (tempTender->isActive == 1) {
-        origXPos = tempTender->position[0];
-        origZPos = tempTender->position[2];
+        origXPos = tempTender->position.x;
+        origZPos = tempTender->position.z;
         trainCarYRot = update_vehicle_following_waypoint(
             tempTender->position, (s16*) &tempTender->waypointIndex, Speed);
-        tempTender->velocity[0] = tempTender->position[0] - origXPos;
-        tempTender->velocity[2] = tempTender->position[2] - origZPos;
+        tempTender->velocity.x = tempTender->position.x - origXPos;
+        tempTender->velocity.z = tempTender->position.z - origZPos;
         vec3s_set(trainCarRot, 0, trainCarYRot, 0);
         tempTender->actorIndex = add_actor_to_empty_slot(tempTender->position, trainCarRot,
                                                             tempTender->velocity, ACTOR_TRAIN_TENDER);
@@ -112,13 +112,13 @@ ATrain::ATrain(ATrain::TenderStatus tender, size_t numCarriages, f32 speed, uint
     for (size_t i = 0; i < PassengerCars.size(); i++) {
         tempPassengerCar = &PassengerCars[i];
         if (tempPassengerCar->isActive == 1) {
-            origXPos = tempPassengerCar->position[0];
-            origZPos = tempPassengerCar->position[2];
+            origXPos = tempPassengerCar->position.x;
+            origZPos = tempPassengerCar->position.z;
             trainCarYRot = update_vehicle_following_waypoint(tempPassengerCar->position,
                                                                 (s16*) &tempPassengerCar->waypointIndex,
                                                                 Speed);
-            tempPassengerCar->velocity[0] = tempPassengerCar->position[0] - origXPos;
-            tempPassengerCar->velocity[2] = tempPassengerCar->position[2] - origZPos;
+            tempPassengerCar->velocity.x = tempPassengerCar->position.x - origXPos;
+            tempPassengerCar->velocity.z = tempPassengerCar->position.z - origZPos;
             vec3s_set(trainCarRot, 0, trainCarYRot, 0);
             tempPassengerCar->actorIndex =
                 add_actor_to_empty_slot(tempPassengerCar->position, trainCarRot, tempPassengerCar->velocity,
@@ -138,16 +138,16 @@ void ATrain::SyncComponents(TrainCarStuff* trainCar, s16 orientationY) {
 
     //! @todo: Change actorIndex to ptr to TrainCar actor
     trainCarActor = (struct TrainCar*) GET_ACTOR(trainCar->actorIndex);
-    trainCarActor->pos[0] = trainCar->position[0];
-    trainCarActor->pos[1] = trainCar->position[1];
-    trainCarActor->pos[2] = trainCar->position[2];
+    trainCarActor->pos.x = trainCar->position.x;
+    trainCarActor->pos.y = trainCar->position.y;
+    trainCarActor->pos.z = trainCar->position.z;
     if (gIsMirrorMode != 0) {
-        trainCarActor->rot[1] = -orientationY;
+        trainCarActor->rot.y = -orientationY;
     } else {
-        trainCarActor->rot[1] = orientationY;
+        trainCarActor->rot.y = orientationY;
     }
-    trainCarActor->velocity[0] = trainCar->velocity[0];
-    trainCarActor->velocity[2] = trainCar->velocity[2];
+    trainCarActor->velocity.x = trainCar->velocity.x;
+    trainCarActor->velocity.z = trainCar->velocity.z;
 }
 
 void ATrain::Tick() {
@@ -163,14 +163,14 @@ void ATrain::Tick() {
 
     oldWaypointIndex = (u16) Locomotive.waypointIndex;
 
-    temp_f20 = Locomotive.position[0];
-    temp_f22 = Locomotive.position[2];
+    temp_f20 = Locomotive.position.x;
+    temp_f22 = Locomotive.position.z;
 
     orientationYUpdate = update_vehicle_following_waypoint(
         Locomotive.position, (s16*) &Locomotive.waypointIndex, Speed);
 
-    Locomotive.velocity[0] = Locomotive.position[0] - temp_f20;
-    Locomotive.velocity[2] = Locomotive.position[2] - temp_f22;
+    Locomotive.velocity.x = Locomotive.position.x - temp_f20;
+    Locomotive.velocity.z = Locomotive.position.z - temp_f22;
 
     sync_train_components(&Locomotive, orientationYUpdate);
 
@@ -188,9 +188,9 @@ void ATrain::Tick() {
         Locomotive.position, TRAIN_SMOKE_RENDER_DISTANCE, SomeFlags);
     // Renders locomotive smoke on all screens if any player is within range.
     if ((((s16) AnotherSmokeTimer % 5) == 0) && (SomeFlags != 0)) {
-        smokePos[0] = Locomotive.position[0];
-        smokePos[1] = (f32) ((f64) Locomotive.position[1] + 65.0);
-        smokePos[2] = (f32) ((f64) Locomotive.position[2] + 25.0);
+        smokePos[0] = Locomotive.position.x;
+        smokePos[1] = (f32) ((f64) Locomotive.position.y + 65.0);
+        smokePos[2] = (f32) ((f64) Locomotive.position.z + 25.0);
         adjust_position_by_angle(smokePos, Locomotive.position, orientationYUpdate);
         //spawn_train_smoke(Index, smokePos, 1.1f);
         AddSmoke(Index, smokePos, 1.1f);
@@ -199,25 +199,25 @@ void ATrain::Tick() {
     car = &Tender;
 
     if (car->isActive == 1) {
-        temp_f20 = car->position[0];
-        temp_f22 = car->position[2];
+        temp_f20 = car->position.x;
+        temp_f22 = car->position.z;
         orientationYUpdate =
             update_vehicle_following_waypoint(car->position, (s16*) &car->waypointIndex, Speed);
-        car->velocity[0] = car->position[0] - temp_f20;
-        car->velocity[2] = car->position[2] - temp_f22;
+        car->velocity.x = car->position.x - temp_f20;
+        car->velocity.z = car->position.z - temp_f22;
         sync_train_components(car, orientationYUpdate);
     }
 
     for (j = 0; j < PassengerCars.size(); j++) {
         car = &PassengerCars[j];
         if (car->isActive == 1) {
-            temp_f20 = car->position[0];
-            temp_f22 = car->position[2];
+            temp_f20 = car->position.x;
+            temp_f22 = car->position.z;
 
             orientationYUpdate =
                 update_vehicle_following_waypoint(car->position, (s16*) &car->waypointIndex, Speed);
-            car->velocity[0] = car->position[0] - temp_f20;
-            car->velocity[2] = car->position[2] - temp_f22;
+            car->velocity.x = car->position.x - temp_f20;
+            car->velocity.z = car->position.z - temp_f22;
             sync_train_components(car, orientationYUpdate);
         }
     }
@@ -233,21 +233,21 @@ void ATrain::VehicleCollision(s32 playerId, Player* player) {
 
     if (D_801631E0[playerId] != 1) {
         if (!(player->effects & 0x01000000)) {
-            playerPosX = player->pos[0];
-            playerPosZ = player->pos[2];
+            playerPosX = player->pos.x;
+            playerPosZ = player->pos.z;
             trainCar = &Locomotive;
-            x_dist = playerPosX - trainCar->position[0];
-            z_dist = playerPosZ - trainCar->position[2];
+            x_dist = playerPosX - trainCar->position.x;
+            z_dist = playerPosZ - trainCar->position.z;
             if ((x_dist > -100.0) && (x_dist < 100.0)) {
                 if ((z_dist > -100.0) && (z_dist < 100.0)) {
-                    if (func_80006018(trainCar->position[0], trainCar->position[2], trainCar->velocity[0],
-                                        trainCar->velocity[2], 60.0f, 20.0f, playerPosX, playerPosZ) == 1) {
+                    if (func_80006018(trainCar->position.x, trainCar->position.z, trainCar->velocity.x,
+                                        trainCar->velocity.z, 60.0f, 20.0f, playerPosX, playerPosZ) == 1) {
                         player->soundEffects |= REVERSE_SOUND_EFFECT;
                     }
                     trainCar = &Tender;
                     if (trainCar->isActive == 1) {
-                        if (func_80006018(trainCar->position[0], trainCar->position[2], trainCar->velocity[0],
-                                            trainCar->velocity[2], 30.0f, 20.0f, playerPosX, playerPosZ) == 1) {
+                        if (func_80006018(trainCar->position.x, trainCar->position.z, trainCar->velocity.x,
+                                            trainCar->velocity.z, 30.0f, 20.0f, playerPosX, playerPosZ) == 1) {
                             player->soundEffects |= REVERSE_SOUND_EFFECT;
                         }
                     }
@@ -256,13 +256,13 @@ void ATrain::VehicleCollision(s32 playerId, Player* player) {
 
             for (size_t i = 0; i < PassengerCars.size(); i++) {
                 trainCar = &PassengerCars[i];
-                x_dist = playerPosX - trainCar->position[0];
-                z_dist = playerPosZ - trainCar->position[2];
+                x_dist = playerPosX - trainCar->position.x;
+                z_dist = playerPosZ - trainCar->position.z;
                 if (trainCar->isActive == 1) {
                     if ((x_dist > -100.0) && (x_dist < 100.0)) {
                         if ((z_dist > -100.0) && (z_dist < 100.0)) {
-                            if (func_80006018(trainCar->position[0], trainCar->position[2], trainCar->velocity[0],
-                                                trainCar->velocity[2], 30.0f, 20.0f, playerPosX, playerPosZ) == 1) {
+                            if (func_80006018(trainCar->position.x, trainCar->position.z, trainCar->velocity.x,
+                                                trainCar->velocity.z, 30.0f, 20.0f, playerPosX, playerPosZ) == 1) {
                                 player->soundEffects |= REVERSE_SOUND_EFFECT;
                             }
                         }

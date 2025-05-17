@@ -120,7 +120,7 @@ void OBat::Draw(s32 cameraId) {
 
             if ((gObjectList[objectIndex].state >= 2) && (gMatrixHudCount < 0x2EF)) {
                 D_80183E80[1] =
-                    func_800418AC(gObjectList[objectIndex].pos[0], gObjectList[objectIndex].pos[2], temp_s7->pos);
+                    func_800418AC(gObjectList[objectIndex].pos.x, gObjectList[objectIndex].pos.z, temp_s7->pos);
                 func_800431B0(gObjectList[objectIndex].pos, D_80183E80, gObjectList[objectIndex].sizeScaling,
                               (Vtx*)D_0D0062B0);
             }
@@ -135,7 +135,7 @@ void OBat::Draw(s32 cameraId) {
 
             if ((gObjectList[objectIndex].state >= 2) && (gMatrixHudCount < 0x2EF)) {
                 D_80183E80[1] =
-                    func_800418AC(gObjectList[objectIndex].pos[0], gObjectList[objectIndex].pos[2], temp_s7->pos);
+                    func_800418AC(gObjectList[objectIndex].pos.x, gObjectList[objectIndex].pos.z, temp_s7->pos);
                 func_800431B0(gObjectList[objectIndex].pos, D_80183E80, gObjectList[objectIndex].sizeScaling,
                               (Vtx*)D_0D0062B0);
             }
@@ -179,18 +179,18 @@ void OBat::func_8007D8D4(s32 objectIndex, s32 arg1) {
             }
             if (arg1 == 1) {
                 if (gIsMirrorMode != 0) {
-                    if (gObjectList[objectIndex].pos[0] >= 2540.0) {
+                    if (gObjectList[objectIndex].pos.x >= 2540.0) {
                         func_80072428(objectIndex);
                     }
-                } else if (gObjectList[objectIndex].pos[0] <= -2540.0) {
+                } else if (gObjectList[objectIndex].pos.x <= -2540.0) {
                     func_80072428(objectIndex);
                 }
             } else if (gIsMirrorMode != 0) {
-                if (gObjectList[objectIndex].pos[0] >= 2150.0) {
+                if (gObjectList[objectIndex].pos.x >= 2150.0) {
                     func_80072428(objectIndex);
                 }
             } else {
-                if (gObjectList[objectIndex].pos[0] <= -2150.0) {
+                if (gObjectList[objectIndex].pos.x <= -2150.0) {
                     func_80072428(objectIndex);
                 }
             }

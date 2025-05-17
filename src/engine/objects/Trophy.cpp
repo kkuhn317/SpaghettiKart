@@ -86,9 +86,9 @@ OTrophy::OTrophy(const FVector& pos, TrophyType trophy, Behaviour bhv) {
     object->origin_pos[0] = _spawnPos.x;
     object->origin_pos[1] = _spawnPos.y;
     object->origin_pos[2] = _spawnPos.z;
-    object->pos[0] = _spawnPos.x;
-    object->pos[1] = _spawnPos.y;
-    object->pos[2] = _spawnPos.z;
+    object->pos.x = _spawnPos.x;
+    object->pos.y = _spawnPos.y;
+    object->pos.z = _spawnPos.z;
 
     _emitter = reinterpret_cast<StarEmitter*>(gWorldInstance.AddEmitter(new StarEmitter()));
 }
@@ -156,12 +156,12 @@ void OTrophy::Tick() { // func_80086D80
                 float yaw = (player->rotation[1] + 0x4000) * (M_PI / 32768.0f);   // Convert degrees to radians
 
                 // Calculate forward direction based on yaw (same as before)
-                float lookAtX = player->pos[0] + cos(yaw);
-                float lookAtZ = player->pos[2] + sin(yaw);
+                float lookAtX = player->pos.x + cos(yaw);
+                float lookAtZ = player->pos.z + sin(yaw);
 
-                float forwardX = lookAtX - player->pos[0];
+                float forwardX = lookAtX - player->pos.x;
                 float forwardY = 0; // Optional: Ignore height changes
-                float forwardZ = lookAtZ - player->pos[2];
+                float forwardZ = lookAtZ - player->pos.z;
 
                 // Normalize the forward vector
                 float length = sqrtf(forwardX * forwardX + forwardZ * forwardZ);
@@ -173,32 +173,32 @@ void OTrophy::Tick() { // func_80086D80
                 float distance = 30.0f;
 
                 // Calculate the object's position in front of the player (same as before)
-                gObjectList[objectIndex].pos[0] = player->pos[0] + forwardX * distance;
-                gObjectList[objectIndex].pos[1] = player->pos[1] + 8.0f;  // Optional height offset
-                gObjectList[objectIndex].pos[2] = player->pos[2] + forwardZ * distance;
+                gObjectList[objectIndex].pos.x = player->pos.x + forwardX * distance;
+                gObjectList[objectIndex].pos.y = player->pos.y + 8.0f;  // Optional height offset
+                gObjectList[objectIndex].pos.z = player->pos.z + forwardZ * distance;
 
                 // Apply more sensitive random movement based on player velocity to simulate floating behavior
                 float velocityFactor = 0.1f; // Increased factor for more sensitivity
-                gObjectList[objectIndex].pos[0] += player->velocity[0] * velocityFactor;
-                gObjectList[objectIndex].pos[1] += player->velocity[1] * velocityFactor; // Optional: Add vertical movement
-                gObjectList[objectIndex].pos[2] += player->velocity[2] * velocityFactor;
+                gObjectList[objectIndex].pos.x += player->velocity.x * velocityFactor;
+                gObjectList[objectIndex].pos.y += player->velocity.y * velocityFactor; // Optional: Add vertical movement
+                gObjectList[objectIndex].pos.z += player->velocity.z * velocityFactor;
 
                 // Increase oscillation for more dynamic movement (sine wave effect)
                 float oscillationSpeed = 4.0f; // Increased speed for quicker oscillations
                 float oscillationAmplitude = 0.4f; // Increased amplitude for more noticeable movement
-                gObjectList[objectIndex].pos[1] += oscillationAmplitude * sinf(oscillationSpeed * gGlobalTimer); // Vertical oscillation based on time
+                gObjectList[objectIndex].pos.y += oscillationAmplitude * sinf(oscillationSpeed * gGlobalTimer); // Vertical oscillation based on time
 
                 // Now use smooth interpolation (lerp) to gradually move the trophy towards its target position
                 float lerpFactor = 0.25f;  // Increased to make the trophy follow the player more quickly
 
-                gObjectList[objectIndex].pos[0] = _oldPos[0] + lerpFactor * (gObjectList[objectIndex].pos[0] - _oldPos[0]);
-                gObjectList[objectIndex].pos[1] = _oldPos[1] + lerpFactor * (gObjectList[objectIndex].pos[1] - _oldPos[1]);
-                gObjectList[objectIndex].pos[2] = _oldPos[2] + lerpFactor * (gObjectList[objectIndex].pos[2] - _oldPos[2]);
+                gObjectList[objectIndex].pos.x = _oldPos[0] + lerpFactor * (gObjectList[objectIndex].pos.x - _oldPos[0]);
+                gObjectList[objectIndex].pos.y = _oldPos[1] + lerpFactor * (gObjectList[objectIndex].pos.y - _oldPos[1]);
+                gObjectList[objectIndex].pos.z = _oldPos[2] + lerpFactor * (gObjectList[objectIndex].pos.z - _oldPos[2]);
 
                 // Save the current position for the next frame
-                _oldPos[0] = gObjectList[objectIndex].pos[0];
-                _oldPos[1] = gObjectList[objectIndex].pos[1];
-                _oldPos[2] = gObjectList[objectIndex].pos[2];
+                _oldPos[0] = gObjectList[objectIndex].pos.x;
+                _oldPos[1] = gObjectList[objectIndex].pos.y;
+                _oldPos[2] = gObjectList[objectIndex].pos.z;
 
             
                 gObjectList[objectIndex].direction_angle[0] += 0x400;
@@ -246,8 +246,8 @@ void OTrophy::Draw(s32 cameraId) {
 
 void OTrophy::func_80086700(s32 objectIndex) {
     gObjectList[objectIndex].sizeScaling = 0.005f;
-    set_obj_origin_pos(objectIndex, gObjectList[indexObjectList2[0]].pos[0],
-                       gObjectList[indexObjectList2[0]].pos[1] + 16.0, gObjectList[indexObjectList2[0]].pos[2]);
+    set_obj_origin_pos(objectIndex, gObjectList[indexObjectList2[0]].pos.x,
+                       gObjectList[indexObjectList2[0]].pos.y + 16.0, gObjectList[indexObjectList2[0]].pos.z);
     set_obj_origin_offset(objectIndex, 0.0f, 0.0f, 0.0f);
     set_obj_direction_angle(objectIndex, 0U, 0U, 0U);
     gObjectList[objectIndex].unk_084[1] = 0x0200;
@@ -268,7 +268,7 @@ void OTrophy::func_80086940(s32 objectIndex) {
         case 2:
             f32_step_towards(&object->sizeScaling, 0.025f, 0.001f);
             func_80087C48(objectIndex, 6.0f, 0.1f, 0x000000C8);
-            if ((f64) object->velocity[1] <= 0.0) {
+            if ((f64) object->velocity.y <= 0.0) {
                 func_8008701C(objectIndex, 3);
             }
             break;
@@ -277,7 +277,7 @@ void OTrophy::func_80086940(s32 objectIndex) {
             break;
         case 4:
             D_801658D6 = 1;
-            object->velocity[1] = -0.4f;
+            object->velocity.y = -0.4f;
             func_80086FD4(objectIndex);
             // object->origin_pos[1] = 90.0f;
             object->offset[1] = 60.0f;
@@ -294,7 +294,7 @@ void OTrophy::func_80086940(s32 objectIndex) {
             break;
         case 5:
             if ((f64) object->offset[1] <= 8.0) {
-                f32_step_towards(&object->velocity[1], -0.1f, -0.01f);
+                f32_step_towards(&object->velocity.y, -0.1f, -0.01f);
             }
             object_add_velocity_offset_y(objectIndex);
             if ((f64) object->offset[1] <= 0.0) {
@@ -338,12 +338,12 @@ void OTrophy::func_80086C14(s32 objectIndex) {
 void OTrophy::func_80086C6C(s32 objectIndex) {
     Vec3f sp24;
 
-    sp24[0] = (gObjectList[objectIndex].pos[0] - 5.0f) + random_int(0x000AU);
-    sp24[2] = (gObjectList[objectIndex].pos[2] - 5.0f) + random_int(0x000AU);
+    sp24[0] = (gObjectList[objectIndex].pos.x - 5.0f) + random_int(0x000AU);
+    sp24[2] = (gObjectList[objectIndex].pos.z - 5.0f) + random_int(0x000AU);
     if (D_801658F4 != 0) {
-        sp24[1] = gObjectList[objectIndex].pos[1] + 14.0;
+        sp24[1] = gObjectList[objectIndex].pos.y + 14.0;
     } else {
-        sp24[1] = gObjectList[objectIndex].pos[1] - 2.0;
+        sp24[1] = gObjectList[objectIndex].pos.y - 2.0;
     }
 
     if (_emitter != nullptr) {

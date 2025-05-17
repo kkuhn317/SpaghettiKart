@@ -132,10 +132,10 @@ void spawn_player(Player* player, s8 playerIndex, f32 startingRow, f32 startingC
 #undef calc
     }
 
-    player->pos[0] = startingRow;
+    player->pos.x = startingRow;
     ret = spawn_actor_on_surface(startingRow, arg4 + 50.0f, startingColumn) + player->boundingBoxSize;
-    player->pos[2] = startingColumn;
-    player->pos[1] = ret;
+    player->pos.z = startingColumn;
+    player->pos.y = ret;
     player->oldPos[0] = startingRow;
     player->oldPos[1] = ret;
 
@@ -146,9 +146,9 @@ void spawn_player(Player* player, s8 playerIndex, f32 startingRow, f32 startingC
     player->unk_05C = 1.0f;
     player->unk_058 = 0.0f;
     player->unk_060 = 0.0f;
-    player->velocity[0] = 0.0f;
-    player->velocity[1] = 0.0f;
-    player->velocity[2] = 0.0f;
+    player->velocity.x = 0.0f;
+    player->velocity.y = 0.0f;
+    player->velocity.z = 0.0f;
     player->rotation[1] = arg5;
     player->rotation[2] = 0;
     player->unk_0FA = 0;
@@ -338,21 +338,21 @@ void spawn_player(Player* player, s8 playerIndex, f32 startingRow, f32 startingC
     player->collision.meshIndexZY = 0;
     player->collision.meshIndexZX = 0;
 
-    player->tyres[FRONT_LEFT].pos[0] = 0.0f;
-    player->tyres[FRONT_LEFT].pos[1] = 0.0f;
-    player->tyres[FRONT_LEFT].pos[2] = 0.0f;
+    player->tyres[FRONT_LEFT].pos.x = 0.0f;
+    player->tyres[FRONT_LEFT].pos.y = 0.0f;
+    player->tyres[FRONT_LEFT].pos.z = 0.0f;
 
-    player->tyres[FRONT_RIGHT].pos[0] = 0.0f;
-    player->tyres[FRONT_RIGHT].pos[1] = 0.0f;
-    player->tyres[FRONT_RIGHT].pos[2] = 0.0f;
+    player->tyres[FRONT_RIGHT].pos.x = 0.0f;
+    player->tyres[FRONT_RIGHT].pos.y = 0.0f;
+    player->tyres[FRONT_RIGHT].pos.z = 0.0f;
 
-    player->tyres[BACK_LEFT].pos[0] = 0.0f;
-    player->tyres[BACK_LEFT].pos[1] = 0.0f;
-    player->tyres[BACK_LEFT].pos[2] = 0.0f;
+    player->tyres[BACK_LEFT].pos.x = 0.0f;
+    player->tyres[BACK_LEFT].pos.y = 0.0f;
+    player->tyres[BACK_LEFT].pos.z = 0.0f;
 
-    player->tyres[BACK_RIGHT].pos[0] = 0.0f;
-    player->tyres[BACK_RIGHT].pos[1] = 0.0f;
-    player->tyres[BACK_RIGHT].pos[2] = 0.0f;
+    player->tyres[BACK_RIGHT].pos.x = 0.0f;
+    player->tyres[BACK_RIGHT].pos.y = 0.0f;
+    player->tyres[BACK_RIGHT].pos.z = 0.0f;
 
     player->tyres[FRONT_LEFT].baseHeight = 0.0f;
     player->tyres[FRONT_RIGHT].baseHeight = 0.0f;
@@ -1200,19 +1200,19 @@ void func_8003D080(void) {
                 switch (gModeSelection) {
                     case GRAND_PRIX:
                         if (GetCourse() == GetToadsTurnpike()) {
-                            camera_init(0.0f, player->pos[1], D_80165230[7], player->rotation[1], 8, 0);
+                            camera_init(0.0f, player->pos.y, D_80165230[7], player->rotation[1], 8, 0);
                         } else {
-                            camera_init((D_80165210[7] + D_80165210[6]) / 2, player->pos[1], D_80165230[7],
+                            camera_init((D_80165210[7] + D_80165210[6]) / 2, player->pos.y, D_80165230[7],
                                         player->rotation[1], 8, 0);
                         }
                         break;
 
                     case TIME_TRIALS:
-                        camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 1, 0);
+                        camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 1, 0);
                         break;
 
                     default:
-                        camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 10, 0);
+                        camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 10, 0);
                         break;
                 }
                 break;
@@ -1221,45 +1221,45 @@ void func_8003D080(void) {
             case SCREEN_MODE_2P_SPLITSCREEN_VERTICAL:
                 switch (gModeSelection) {
                     case GRAND_PRIX:
-                        camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 1, 0);
+                        camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 1, 0);
                         player++;
-                        camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 1, 1);
+                        camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 1, 1);
                         break;
 
                     case BATTLE:
-                        camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 9, 0);
+                        camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 9, 0);
                         player++;
-                        camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 9, 1);
+                        camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 9, 1);
                         break;
 
                     default:
-                        camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 1, 0);
+                        camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 1, 0);
                         player++;
-                        camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 1, 1);
+                        camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 1, 1);
                         break;
                 }
                 break;
 
             case SCREEN_MODE_3P_4P_SPLITSCREEN:
                 if (gModeSelection == BATTLE) {
-                    camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 9, 0);
+                    camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 9, 0);
                     player++;
-                    camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 9, 1);
+                    camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 9, 1);
                     player++;
-                    camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 9, 2);
+                    camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 9, 2);
                     if (gPlayerCountSelection1 == 4) {
                         player++;
-                        camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 9, 3);
+                        camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 9, 3);
                     }
                 } else {
-                    camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 1, 0);
+                    camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 1, 0);
                     player++;
-                    camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 1, 1);
+                    camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 1, 1);
                     player++;
-                    camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 1, 2);
+                    camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 1, 2);
                     if (gPlayerCountSelection1 == 4) {
                         player++;
-                        camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 1, 3);
+                        camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 1, 3);
                     }
                 }
                 break;
@@ -1267,24 +1267,24 @@ void func_8003D080(void) {
     } else {
         switch (gActiveScreenMode) {
             case SCREEN_MODE_1P:
-                camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 3, 0);
+                camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 3, 0);
                 break;
 
             case SCREEN_MODE_2P_SPLITSCREEN_HORIZONTAL:
             case SCREEN_MODE_2P_SPLITSCREEN_VERTICAL:
-                camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 3, 0);
+                camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 3, 0);
                 player++;
-                camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 3, 1);
+                camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 3, 1);
                 break;
 
             case SCREEN_MODE_3P_4P_SPLITSCREEN:
-                camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 3, 0);
+                camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 3, 0);
                 player++;
-                camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 3, 1);
+                camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 3, 1);
                 player++;
-                camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 3, 2);
+                camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 3, 2);
                 player++;
-                camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 3, 3);
+                camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 3, 3);
                 break;
         }
     }
@@ -1346,8 +1346,8 @@ void func_8003DB5C(void) {
     Player* player = gPlayerOne;
     s32 playerId;
 
-    camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 3, 0);
-    camera_init(player->pos[0], player->pos[1], player->pos[2], player->rotation[1], 3, 1);
+    camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 3, 0);
+    camera_init(player->pos.x, player->pos.y, player->pos.z, player->rotation[1], 3, 1);
 
     for (playerId = 0; playerId < NUM_PLAYERS; playerId++, player++) {
         load_kart_palette(player, playerId, 1, 0);

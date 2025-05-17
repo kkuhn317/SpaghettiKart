@@ -644,8 +644,8 @@ s32 set_vehicle_render_distance_flags(Vec3f vehiclePos, f32 renderDistance, s32 
         // Checks distance from each player.
         for (i = 0; i < gPlayerCount; i++, player++) {
             if (((player->type & PLAYER_HUMAN) != 0) && ((player->type & PLAYER_KART_AI) == 0)) {
-                playerX = player->pos[0];
-                playerZ = player->pos[2];
+                playerX = player->pos.x;
+                playerZ = player->pos.z;
 
                 // Is player within render distance
                 if (((playerX - renderDistance) < x) && ((playerX + renderDistance) > x) &&
@@ -661,8 +661,8 @@ s32 set_vehicle_render_distance_flags(Vec3f vehiclePos, f32 renderDistance, s32 
     } else { // Demo cinematic uses the camera to check render distance
         camera = camera1;
         for (i = 0; i < numScreens; i++, camera++) {
-            playerX = camera->pos[0];
-            playerZ = camera->pos[2];
+            playerX = camera->pos.x;
+            playerZ = camera->pos.z;
             if (((playerX - renderDistance) < x) && (x < (playerX + renderDistance)) &&
                 ((playerZ - renderDistance) < z) && (z < (playerZ + renderDistance))) {
                 flag |= (RENDER_VEHICLE << i);
@@ -1027,8 +1027,8 @@ void func_80007FA4(s32 arg0, Player* player, f32 arg2) {
     f32 temp_f2;
     s32 test;
 
-    temp_f0 = D_80163418[arg0] - player->pos[0];
-    temp_f2 = D_80163438[arg0] - player->pos[2];
+    temp_f0 = D_80163418[arg0] - player->pos.x;
+    temp_f2 = D_80163438[arg0] - player->pos.z;
     temp_f12 = (temp_f0 * temp_f0) + (temp_f2 * temp_f2);
     if (arg0 == 3) {
         if ((temp_f12 < 25.0f) && (D_80163410[arg0] < 5)) {
@@ -1081,8 +1081,8 @@ void func_80008424(s32 playerId, f32 arg1, Player* player) {
         } else if ((bStopAICrossing[playerId] == 1) && !(player->effects & (STAR_EFFECT | BOO_EFFECT))) {
             decelerate_ai_player(player, 10.0f);
             if (player->currentSpeed == 0.0) {
-                player->velocity[0] = 0.0f;
-                player->velocity[2] = 0.0f;
+                player->velocity.x = 0.0f;
+                player->velocity.z = 0.0f;
             }
         } else {
             var_f0 = 3.3333333f;
@@ -1325,9 +1325,9 @@ s32 func_80008E58(s32 payerId, s32 pathIndex) {
     UNUSED s32 stackPadding;
 
     player = &gPlayers[payerId];
-    posX = player->pos[0];
-    posY = player->pos[1];
-    posZ = player->pos[2];
+    posX = player->pos.x;
+    posY = player->pos.y;
+    posZ = player->pos.z;
     stackPadding = pathIndex;
     trackSectionId = get_track_section_id(player->collision.meshIndexZX);
     D_80163318[payerId] = trackSectionId;
@@ -1394,9 +1394,9 @@ void func_800090F0(s32 playerId, Player* player) {
     f32 posZ;
     UNUSED f32 pad[2];
 
-    posX = player->pos[0];
-    posY = player->pos[1];
-    posZ = player->pos[2];
+    posX = player->pos.x;
+    posY = player->pos.y;
+    posZ = player->pos.z;
     if (D_80163490[playerId] == 1) {
         D_80163448 = func_80008E58(playerId, random_int(4U));
         sSomeNearestWaypoint = func_8000CD24(posX, posY, posZ, 0, player, playerId, D_80163448);
@@ -1435,9 +1435,9 @@ void func_8000929C(s32 playerId, Player* player) {
     s16 var_t0;
     UNUSED s32 stackPadding1;
 
-    tempPos0 = player->pos[0];
-    tempPos1 = player->pos[1];
-    tempPos2 = player->pos[2];
+    tempPos0 = player->pos.x;
+    tempPos1 = player->pos.y;
+    tempPos2 = player->pos.z;
     D_801630E2 = 0;
     D_80163240[playerId] = 0;
     sSomeNearestWaypoint =
@@ -1648,17 +1648,17 @@ void func_80009B60(s32 playerId) {
             return;
         }
         D_801633E0[playerId] = 0;
-        if (player->pos[0] < gCourseMinX) {
+        if (player->pos.x < gCourseMinX) {
             D_801633E0[playerId] = 1;
         }
-        if (gCourseMaxX < player->pos[0]) {
+        if (gCourseMaxX < player->pos.x) {
             D_801633E0[playerId] = 2;
         }
-        if (player->pos[2] < gCourseMinZ) {
+        if (player->pos.z < gCourseMinZ) {
             D_801633E0[playerId] = 3;
         }
         // MISMATCH3
-        if (gCourseMaxZ < player->pos[2]) {
+        if (gCourseMaxZ < player->pos.z) {
             D_801633E0[playerId] = 4;
         }
         if (!(player->unk_0CA & 2) && !(player->unk_0CA & 8)) {
@@ -1725,7 +1725,7 @@ void func_80009B60(s32 playerId) {
                     set_player_height(player);
                 }
                 if (D_801631E0[playerId] == 1) {
-                    player->pos[1] = D_80164510[playerId];
+                    player->pos.y = D_80164510[playerId];
                 }
                 D_801631F8[playerId] = D_801631E0[playerId];
 
@@ -1763,8 +1763,8 @@ void func_80009B60(s32 playerId) {
                     //check_ai_crossing_distance(playerId);
                     func_8000D3B8(playerId);
                     func_8000D438(playerId, D_801630E0);
-                    temp_f0 = D_80162FA0[0] - player->pos[0];
-                    temp_f2 = D_80162FA0[2] - player->pos[2];
+                    temp_f0 = D_80162FA0[0] - player->pos.x;
+                    temp_f2 = D_80162FA0[2] - player->pos.z;
                     if (!(player->effects & 0x80) && !(player->effects & 0x40) && !(player->effects & 0x800)) {
                         if (((temp_f0 * temp_f0) + (temp_f2 * temp_f2)) > 6400.0f) {
                             if (D_80163448 == 0) {
@@ -2153,7 +2153,7 @@ void func_8000B95C(s32 playerId, u16 waypointIndex, s32 pathIndex) {
     if (CM_GetProps()->AIMaximumSeparation >= 0.0f) {
         if ((gPlayers[playerId].type & 0x8000) != 0) {
             D_80163068[playerId] =
-                func_8000B874(gPlayers[playerId].pos[0], gPlayers[playerId].pos[2], waypointIndex, pathIndex);
+                func_8000B874(gPlayers[playerId].pos.x, gPlayers[playerId].pos.z, waypointIndex, pathIndex);
         }
     }
 }
@@ -2513,9 +2513,9 @@ s16 func_8000CD24(f32 posX, f32 posY, f32 posZ, s16 waypointIndex, Player* playe
         if (D_801631E0[playerId] == 1) {
             if (player->unk_0CA & 1) {
                 temp_v1 = &D_80164550[pathIndex][waypointIndex];
-                player->pos[0] = (f32) temp_v1->posX;
-                player->pos[1] = (f32) temp_v1->posY;
-                player->pos[2] = (f32) temp_v1->posZ;
+                player->pos.x = (f32) temp_v1->posX;
+                player->pos.y = (f32) temp_v1->posY;
+                player->pos.z = (f32) temp_v1->posZ;
                 player->unk_0CA &= ~0x0001;
                 return waypointIndex;
             }
@@ -2531,9 +2531,9 @@ s16 func_8000CD24(f32 posX, f32 posY, f32 posZ, s16 waypointIndex, Player* playe
                     newWaypoint =
                         find_closest_waypoint_track_section(posX, posY, posZ, D_80163318[playerId], &pathIndex);
                     temp_v1 = &D_80164550[pathIndex][newWaypoint];
-                    player->pos[0] = (f32) temp_v1->posX;
-                    player->pos[1] = (f32) temp_v1->posY;
-                    player->pos[2] = (f32) temp_v1->posZ;
+                    player->pos.x = (f32) temp_v1->posX;
+                    player->pos.y = (f32) temp_v1->posY;
+                    player->pos.z = (f32) temp_v1->posZ;
                 }
             } else {
                 newWaypoint = find_closest_waypoint_with_previous_waypoint(posX, posY, posZ, waypointIndex, pathIndex);
@@ -2543,9 +2543,9 @@ s16 func_8000CD24(f32 posX, f32 posY, f32 posZ, s16 waypointIndex, Player* playe
                     posX = (f32) temp_v1->posX;
                     posY = (f32) temp_v1->posY;
                     posZ = (f32) temp_v1->posZ;
-                    player->pos[0] = posX;
-                    player->pos[1] = posY;
-                    player->pos[2] = posZ;
+                    player->pos.x = posX;
+                    player->pos.y = posY;
+                    player->pos.z = posZ;
                     check_bounding_collision(&player->collision, 10.0f, posX, posY, posZ);
                     D_80163318[playerId] = get_track_section_id(player->collision.meshIndexZX);
                 }
@@ -2734,12 +2734,12 @@ s16 func_8000D6D0(Vec3f position, s16* waypointIndex, f32 speed, f32 arg3, s16 p
     TrackWaypoint* path;
 
     path = D_80164550[pathIndex];
-    oldPos[0] = position[0];
-    oldPos[1] = position[1];
-    oldPos[2] = position[2];
-    oldPosX = position[0];
-    oldPosY = position[1];
-    oldPosZ = position[2];
+    oldPos[0] = position.x;
+    oldPos[1] = position.y;
+    oldPos[2] = position.z;
+    oldPosX = position.x;
+    oldPosY = position.y;
+    oldPosZ = position.z;
     temp_v0 = func_8000D2B4(oldPosX, oldPosY, oldPosZ, *waypointIndex, (s32) pathIndex);
     *waypointIndex = temp_v0;
     temp_v1 = temp_v0 + arg5;
@@ -2767,9 +2767,9 @@ s16 func_8000D6D0(Vec3f position, s16* waypointIndex, f32 speed, f32 arg3, s16 p
         var_f12 = oldPosY;
         var_f14 = oldPosZ;
     }
-    position[0] = var_f2;
-    position[1] = var_f12;
-    position[2] = var_f14;
+    position.x = var_f2;
+    position.y = var_f12;
+    position.z = var_f14;
     return get_angle_between_waypoints(oldPos, position);
 }
 
@@ -2800,13 +2800,13 @@ s16 func_8000D940(Vec3f pos, s16* waypointIndex, f32 speed, f32 arg3, s16 pathIn
     s32 waypointCount;
     Vec3f sp54;
 
-    sp54[0] = pos[0];
-    sp54[1] = pos[1];
-    sp54[2] = pos[2];
+    sp54[0] = pos.x;
+    sp54[1] = pos.y;
+    sp54[2] = pos.z;
     waypointCount = gWaypointCountByPathIndex[pathIndex];
-    temp_f20 = pos[0];
-    temp_f22 = pos[1];
-    temp_f24 = pos[2];
+    temp_f20 = pos.x;
+    temp_f22 = pos.y;
+    temp_f24 = pos.z;
     temp_v0 = func_8000D2B4(temp_f20, temp_f22, temp_f24, *waypointIndex, (s32) pathIndex);
     *waypointIndex = temp_v0;
     waypoint1 = ((temp_v0 + waypointCount) - 3) % waypointCount;
@@ -2833,9 +2833,9 @@ s16 func_8000D940(Vec3f pos, s16* waypointIndex, f32 speed, f32 arg3, s16 pathIn
         var_f12 = temp_f22;
         var_f14 = temp_f24;
     }
-    pos[0] = var_f2;
-    pos[1] = var_f12;
-    pos[2] = var_f14;
+    pos.x = var_f2;
+    pos.y = var_f12;
+    pos.z = var_f14;
     return get_angle_between_waypoints(sp54, pos);
 }
 
@@ -2866,12 +2866,12 @@ s16 update_vehicle_following_waypoint(Vec3f pos, s16* waypointIndex, f32 speed) 
     Path2D* temp_a2;
     Vec3f sp38;
 
-    origXPos = pos[0];
-    origYPos = pos[1];
-    origZPos = pos[2];
-    sp38[0] = pos[0];
-    sp38[1] = pos[1];
-    sp38[2] = pos[2];
+    origXPos = pos.x;
+    origYPos = pos.y;
+    origZPos = pos.z;
+    sp38[0] = pos.x;
+    sp38[1] = pos.y;
+    sp38[2] = pos.z;
     newWaypointIndex = find_closest_vehicles_waypoint(origXPos, origYPos, origZPos, *waypointIndex);
     *waypointIndex = newWaypointIndex;
     farWaypoint1 = (newWaypointIndex + 3) % gVehicle2DWaypointLength;
@@ -2890,9 +2890,9 @@ s16 update_vehicle_following_waypoint(Vec3f pos, s16* waypointIndex, f32 speed) 
         newX = origXPos;
         newZ = origZPos;
     }
-    pos[0] = newX;
-    pos[1] = origYPos;
-    pos[2] = newZ;
+    pos.x = newX;
+    pos.y = origYPos;
+    pos.z = newZ;
     return get_angle_between_waypoints(sp38, pos);
 }
 
@@ -3028,9 +3028,9 @@ void func_8000DF8C(s32 bombKartId) {
             if (GetCourse() == GetPodiumCeremony()) {
                 if (D_8016347E == 1) {
                     var_v0 = gPlayerFour;
-                    temp_f0 = var_f22 - var_v0->pos[0];
-                    temp_f2 = var_f20 - var_v0->pos[1];
-                    temp_f12 = var_f24 - var_v0->pos[2];
+                    temp_f0 = var_f22 - var_v0->pos.x;
+                    temp_f2 = var_f20 - var_v0->pos.y;
+                    temp_f12 = var_f24 - var_v0->pos.z;
                     if ((((temp_f0 * temp_f0) + (temp_f2 * temp_f2)) + (temp_f12 * temp_f12)) < 25.0f) {
                         var_s1 = 0;
                         sp7E = 4;
@@ -3043,9 +3043,9 @@ void func_8000DF8C(s32 bombKartId) {
                 for (var_a0 = 0; var_a0 < gPlayerCount; var_a0++) {
                     var_v0 = &gPlayers[var_a0];
                     if (!(var_v0->effects & 0x80000000)) {
-                        temp_f0 = var_f22 - var_v0->pos[0];
-                        temp_f2 = var_f20 - var_v0->pos[1];
-                        temp_f12 = var_f24 - var_v0->pos[2];
+                        temp_f0 = var_f22 - var_v0->pos.x;
+                        temp_f2 = var_f20 - var_v0->pos.y;
+                        temp_f12 = var_f24 - var_v0->pos.z;
                         if ((((temp_f0 * temp_f0) + (temp_f2 * temp_f2)) + (temp_f12 * temp_f12)) < 25.0f) {
                             sp7E = 4;
                             var_s1 = 0;
@@ -3514,7 +3514,7 @@ void func_8000F628(void) {
         D_801633C8[i] = 0;
         D_801633F8[i] = 0;
         D_80163318[i] = 0;
-        D_80163450[i] = player->pos[2];
+        D_80163450[i] = player->pos.z;
         D_80163380[i] = 6;
         if (gPlayers[i].type & PLAYER_HUMAN) {
             D_80163330[i] = 3;
@@ -4335,8 +4335,8 @@ void spawn_vehicle_on_road(Vec3f position, Vec3s rotation, Vec3f velocity, s32 w
     UNUSED f32 pad;
     f32 origZPos;
 
-    origXPos = position[0];
-    origZPos = position[2];
+    origXPos = position.x;
+    origZPos = position.z;
     if (D_8016347A == 0) {
         func_8000D6D0(position, (s16*) &waypointIndex, speed,
                       someMultiplierTheSequel, 0, 3);
@@ -4350,20 +4350,20 @@ void spawn_vehicle_on_road(Vec3f position, Vec3s rotation, Vec3f velocity, s32 w
         rotation[1] = 0;
         rotation[2] = 0;
     }
-    velocity[0] = position[0] - origXPos;
-    velocity[2] = position[2] - origZPos;
+    velocity.x = position.x - origXPos;
+    velocity.z = position.z - origZPos;
 }
 
 void set_vehicle_pos_waypoint(TrainCarStuff* trainCar, Path2D* posXZ, u16 waypoint) {
-    trainCar->position[0] = (f32) posXZ->x;
-    trainCar->position[1] = (f32) D_80162EB0;
-    trainCar->position[2] = (f32) posXZ->z;
+    trainCar->position.x = (f32) posXZ->x;
+    trainCar->position.y = (f32) D_80162EB0;
+    trainCar->position.z = (f32) posXZ->z;
     trainCar->actorIndex = -1;
     trainCar->waypointIndex = waypoint;
     trainCar->isActive = 0;
-    trainCar->velocity[0] = 0.0f;
-    trainCar->velocity[1] = 0.0f;
-    trainCar->velocity[2] = 0.0f;
+    trainCar->velocity.x = 0.0f;
+    trainCar->velocity.y = 0.0f;
+    trainCar->velocity.z = 0.0f;
 }
 
 /**
@@ -4446,16 +4446,16 @@ void sync_train_components(TrainCarStuff* trainCar, s16 orientationY) {
     struct TrainCar* trainCarActor;
 
     trainCarActor = (struct TrainCar*) GET_ACTOR(trainCar->actorIndex);
-    trainCarActor->pos[0] = trainCar->position[0];
-    trainCarActor->pos[1] = trainCar->position[1];
-    trainCarActor->pos[2] = trainCar->position[2];
+    trainCarActor->pos.x = trainCar->position.x;
+    trainCarActor->pos.y = trainCar->position.y;
+    trainCarActor->pos.z = trainCar->position.z;
     if (gIsMirrorMode != 0) {
-        trainCarActor->rot[1] = -orientationY;
+        trainCarActor->rot.y = -orientationY;
     } else {
-        trainCarActor->rot[1] = orientationY;
+        trainCarActor->rot.y = orientationY;
     }
-    trainCarActor->velocity[0] = trainCar->velocity[0];
-    trainCarActor->velocity[2] = trainCar->velocity[2];
+    trainCarActor->velocity.x = trainCar->velocity.x;
+    trainCarActor->velocity.z = trainCar->velocity.z;
 }
 
 void update_vehicle_trains(void) {
@@ -4474,14 +4474,14 @@ void update_vehicle_trains(void) {
     for (i = 0; i < NUM_TRAINS; i++) {
         oldWaypointIndex = (u16) gTrainList[i].locomotive.waypointIndex;
 
-        temp_f20 = gTrainList[i].locomotive.position[0];
-        temp_f22 = gTrainList[i].locomotive.position[2];
+        temp_f20 = gTrainList[i].locomotive.position.x;
+        temp_f22 = gTrainList[i].locomotive.position.z;
 
         orientationYUpdate = update_vehicle_following_waypoint(
             gTrainList[i].locomotive.position, (s16*) &gTrainList[i].locomotive.waypointIndex, gTrainList[i].speed);
 
-        gTrainList[i].locomotive.velocity[0] = gTrainList[i].locomotive.position[0] - temp_f20;
-        gTrainList[i].locomotive.velocity[2] = gTrainList[i].locomotive.position[2] - temp_f22;
+        gTrainList[i].locomotive.velocity.x = gTrainList[i].locomotive.position.x - temp_f20;
+        gTrainList[i].locomotive.velocity.z = gTrainList[i].locomotive.position.z - temp_f22;
 
         sync_train_components(&gTrainList[i].locomotive, orientationYUpdate);
 
@@ -4499,9 +4499,9 @@ void update_vehicle_trains(void) {
             gTrainList[i].locomotive.position, TRAIN_SMOKE_RENDER_DISTANCE, gTrainList[i].someFlags);
         // Renders locomotive smoke on all screens if any player is within range.
         if ((((s16) gTrainSmokeTimer % 5) == 0) && (gTrainList[i].someFlags != 0)) {
-            smokePos[0] = gTrainList[i].locomotive.position[0];
-            smokePos[1] = (f32) ((f64) gTrainList[i].locomotive.position[1] + 65.0);
-            smokePos[2] = (f32) ((f64) gTrainList[i].locomotive.position[2] + 25.0);
+            smokePos[0] = gTrainList[i].locomotive.position.x;
+            smokePos[1] = (f32) ((f64) gTrainList[i].locomotive.position.y + 65.0);
+            smokePos[2] = (f32) ((f64) gTrainList[i].locomotive.position.z + 25.0);
             adjust_position_by_angle(smokePos, gTrainList[i].locomotive.position, orientationYUpdate);
             spawn_train_smoke(i, smokePos, 1.1f);
         }
@@ -4509,25 +4509,25 @@ void update_vehicle_trains(void) {
         car = &gTrainList[i].tender;
 
         if (car->isActive == 1) {
-            temp_f20 = car->position[0];
-            temp_f22 = car->position[2];
+            temp_f20 = car->position.x;
+            temp_f22 = car->position.z;
             orientationYUpdate =
                 update_vehicle_following_waypoint(car->position, (s16*) &car->waypointIndex, gTrainList[i].speed);
-            car->velocity[0] = car->position[0] - temp_f20;
-            car->velocity[2] = car->position[2] - temp_f22;
+            car->velocity.x = car->position.x - temp_f20;
+            car->velocity.z = car->position.z - temp_f22;
             sync_train_components(car, orientationYUpdate);
         }
 
         for (j = 0; j < gTrainList[i].numCarriages; j++) {
             car = &gTrainList[i].passengerCars[j];
             if (car->isActive == 1) {
-                temp_f20 = car->position[0];
-                temp_f22 = car->position[2];
+                temp_f20 = car->position.x;
+                temp_f22 = car->position.z;
 
                 orientationYUpdate =
                     update_vehicle_following_waypoint(car->position, (s16*) &car->waypointIndex, gTrainList[i].speed);
-                car->velocity[0] = car->position[0] - temp_f20;
-                car->velocity[2] = car->position[2] - temp_f22;
+                car->velocity.x = car->position.x - temp_f20;
+                car->velocity.z = car->position.z - temp_f22;
                 sync_train_components(car, orientationYUpdate);
             }
         }
@@ -4545,22 +4545,22 @@ void func_80012DC0(s32 playerId, Player* player) {
 
     if (D_801631E0[playerId] != 1) {
         if (!(player->effects & 0x01000000)) {
-            playerPosX = player->pos[0];
-            playerPosZ = player->pos[2];
+            playerPosX = player->pos.x;
+            playerPosZ = player->pos.z;
             for (trainIndex = 0; trainIndex < NUM_TRAINS; trainIndex++) {
                 trainCar = &gTrainList[trainIndex].locomotive;
-                x_dist = playerPosX - trainCar->position[0];
-                z_dist = playerPosZ - trainCar->position[2];
+                x_dist = playerPosX - trainCar->position.x;
+                z_dist = playerPosZ - trainCar->position.z;
                 if ((x_dist > -100.0) && (x_dist < 100.0)) {
                     if ((z_dist > -100.0) && (z_dist < 100.0)) {
-                        if (func_80006018(trainCar->position[0], trainCar->position[2], trainCar->velocity[0],
-                                          trainCar->velocity[2], 60.0f, 20.0f, playerPosX, playerPosZ) == 1) {
+                        if (func_80006018(trainCar->position.x, trainCar->position.z, trainCar->velocity.x,
+                                          trainCar->velocity.z, 60.0f, 20.0f, playerPosX, playerPosZ) == 1) {
                             player->soundEffects |= REVERSE_SOUND_EFFECT;
                         }
                         trainCar = &gTrainList[trainIndex].tender;
                         if (trainCar->isActive == 1) {
-                            if (func_80006018(trainCar->position[0], trainCar->position[2], trainCar->velocity[0],
-                                              trainCar->velocity[2], 30.0f, 20.0f, playerPosX, playerPosZ) == 1) {
+                            if (func_80006018(trainCar->position.x, trainCar->position.z, trainCar->velocity.x,
+                                              trainCar->velocity.z, 30.0f, 20.0f, playerPosX, playerPosZ) == 1) {
                                 player->soundEffects |= REVERSE_SOUND_EFFECT;
                             }
                         }
@@ -4570,13 +4570,13 @@ void func_80012DC0(s32 playerId, Player* player) {
                 for (passengerCarIndex = 0; passengerCarIndex < gTrainList[trainIndex].numCarriages;
                      passengerCarIndex++) {
                     trainCar = &gTrainList[trainIndex].passengerCars[passengerCarIndex];
-                    x_dist = playerPosX - trainCar->position[0];
-                    z_dist = playerPosZ - trainCar->position[2];
+                    x_dist = playerPosX - trainCar->position.x;
+                    z_dist = playerPosZ - trainCar->position.z;
                     if (trainCar->isActive == 1) {
                         if ((x_dist > -100.0) && (x_dist < 100.0)) {
                             if ((z_dist > -100.0) && (z_dist < 100.0)) {
-                                if (func_80006018(trainCar->position[0], trainCar->position[2], trainCar->velocity[0],
-                                                  trainCar->velocity[2], 30.0f, 20.0f, playerPosX, playerPosZ) == 1) {
+                                if (func_80006018(trainCar->position.x, trainCar->position.z, trainCar->velocity.x,
+                                                  trainCar->velocity.z, 30.0f, 20.0f, playerPosX, playerPosZ) == 1) {
                                     player->soundEffects |= REVERSE_SOUND_EFFECT;
                                 }
                             }
@@ -4656,9 +4656,9 @@ void init_vehicles_ferry(void) {
         temp = i * 0xB4;
         paddleBoat = &gPaddleBoats[i];
         temp_a2 = &gVehicle2DWaypoint[temp];
-        paddleBoat->position[0] = temp_a2->x;
-        paddleBoat->position[1] = D_80162EB2;
-        paddleBoat->position[2] = temp_a2->z;
+        paddleBoat->position.x = temp_a2->x;
+        paddleBoat->position.y = D_80162EB2;
+        paddleBoat->position.z = temp_a2->z;
         paddleBoat->waypointIndex = i * 0xB4;
         paddleBoat->actorIndex = -1;
 
@@ -4667,9 +4667,9 @@ void init_vehicles_ferry(void) {
         } else {
             paddleBoat->isActive = 1;
         }
-        paddleBoat->velocity[0] = 0.0f;
-        paddleBoat->velocity[1] = 0.0f;
-        paddleBoat->velocity[2] = 0.0f;
+        paddleBoat->velocity.x = 0.0f;
+        paddleBoat->velocity.y = 0.0f;
+        paddleBoat->velocity.z = 0.0f;
         paddleBoat->speed = 1.6666666f;
         paddleBoat->rotY = 0;
     }
@@ -4696,22 +4696,22 @@ void update_vehicle_paddle_boats(void) {
     for (i = 0; i < NUM_ACTIVE_PADDLE_BOATS; i++) {
         paddleBoat = &gPaddleBoats[i];
         if (paddleBoat->isActive == 1) {
-            temp_f26 = paddleBoat->position[0];
-            temp_f28 = paddleBoat->position[1];
-            temp_f30 = paddleBoat->position[2];
+            temp_f26 = paddleBoat->position.x;
+            temp_f28 = paddleBoat->position.y;
+            temp_f30 = paddleBoat->position.z;
             update_vehicle_following_waypoint(paddleBoat->position, (s16*) &paddleBoat->waypointIndex,
                                               paddleBoat->speed);
             paddleBoat->someFlags = set_vehicle_render_distance_flags(paddleBoat->position, BOAT_SMOKE_RENDER_DISTANCE,
                                                                       paddleBoat->someFlags);
             if ((((s16) gFerrySmokeTimer % 10) == 0) && (paddleBoat->someFlags != 0)) {
-                smokePos[0] = (f32) ((f64) paddleBoat->position[0] - 30.0);
-                smokePos[1] = (f32) ((f64) paddleBoat->position[1] + 180.0);
-                smokePos[2] = (f32) ((f64) paddleBoat->position[2] + 45.0);
+                smokePos[0] = (f32) ((f64) paddleBoat->position.x - 30.0);
+                smokePos[1] = (f32) ((f64) paddleBoat->position.y + 180.0);
+                smokePos[2] = (f32) ((f64) paddleBoat->position.z + 45.0);
                 adjust_position_by_angle(smokePos, paddleBoat->position, paddleBoat->rotY);
                 spawn_ferry_smoke(i, smokePos, 1.1f);
-                smokePos[0] = (f32) ((f64) paddleBoat->position[0] + 30.0);
-                smokePos[1] = (f32) ((f64) paddleBoat->position[1] + 180.0);
-                smokePos[2] = (f32) ((f64) paddleBoat->position[2] + 45.0);
+                smokePos[0] = (f32) ((f64) paddleBoat->position.x + 30.0);
+                smokePos[1] = (f32) ((f64) paddleBoat->position.y + 180.0);
+                smokePos[2] = (f32) ((f64) paddleBoat->position.z + 45.0);
                 adjust_position_by_angle(smokePos, paddleBoat->position, paddleBoat->rotY);
                 spawn_ferry_smoke(i, smokePos, 1.1f);
             }
@@ -4759,21 +4759,21 @@ void update_vehicle_paddle_boats(void) {
             } else if (temp < 0) {
                 paddleBoat->rotY -= var_v1;
             }
-            paddleBoat->velocity[0] = paddleBoat->position[0] - temp_f26;
-            paddleBoat->velocity[1] = paddleBoat->position[1] - temp_f28;
-            paddleBoat->velocity[2] = paddleBoat->position[2] - temp_f30;
+            paddleBoat->velocity.x = paddleBoat->position.x - temp_f26;
+            paddleBoat->velocity.y = paddleBoat->position.y - temp_f28;
+            paddleBoat->velocity.z = paddleBoat->position.z - temp_f30;
             paddleBoatActor = GET_ACTOR(paddleBoat->actorIndex);
-            paddleBoatActor->pos[0] = paddleBoat->position[0];
-            paddleBoatActor->pos[1] = paddleBoat->position[1];
-            paddleBoatActor->pos[2] = paddleBoat->position[2];
+            paddleBoatActor->pos.x = paddleBoat->position.x;
+            paddleBoatActor->pos.y = paddleBoat->position.y;
+            paddleBoatActor->pos.z = paddleBoat->position.z;
             if (gIsMirrorMode != 0) {
-                paddleBoatActor->rot[1] = -paddleBoat->rotY;
+                paddleBoatActor->rot.y = -paddleBoat->rotY;
             } else {
-                paddleBoatActor->rot[1] = paddleBoat->rotY;
+                paddleBoatActor->rot.y = paddleBoat->rotY;
             }
-            paddleBoatActor->velocity[0] = paddleBoat->velocity[0];
-            paddleBoatActor->velocity[1] = paddleBoat->velocity[1];
-            paddleBoatActor->velocity[2] = paddleBoat->velocity[2];
+            paddleBoatActor->velocity.x = paddleBoat->velocity.x;
+            paddleBoatActor->velocity.y = paddleBoat->velocity.y;
+            paddleBoatActor->velocity.z = paddleBoat->velocity.z;
         }
     }
 }
@@ -4789,19 +4789,19 @@ void func_80013854(Player* player) {
     f32 playerY;
 
     if (!((player->effects & 0x01000000)) && (!(player->effects & HIT_BY_ITEM_EFFECT))) {
-        playerX = player->pos[0];
-        playerY = player->pos[1];
-        playerZ = player->pos[2];
+        playerX = player->pos.x;
+        playerY = player->pos.y;
+        playerZ = player->pos.z;
         for (someIndex = 0; someIndex < NUM_ACTIVE_PADDLE_BOATS; someIndex++) {
             tempPaddleWheelBoat = &gPaddleBoats[someIndex];
             if (tempPaddleWheelBoat->isActive == 1) {
-                x_diff = playerX - tempPaddleWheelBoat->position[0];
-                y_diff = playerY - tempPaddleWheelBoat->position[1];
-                z_diff = playerZ - tempPaddleWheelBoat->position[2];
+                x_diff = playerX - tempPaddleWheelBoat->position.x;
+                y_diff = playerY - tempPaddleWheelBoat->position.y;
+                z_diff = playerZ - tempPaddleWheelBoat->position.z;
                 if ((x_diff > -300.0) && (x_diff < 300.0)) {
                     if ((z_diff > -300.0) && (z_diff < 300.0)) {
-                        if ((func_80006018(tempPaddleWheelBoat->position[0], tempPaddleWheelBoat->position[2],
-                                           tempPaddleWheelBoat->velocity[0], tempPaddleWheelBoat->velocity[2], 200.0f,
+                        if ((func_80006018(tempPaddleWheelBoat->position.x, tempPaddleWheelBoat->position.z,
+                                           tempPaddleWheelBoat->velocity.x, tempPaddleWheelBoat->velocity.z, 200.0f,
                                            60.0f, playerX, playerZ) == 1) &&
                             (y_diff < 60.0)) {
                             player->soundEffects |= 0x80000;
@@ -4824,15 +4824,15 @@ void initialize_toads_turnpike_vehicle(f32 speedA, f32 speedB, s32 numVehicles, 
         waypointOffset = (((i * numWaypoints) / numVehicles) + arg3) % numWaypoints;
         veh = &vehicleList[i];
         temp_v0 = &waypointList[waypointOffset];
-        veh->position[0] = (f32) temp_v0->posX;
-        veh->position[1] = (f32) temp_v0->posY;
-        veh->position[2] = (f32) temp_v0->posZ;
+        veh->position.x = (f32) temp_v0->posX;
+        veh->position.y = (f32) temp_v0->posY;
+        veh->position.z = (f32) temp_v0->posZ;
         veh->actorIndex = -1;
         veh->waypointIndex = waypointOffset;
         veh->unused = 0;
-        veh->velocity[0] = 0.0f;
-        veh->velocity[1] = 0.0f;
-        veh->velocity[2] = 0.0f;
+        veh->velocity.x = 0.0f;
+        veh->velocity.y = 0.0f;
+        veh->velocity.z = 0.0f;
         veh->someFlags = 0;
         veh->someFlagsTheSequel = 0;
         if (gModeSelection == TIME_TRIALS) {
@@ -4905,9 +4905,9 @@ void update_vehicle_follow_waypoint(VehicleStuff* vehicle) {
     Vec3f sp34;
     struct Actor* vehicleActor;
 
-    sp5C = vehicle->position[0];
-    sp58 = vehicle->position[1];
-    sp54 = vehicle->position[2];
+    sp5C = vehicle->position.x;
+    sp58 = vehicle->position.y;
+    sp54 = vehicle->position.z;
     sp40[0] = sp58;
     sp40[1] = 0.0f;
     sp40[2] = 0.0f;
@@ -4932,30 +4932,30 @@ void update_vehicle_follow_waypoint(VehicleStuff* vehicle) {
                                vehicle->someMultiplierTheSequel, 0);
     }
     adjust_angle(&vehicle->rotation[1], var_a1, 100);
-    temp_f0_3 = vehicle->position[0] - sp5C;
-    temp_f2_2 = vehicle->position[2] - sp54;
-    sp34[0] = vehicle->position[1];
+    temp_f0_3 = vehicle->position.x - sp5C;
+    temp_f2_2 = vehicle->position.z - sp54;
+    sp34[0] = vehicle->position.y;
     sp34[1] = 0.0f;
     sp34[2] = sqrtf((temp_f0_3 * temp_f0_3) + (temp_f2_2 * temp_f2_2));
     thing = get_angle_between_two_vectors(sp40, sp34);
     adjust_angle(&vehicle->rotation[0], -thing, 100);
-    vehicle->velocity[0] = vehicle->position[0] - sp5C;
-    vehicle->velocity[1] = vehicle->position[1] - sp58;
-    vehicle->velocity[2] = vehicle->position[2] - sp54;
+    vehicle->velocity.x = vehicle->position.x - sp5C;
+    vehicle->velocity.y = vehicle->position.y - sp58;
+    vehicle->velocity.z = vehicle->position.z - sp54;
     vehicleActor = GET_ACTOR(vehicle->actorIndex);
-    vehicleActor->pos[0] = vehicle->position[0];
-    vehicleActor->pos[1] = vehicle->position[1];
-    vehicleActor->pos[2] = vehicle->position[2];
-    vehicleActor->rot[0] = vehicle->rotation[0];
+    vehicleActor->pos.x = vehicle->position.x;
+    vehicleActor->pos.y = vehicle->position.y;
+    vehicleActor->pos.z = vehicle->position.z;
+    vehicleActor->rot.x = vehicle->rotation[0];
     if (gIsMirrorMode != 0) {
-        vehicleActor->rot[1] = -vehicle->rotation[1];
+        vehicleActor->rot.y = -vehicle->rotation[1];
     } else {
-        vehicleActor->rot[1] = vehicle->rotation[1];
+        vehicleActor->rot.y = vehicle->rotation[1];
     }
-    vehicleActor->rot[2] = vehicle->rotation[2];
-    vehicleActor->velocity[0] = vehicle->velocity[0];
-    vehicleActor->velocity[1] = vehicle->velocity[1];
-    vehicleActor->velocity[2] = vehicle->velocity[2];
+    vehicleActor->rot.z = vehicle->rotation[2];
+    vehicleActor->velocity.x = vehicle->velocity.x;
+    vehicleActor->velocity.y = vehicle->velocity.y;
+    vehicleActor->velocity.z = vehicle->velocity.z;
 }
 
 void func_80013F7C(s32 playerId, Player* player, VehicleStuff* vehicle, f32 arg3, f32 arg4, s32 arg5, u32 soundBits) {
@@ -4972,21 +4972,21 @@ void func_80013F7C(s32 playerId, Player* player, VehicleStuff* vehicle, f32 arg3
     if (((D_801631E0[playerId] != 1) || ((((player->type & PLAYER_HUMAN) != 0)) && !(player->type & PLAYER_KART_AI))) &&
         !(player->effects & 0x01000000)) {
 
-        spC4 = player->pos[0];
-        spC0 = player->pos[1];
-        spBC = player->pos[2];
+        spC4 = player->pos.x;
+        spC0 = player->pos.y;
+        spBC = player->pos.z;
 
         for (i = 0; i < arg5; i++) {
-            temp_f12 = spC4 - vehicle->position[0];
-            temp_f22 = spC0 - vehicle->position[1];
-            temp_f14 = spBC - vehicle->position[2];
+            temp_f12 = spC4 - vehicle->position.x;
+            temp_f22 = spC0 - vehicle->position.y;
+            temp_f14 = spBC - vehicle->position.z;
 
             if (((temp_f12) > -100.0) && ((temp_f12) < 100.0)) {
                 if ((temp_f22 > -20.0) && (temp_f22 < 20.0)) {
 
                     if (((temp_f14) > -100.0) && ((temp_f14) < 100.0)) {
-                        if (func_80006018(vehicle->position[0], vehicle->position[2], vehicle->velocity[0],
-                                          vehicle->velocity[2], arg3, arg4, spC4, spBC) == (s32) 1) {
+                        if (func_80006018(vehicle->position.x, vehicle->position.z, vehicle->velocity.x,
+                                          vehicle->velocity.z, arg3, arg4, spC4, spBC) == (s32) 1) {
                             player->soundEffects |= REVERSE_SOUND_EFFECT;
                         }
                     }
@@ -5399,9 +5399,9 @@ void calculate_camera_up_vector(Camera* camera, s32 cameraIndex) {
         camera->up[2] = 0.0f;
         camera->up[1] = 1.0f;
     } else {
-        xdiff = camera->lookAt[0] - camera->pos[0];
-        ydiff = camera->lookAt[1] - camera->pos[1];
-        zdiff = camera->lookAt[2] - camera->pos[2];
+        xdiff = camera->lookAt.x - camera->pos.x;
+        ydiff = camera->lookAt.y - camera->pos.y;
+        zdiff = camera->lookAt.z - camera->pos.z;
         distance = sqrtf((xdiff * xdiff) + (ydiff * ydiff) + (zdiff * zdiff));
         xnorm = xdiff / distance;
         ynorm = ydiff / distance;
@@ -5463,18 +5463,18 @@ void func_80015390(Camera* camera, UNUSED Player* player, UNUSED s32 arg2) {
     }
     func_8001D794(temp_s1, camera, sp64, &sp84, &sp80, &sp7C, camera->unk_2C);
     check_bounding_collision(&camera->collision, 10.0f, sp84, sp80, sp7C);
-    camera->lookAt[0] = sp64[0];
-    camera->lookAt[1] = sp64[1];
-    camera->lookAt[2] = sp64[2];
-    camera->pos[0] = sp84;
-    camera->pos[1] = sp80;
-    camera->pos[2] = sp7C;
-    temp_f12 = camera->lookAt[0] - camera->pos[0];
-    sp90 = camera->lookAt[1] - camera->pos[1];
-    temp_f14 = camera->lookAt[2] - camera->pos[2];
-    camera->rot[1] = atan2s(temp_f12, temp_f14);
-    camera->rot[0] = atan2s(sqrtf((temp_f12 * temp_f12) + (temp_f14 * temp_f14)), sp90);
-    camera->rot[2] = 0;
+    camera->lookAt.x = sp64[0];
+    camera->lookAt.y = sp64[1];
+    camera->lookAt.z = sp64[2];
+    camera->pos.x = sp84;
+    camera->pos.y = sp80;
+    camera->pos.z = sp7C;
+    temp_f12 = camera->lookAt.x - camera->pos.x;
+    sp90 = camera->lookAt.y - camera->pos.y;
+    temp_f14 = camera->lookAt.z - camera->pos.z;
+    camera->rot.y = atan2s(temp_f12, temp_f14);
+    camera->rot.x = atan2s(sqrtf((temp_f12 * temp_f12) + (temp_f14 * temp_f14)), sp90);
+    camera->rot.z = 0;
 }
 
 void func_80015544(s32 playerId, f32 arg1, s32 cameraId, s32 pathIndex) {
@@ -5502,9 +5502,9 @@ void func_80015544(s32 playerId, f32 arg1, s32 cameraId, s32 pathIndex) {
         D_80164618[cameraId] = (f32) (temp_f12 + 10.0);
     }
     D_80164648[cameraId] = 0.0f;
-    camera->pos[0] = D_801645F8[cameraId];
-    camera->pos[1] = D_80164618[cameraId];
-    camera->pos[2] = D_80164638[cameraId];
+    camera->pos.x = D_801645F8[cameraId];
+    camera->pos.y = D_80164618[cameraId];
+    camera->pos.z = D_80164638[cameraId];
 }
 
 void func_8001577C(Camera* camera, UNUSED Player* playerArg, UNUSED s32 arg2, s32 cameraId) {
@@ -5526,7 +5526,7 @@ void func_8001577C(Camera* camera, UNUSED Player* playerArg, UNUSED s32 arg2, s3
     player = gPlayerOne;
     player += playerId;
     gNearestWaypointByCameraId[cameraId] =
-        func_8000D33C(camera->pos[0], camera->pos[1], camera->pos[2], gNearestWaypointByCameraId[cameraId], pathIndex);
+        func_8000D33C(camera->pos.x, camera->pos.y, camera->pos.z, gNearestWaypointByCameraId[cameraId], pathIndex);
     playerWaypoint = gNearestWaypointByPlayerId[playerId];
     cameraWaypoint = gNearestWaypointByCameraId[cameraId];
     if (func_80007BF8(playerWaypoint, cameraWaypoint, 0x0032U, 0x000FU, gWaypointCountByPathIndex[pathIndex]) <= 0) {
@@ -5548,19 +5548,19 @@ void func_8001577C(Camera* camera, UNUSED Player* playerArg, UNUSED s32 arg2, s3
         }
     }
 alable:
-    camera->pos[0] = D_801645F8[cameraId];
-    camera->pos[1] = D_80164618[cameraId];
-    camera->pos[2] = D_80164638[cameraId];
-    camera->lookAt[0] = player->pos[0];
-    camera->lookAt[1] = player->pos[1] + 6.0;
-    camera->lookAt[2] = player->pos[2];
+    camera->pos.x = D_801645F8[cameraId];
+    camera->pos.y = D_80164618[cameraId];
+    camera->pos.z = D_80164638[cameraId];
+    camera->lookAt.x = player->pos.x;
+    camera->lookAt.y = player->pos.y + 6.0;
+    camera->lookAt.z = player->pos.z;
     func_80014D30(cameraId, pathIndex);
-    xdiff = camera->lookAt[0] - camera->pos[0];
-    ydiff = camera->lookAt[1] - camera->pos[1];
-    zdiff = camera->lookAt[2] - camera->pos[2];
-    camera->rot[1] = atan2s(xdiff, zdiff);
-    camera->rot[0] = atan2s(sqrtf((xdiff * xdiff) + (zdiff * zdiff)), ydiff);
-    camera->rot[2] = 0;
+    xdiff = camera->lookAt.x - camera->pos.x;
+    ydiff = camera->lookAt.y - camera->pos.y;
+    zdiff = camera->lookAt.z - camera->pos.z;
+    camera->rot.y = atan2s(xdiff, zdiff);
+    camera->rot.x = atan2s(sqrtf((xdiff * xdiff) + (zdiff * zdiff)), ydiff);
+    camera->rot.z = 0;
 }
 
 void func_80015A9C(s32 playerId, f32 arg1, s32 cameraId, s16 pathIndex) {
@@ -5582,9 +5582,9 @@ void func_80015A9C(s32 playerId, f32 arg1, s32 cameraId, s16 pathIndex) {
         D_80164648[cameraId] = 0.0f;
     }
 
-    camera->pos[0] = D_801645F8[cameraId];
-    camera->pos[1] = D_80164618[cameraId];
-    camera->pos[2] = D_80164638[cameraId];
+    camera->pos.x = D_801645F8[cameraId];
+    camera->pos.y = D_80164618[cameraId];
+    camera->pos.z = D_80164638[cameraId];
 }
 
 void func_80015C94(Camera* camera, UNUSED Player* unusedPlayer, UNUSED s32 arg2, s32 cameraId) {
@@ -5617,7 +5617,7 @@ void func_80015C94(Camera* camera, UNUSED Player* unusedPlayer, UNUSED s32 arg2,
     D_80163238 = playerId;
     pathIndex = gPathIndexByPlayerId[playerId];
     gNearestWaypointByCameraId[cameraId] =
-        func_8000D33C(camera->pos[0], camera->pos[1], camera->pos[2], gNearestWaypointByCameraId[cameraId], pathIndex);
+        func_8000D33C(camera->pos.x, camera->pos.y, camera->pos.z, gNearestWaypointByCameraId[cameraId], pathIndex);
     playerWaypoint = gNearestWaypointByPlayerId[playerId];
     cameraWaypoint = gNearestWaypointByCameraId[cameraId];
     if (func_80007BF8(playerWaypoint, cameraWaypoint, 0x0032U, 0x000FU, gWaypointCountByPathIndex[pathIndex]) <= 0) {
@@ -5649,27 +5649,27 @@ void func_80015C94(Camera* camera, UNUSED Player* unusedPlayer, UNUSED s32 arg2,
         midY = D_80164618[cameraId];
         midZ = D_80164638[cameraId];
     }
-    camera->pos[0] = midX;
-    camera->pos[2] = midZ;
+    camera->pos.x = midX;
+    camera->pos.z = midZ;
     temp_f2_2 = spawn_actor_on_surface(midX, (midY + 30.0), midZ);
     if ((temp_f2_2 < (midY - 20.0)) || (temp_f2_2 >= 3000.0)) {
-        camera->pos[1] = midY + 10.0;
+        camera->pos.y = midY + 10.0;
     } else {
-        camera->pos[1] = temp_f2_2 + 8.0;
+        camera->pos.y = temp_f2_2 + 8.0;
     }
     D_801645F8[cameraId] = midX;
     D_80164618[cameraId] = midY;
     D_80164638[cameraId] = midZ;
-    camera->lookAt[0] = player->pos[0];
-    camera->lookAt[1] = player->pos[1] + 6.0;
-    camera->lookAt[2] = player->pos[2];
+    camera->lookAt.x = player->pos.x;
+    camera->lookAt.y = player->pos.y + 6.0;
+    camera->lookAt.z = player->pos.z;
     func_80014D30(cameraId, pathIndex);
-    xdiff2 = camera->lookAt[0] - camera->pos[0];
-    ydiff2 = camera->lookAt[1] - camera->pos[1];
-    zdiff2 = camera->lookAt[2] - camera->pos[2];
-    camera->rot[1] = atan2s(xdiff2, zdiff2);
-    camera->rot[0] = atan2s(sqrtf((xdiff2 * xdiff2) + (zdiff2 * zdiff2)), ydiff2);
-    camera->rot[2] = 0;
+    xdiff2 = camera->lookAt.x - camera->pos.x;
+    ydiff2 = camera->lookAt.y - camera->pos.y;
+    zdiff2 = camera->lookAt.z - camera->pos.z;
+    camera->rot.y = atan2s(xdiff2, zdiff2);
+    camera->rot.x = atan2s(sqrtf((xdiff2 * xdiff2) + (zdiff2 * zdiff2)), ydiff2);
+    camera->rot.z = 0;
 }
 
 void func_800162CC(s32 playerId, f32 arg1, s32 cameraId, s16 pathIndex) {
@@ -5689,9 +5689,9 @@ void func_800162CC(s32 playerId, f32 arg1, s32 cameraId, s16 pathIndex) {
     D_80164658[cameraId] = gPlayers[playerId].unk_094;
     D_80164648[cameraId] = gPlayers[playerId].unk_094;
 
-    camera->pos[0] = D_801645F8[cameraId];
-    camera->pos[1] = D_80164618[cameraId];
-    camera->pos[2] = D_80164638[cameraId];
+    camera->pos.x = D_801645F8[cameraId];
+    camera->pos.y = D_80164618[cameraId];
+    camera->pos.z = D_80164638[cameraId];
 }
 
 void func_80016494(Camera* camera, UNUSED Player* unusedPlayer, UNUSED s32 arg2, s32 cameraId) {
@@ -5726,7 +5726,7 @@ void func_80016494(Camera* camera, UNUSED Player* unusedPlayer, UNUSED s32 arg2,
     pathIndex = gPathIndexByPlayerId[playerId];
     player += playerId;
     gNearestWaypointByCameraId[cameraId] =
-        func_8000D33C(camera->pos[0], camera->pos[1], camera->pos[2], gNearestWaypointByCameraId[cameraId], pathIndex);
+        func_8000D33C(camera->pos.x, camera->pos.y, camera->pos.z, gNearestWaypointByCameraId[cameraId], pathIndex);
     temp_f2_5 = (D_80163068[playerId] - D_80164688[cameraId]);
     temp_f2_5 *= temp_f2_5;
     playerWaypoint = gNearestWaypointByPlayerId[playerId];
@@ -5777,27 +5777,27 @@ void func_80016494(Camera* camera, UNUSED Player* unusedPlayer, UNUSED s32 arg2,
         midY = D_80164618[cameraId];
         midZ = D_80164638[cameraId];
     }
-    camera->pos[0] = midX;
-    camera->pos[2] = midZ;
+    camera->pos.x = midX;
+    camera->pos.z = midZ;
     temp_f2_5 = spawn_actor_on_surface(midX, midY + 30.0, midZ);
     if ((temp_f2_5 < (midY - 20.0)) || (temp_f2_5 >= 3000.0)) {
-        camera->pos[1] = midY + 10.0;
+        camera->pos.y = midY + 10.0;
     } else {
-        camera->pos[1] = temp_f2_5 + 10.0;
+        camera->pos.y = temp_f2_5 + 10.0;
     }
     D_801645F8[cameraId] = midX;
     D_80164618[cameraId] = midY;
     D_80164638[cameraId] = midZ;
-    camera->lookAt[0] = player->pos[0];
-    camera->lookAt[1] = player->pos[1] + 6.0;
-    camera->lookAt[2] = player->pos[2];
+    camera->lookAt.x = player->pos.x;
+    camera->lookAt.y = player->pos.y + 6.0;
+    camera->lookAt.z = player->pos.z;
     func_80014D30(cameraId, pathIndex);
-    xdiff2 = camera->lookAt[0] - camera->pos[0];
-    ydiff2 = camera->lookAt[1] - camera->pos[1];
-    zdiff2 = camera->lookAt[2] - camera->pos[2];
-    camera->rot[1] = atan2s(xdiff2, zdiff2);
-    camera->rot[0] = atan2s(sqrtf((xdiff2 * xdiff2) + (zdiff2 * zdiff2)), ydiff2);
-    camera->rot[2] = 0;
+    xdiff2 = camera->lookAt.x - camera->pos.x;
+    ydiff2 = camera->lookAt.y - camera->pos.y;
+    zdiff2 = camera->lookAt.z - camera->pos.z;
+    camera->rot.y = atan2s(xdiff2, zdiff2);
+    camera->rot.x = atan2s(sqrtf((xdiff2 * xdiff2) + (zdiff2 * zdiff2)), ydiff2);
+    camera->rot.z = 0;
 }
 
 void func_80016C3C(UNUSED s32 playerId, UNUSED f32 arg1, s32 cameraId) {
@@ -5845,12 +5845,12 @@ void func_80016C3C(UNUSED s32 playerId, UNUSED f32 arg1, s32 cameraId) {
     sp54 = (path[0][sp48].posY + path[0][sp44].posY) * 0.5f;
     camera = cameras;
     camera += cameraId;
-    camera->lookAt[0] = temp_f2;
-    camera->lookAt[2] = temp_f12;
-    camera->lookAt[1] = sp54 + 8.0;
-    camera->pos[0] = D_801645F8[cameraId];
-    camera->pos[1] = D_80164618[cameraId];
-    camera->pos[2] = D_80164638[cameraId];
+    camera->lookAt.x = temp_f2;
+    camera->lookAt.z = temp_f12;
+    camera->lookAt.y = sp54 + 8.0;
+    camera->pos.x = D_801645F8[cameraId];
+    camera->pos.y = D_80164618[cameraId];
+    camera->pos.z = D_80164638[cameraId];
 }
 
 void func_80017054(Camera* camera, UNUSED Player* player, UNUSED s32 index, s32 cameraId);
@@ -5891,12 +5891,12 @@ void func_80017054(Camera* camera, UNUSED Player* player, UNUSED s32 index, s32 
     sp58 = gWaypointCountByPathIndex[pathIndex];
     D_80163238 = playerId;
     sp56 = gNearestWaypointByCameraId[cameraId];
-    gNearestWaypointByCameraId[cameraId] = func_8000D33C(camera->pos[0], camera->pos[1], camera->pos[2], gNearestWaypointByCameraId[cameraId], pathIndex);
+    gNearestWaypointByCameraId[cameraId] = func_8000D33C(camera->pos.x, camera->pos.y, camera->pos.z, gNearestWaypointByCameraId[cameraId], pathIndex);
     // if (GetCourse() == GetYoshiValley()) {
     if (gCurrentCourseId == 4) {
         if ((sp56 != gNearestWaypointByCameraId[cameraId]) && (gNearestWaypointByCameraId[cameraId] == 1)) {
             pathIndex = (D_80163DD8[cameraId] = random_int(4U));
-            gNearestWaypointByCameraId[cameraId] = func_8000D33C(camera->pos[0], camera->pos[1], camera->pos[2], gNearestWaypointByCameraId[cameraId], pathIndex);
+            gNearestWaypointByCameraId[cameraId] = func_8000D33C(camera->pos.x, camera->pos.y, camera->pos.z, gNearestWaypointByCameraId[cameraId], pathIndex);
         }
     }
 
@@ -5941,27 +5941,27 @@ void func_80017054(Camera* camera, UNUSED Player* player, UNUSED s32 index, s32 
     }
 
     if (((diffX > (-10000.0))) && ((diffX < 10000.0))) {
-        camera->pos[0] = diffX;
-        camera->pos[2] = diffZ;
+        camera->pos.x = diffX;
+        camera->pos.z = diffZ;
     }
 
-    //camera->pos[0] = camX;
-    camera->pos[1] = diffY + 10.0; // Set camera 10 points above the ground
+    //camera->pos.x = camX;
+    camera->pos.y = diffY + 10.0; // Set camera 10 points above the ground
     
     if (1) { } if (1) { } if (1) { } if (1) { } if (1) { }
     D_801645F8[cameraId] = diffX;
     D_80164638[cameraId] = diffZ;
     D_80164618[cameraId] = camY;
-    camera->lookAt[0] = lookAtX;
-    camera->lookAt[1] = lookAtY + 8.0;
-    camera->lookAt[2] = lookAtZ;
+    camera->lookAt.x = lookAtX;
+    camera->lookAt.y = lookAtY + 8.0;
+    camera->lookAt.z = lookAtZ;
     func_80014D30(cameraId, pathIndex);
-    diffX2 = camera->lookAt[0] - camera->pos[0];
-    diffY2 = camera->lookAt[1] - camera->pos[1];
-    diffZ2 = camera->lookAt[2] - camera->pos[2];
-    camera->rot[1] = atan2s(diffX2, diffZ2);
-    camera->rot[0] = atan2s(sqrtf((diffX2 * diffX2) + (diffZ2 * diffZ2)), diffY2);
-    camera->rot[2] = 0;
+    diffX2 = camera->lookAt.x - camera->pos.x;
+    diffY2 = camera->lookAt.y - camera->pos.y;
+    diffZ2 = camera->lookAt.z - camera->pos.z;
+    camera->rot.y = atan2s(diffX2, diffZ2);
+    camera->rot.x = atan2s(sqrtf((diffX2 * diffX2) + (diffZ2 * diffZ2)), diffY2);
+    camera->rot.z = 0;
 }
 #else
 GLOBAL_ASM("asm/non_matchings/code_80005FD0/func_80017054.s")
@@ -5984,9 +5984,9 @@ void func_80017720(s32 playerId, UNUSED f32 arg1, s32 cameraId, s16 pathIndex) {
     D_80164658[cameraId] = gPlayers[playerId].unk_094;
     D_80164648[cameraId] = gPlayers[playerId].unk_094;
 
-    camera->pos[0] = D_801645F8[cameraId];
-    camera->pos[1] = D_80164618[cameraId];
-    camera->pos[2] = D_80164638[cameraId];
+    camera->pos.x = D_801645F8[cameraId];
+    camera->pos.y = D_80164618[cameraId];
+    camera->pos.z = D_80164638[cameraId];
 }
 
 void func_800178F4(Camera* camera, UNUSED Player* unusedPlayer, UNUSED s32 arg2, s32 cameraId) {
@@ -6023,7 +6023,7 @@ void func_800178F4(Camera* camera, UNUSED Player* unusedPlayer, UNUSED s32 arg2,
     player += playerId;
     waypointCount = gWaypointCountByPathIndex[pathIndex];
     gNearestWaypointByCameraId[cameraId] =
-        func_8000D33C(camera->pos[0], camera->pos[1], camera->pos[2], gNearestWaypointByCameraId[cameraId], pathIndex);
+        func_8000D33C(camera->pos.x, camera->pos.y, camera->pos.z, gNearestWaypointByCameraId[cameraId], pathIndex);
     playerWaypoint = (gNearestWaypointByPlayerId[playerId] + 3) % waypointCount;
     cameraWaypoint = gNearestWaypointByCameraId[cameraId];
     if (func_80007BF8(playerWaypoint, cameraWaypoint, 0x000DU, 1U, waypointCount) <= 0) {
@@ -6064,22 +6064,22 @@ void func_800178F4(Camera* camera, UNUSED Player* unusedPlayer, UNUSED s32 arg2,
         midY = D_80164618[cameraId];
         midZ = D_80164638[cameraId];
     }
-    camera->pos[0] = midX;
-    camera->pos[2] = midZ;
-    camera->pos[1] = midY + 10.0;
+    camera->pos.x = midX;
+    camera->pos.z = midZ;
+    camera->pos.y = midY + 10.0;
     D_801645F8[cameraId] = midX;
     D_80164618[cameraId] = midY;
     D_80164638[cameraId] = midZ;
-    camera->lookAt[0] = player->pos[0];
-    camera->lookAt[1] = player->pos[1] + 6.0;
-    camera->lookAt[2] = player->pos[2];
+    camera->lookAt.x = player->pos.x;
+    camera->lookAt.y = player->pos.y + 6.0;
+    camera->lookAt.z = player->pos.z;
     func_80014D30(cameraId, pathIndex);
-    xdiff2 = camera->lookAt[0] - camera->pos[0];
-    ydiff2 = camera->lookAt[1] - camera->pos[1];
-    zdiff2 = camera->lookAt[2] - camera->pos[2];
-    camera->rot[1] = atan2s(xdiff2, zdiff2);
-    camera->rot[0] = atan2s(sqrtf((xdiff2 * xdiff2) + (zdiff2 * zdiff2)), ydiff2);
-    camera->rot[2] = 0;
+    xdiff2 = camera->lookAt.x - camera->pos.x;
+    ydiff2 = camera->lookAt.y - camera->pos.y;
+    zdiff2 = camera->lookAt.z - camera->pos.z;
+    camera->rot.y = atan2s(xdiff2, zdiff2);
+    camera->rot.x = atan2s(sqrtf((xdiff2 * xdiff2) + (zdiff2 * zdiff2)), ydiff2);
+    camera->rot.z = 0;
 }
 
 void func_80017F10(s32 playerId, UNUSED f32 arg1, s32 cameraId, s16 pathIndex) {
@@ -6099,9 +6099,9 @@ void func_80017F10(s32 playerId, UNUSED f32 arg1, s32 cameraId, s16 pathIndex) {
     D_80164658[cameraId] = gPlayers[playerId].unk_094;
     D_80164648[cameraId] = gPlayers[playerId].unk_094;
 
-    camera->pos[0] = D_801645F8[cameraId];
-    camera->pos[1] = D_80164618[cameraId];
-    camera->pos[2] = D_80164638[cameraId];
+    camera->pos.x = D_801645F8[cameraId];
+    camera->pos.y = D_80164618[cameraId];
+    camera->pos.z = D_80164638[cameraId];
 }
 
 void func_800180F0(Camera* camera, UNUSED Player* unusedPlayer, UNUSED s32 arg2, s32 cameraId) {
@@ -6138,7 +6138,7 @@ void func_800180F0(Camera* camera, UNUSED Player* unusedPlayer, UNUSED s32 arg2,
     waypointCount = gWaypointCountByPathIndex[pathIndex];
     player += playerId;
     gNearestWaypointByCameraId[cameraId] =
-        func_8000D33C(camera->pos[0], camera->pos[1], camera->pos[2], gNearestWaypointByCameraId[cameraId], pathIndex);
+        func_8000D33C(camera->pos.x, camera->pos.y, camera->pos.z, gNearestWaypointByCameraId[cameraId], pathIndex);
     playerWaypoint = ((gNearestWaypointByPlayerId[playerId] + waypointCount) - 2) % waypointCount;
     cameraWaypoint = gNearestWaypointByCameraId[cameraId];
     if (func_80007BF8(playerWaypoint, cameraWaypoint, 1U, 0x000AU, waypointCount) <= 0) {
@@ -6179,22 +6179,22 @@ void func_800180F0(Camera* camera, UNUSED Player* unusedPlayer, UNUSED s32 arg2,
         midY = D_80164618[cameraId];
         midZ = D_80164638[cameraId];
     }
-    camera->pos[0] = midX;
-    camera->pos[2] = midZ;
-    camera->pos[1] = player->pos[1] + 10.0;
+    camera->pos.x = midX;
+    camera->pos.z = midZ;
+    camera->pos.y = player->pos.y + 10.0;
     D_801645F8[cameraId] = midX;
     D_80164618[cameraId] = midY;
     D_80164638[cameraId] = midZ;
-    camera->lookAt[0] = player->pos[0];
-    camera->lookAt[1] = player->pos[1] + 6.0;
-    camera->lookAt[2] = player->pos[2];
+    camera->lookAt.x = player->pos.x;
+    camera->lookAt.y = player->pos.y + 6.0;
+    camera->lookAt.z = player->pos.z;
     func_80014D30(cameraId, pathIndex);
-    sp94 = camera->lookAt[0] - camera->pos[0];
-    sp90 = camera->lookAt[1] - camera->pos[1];
-    sp8C = camera->lookAt[2] - camera->pos[2];
-    camera->rot[1] = atan2s(sp94, sp8C);
-    camera->rot[0] = atan2s(sqrtf((sp94 * sp94) + (sp8C * sp8C)), sp90);
-    camera->rot[2] = 0;
+    sp94 = camera->lookAt.x - camera->pos.x;
+    sp90 = camera->lookAt.y - camera->pos.y;
+    sp8C = camera->lookAt.z - camera->pos.z;
+    camera->rot.y = atan2s(sp94, sp8C);
+    camera->rot.x = atan2s(sqrtf((sp94 * sp94) + (sp8C * sp8C)), sp90);
+    camera->rot.z = 0;
 }
 
 void func_80018718(s32 playerId, UNUSED f32 arg1, s32 cameraId, s16 pathIndex) {
@@ -6213,9 +6213,9 @@ void func_80018718(s32 playerId, UNUSED f32 arg1, s32 cameraId, s16 pathIndex) {
     D_80164658[cameraId] = gPlayers[playerId].unk_094;
     D_80164648[cameraId] = gPlayers[playerId].unk_094;
     D_8016448C = 1;
-    camera->pos[0] = D_801645F8[cameraId];
-    camera->pos[1] = D_80164618[cameraId];
-    camera->pos[2] = D_80164638[cameraId];
+    camera->pos.x = D_801645F8[cameraId];
+    camera->pos.y = D_80164618[cameraId];
+    camera->pos.z = D_80164638[cameraId];
 }
 
 void func_800188F4(Camera* camera, UNUSED Player* unusePlayer, UNUSED s32 arg2, s32 cameraId) {
@@ -6281,7 +6281,7 @@ void func_800188F4(Camera* camera, UNUSED Player* unusePlayer, UNUSED s32 arg2, 
     D_80163238 = playerId;
     player += playerId;
     gNearestWaypointByCameraId[cameraId] =
-        func_8000D33C(camera->pos[0], camera->pos[1], camera->pos[2], gNearestWaypointByCameraId[cameraId], pathIndex);
+        func_8000D33C(camera->pos.x, camera->pos.y, camera->pos.z, gNearestWaypointByCameraId[cameraId], pathIndex);
     playerWaypoint = gNearestWaypointByPlayerId[playerId];
     cameraWaypoint = gNearestWaypointByCameraId[cameraId];
     if (func_80007BF8(playerWaypoint, cameraWaypoint, 0x000FU, 0x000FU, waypointCount) <= 0) {
@@ -6309,27 +6309,27 @@ void func_800188F4(Camera* camera, UNUSED Player* unusePlayer, UNUSED s32 arg2, 
         midY = D_80164618[cameraId];
         midZ = D_80164638[cameraId];
     }
-    camera->pos[0] = midX;
-    camera->pos[2] = midZ;
+    camera->pos.x = midX;
+    camera->pos.z = midZ;
     temp_f2_4 = spawn_actor_on_surface(midX, midY + 30.0, midZ);
     if ((temp_f2_4 < (midY - 20.0)) || (temp_f2_4 >= 3000.0)) {
-        camera->pos[1] = midY + 10.0;
+        camera->pos.y = midY + 10.0;
     } else {
-        camera->pos[1] = temp_f2_4 + 8.0;
+        camera->pos.y = temp_f2_4 + 8.0;
     }
     D_801645F8[cameraId] = midX;
     D_80164618[cameraId] = midY;
     D_80164638[cameraId] = midZ;
-    camera->lookAt[0] = player->pos[0];
-    camera->lookAt[1] = player->pos[1] + 6.0;
-    camera->lookAt[2] = player->pos[2];
+    camera->lookAt.x = player->pos.x;
+    camera->lookAt.y = player->pos.y + 6.0;
+    camera->lookAt.z = player->pos.z;
     func_80014D30(cameraId, pathIndex);
-    spAC = camera->lookAt[0] - camera->pos[0];
-    spA8 = camera->lookAt[1] - camera->pos[1];
-    spA4 = camera->lookAt[2] - camera->pos[2];
-    camera->rot[1] = atan2s(spAC, spA4);
-    camera->rot[0] = atan2s(sqrtf((spAC * spAC) + (spA4 * spA4)), spA8);
-    camera->rot[2] = 0;
+    spAC = camera->lookAt.x - camera->pos.x;
+    spA8 = camera->lookAt.y - camera->pos.y;
+    spA4 = camera->lookAt.z - camera->pos.z;
+    camera->rot.y = atan2s(spAC, spA4);
+    camera->rot.x = atan2s(sqrtf((spAC * spAC) + (spA4 * spA4)), spA8);
+    camera->rot.z = 0;
 }
 
 void func_80019118(s32 playerId, f32 arg1, s32 cameraId, UNUSED s16 pathIndex) {
@@ -6355,9 +6355,9 @@ void func_80019118(s32 playerId, f32 arg1, s32 cameraId, UNUSED s16 pathIndex) {
         D_80164618[cameraId] = (f32) (temp_f12 + 10.0);
     }
     D_80164648[cameraId] = 0.0f;
-    camera->pos[0] = D_801645F8[cameraId];
-    camera->pos[1] = D_80164618[cameraId];
-    camera->pos[2] = D_80164638[cameraId];
+    camera->pos.x = D_801645F8[cameraId];
+    camera->pos.y = D_80164618[cameraId];
+    camera->pos.z = D_80164638[cameraId];
 }
 
 void func_8001933C(Camera* camera, UNUSED Player* playerArg, UNUSED s32 arg2, s32 cameraId) {
@@ -6381,7 +6381,7 @@ void func_8001933C(Camera* camera, UNUSED Player* playerArg, UNUSED s32 arg2, s3
     player += playerId;
     waypointCount = gWaypointCountByPathIndex[pathIndex];
     gNearestWaypointByCameraId[cameraId] =
-        func_8000D33C(camera->pos[0], camera->pos[1], camera->pos[2], gNearestWaypointByCameraId[cameraId], 0);
+        func_8000D33C(camera->pos.x, camera->pos.y, camera->pos.z, gNearestWaypointByCameraId[cameraId], 0);
     playerWaypoint = gNearestWaypointByPlayerId[playerId];
     cameraWaypoint = gNearestWaypointByCameraId[cameraId];
     if (func_80007BF8(playerWaypoint, cameraWaypoint, 0x0032U, 0x0014U, waypointCount) <= 0) {
@@ -6393,20 +6393,20 @@ void func_8001933C(Camera* camera, UNUSED Player* playerArg, UNUSED s32 arg2, s3
             func_8001A348(cameraId, -1.0f, 0x0000000C);
         }
     }
-    camera->pos[0] = D_801645F8[cameraId];
-    camera->pos[1] = D_80164618[cameraId];
-    camera->pos[2] = D_80164638[cameraId];
+    camera->pos.x = D_801645F8[cameraId];
+    camera->pos.y = D_80164618[cameraId];
+    camera->pos.z = D_80164638[cameraId];
     waypoint = &D_80164550[pathIndex][cameraWaypoint];
-    camera->lookAt[0] = (player->pos[0] * 0.8) + (0.2 * waypoint->posX);
-    camera->lookAt[1] = (player->pos[1] * 0.8) + (0.2 * waypoint->posY);
-    camera->lookAt[2] = (player->pos[2] * 0.8) + (0.2 * waypoint->posZ);
+    camera->lookAt.x = (player->pos.x * 0.8) + (0.2 * waypoint->posX);
+    camera->lookAt.y = (player->pos.y * 0.8) + (0.2 * waypoint->posY);
+    camera->lookAt.z = (player->pos.z * 0.8) + (0.2 * waypoint->posZ);
     func_80014D30(cameraId, pathIndex);
-    xdiff = camera->lookAt[0] - camera->pos[0];
-    ydiff = camera->lookAt[1] - camera->pos[1];
-    zdiff = camera->lookAt[2] - camera->pos[2];
-    camera->rot[1] = atan2s(xdiff, zdiff);
-    camera->rot[0] = atan2s(sqrtf((xdiff * xdiff) + (zdiff * zdiff)), ydiff);
-    camera->rot[2] = 0;
+    xdiff = camera->lookAt.x - camera->pos.x;
+    ydiff = camera->lookAt.y - camera->pos.y;
+    zdiff = camera->lookAt.z - camera->pos.z;
+    camera->rot.y = atan2s(xdiff, zdiff);
+    camera->rot.x = atan2s(sqrtf((xdiff * xdiff) + (zdiff * zdiff)), ydiff);
+    camera->rot.z = 0;
 }
 
 void func_8001968C(void) {
@@ -6435,20 +6435,20 @@ void func_80019760(Camera* camera, UNUSED Player* player, UNUSED s32 arg2, s32 c
     f32 zdiff;
     TrackWaypoint* temp_v1;
 
-    camera->pos[0] = D_801645F8[cameraId];
-    camera->pos[1] = D_80164618[cameraId];
-    camera->pos[2] = D_80164638[cameraId];
+    camera->pos.x = D_801645F8[cameraId];
+    camera->pos.y = D_80164618[cameraId];
+    camera->pos.z = D_80164638[cameraId];
     temp_v1 = &(*D_80164550)[gNearestWaypointByCameraId[cameraId]];
-    camera->lookAt[0] = (f32) temp_v1->posX;
-    camera->lookAt[1] = (f32) temp_v1->posY;
-    camera->lookAt[2] = (f32) temp_v1->posZ;
+    camera->lookAt.x = (f32) temp_v1->posX;
+    camera->lookAt.y = (f32) temp_v1->posY;
+    camera->lookAt.z = (f32) temp_v1->posZ;
     func_80014D30(cameraId, 0);
-    xdiff = camera->lookAt[0] - camera->pos[0];
-    ydiff = camera->lookAt[1] - camera->pos[1];
-    zdiff = camera->lookAt[2] - camera->pos[2];
-    camera->rot[1] = atan2s(xdiff, zdiff);
-    camera->rot[0] = atan2s(sqrtf((xdiff * xdiff) + (zdiff * zdiff)), ydiff);
-    camera->rot[2] = 0;
+    xdiff = camera->lookAt.x - camera->pos.x;
+    ydiff = camera->lookAt.y - camera->pos.y;
+    zdiff = camera->lookAt.z - camera->pos.z;
+    camera->rot.y = atan2s(xdiff, zdiff);
+    camera->rot.x = atan2s(sqrtf((xdiff * xdiff) + (zdiff * zdiff)), ydiff);
+    camera->rot.z = 0;
 }
 
 void func_80019890(s32 playerId, s32 cameraId) {
@@ -6511,7 +6511,7 @@ void func_80019890(s32 playerId, s32 cameraId) {
             break;
     }
     gNearestWaypointByCameraId[cameraId] =
-        func_8000BD94(camera->pos[0], camera->pos[1], camera->pos[2], (s32) pathIndex);
+        func_8000BD94(camera->pos.x, camera->pos.y, camera->pos.z, (s32) pathIndex);
     if ((s16) D_80164680[cameraId] == 9) {
         D_80163DD8[cameraId] = (s32) pathIndex;
     }
@@ -6790,11 +6790,11 @@ void func_8001A588(UNUSED u16* localD_80152300, Camera* camera, Player* player, 
     }
     func_80019FB4(cameraIndex);
 
-    if ((s32) (camera->pos[0] * 10.0) == (s32) ((f64) camera->lookAt[0] * 10.0)) {
+    if ((s32) (camera->pos.x * 10.0) == (s32) ((f64) camera->lookAt.x * 10.0)) {
 
-        if ((s32) (camera->pos[2] * 10.0) == (s32) ((f64) camera->lookAt[2] * 10.0)) {
-            camera->pos[0] = (f32) (camera->pos[0] + 100.0);
-            camera->pos[2] = (f32) (camera->pos[2] + 100.0);
+        if ((s32) (camera->pos.z * 10.0) == (s32) ((f64) camera->lookAt.z * 10.0)) {
+            camera->pos.x = (f32) (camera->pos.x + 100.0);
+            camera->pos.z = (f32) (camera->pos.z + 100.0);
         }
     }
     if ((gModeSelection != BATTLE) && (D_80164680[cameraIndex] == -1) && (player->type & 0x800) &&
@@ -7065,12 +7065,12 @@ void kart_ai_use_item_strategy(s32 playerId) {
                     if (playerId != banana->playerId) {}
                 } else {
                     banana->state = 1;
-                    banana->velocity[0] = 0.0f;
-                    banana->velocity[1] = 0.0f;
-                    banana->velocity[2] = 0.0f;
+                    banana->velocity.x = 0.0f;
+                    banana->velocity.y = 0.0f;
+                    banana->velocity.z = 0.0f;
                     if (D_801631E0[playerId] == ((u16) 1)) {
-                        banana->pos[1] = spawn_actor_on_surface(player->pos[0], (f32) (((f64) player->pos[1]) + 30.0),
-                                                                player->pos[2]) +
+                        banana->pos.y = spawn_actor_on_surface(player->pos.x, (f32) (((f64) player->pos.y) + 30.0),
+                                                                player->pos.z) +
                                          (banana->boundingBoxSize + 1.0f);
                     }
                 }
@@ -7091,10 +7091,10 @@ void kart_ai_use_item_strategy(s32 playerId) {
                     waypoint = &D_80164550[gPathIndexByPlayerId[0]]
                                           [(gNearestWaypointByPlayerId[D_80163478] + 0x1E) %
                                            gWaypointCountByPathIndex[gPathIndexByPlayerId[D_80163478]]];
-                    banana->velocity[0] = (waypoint->posX - player->pos[0]) / 20.0;
-                    banana->velocity[1] = ((waypoint->posY - player->pos[1]) / 20.0) + 4.0;
-                    banana->velocity[2] = (waypoint->posZ - player->pos[2]) / 20.0;
-                    banana->pos[1] = player->pos[1];
+                    banana->velocity.x = (waypoint->posX - player->pos.x) / 20.0;
+                    banana->velocity.y = ((waypoint->posY - player->pos.y) / 20.0) + 4.0;
+                    banana->velocity.z = (waypoint->posZ - player->pos.z) / 20.0;
+                    banana->pos.y = player->pos.y;
                     func_800C92CC(playerId, SOUND_ARG_LOAD(0x29, 0x00, 0x80, 0x09));
                     func_800C98B8(player->pos, player->velocity, SOUND_ARG_LOAD(0x19, 0x01, 0x80, 0x14));
                 } else {
@@ -7111,10 +7111,10 @@ void kart_ai_use_item_strategy(s32 playerId) {
                     temp_s0->unk_04 = 0;
                     player->soundEffects &= ~0x00040000;
                 } else {
-                    banana->velocity[1] -= 0.4;
-                    banana->pos[0] += banana->velocity[0];
-                    banana->pos[1] += banana->velocity[1];
-                    banana->pos[2] += banana->velocity[2];
+                    banana->velocity.y -= 0.4;
+                    banana->pos.x += banana->velocity.x;
+                    banana->pos.y += banana->velocity.y;
+                    banana->pos.z += banana->velocity.z;
                     if (temp_s0->unk_04 >= 0x15) {
                         temp_s0->unk_00 = 0x0024;
                     }
@@ -7128,11 +7128,11 @@ void kart_ai_use_item_strategy(s32 playerId) {
                     if (playerId != banana->playerId) {}
                 } else {
                     banana->state = 1;
-                    banana->velocity[0] = 0.0f;
-                    banana->velocity[1] = 0.0f;
-                    banana->velocity[2] = 0.0f;
-                    banana->pos[1] =
-                        spawn_actor_on_surface(banana->pos[0], (f32) (((f64) banana->pos[1]) + 30.0), banana->pos[2]) +
+                    banana->velocity.x = 0.0f;
+                    banana->velocity.y = 0.0f;
+                    banana->velocity.z = 0.0f;
+                    banana->pos.y =
+                        spawn_actor_on_surface(banana->pos.x, (f32) (((f64) banana->pos.y) + 30.0), banana->pos.z) +
                         (banana->boundingBoxSize + 1.0f);
                 }
                 player->soundEffects &= ~0x00040000;
@@ -7159,7 +7159,7 @@ void kart_ai_use_item_strategy(s32 playerId) {
             case 5:
                 actor = GET_ACTOR(temp_s0->actorIndex);
                 if ((((!(actor->flags & 0x8000)) || (actor->type != 7)) || (actor->state != 0)) ||
-                    (playerId != actor->rot[2])) {
+                    (playerId != actor->rot.z)) {
                     temp_s0->unk_00 = 0;
                     temp_s0->unk_04 = 0;
                 } else if (temp_s0->unk_0E < temp_s0->unk_04) {
@@ -7171,7 +7171,7 @@ void kart_ai_use_item_strategy(s32 playerId) {
             case 6:
                 actor = GET_ACTOR(temp_s0->actorIndex);
                 if ((((!(actor->flags & 0x8000)) || (actor->type != 7)) || (actor->state != 0)) ||
-                    (playerId != actor->rot[2])) {
+                    (playerId != actor->rot.z)) {
                     temp_s0->unk_00 = 0;
                     temp_s0->unk_04 = 0;
                 } else {
@@ -7345,12 +7345,12 @@ void kart_ai_use_item_strategy(s32 playerId) {
                 if ((((!(fakeItemBox->flags & 0x8000)) || (fakeItemBox->type != 0x000D)) ||
                      (fakeItemBox->state != 0)) ||
                     (playerId != ((s32) fakeItemBox->playerId))) {
-                    if (playerId != fakeItemBox->rot[0]) {}
+                    if (playerId != fakeItemBox->rot.x) {}
                 } else {
                     func_802A1064(fakeItemBox);
                     if (D_801631E0[playerId] == 1) {
-                        fakeItemBox->pos[1] = spawn_actor_on_surface(fakeItemBox->pos[0], fakeItemBox->pos[1] + 30.0,
-                                                                     fakeItemBox->pos[2]) +
+                        fakeItemBox->pos.y = spawn_actor_on_surface(fakeItemBox->pos.x, fakeItemBox->pos.y + 30.0,
+                                                                     fakeItemBox->pos.z) +
                                               fakeItemBox->boundingBoxSize;
                     }
                 }
@@ -7486,10 +7486,10 @@ void func_8001BE78(void) {
                 break;
         }
         temp_s0 = &D_80164550[i][gNearestWaypointByPlayerId[i]];
-        temp_s1->pos[0] = (f32) temp_s0->posX;
-        temp_s1->pos[1] =
+        temp_s1->pos.x = (f32) temp_s0->posX;
+        temp_s1->pos.y =
             spawn_actor_on_surface((f32) temp_s0->posX, 2000.0f, (f32) temp_s0->posZ) + temp_s1->boundingBoxSize;
-        temp_s1->pos[2] = (f32) temp_s0->posZ;
+        temp_s1->pos.z = (f32) temp_s0->posZ;
         temp_s1->rotation[1] = (s16) *D_80164590[i];
         func_8003680C(temp_s1, 0);
         temp_s1++;
@@ -7547,8 +7547,8 @@ void func_8001C14C(void) {
         player = &gPlayerOne[var_s1];
         func_80009B60(var_s1);
         if (!(player->type & 0x2000)) {
-            temp_f0 = D_80163418[var_s1] - player->pos[0];
-            temp_f2 = D_80163438[var_s1] - player->pos[2];
+            temp_f0 = D_80163418[var_s1] - player->pos.x;
+            temp_f2 = D_80163438[var_s1] - player->pos.z;
             if ((f64) ((temp_f0 * temp_f0) + (temp_f2 * temp_f2)) < 1.0) {
                 if (var_s1 != 3) {
                     if (1) {}

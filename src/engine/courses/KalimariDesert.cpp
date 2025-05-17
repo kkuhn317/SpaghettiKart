@@ -160,12 +160,12 @@ void KalimariDesert::BeginPlay() {
         uintptr_t* crossing2 = (uintptr_t*) gWorldInstance.AddCrossing(crossingPos2, 176, 182, 900.0f, 650.0f);
 
         vec3f_set(position, -1680.0f, 2.0f, 35.0f);
-        position[0] *= gCourseDirection;
+        position.x *= gCourseDirection;
         rrxing = (struct RailroadCrossing*) GET_ACTOR(add_actor_to_empty_slot(position, rotation, velocity,
                                                                                 ACTOR_RAILROAD_CROSSING));
         rrxing->crossingTrigger = crossing2;
         vec3f_set(position, -1600.0f, 2.0f, 35.0f);
-        position[0] *= gCourseDirection;
+        position.x *= gCourseDirection;
         rrxing = (struct RailroadCrossing*) GET_ACTOR(add_actor_to_empty_slot(position, rotation, velocity,
                                                                                 ACTOR_RAILROAD_CROSSING));
         rrxing->crossingTrigger = crossing2;
@@ -173,12 +173,12 @@ void KalimariDesert::BeginPlay() {
         // Original game forgot to put gCourseDirection to face the crossing the right direction in extra mode
         vec3s_set(rotation, 0, -0x2000 * gCourseDirection, 0);
         vec3f_set(position, -2459.0f, 2.0f, 2263.0f);
-        position[0] *= gCourseDirection;
+        position.x *= gCourseDirection;
         rrxing = (struct RailroadCrossing*) GET_ACTOR(add_actor_to_empty_slot(position, rotation, velocity,
                                                                                 ACTOR_RAILROAD_CROSSING));
         rrxing->crossingTrigger = crossing1;
         vec3f_set(position, -2467.0f, 2.0f, 2375.0f);
-        position[0] *= gCourseDirection;
+        position.x *= gCourseDirection;
         rrxing = (struct RailroadCrossing*) GET_ACTOR(add_actor_to_empty_slot(position, rotation, velocity,
                                                                                 ACTOR_RAILROAD_CROSSING));
         rrxing->crossingTrigger = crossing1;

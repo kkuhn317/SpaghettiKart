@@ -27,9 +27,9 @@ OSnowman::OSnowman(const FVector& pos) {
     gObjectList[_headIndex].origin_pos[0] = pos.x * xOrientation;
     gObjectList[_headIndex].origin_pos[1] = pos.y + 5.0 + 3.0;
     gObjectList[_headIndex].origin_pos[2] = pos.z;
-    gObjectList[_headIndex].pos[0] = pos.x * xOrientation; 
-    gObjectList[_headIndex].pos[1] = pos.y + 5.0 + 3.0;
-    gObjectList[_headIndex].pos[2] = pos.z;
+    gObjectList[_headIndex].pos.x = pos.x * xOrientation; 
+    gObjectList[_headIndex].pos.y = pos.y + 5.0 + 3.0;
+    gObjectList[_headIndex].pos.z = pos.z;
 
     find_unused_obj_index(&_bodyIndex);
     init_object(_bodyIndex, 0);
@@ -38,9 +38,9 @@ OSnowman::OSnowman(const FVector& pos) {
     gObjectList[_bodyIndex].origin_pos[2] = pos.z;
     gObjectList[_bodyIndex].unk_0D5 = 0; // Section Id no longer used.
 
-    gObjectList[_bodyIndex].pos[0] = pos.x * xOrientation; 
-    gObjectList[_bodyIndex].pos[1] = pos.y + 3.0;
-    gObjectList[_bodyIndex].pos[2] = pos.z;
+    gObjectList[_bodyIndex].pos.x = pos.x * xOrientation; 
+    gObjectList[_bodyIndex].pos.y = pos.y + 3.0;
+    gObjectList[_bodyIndex].pos.z = pos.z;
 
     _count++;
 }
@@ -119,7 +119,7 @@ void OSnowman::DrawHead(s32 cameraId) {
         if (is_obj_flag_status_active(objectIndex, VISIBLE) != 0) {
             D_80183E80[0] = (s16) gObjectList[objectIndex].orientation[0];
             D_80183E80[1] =
-                func_800418AC(gObjectList[objectIndex].pos[0], gObjectList[objectIndex].pos[2], camera->pos);
+                func_800418AC(gObjectList[objectIndex].pos.x, gObjectList[objectIndex].pos.z, camera->pos);
             D_80183E80[2] = (u16) gObjectList[objectIndex].orientation[2];
             if (is_obj_flag_status_active(objectIndex, 0x00000010) != 0) {
                 draw_2d_texture_at(gObjectList[objectIndex].pos, (u16*) D_80183E80,
@@ -157,7 +157,7 @@ void OSnowman::DrawBody(s32 cameraId) {
                 if (object->state > 0) {
                     func_8008A364(objectIndex, cameraId, 0x2AABU, 0x000001F4);
                     if (is_obj_flag_status_active(objectIndex, VISIBLE) != 0) {
-                        object->orientation[1] = func_800418AC(object->pos[0], object->pos[2], sp44->pos);
+                        object->orientation[1] = func_800418AC(object->pos.x, object->pos.z, sp44->pos);
                         rsp_set_matrix_gObjectList(objectIndex);
                         gSPDisplayList(gDisplayListHead++, (Gfx*)D_0D0069E0);
                     }
@@ -311,8 +311,8 @@ void OSnowman::func_80083538(s32 objectIndex, Vec3f arg1, s32 arg2, s32 arg3) {
     object->tlutList = (u8*)d_course_frappe_snowland_snow_tlut;
     object->sizeScaling = random_int(0x0064U);
     object->sizeScaling = (object->sizeScaling * 0.001) + 0.05;
-    object->velocity[1] = random_int(0x0014U);
-    object->velocity[1] = (object->velocity[1] * 0.5) + 2.6;
+    object->velocity.y = random_int(0x0014U);
+    object->velocity.y = (object->velocity.y * 0.5) + 2.6;
     object->unk_034 = random_int(0x000AU);
     object->unk_034 = (object->unk_034 * 0.1) + 4.5;
     object->direction_angle[1] = (arg2 << 0x10) / arg3;
@@ -327,7 +327,7 @@ void OSnowman::func_8008379C(s32 objectIndex) {
         case 0:
             break;
         case 1:
-            if (func_80087E08(objectIndex, gObjectList[objectIndex].velocity[1], 0.74f,
+            if (func_80087E08(objectIndex, gObjectList[objectIndex].velocity.y, 0.74f,
                               gObjectList[objectIndex].unk_034, gObjectList[objectIndex].direction_angle[1],
                               0x00000064) != 0) {
                 object_next_state(objectIndex);

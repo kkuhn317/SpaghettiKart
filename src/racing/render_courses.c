@@ -85,7 +85,7 @@ void render_course_segments(const char* addr[], struct UnkStruct_800DC5EC* arg1)
     s16 temp_v0_3;
     u16 rot;
     if (gIsMirrorMode) {
-        rot = (u16) camera->rot[1];
+        rot = (u16) camera->rot.y;
         if (rot < 0x2000) {
             direction = SOUTH;
         } else if (rot < 0x6000) {
@@ -98,7 +98,7 @@ void render_course_segments(const char* addr[], struct UnkStruct_800DC5EC* arg1)
             direction = SOUTH;
         }
     } else {
-        rot = (u16) camera->rot[1];
+        rot = (u16) camera->rot.y;
         if (rot < 0x2000) {
             direction = SOUTH;
         } else if (rot < 0x6000) {
@@ -212,7 +212,7 @@ void func_8029122C(struct UnkStruct_800DC5EC* arg0, s32 playerId) {
 
     init_rdp();
     pathCounter = (u16) arg0->pathCounter;
-    cameraRot = (u16) arg0->camera->rot[1];
+    cameraRot = (u16) arg0->camera->rot.y;
     playerDirection = arg0->playerDirection;
     switch (playerId) {
         case PLAYER_ONE:
@@ -328,7 +328,7 @@ void func_8029122C(struct UnkStruct_800DC5EC* arg0, s32 playerId) {
     //         render_course_segments(sherbet_land_dls_2, arg0);
 
     //         gDPSetAlphaCompare(gDisplayListHead++, G_AC_NONE);
-    //         if ((func_80290C20(arg0->camera) == 1) && (get_water_level(player) < player->pos[1])) {
+    //         if ((func_80290C20(arg0->camera) == 1) && (get_water_level(player) < player->pos.y)) {
     //             gSPSetGeometryMode(gDisplayListHead++, G_ZBUFFER);
     //             gDPSetCombineMode(gDisplayListHead++, G_CC_SHADE, G_CC_SHADE);
     //             gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
@@ -762,13 +762,13 @@ void render_banshee_boardwalk(struct UnkStruct_800DC5EC* arg0) {
     // d_course_banshee_boardwalk_packed_dl_540
     gSPDisplayList(gDisplayListHead++, segmented_gfx_to_virtual(0x07000540));
 
-    if (camera->pos[1] < -20.0f) {
+    if (camera->pos.y < -20.0f) {
         // d_course_banshee_boardwalk_packed_dl_6310
         gSPDisplayList(gDisplayListHead++, segmented_gfx_to_virtual(0x07006310));
     }
-    spA8[0] = camera->pos[0];
+    spA8[0] = camera->pos.x;
     spA8[1] = -82.0f;
-    spA8[2] = camera->pos[2];
+    spA8[2] = camera->pos.z;
     mtxf_translate(spCC, spA8);
     render_set_position(spCC, 0);
 

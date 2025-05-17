@@ -28,24 +28,24 @@ void render_actor_fake_item_box(Camera* camera, struct FakeItemBox* fakeItemBox)
     // @port: Tag the transform.
     FrameInterpolation_RecordOpenChild("Fake Item Box", TAG_ITEM_ADDR(fakeItemBox));
 
-    if (is_within_render_distance(camera->pos, fakeItemBox->pos, camera->rot[1], 2500.0f, gCameraZoom[camera - camera1],
+    if (is_within_render_distance(camera->pos, fakeItemBox->pos, camera->rot.y, 2500.0f, gCameraZoom[camera - camera1],
                                   1000000.0f) < 0 &&
         CVarGetInteger("gNoCulling", 0) == 0) {
         actor_not_rendered(camera, (struct Actor*) fakeItemBox);
         return;
     }
-    if (((f32) gCourseMaxY + 800.0f) < fakeItemBox->pos[1]) {
+    if (((f32) gCourseMaxY + 800.0f) < fakeItemBox->pos.y) {
         actor_not_rendered(camera, (struct Actor*) fakeItemBox);
         return;
     }
-    if (fakeItemBox->pos[1] < ((f32) gCourseMinY - 800.0f)) {
+    if (fakeItemBox->pos.y < ((f32) gCourseMinY - 800.0f)) {
         actor_not_rendered(camera, (struct Actor*) fakeItemBox);
         return;
     }
 
     actor_rendered(camera, (struct Actor*) fakeItemBox);
     someRot[0] = 0;
-    someRot[1] = fakeItemBox->rot[1];
+    someRot[1] = fakeItemBox->rot.y;
     someRot[2] = 0;
     mtxf_pos_rotation_xyz(someMatrix2, fakeItemBox->pos, someRot);
     mtxf_scale(someMatrix2, fakeItemBox->sizeScaling);
@@ -65,13 +65,13 @@ void render_actor_fake_item_box(Camera* camera, struct FakeItemBox* fakeItemBox)
 
         gSPClearGeometryMode(gDisplayListHead++, G_LIGHTING);
         gDPSetCombineMode(gDisplayListHead++, G_CC_MODULATEIA, G_CC_MODULATEIA);
-        if ((fakeItemBox->rot[1] < 0xAA1) && (fakeItemBox->rot[1] > 0)) {
+        if ((fakeItemBox->rot.y < 0xAA1) && (fakeItemBox->rot.y > 0)) {
             gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
-        } else if ((fakeItemBox->rot[1] >= 0x6AA5) && (fakeItemBox->rot[1] < 0x754E)) {
+        } else if ((fakeItemBox->rot.y >= 0x6AA5) && (fakeItemBox->rot.y < 0x754E)) {
             gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
-        } else if ((fakeItemBox->rot[1] >= 0x38E1) && (fakeItemBox->rot[1] < 0x438A)) {
+        } else if ((fakeItemBox->rot.y >= 0x38E1) && (fakeItemBox->rot.y < 0x438A)) {
             gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
-        } else if ((fakeItemBox->rot[1] >= 0xC711) && (fakeItemBox->rot[1] < 0xD1BA)) {
+        } else if ((fakeItemBox->rot.y >= 0xC711) && (fakeItemBox->rot.y < 0xD1BA)) {
             gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
         } else {
             gDPSetBlendMask(gDisplayListHead++, 0xFF);

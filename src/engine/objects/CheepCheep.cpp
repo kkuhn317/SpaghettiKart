@@ -94,12 +94,12 @@ void OCheepCheep::func_8007BBBC(s32 objectIndex) {
             } else {
                 func_80087E08(objectIndex, 18.0f, 0.7f, 25.0f, (s16) 0x00005800, 0x0000012C);
             }
-            if (object->velocity[2] < 0.0f) {
-                var_f14 = -object->velocity[2];
+            if (object->velocity.z < 0.0f) {
+                var_f14 = -object->velocity.z;
             } else {
-                var_f14 = object->velocity[2];
+                var_f14 = object->velocity.z;
             }
-            object->direction_angle[0] = func_80041658(object->velocity[1], var_f14);
+            object->direction_angle[0] = func_80041658(object->velocity.y, var_f14);
             set_and_run_timer_object(objectIndex, 0x00000046);
             break;
         case 3:
@@ -180,10 +180,10 @@ void OCheepCheep::func_8007BFB0(s32 objectIndex) {
         case 0:
             break;
         case 1:
-            object->velocity[1] = -0.2f;
+            object->velocity.y = -0.2f;
             if ((f64) object->offset[1] <= 0.0) {
                 object->offset[1] = 0.0f;
-                object->velocity[1] = 0.0f;
+                object->velocity.y = 0.0f;
                 func_80086F60(objectIndex);
             }
             break;

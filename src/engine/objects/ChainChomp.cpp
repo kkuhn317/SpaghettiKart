@@ -58,12 +58,12 @@ void OChainChomp::func_80055AB8(s32 objectIndex, s32 cameraId) {
     camera = &camera1[cameraId];
     if (gObjectList[objectIndex].state >= 2) {
         if (is_obj_flag_status_active(objectIndex, 0x00100000) != 0) {
-            D_80183E40[0] = gObjectList[objectIndex].pos[0];
-            D_80183E40[1] = gObjectList[objectIndex].pos[1] + 16.0;
-            D_80183E40[2] = gObjectList[objectIndex].pos[2];
+            D_80183E40[0] = gObjectList[objectIndex].pos.x;
+            D_80183E40[1] = gObjectList[objectIndex].pos.y + 16.0;
+            D_80183E40[2] = gObjectList[objectIndex].pos.z;
             D_80183E80[0] = 0;
             D_80183E80[1] =
-                func_800418AC(gObjectList[objectIndex].pos[0], gObjectList[objectIndex].pos[2], camera->pos);
+                func_800418AC(gObjectList[objectIndex].pos.x, gObjectList[objectIndex].pos.z, camera->pos);
             D_80183E80[2] = 0x8000;
             func_800468E0(D_80183E40, D_80183E80, 0.54f, (u8*)d_course_rainbow_road_sphere, (Vtx*)D_0D0062B0, 0x00000020,
                           0x00000040, 0x00000020, 0x00000040, 5);

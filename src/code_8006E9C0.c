@@ -671,16 +671,16 @@ void init_course_object(void) {
     //         // Handle the big statue's fire breath
     //         objectId = indexObjectList2[0];
     //         init_object(objectId, 0);
-    //         gObjectList[objectId].pos[0] = -68.0 * xOrientation;
-    //         gObjectList[objectId].pos[1] = 80.0f;
-    //         gObjectList[objectId].pos[2] = -1840.0f;
+    //         gObjectList[objectId].pos.x = -68.0 * xOrientation;
+    //         gObjectList[objectId].pos.y = 80.0f;
+    //         gObjectList[objectId].pos.z = -1840.0f;
     //         // Handle the smaller statues' fire breath
     //         for (i = 0; i < NUM_FIRE_BREATHS; i++) {
     //             objectId = indexObjectList3[i];
     //             init_object(objectId, 0);
-    //             gObjectList[objectId].pos[0] = gFireBreathsSpawns[i][0] * xOrientation;
-    //             gObjectList[objectId].pos[1] = gFireBreathsSpawns[i][1];
-    //             gObjectList[objectId].pos[2] = gFireBreathsSpawns[i][2];
+    //             gObjectList[objectId].pos.x = gFireBreathsSpawns[i][0] * xOrientation;
+    //             gObjectList[objectId].pos.y = gFireBreathsSpawns[i][1];
+    //             gObjectList[objectId].pos.z = gFireBreathsSpawns[i][2];
     //             gObjectList[objectId].direction_angle[1] = 0;
     //             if (i % 2U) {
     //                 gObjectList[objectId].direction_angle[1] += 0x8000;
@@ -710,11 +710,11 @@ void init_course_object(void) {
     //             for (i = 0; i < NUM_HEDGEHOGS; i++) {
     //                 objectId = indexObjectList2[i];
     //                 init_object(objectId, 0);
-    //                 gObjectList[objectId].pos[0] = gObjectList[objectId].origin_pos[0] =
-    //                     gHedgehogSpawns[i].pos[0] * xOrientation;
-    //                 gObjectList[objectId].pos[1] = gObjectList[objectId].surfaceHeight =
-    //                     gHedgehogSpawns[i].pos[1] + 6.0;
-    //                 gObjectList[objectId].pos[2] = gObjectList[objectId].origin_pos[2] = gHedgehogSpawns[i].pos[2];
+    //                 gObjectList[objectId].pos.x = gObjectList[objectId].origin_pos[0] =
+    //                     gHedgehogSpawns[i].pos.x * xOrientation;
+    //                 gObjectList[objectId].pos.y = gObjectList[objectId].surfaceHeight =
+    //                     gHedgehogSpawns[i].pos.y + 6.0;
+    //                 gObjectList[objectId].pos.z = gObjectList[objectId].origin_pos[2] = gHedgehogSpawns[i].pos.z;
     //                 gObjectList[objectId].unk_0D5 = gHedgehogSpawns[i].unk_06;
     //                 gObjectList[objectId].unk_09C = gHedgehogPatrolPoints[i][0] * xOrientation;
     //                 gObjectList[objectId].unk_09E = gHedgehogPatrolPoints[i][2];
@@ -729,14 +729,14 @@ void init_course_object(void) {
     //             for (i = 0; i < NUM_SNOWMEN; i++) {
     //                 objectId = indexObjectList2[i];
     //                 init_object(objectId, 0);
-    //                 gObjectList[objectId].origin_pos[0] = gSnowmanSpawns[i].pos[0] * xOrientation;
-    //                 gObjectList[objectId].origin_pos[1] = gSnowmanSpawns[i].pos[1] + 5.0 + 3.0;
-    //                 gObjectList[objectId].origin_pos[2] = gSnowmanSpawns[i].pos[2];
+    //                 gObjectList[objectId].origin_pos[0] = gSnowmanSpawns[i].pos.x * xOrientation;
+    //                 gObjectList[objectId].origin_pos[1] = gSnowmanSpawns[i].pos.y + 5.0 + 3.0;
+    //                 gObjectList[objectId].origin_pos[2] = gSnowmanSpawns[i].pos.z;
     //                 objectId = indexObjectList1[i];
     //                 init_object(objectId, 0);
-    //                 gObjectList[objectId].origin_pos[0] = gSnowmanSpawns[i].pos[0] * xOrientation;
-    //                 gObjectList[objectId].origin_pos[1] = gSnowmanSpawns[i].pos[1] + 3.0;
-    //                 gObjectList[objectId].origin_pos[2] = gSnowmanSpawns[i].pos[2];
+    //                 gObjectList[objectId].origin_pos[0] = gSnowmanSpawns[i].pos.x * xOrientation;
+    //                 gObjectList[objectId].origin_pos[1] = gSnowmanSpawns[i].pos.y + 3.0;
+    //                 gObjectList[objectId].origin_pos[2] = gSnowmanSpawns[i].pos.z;
     //                 gObjectList[objectId].unk_0D5 = gSnowmanSpawns[i].unk_6;
     //             }
     //         }
@@ -746,11 +746,11 @@ void init_course_object(void) {
     //             for (i = 0; i < NUM_CRABS; i++) {
     //                 objectId = indexObjectList1[i];
     //                 init_object(objectId, 0);
-    //                 gObjectList[objectId].pos[0] = gObjectList[objectId].origin_pos[0] =
+    //                 gObjectList[objectId].pos.x = gObjectList[objectId].origin_pos[0] =
     //                     gCrabSpawns[i].startX * xOrientation;
     //                 gObjectList[objectId].unk_01C[0] = gCrabSpawns[i].patrolX * xOrientation;
 
-    //                 gObjectList[objectId].pos[2] = gObjectList[objectId].origin_pos[2] = gCrabSpawns[i].startZ;
+    //                 gObjectList[objectId].pos.z = gObjectList[objectId].origin_pos[2] = gCrabSpawns[i].startZ;
     //                 gObjectList[objectId].unk_01C[2] = gCrabSpawns[i].patrolZ;
     //             }
     //         }
@@ -834,8 +834,8 @@ void init_course_object(void) {
     //                 find_unused_obj_index(&gObjectParticle1[i]);
     //                 objectId = gObjectParticle1[i];
     //                 init_object(objectId, 0);
-    //                 gObjectList[objectId].pos[0] = gMoleSpawns.asVec3sList[i][0] * xOrientation;
-    //                 gObjectList[objectId].pos[2] = gMoleSpawns.asVec3sList[i][2];
+    //                 gObjectList[objectId].pos.x = gMoleSpawns.asVec3sList[i][0] * xOrientation;
+    //                 gObjectList[objectId].pos.z = gMoleSpawns.asVec3sList[i][2];
     //                 func_800887C0(objectId);
     //                 gObjectList[objectId].sizeScaling = 0.7f;
     //             }

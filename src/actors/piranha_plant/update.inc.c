@@ -9,8 +9,8 @@
 void update_actor_piranha_plant(struct PiranhaPlant* arg0) {
     if ((arg0->flags & 0x800) == 0) {
         if ((arg0->flags & 0x400) != 0) {
-            arg0->pos[1] += 4.0f;
-            if (arg0->pos[1] > 800.0f) {
+            arg0->pos.y += 4.0f;
+            if (arg0->pos.y > 800.0f) {
                 arg0->flags |= 0x800;
             }
         } else {

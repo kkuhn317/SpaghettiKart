@@ -20,18 +20,18 @@ void render_actor_kiwano_fruit(UNUSED Camera* camera, Mat4 arg1, struct Actor* a
         return;
     }
 
-    arg1[3][0] = actor->pos[0];
-    arg1[3][1] = actor->pos[1];
-    arg1[3][2] = actor->pos[2];
+    arg1[3][0] = actor->pos.x;
+    arg1[3][1] = actor->pos.y;
+    arg1[3][2] = actor->pos.z;
 
     maxObjectsReached = render_set_position(arg1, 0) == 0;
     if (maxObjectsReached) {
         return;
     }
 
-    // Animate actor by creating an index from rot[0]. Divide by texture size to get whole number 0-2.
+    // Animate actor by creating an index from rot.x. Divide by texture size to get whole number 0-2.
     // All three animated textures need to be the same size for this to work.
-    size_t idx = (actor->rot[0] << 0xA) / ResourceGetTexSizeByName(gTextureDksJungleParkwayKiwanoFruit1);
+    size_t idx = (actor->rot.x << 0xA) / ResourceGetTexSizeByName(gTextureDksJungleParkwayKiwanoFruit1);
     switch(idx) {
         case 0:
             addr = gTextureDksJungleParkwayKiwanoFruit1;
@@ -44,7 +44,7 @@ void render_actor_kiwano_fruit(UNUSED Camera* camera, Mat4 arg1, struct Actor* a
             break;
     }
 
-    //addr = segmented_texture_to_virtual((actor->rot[0] << 0xA) + 0x03009000);
+    //addr = segmented_texture_to_virtual((actor->rot.x << 0xA) + 0x03009000);
     gDPLoadTextureBlock(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(addr), G_IM_FMT_CI, G_IM_SIZ_8b, 32, 32, 0,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);

@@ -11,18 +11,6 @@ typedef struct {
 } Color;
 
 typedef struct {
-    float x;
-    float y;
-    float z;
-} Vec3fInterp;
-
-typedef struct {
-    s16 x;
-    s16 y;
-    s16 z;
-} Vec3sInterp;
-
-typedef struct {
     f32 m1; f32 m2; f32 m3; f32 m4;
     f32 m5; f32 m6; f32 m7; f32 m8;
 } Mat4Interp;

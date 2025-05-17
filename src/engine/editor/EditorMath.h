@@ -29,9 +29,9 @@ struct Triangle {
  * 
  * @return FVector ray direction
  * 
- * ray.x = camera->pos[0] + direction.x * length;
- * ray.y = camera->pos[1] + direction.y * length;
- * ray.z = camera->pos[2] + direction.z * length;
+ * ray.x = camera->pos.x + direction.x * length;
+ * ray.y = camera->pos.y + direction.y * length;
+ * ray.z = camera->pos.z + direction.z * length;
  */
 bool IsInGameScreen();
 FVector ScreenRayTrace();

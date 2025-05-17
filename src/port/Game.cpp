@@ -719,7 +719,7 @@ void CM_ActorCollision(Player* player, Actor* actor) {
 }
 
 f32 CM_GetWaterLevel(Vec3f pos, Collision* collision) {
-    FVector fPos = {pos[0], pos[1], pos[2]};
+    FVector fPos = {pos.x, pos.y, pos.z};
     return gWorldInstance.CurrentCourse->GetWaterLevel(fPos, collision);
 }
 

@@ -458,7 +458,7 @@ void start_race(void) {
 }
 
 f32 func_8028EE8C(s32 arg0) {
-    f32 temp_v0 = gPlayers[arg0].pos[2];
+    f32 temp_v0 = gPlayers[arg0].pos.z;
     f32 temp_v1 = gPlayers[arg0].oldPos[2];
     f32 temp_f14 = D_8015F8D0[2] - temp_v0;
     f32 temp_f16 = temp_v1 - D_8015F8D0[2];
@@ -1073,13 +1073,13 @@ void func_802903D8(Player* playerOne, Player* playerTwo) {
     f32 sp24 = gFloatArray802B8790[playerOne->characterId];
     f32 sp20 = gFloatArray802B8790[playerTwo->characterId];
 
-    sp60[0] = playerOne->pos[0] - playerTwo->pos[0];
-    sp60[1] = (playerOne->pos[1] - playerOne->boundingBoxSize) - (playerTwo->pos[1] - playerTwo->boundingBoxSize);
-    sp60[2] = playerOne->pos[2] - playerTwo->pos[2];
+    sp60[0] = playerOne->pos.x - playerTwo->pos.x;
+    sp60[1] = (playerOne->pos.y - playerOne->boundingBoxSize) - (playerTwo->pos.y - playerTwo->boundingBoxSize);
+    sp60[2] = playerOne->pos.z - playerTwo->pos.z;
 
-    sp54[0] = playerTwo->velocity[0] - playerOne->velocity[0];
-    sp54[1] = playerTwo->velocity[1] - playerOne->velocity[1];
-    sp54[2] = playerTwo->velocity[2] - playerOne->velocity[2];
+    sp54[0] = playerTwo->velocity.x - playerOne->velocity.x;
+    sp54[1] = playerTwo->velocity.y - playerOne->velocity.y;
+    sp54[2] = playerTwo->velocity.z - playerOne->velocity.z;
 
     temp_f0 = sqrtf((sp60[0] * sp60[0]) + (sp60[1] * sp60[1]) + (sp60[2] * sp60[2]));
 
@@ -1125,12 +1125,12 @@ void func_802903D8(Player* playerOne, Player* playerTwo) {
     sp60[2] /= temp_f0;
     if (temp_f0_2 < 0.2f) {
         temp_f0 = (playerOne->boundingBoxSize + playerTwo->boundingBoxSize) * 0.55f;
-        playerOne->pos[0] = playerTwo->pos[0] + (sp60[0] * temp_f0);
-        playerOne->pos[1] = playerTwo->pos[1] + (sp60[1] * temp_f0);
-        playerOne->pos[2] = playerTwo->pos[2] + (sp60[2] * temp_f0);
-        playerTwo->pos[0] -= temp_f0 * sp60[0];
-        playerTwo->pos[1] -= temp_f0 * sp60[1];
-        playerTwo->pos[2] -= temp_f0 * sp60[2];
+        playerOne->pos.x = playerTwo->pos.x + (sp60[0] * temp_f0);
+        playerOne->pos.y = playerTwo->pos.y + (sp60[1] * temp_f0);
+        playerOne->pos.z = playerTwo->pos.z + (sp60[2] * temp_f0);
+        playerTwo->pos.x -= temp_f0 * sp60[0];
+        playerTwo->pos.y -= temp_f0 * sp60[1];
+        playerTwo->pos.z -= temp_f0 * sp60[2];
         return;
     } else {
         temp_f16 = ((sp60[0] * sp54[0]) + (sp60[1] * sp54[1]) + (sp60[2] * sp54[2])) / temp_f0_2;
@@ -1138,21 +1138,21 @@ void func_802903D8(Player* playerOne, Player* playerTwo) {
     temp_f0_2 = temp_f0_2 * temp_f16 * 0.85;
     if ((playerOne->effects & 0x200) != 0x200) {
         temp_f2 = (temp_f0_2 * sp20) / sp24;
-        playerOne->velocity[0] += sp60[0] * temp_f2;
-        playerOne->velocity[1] += sp60[1] * temp_f2;
-        playerOne->velocity[2] += sp60[2] * temp_f2;
-        playerOne->pos[0] -= sp60[0] * sp74 * 0.5f;
-        playerOne->pos[1] -= sp60[1] * sp74 * 0.5f;
-        playerOne->pos[2] -= sp60[2] * sp74 * 0.5f;
+        playerOne->velocity.x += sp60[0] * temp_f2;
+        playerOne->velocity.y += sp60[1] * temp_f2;
+        playerOne->velocity.z += sp60[2] * temp_f2;
+        playerOne->pos.x -= sp60[0] * sp74 * 0.5f;
+        playerOne->pos.y -= sp60[1] * sp74 * 0.5f;
+        playerOne->pos.z -= sp60[2] * sp74 * 0.5f;
     }
     if ((playerTwo->effects & 0x200) != 0x200) {
         temp_f2 = (temp_f0_2 * sp24) / sp20;
-        playerTwo->velocity[0] -= sp60[0] * temp_f2;
-        playerTwo->velocity[1] -= sp60[1] * temp_f2;
-        playerTwo->velocity[2] -= sp60[2] * temp_f2;
-        playerTwo->pos[0] += sp60[0] * sp74 * 0.5f;
-        playerTwo->pos[1] += sp60[1] * sp74 * 0.5f;
-        playerTwo->pos[2] += sp60[2] * sp74 * 0.5f;
+        playerTwo->velocity.x -= sp60[0] * temp_f2;
+        playerTwo->velocity.y -= sp60[1] * temp_f2;
+        playerTwo->velocity.z -= sp60[2] * temp_f2;
+        playerTwo->pos.x += sp60[0] * sp74 * 0.5f;
+        playerTwo->pos.y += sp60[1] * sp74 * 0.5f;
+        playerTwo->pos.z += sp60[2] * sp74 * 0.5f;
     }
     if (playerOne->type & PLAYER_HUMAN) {
         func_800C9060((playerOne - gPlayerOne), 0x19008001U);

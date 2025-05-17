@@ -150,13 +150,13 @@ void ABoat::Tick() {
         Velocity[1] = Position[1] - temp_f28;
         Velocity[2] = Position[2] - temp_f30;
         paddleBoatActor = GET_ACTOR(ActorIndex);
-        paddleBoatActor->pos[0] = Position[0];
-        paddleBoatActor->pos[1] = Position[1];
-        paddleBoatActor->pos[2] = Position[2];
+        paddleBoatActor->pos.x = Position[0];
+        paddleBoatActor->pos.y = Position[1];
+        paddleBoatActor->pos.z = Position[2];
         if (gIsMirrorMode != 0) {
-            paddleBoatActor->rot[1] = -RotY;
+            paddleBoatActor->rot.y = -RotY;
         } else {
-            paddleBoatActor->rot[1] = RotY;
+            paddleBoatActor->rot.y = RotY;
         }
         Velocity[0] = Velocity[0];
         Velocity[1] = Velocity[1];
@@ -173,9 +173,9 @@ void ABoat::VehicleCollision(s32 playerId, Player* player) {
     f32 playerY;
 
     if (!((player->effects & 0x01000000)) && (!(player->effects & HIT_BY_ITEM_EFFECT))) {
-        playerX = player->pos[0];
-        playerY = player->pos[1];
-        playerZ = player->pos[2];
+        playerX = player->pos.x;
+        playerY = player->pos.y;
+        playerZ = player->pos.z;
         if (IsActive == 1) {
             x_diff = playerX - Position[0];
             y_diff = playerY - Position[1];

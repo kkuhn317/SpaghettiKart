@@ -131,9 +131,9 @@ void OBombKart::Tick() {
             if (GetCourse() == GetPodiumCeremony()) {
                 if (D_8016347E == 1) {
                     player = gPlayerFour;
-                    temp_f0 = newPos[0] - player->pos[0];
-                    temp_f2 = newPos[2] - player->pos[1];
-                    temp_f12 = newPos[2] - player->pos[2];
+                    temp_f0 = newPos[0] - player->pos.x;
+                    temp_f2 = newPos[2] - player->pos.y;
+                    temp_f12 = newPos[2] - player->pos.z;
                     if ((((temp_f0 * temp_f0) + (temp_f2 * temp_f2)) + (temp_f12 * temp_f12)) < 25.0f) {
                         circleTimer = 0;
                         state = States::EXPLODE;
@@ -146,9 +146,9 @@ void OBombKart::Tick() {
                 for (size_t i = 0; i < gPlayerCount; i++) {
                     player = &gPlayers[i];
                     if (!(player->effects & 0x80000000)) {
-                        temp_f0 = newPos[0] - player->pos[0];
-                        temp_f2 = newPos[1] - player->pos[1];
-                        temp_f12 = newPos[2] - player->pos[2];
+                        temp_f0 = newPos[0] - player->pos.x;
+                        temp_f2 = newPos[1] - player->pos.y;
+                        temp_f12 = newPos[2] - player->pos.z;
                         if ((((temp_f0 * temp_f0) + (temp_f2 * temp_f2)) + (temp_f12 * temp_f12)) < 25.0f) {
                             state = States::EXPLODE;
                             circleTimer = 0;
@@ -334,9 +334,9 @@ void OBombKart::Draw(s32 cameraId) {
             if (object->state != 0) {
                 s32 primAlpha = object->primAlpha;
                 Player* player = &gPlayerOne[playerId];
-                object->pos[0] = player->pos[0];
-                object->pos[1] = player->pos[1] - 2.0;
-                object->pos[2] = player->pos[2];
+                object->pos.x = player->pos.x;
+                object->pos.y = player->pos.y - 2.0;
+                object->pos.z = player->pos.z;
                 object->surfaceHeight = player->unk_074;
                 func_800563DC(_objectIndex, cameraId, primAlpha);
                 func_8005669C(_objectIndex, cameraId, primAlpha);
@@ -370,9 +370,9 @@ void OBombKart::Draw(s32 cameraId) {
     // huh???
     s32 state = State;
     if (State != States::DISABLED) {
-        gObjectList[_objectIndex].pos[0] = Pos[0];
-        gObjectList[_objectIndex].pos[1] = Pos[1];
-        gObjectList[_objectIndex].pos[2] = Pos[2];
+        gObjectList[_objectIndex].pos.x = Pos[0];
+        gObjectList[_objectIndex].pos.y = Pos[1];
+        gObjectList[_objectIndex].pos.z = Pos[2];
         s32 temp_s4 = func_8008A364(_objectIndex, cameraId, 0x31C4U, 0x000001F4);
         if (is_obj_flag_status_active(_objectIndex, VISIBLE) != 0) {
             set_object_flag(_objectIndex, 0x00200000);
@@ -441,7 +441,7 @@ void OBombKart::Waypoint(s32 screenId) {
 Player* OBombKart::FindTarget() {
     for (size_t i = 0; i < NUM_PLAYERS; i++) {
         if (gPlayers[i].type & PLAYER_HUMAN) {
-            if (is_within_distance_2d(Pos[0], Pos[2], gPlayers[i].pos[0], gPlayers[i].pos[2], 500)) {
+            if (is_within_distance_2d(Pos[0], Pos[2], gPlayers[i].pos.x, gPlayers[i].pos.z, 500)) {
                 return &gPlayers[i];
             }
         }
@@ -456,9 +456,9 @@ void OBombKart::Chase(Player* player, Vec3f pos) {
 
     // Calculate the directional vector toward the player
     Vec3f direction;
-    direction[0] = player->pos[0] - pos[0];
-    direction[1] = player->pos[1] - pos[1];
-    direction[2] = player->pos[2] - pos[2];
+    direction[0] = player->pos.x - pos.x;
+    direction[1] = player->pos.y - pos.y;
+    direction[2] = player->pos.z - pos.z;
 
     // Calculate the distance in the XZ plane
     f32 xz_dist = sqrtf((direction[0] * direction[0]) + (direction[2] * direction[2]));
@@ -466,18 +466,18 @@ void OBombKart::Chase(Player* player, Vec3f pos) {
     // Reset distance
     if (xz_dist > 700.0f) {
         _target = NULL;
-        pos[0] = _spawnPos[0];
-        pos[1] = _spawnPos[1];
-        pos[2] = _spawnPos[2];
+        pos.x = _spawnPos[0];
+        pos.y = _spawnPos[1];
+        pos.z = _spawnPos[2];
         return;
     }
 
     // Break off the chase if player has boo item
     if (player->effects & BOO_EFFECT) {
         _target = NULL;
-        pos[0] = _spawnPos[0];
-        pos[1] = _spawnPos[1];
-        pos[2] = _spawnPos[2];
+        pos.x = _spawnPos[0];
+        pos.y = _spawnPos[1];
+        pos.z = _spawnPos[2];
         return;
     }
 
@@ -488,20 +488,20 @@ void OBombKart::Chase(Player* player, Vec3f pos) {
         direction[2] /= xz_dist;
 
         // Scale the movement by a fixed step size
-        pos[0] += direction[0] * speed;
-        pos[2] += direction[2] * speed;
+        pos.x += direction[0] * speed;
+        pos.z += direction[2] * speed;
     }
 
     Vec3f newPosition;
-    newPosition[0] = pos[0];
-    newPosition[1] = pos[1];
-    newPosition[2] = pos[2];
+    newPosition[0] = pos.x;
+    newPosition[1] = pos.y;
+    newPosition[2] = pos.z;
 
-    newPosition[1] = calculate_surface_height(pos[0], 2000.0f, pos[2], _Collision.meshIndexZX) + 3.5f;
+    newPosition[1] = calculate_surface_height(pos.x, 2000.0f, pos.z, _Collision.meshIndexZX) + 3.5f;
 
-    pos[0] = newPosition[0];
-    pos[1] = newPosition[1];
-    pos[2] = newPosition[2];
+    pos.x = newPosition[0];
+    pos.y = newPosition[1];
+    pos.z = newPosition[2];
 
-    check_bounding_collision(&_Collision, 10.0f, pos[0], pos[1], pos[2]);
+    check_bounding_collision(&_Collision, 10.0f, pos.x, pos.y, pos.z);
 }

@@ -20,7 +20,7 @@ void render_actor_yoshi_egg(Camera* arg0, Mat4 arg1, struct YoshiValleyEgg* egg,
     f32 temp_f0;
 
     if (gGamestate != CREDITS_SEQUENCE) {
-        temp_f0 = is_within_render_distance(arg0->pos, egg->pos, arg0->rot[1], 200.0f, gCameraZoom[arg0 - camera1],
+        temp_f0 = is_within_render_distance(arg0->pos, egg->pos, arg0->rot.y, 200.0f, gCameraZoom[arg0 - camera1],
                                             16000000.0f);
 
         if (CVarGetInteger("gNoCulling", 0) == 1) {
@@ -43,9 +43,9 @@ void render_actor_yoshi_egg(Camera* arg0, Mat4 arg1, struct YoshiValleyEgg* egg,
     gSPSetGeometryMode(gDisplayListHead++, G_SHADING_SMOOTH);
     if ((arg3 > 12) && (arg3 < 20)) {
         if (temp_f0 < 640000.0f) {
-            sp54[0] = egg->pos[0];
+            sp54[0] = egg->pos.x;
             sp54[1] = 3.0f;
-            sp54[2] = egg->pos[2];
+            sp54[2] = egg->pos.z;
             func_802976D8(sp5C);
             func_8029794C(sp54, sp5C, 10.0f);
         }
@@ -64,9 +64,9 @@ void render_actor_yoshi_egg(Camera* arg0, Mat4 arg1, struct YoshiValleyEgg* egg,
         gSPDisplayList(gDisplayListHead++, d_course_yoshi_valley_dl_16D70);
         FrameInterpolation_RecordMatrixPop(sp60);
     } else {
-        arg1[3][0] = egg->pos[0];
-        arg1[3][1] = egg->pos[1];
-        arg1[3][2] = egg->pos[2];
+        arg1[3][0] = egg->pos.x;
+        arg1[3][1] = egg->pos.y;
+        arg1[3][2] = egg->pos.z;
 
         FrameInterpolation_RecordMatrixPush(arg1);
 

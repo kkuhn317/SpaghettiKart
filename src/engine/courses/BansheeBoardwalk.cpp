@@ -298,13 +298,13 @@ void BansheeBoardwalk::Render(struct UnkStruct_800DC5EC* arg0) {
     // d_course_banshee_boardwalk_packed_dl_540
     gSPDisplayList(gDisplayListHead++, segmented_gfx_to_virtual(reinterpret_cast<void*>(0x07000540)));
 
-    if (camera->pos[1] < -20.0f) {
+    if (camera->pos.y < -20.0f) {
         // d_course_banshee_boardwalk_packed_dl_6310
         gSPDisplayList(gDisplayListHead++, segmented_gfx_to_virtual(reinterpret_cast<void*>(0x07006310)));
     }
-    spA8[0] = camera->pos[0];
+    spA8[0] = camera->pos.x;
     spA8[1] = -82.0f;
-    spA8[2] = camera->pos[2];
+    spA8[2] = camera->pos.z;
     mtxf_translate(spCC, spA8);
     render_set_position(spCC, 0);
 

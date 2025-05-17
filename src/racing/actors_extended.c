@@ -52,7 +52,7 @@ void triple_shell_actor_collide_with_player(struct ShellActor* shell, s32 shellT
 
     shell->flags = 0x8000; // bitflag
     shell->rotAngle = 0;
-    shell->velocity[1] = 3.0f;
+    shell->velocity.y = 3.0f;
     shell->someTimer = 60;
 
     switch (shellType) {
@@ -70,9 +70,9 @@ void triple_shell_actor_collide_with_player(struct ShellActor* shell, s32 shellT
 void func_802B039C(struct BananaActor* banana) {
     banana->state = DROPPED_BANANA;
     banana->unk_04 = 0x00B4;
-    banana->velocity[0] = ((f32) (random_int(0x00C8) - 0x64) * 0.015);
-    banana->velocity[1] = ((f32) random_int(0x00C8)) * 0.015;
-    banana->velocity[2] = ((f32) (random_int(0x00C8) - 0x64) * 0.015);
+    banana->velocity.x = ((f32) (random_int(0x00C8) - 0x64) * 0.015);
+    banana->velocity.y = ((f32) random_int(0x00C8)) * 0.015;
+    banana->velocity.z = ((f32) (random_int(0x00C8) - 0x64) * 0.015);
 }
 
 void func_802B0464(s16 bananaIndex) {
@@ -107,7 +107,7 @@ void destroy_banana_in_banana_bunch(struct BananaActor* banana) {
     banana->flags = -0x8000;
     banana->unk_04 = 0x003C;
     banana->state = DESTROYED_BANANA;
-    banana->velocity[1] = 3.0f;
+    banana->velocity.y = 3.0f;
     temp_v0_2 = (struct BananaBunchParent*) GET_ACTOR(banana->parentIndex);
     temp_v0_2->bananaIndices[0] = -1;
     temp_v0_2->bananaIndices[1] = -1;
@@ -143,9 +143,9 @@ void func_802B0648(struct BananaBunchParent* banana_bunch) {
 
     banana->state = DROPPED_BANANA;
     banana->unk_04 = 0x00B4;
-    banana->velocity[0] = 0.0f;
-    banana->velocity[1] = 1.5f;
-    banana->velocity[2] = 0.0f;
+    banana->velocity.x = 0.0f;
+    banana->velocity.y = 1.5f;
+    banana->velocity.z = 0.0f;
     elderIndex = banana->elderIndex;
     if (elderIndex != -1) {
         ((struct BananaActor*) GET_ACTOR(elderIndex))->youngerIndex = -1;
@@ -195,9 +195,9 @@ void func_802B0788(s16 rawStickY, struct BananaBunchParent* banana_bunch, Player
     }
     vec3f_set(velocity, 0.0f, var_f0, var_f12);
     func_802B64C4(velocity, player->rotation[1] + player->unk_0C0);
-    banana->velocity[0] = velocity[0];
-    banana->velocity[1] = velocity[1];
-    banana->velocity[2] = velocity[2];
+    banana->velocity.x = velocity.x;
+    banana->velocity.y = velocity.y;
+    banana->velocity.z = velocity.z;
 }
 
 s32 func_802B09C0(s16 bananaId) {
@@ -433,9 +433,9 @@ void update_actor_triple_shell(TripleShellParent* parent, s16 shellType) {
                         someVelocity[1] = 0;
                         someVelocity[2] = 8;
                         func_802B64C4(someVelocity, player->rotation[1] + player->unk_0C0);
-                        shell->velocity[0] = someVelocity[0];
-                        shell->velocity[1] = someVelocity[1];
-                        shell->velocity[2] = someVelocity[2];
+                        shell->velocity.x = someVelocity[0];
+                        shell->velocity.y = someVelocity[1];
+                        shell->velocity.z = someVelocity[2];
                         shell->state = MOVING_SHELL;
                         shell->someTimer = 0x001E;
                         func_800C9060(parent->playerId, SOUND_ARG_LOAD(0x19, 0x00, 0x80, 0x04));
@@ -459,9 +459,9 @@ void update_actor_triple_shell(TripleShellParent* parent, s16 shellType) {
                         someVelocity[1] = 0;
                         someVelocity[2] = 8;
                         func_802B64C4(someVelocity, player->rotation[1] + player->unk_0C0);
-                        shell->velocity[0] = someVelocity[0];
-                        shell->velocity[1] = someVelocity[1];
-                        shell->velocity[2] = someVelocity[2];
+                        shell->velocity.x = someVelocity[0];
+                        shell->velocity.y = someVelocity[1];
+                        shell->velocity.z = someVelocity[2];
                         shell->state = MOVING_SHELL;
                         shell->someTimer = 0x001E;
                         func_800C90F4(parent->playerId,
@@ -485,9 +485,9 @@ void update_actor_triple_shell(TripleShellParent* parent, s16 shellType) {
                         someVelocity[1] = 0;
                         someVelocity[2] = 8;
                         func_802B64C4(someVelocity, player->rotation[1] + player->unk_0C0);
-                        shell->velocity[0] = someVelocity[0];
-                        shell->velocity[1] = someVelocity[1];
-                        shell->velocity[2] = someVelocity[2];
+                        shell->velocity.x = someVelocity[0];
+                        shell->velocity.y = someVelocity[1];
+                        shell->velocity.z = someVelocity[2];
                         shell->state = MOVING_SHELL;
                         shell->someTimer = 0x001E;
                         func_800C9060(parent->playerId, SOUND_ARG_LOAD(0x19, 0x00, 0x80, 0x04));
@@ -563,9 +563,9 @@ s32 init_triple_shell(TripleShellParent* parent, Player* player, s16 shellType, 
     startingPos[1] = -player->boundingBoxSize;
     startingPos[2] = player->boundingBoxSize - 4.0f;
     mtxf_translate_vec3f_mat3(startingPos, player->orientationMatrix);
-    startingPos[0] += player->pos[0];
-    startingPos[1] += player->pos[1];
-    startingPos[2] += player->pos[2];
+    startingPos[0] += player->pos.x;
+    startingPos[1] += player->pos.y;
+    startingPos[2] += player->pos.z;
 
     actorIndex = add_actor_to_empty_slot(startingPos, startingRot, startingVelocity, shellType);
     if (actorIndex < 0) {
@@ -574,10 +574,10 @@ s32 init_triple_shell(TripleShellParent* parent, Player* player, s16 shellType, 
     }
 
     shell = (struct ShellActor*) GET_ACTOR(actorIndex);
-    startingPos[0] = player->pos[0];
-    startingPos[1] = player->pos[1];
-    startingPos[2] = player->pos[2];
-    actor_terrain_collision(&shell->unk30, shell->boundingBoxSize + 1.0f, shell->pos[0], shell->pos[1], shell->pos[2],
+    startingPos[0] = player->pos.x;
+    startingPos[1] = player->pos.y;
+    startingPos[2] = player->pos.z;
+    actor_terrain_collision(&shell->unk30, shell->boundingBoxSize + 1.0f, shell->pos.x, shell->pos.y, shell->pos.z,
                             startingPos[0], startingPos[1], startingPos[2]);
     func_802B4E30((struct Actor*) shell);
     shell->flags = 0x9000;
@@ -614,9 +614,9 @@ s32 use_green_shell_item(Player* player) {
     mtxf_translate_vec3f_mat3(startingPos, player->orientationMatrix);
 
     // move to player position
-    startingPos[0] += player->pos[0];
-    startingPos[1] += player->pos[1];
-    startingPos[2] += player->pos[2];
+    startingPos[0] += player->pos.x;
+    startingPos[1] += player->pos.y;
+    startingPos[2] += player->pos.z;
 
     // spawn the shell
     actorIndex = add_actor_to_empty_slot(startingPos, startingRot, startingVelocity, ACTOR_GREEN_SHELL);
@@ -625,10 +625,10 @@ s32 use_green_shell_item(Player* player) {
     }
 
     shell = (struct ShellActor*) GET_ACTOR(actorIndex);
-    startingPos[0] = player->pos[0];
-    startingPos[1] = player->pos[1];
-    startingPos[2] = player->pos[2];
-    actor_terrain_collision(&shell->unk30, shell->boundingBoxSize + 1.0f, shell->pos[0], shell->pos[1], shell->pos[2],
+    startingPos[0] = player->pos.x;
+    startingPos[1] = player->pos.y;
+    startingPos[2] = player->pos.z;
+    actor_terrain_collision(&shell->unk30, shell->boundingBoxSize + 1.0f, shell->pos.x, shell->pos.y, shell->pos.z,
                             startingPos[0], startingPos[1], startingPos[2]);
     func_802B4E30((struct Actor*) shell);
     shell->state = HELD_SHELL;
@@ -654,9 +654,9 @@ s32 use_red_shell_item(Player* player) {
     mtxf_translate_vec3f_mat3(startingPos, player->orientationMatrix);
 
     // move to player position
-    startingPos[0] += player->pos[0];
-    startingPos[1] += player->pos[1];
-    startingPos[2] += player->pos[2];
+    startingPos[0] += player->pos.x;
+    startingPos[1] += player->pos.y;
+    startingPos[2] += player->pos.z;
 
     // spawn the shell
     actorIndex = add_actor_to_empty_slot(startingPos, startingRot, startingVelocity, ACTOR_RED_SHELL);
@@ -665,10 +665,10 @@ s32 use_red_shell_item(Player* player) {
     }
 
     shell = (struct ShellActor*) GET_ACTOR(actorIndex);
-    startingPos[0] = player->pos[0];
-    startingPos[1] = player->pos[1];
-    startingPos[2] = player->pos[2];
-    actor_terrain_collision(&shell->unk30, shell->boundingBoxSize + 1.0f, shell->pos[0], shell->pos[1], shell->pos[2],
+    startingPos[0] = player->pos.x;
+    startingPos[1] = player->pos.y;
+    startingPos[2] = player->pos.z;
+    actor_terrain_collision(&shell->unk30, shell->boundingBoxSize + 1.0f, shell->pos.x, shell->pos.y, shell->pos.z,
                             startingPos[0], startingPos[1], startingPos[2]);
     func_802B4E30((struct Actor*) shell);
     shell->state = HELD_SHELL;
@@ -701,23 +701,23 @@ void func_802B2914(struct BananaBunchParent* banana_bunch, Player* player, s16 b
     startingPos[1] = -player->boundingBoxSize;
     startingPos[2] = -(player->boundingBoxSize + 4.0f);
     mtxf_translate_vec3f_mat3(startingPos, player->orientationMatrix);
-    startingPos[0] += player->pos[0];
-    startingPos[1] += player->pos[1];
-    startingPos[2] += player->pos[2];
-    startingVelocity[0] = player->velocity[0];
-    startingVelocity[1] = player->velocity[1];
-    startingVelocity[2] = player->velocity[2];
+    startingPos[0] += player->pos.x;
+    startingPos[1] += player->pos.y;
+    startingPos[2] += player->pos.z;
+    startingVelocity[0] = player->velocity.x;
+    startingVelocity[1] = player->velocity.y;
+    startingVelocity[2] = player->velocity.z;
     startingRot[0] = 0;
     startingRot[1] = 0;
     startingRot[2] = 0;
     actorIndex = add_actor_to_empty_slot(startingPos, startingRot, startingVelocity, ACTOR_BANANA);
     if (actorIndex >= 0) {
         newBanana = (struct BananaActor*) GET_ACTOR(actorIndex);
-        startingPos[0] = player->pos[0];
-        startingPos[1] = player->pos[1];
-        startingPos[2] = player->pos[2];
-        actor_terrain_collision(&newBanana->unk30, newBanana->boundingBoxSize + 1.0f, newBanana->pos[0],
-                                newBanana->pos[1], newBanana->pos[2], startingPos[0], startingPos[1], startingPos[2]);
+        startingPos[0] = player->pos.x;
+        startingPos[1] = player->pos.y;
+        startingPos[2] = player->pos.z;
+        actor_terrain_collision(&newBanana->unk30, newBanana->boundingBoxSize + 1.0f, newBanana->pos.x,
+                                newBanana->pos.y, newBanana->pos.z, startingPos[0], startingPos[1], startingPos[2]);
         func_802B4E30((struct Actor*) newBanana);
         newBanana->flags = 0x9000;
         newBanana->playerId = player - gPlayerOne;
@@ -783,14 +783,14 @@ s32 use_fake_itembox_item(Player* player) {
     mtxf_translate_vec3f_mat3(startingPos, player->orientationMatrix);
 
     // move to player position
-    startingPos[0] += player->pos[0];
-    startingPos[1] += player->pos[1];
-    startingPos[2] += player->pos[2];
+    startingPos[0] += player->pos.x;
+    startingPos[1] += player->pos.y;
+    startingPos[2] += player->pos.z;
 
     // set the itembox's velocity to the player's velocity
-    startingVelocity[0] = player->velocity[0];
-    startingVelocity[1] = player->velocity[1];
-    startingVelocity[2] = player->velocity[2];
+    startingVelocity[0] = player->velocity.x;
+    startingVelocity[1] = player->velocity.y;
+    startingVelocity[2] = player->velocity.z;
 
     startingRot[0] = 0;
     startingRot[1] = 0;
@@ -831,14 +831,14 @@ s32 use_banana_item(Player* player) {
     mtxf_translate_vec3f_mat3(startingPos, player->orientationMatrix);
 
     // add the player's position to the banana's position
-    startingPos[0] += player->pos[0];
-    startingPos[1] += player->pos[1];
-    startingPos[2] += player->pos[2];
+    startingPos[0] += player->pos.x;
+    startingPos[1] += player->pos.y;
+    startingPos[2] += player->pos.z;
 
     // set the banana's velocity to the player's velocity
-    startingVelocity[0] = player->velocity[0];
-    startingVelocity[1] = player->velocity[1];
-    startingVelocity[2] = player->velocity[2];
+    startingVelocity[0] = player->velocity.x;
+    startingVelocity[1] = player->velocity.y;
+    startingVelocity[2] = player->velocity.z;
     startingRot[0] = 0;
     startingRot[1] = 0;
     startingRot[2] = 0;
@@ -972,18 +972,18 @@ void check_player_use_item(void) {
 
 void func_802B4E30(struct Actor* arg0) {
     if ((arg0->unk30.surfaceDistance[2] < 0.0f) && (arg0->unk30.unk34 == 1)) {
-        arg0->pos[0] -= (arg0->unk30.orientationVector[0] * arg0->unk30.surfaceDistance[2]);
-        arg0->pos[1] -= (arg0->unk30.orientationVector[1] * arg0->unk30.surfaceDistance[2]);
-        arg0->pos[2] -= (arg0->unk30.orientationVector[2] * arg0->unk30.surfaceDistance[2]);
+        arg0->pos.x -= (arg0->unk30.orientationVector[0] * arg0->unk30.surfaceDistance[2]);
+        arg0->pos.y -= (arg0->unk30.orientationVector[1] * arg0->unk30.surfaceDistance[2]);
+        arg0->pos.z -= (arg0->unk30.orientationVector[2] * arg0->unk30.surfaceDistance[2]);
     }
     if ((arg0->unk30.surfaceDistance[0] < 0.0f) && (arg0->unk30.unk30 == 1)) {
-        arg0->pos[0] -= (arg0->unk30.unk48[0] * arg0->unk30.surfaceDistance[0]);
-        arg0->pos[1] -= (arg0->unk30.unk48[1] * arg0->unk30.surfaceDistance[0]);
-        arg0->pos[2] -= (arg0->unk30.unk48[2] * arg0->unk30.surfaceDistance[0]);
+        arg0->pos.x -= (arg0->unk30.unk48[0] * arg0->unk30.surfaceDistance[0]);
+        arg0->pos.y -= (arg0->unk30.unk48[1] * arg0->unk30.surfaceDistance[0]);
+        arg0->pos.z -= (arg0->unk30.unk48[2] * arg0->unk30.surfaceDistance[0]);
     }
     if ((arg0->unk30.surfaceDistance[1] < 0.0f) && (arg0->unk30.unk32 == 1)) {
-        arg0->pos[0] -= (arg0->unk30.unk54[0] * arg0->unk30.surfaceDistance[1]);
-        arg0->pos[1] -= (arg0->unk30.unk54[1] * arg0->unk30.surfaceDistance[1]);
-        arg0->pos[2] -= (arg0->unk30.unk54[2] * arg0->unk30.surfaceDistance[1]);
+        arg0->pos.x -= (arg0->unk30.unk54[0] * arg0->unk30.surfaceDistance[1]);
+        arg0->pos.y -= (arg0->unk30.unk54[1] * arg0->unk30.surfaceDistance[1]);
+        arg0->pos.z -= (arg0->unk30.unk54[2] * arg0->unk30.surfaceDistance[1]);
     }
 }

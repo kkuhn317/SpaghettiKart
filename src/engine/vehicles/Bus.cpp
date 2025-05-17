@@ -137,19 +137,19 @@ void ABus::Tick() {
     Velocity[1] = Position[1] - sp58;
     Velocity[2] = Position[2] - sp54;
     struct Actor* vehicleActor = GET_ACTOR(ActorIndex);
-    vehicleActor->pos[0] = Position[0];
-    vehicleActor->pos[1] = Position[1];
-    vehicleActor->pos[2] = Position[2];
-    vehicleActor->rot[0] = Rotation[0];
+    vehicleActor->pos.x = Position[0];
+    vehicleActor->pos.y = Position[1];
+    vehicleActor->pos.z = Position[2];
+    vehicleActor->rot.x = Rotation[0];
     if (gIsMirrorMode != 0) {
-        vehicleActor->rot[1] = -Rotation[1];
+        vehicleActor->rot.y = -Rotation[1];
     } else {
-        vehicleActor->rot[1] = Rotation[1];
+        vehicleActor->rot.y = Rotation[1];
     }
-    vehicleActor->rot[2] = Rotation[2];
-    vehicleActor->velocity[0] = Velocity[0];
-    vehicleActor->velocity[1] = Velocity[1];
-    vehicleActor->velocity[2] = Velocity[2];
+    vehicleActor->rot.z = Rotation[2];
+    vehicleActor->velocity.x = Velocity[0];
+    vehicleActor->velocity.y = Velocity[1];
+    vehicleActor->velocity.z = Velocity[2];
 }
 
 void ABus::VehicleCollision(s32 playerId, Player* player) {
@@ -164,9 +164,9 @@ void ABus::VehicleCollision(s32 playerId, Player* player) {
     if (((D_801631E0[playerId] != 1) || ((((player->type & PLAYER_HUMAN) != 0)) && !(player->type & PLAYER_KART_AI))) &&
         !(player->effects & 0x01000000)) {
 
-        spC4 = player->pos[0];
-        spC0 = player->pos[1];
-        spBC = player->pos[2];
+        spC4 = player->pos.x;
+        spC0 = player->pos.y;
+        spBC = player->pos.z;
 
         temp_f12 = spC4 - Position[0];
         temp_f22 = spC0 - Position[1];

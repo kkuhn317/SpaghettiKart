@@ -30,7 +30,7 @@ void render_actor_item_box(Camera* camera, struct ItemBox* item_box) {
     // @port: Tag the transform.
     FrameInterpolation_RecordOpenChild("ItemBox", TAG_ITEM_ADDR(item_box));
 
-    temp_f0 = is_within_render_distance(camera->pos, item_box->pos, camera->rot[1], 0.0f, gCameraZoom[camera - camera1],
+    temp_f0 = is_within_render_distance(camera->pos, item_box->pos, camera->rot.y, 0.0f, gCameraZoom[camera - camera1],
                                         4000000.0f);
     if (CVarGetInteger("gNoCulling", 0) == 1) {
         temp_f0 = CLAMP(temp_f0, 0.0f, 600000.0f);
@@ -38,11 +38,11 @@ void render_actor_item_box(Camera* camera, struct ItemBox* item_box) {
     if (!(temp_f0 < 0.0f) && !(600000.0f < temp_f0)) {
         if ((item_box->state == 2) && (temp_f0 < 100000.0f)) {
             someRot[0] = 0;
-            someRot[1] = item_box->rot[1];
+            someRot[1] = item_box->rot.y;
             someRot[2] = 0;
-            someVec2[0] = item_box->pos[0];
+            someVec2[0] = item_box->pos.x;
             someVec2[1] = item_box->resetDistance + 2.0f;
-            someVec2[2] = item_box->pos[2];
+            someVec2[2] = item_box->pos.z;
 
             mtxf_pos_rotation_xyz(someMatrix1, someVec2, someRot);
 
@@ -52,8 +52,8 @@ void render_actor_item_box(Camera* camera, struct ItemBox* item_box) {
 
             gSPDisplayList(gDisplayListHead++, D_0D002EE8);
 
-            someRot[1] = item_box->rot[1] * 2;
-            someVec2[1] = item_box->pos[1];
+            someRot[1] = item_box->rot.y * 2;
+            someVec2[1] = item_box->pos.y;
 
             mtxf_pos_rotation_xyz(someMatrix1, someVec2, someRot);
 
@@ -82,13 +82,13 @@ void render_actor_item_box(Camera* camera, struct ItemBox* item_box) {
 
             gSPClearGeometryMode(gDisplayListHead++, G_LIGHTING);
             gDPSetCombineMode(gDisplayListHead++, G_CC_MODULATEIA, G_CC_MODULATEIA);
-            // if ((item_box->rot[1] < 0xAA1) && (item_box->rot[1] > 0)) {
+            // if ((item_box->rot.y < 0xAA1) && (item_box->rot.y > 0)) {
             //     gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
-            // } else if ((item_box->rot[1] >= 0x6AA5) && (item_box->rot[1] < 0x754E)) {
+            // } else if ((item_box->rot.y >= 0x6AA5) && (item_box->rot.y < 0x754E)) {
             //     gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
-            // } else if ((item_box->rot[1] >= 0x38E1) && (item_box->rot[1] < 0x438A)) {
+            // } else if ((item_box->rot.y >= 0x38E1) && (item_box->rot.y < 0x438A)) {
             //     gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
-            // } else if ((item_box->rot[1] >= 0xC711) && (item_box->rot[1] < 0xD1BA)) {
+            // } else if ((item_box->rot.y >= 0xC711) && (item_box->rot.y < 0xD1BA)) {
             //     gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
             // } else {
             gDPSetBlendMask(gDisplayListHead++, 0xFF);

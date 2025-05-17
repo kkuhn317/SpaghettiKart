@@ -118,31 +118,31 @@ void Gizmo::Translate() {
 
     if (Enabled) {
         length = sqrt(
-            pow(_selected->Pos->x - cameras[0].pos[0], 2) +
-            pow(_selected->Pos->y - cameras[0].pos[1], 2) +
-            pow(_selected->Pos->z - cameras[0].pos[2], 2)
+            pow(_selected->Pos->x - cameras[0].pos.x, 2) +
+            pow(_selected->Pos->y - cameras[0].pos.y, 2) +
+            pow(_selected->Pos->z - cameras[0].pos.z, 2)
         );
 
         switch(SelectedHandle) {
             case GizmoHandle::All_Axis:
-                _selected->Pos->x = (cameras[0].pos[0] + _ray.x * PickDistance) + _cursorOffset.x;
-                _selected->Pos->y = (cameras[0].pos[1] + _ray.y * PickDistance) + _cursorOffset.y;
-                _selected->Pos->z = (cameras[0].pos[2] + _ray.z * PickDistance) + _cursorOffset.z;
+                _selected->Pos->x = (cameras[0].pos.x + _ray.x * PickDistance) + _cursorOffset.x;
+                _selected->Pos->y = (cameras[0].pos.y + _ray.y * PickDistance) + _cursorOffset.y;
+                _selected->Pos->z = (cameras[0].pos.z + _ray.z * PickDistance) + _cursorOffset.z;
                 if (CVarGetInteger("gEditorSnapToGround", 0) == true) {
                     _selected->Pos->y = SnapToSurface(_selected->Pos);
                 }
                 break;
             case GizmoHandle::X_Axis:
-                _selected->Pos->x = (cameras[0].pos[0] + _ray.x * length) + _cursorOffset.x;
+                _selected->Pos->x = (cameras[0].pos.x + _ray.x * length) + _cursorOffset.x;
                 if (CVarGetInteger("gEditorSnapToGround", 0) == true) {
                     _selected->Pos->y = SnapToSurface(_selected->Pos);
                 }
                 break;
             case GizmoHandle::Y_Axis:
-                _selected->Pos->y = (cameras[0].pos[1] + _ray.y * length) + _cursorOffset.y;
+                _selected->Pos->y = (cameras[0].pos.y + _ray.y * length) + _cursorOffset.y;
                 break;
             case GizmoHandle::Z_Axis:
-                _selected->Pos->z = (cameras[0].pos[2] + _ray.z * length) + _cursorOffset.z;
+                _selected->Pos->z = (cameras[0].pos.z + _ray.z * length) + _cursorOffset.z;
                 if (CVarGetInteger("gEditorSnapToGround", 0) == true) {
                     _selected->Pos->y = SnapToSurface(_selected->Pos);
                 }
@@ -180,7 +180,7 @@ f32 Gizmo::SnapToSurface(FVector* pos) {
 }
 
 void Gizmo::Rotate() {
-    FVector cam = FVector(cameras[0].pos[0], cameras[0].pos[1], cameras[0].pos[2]);
+    FVector cam = FVector(cameras[0].pos.x, cameras[0].pos.y, cameras[0].pos.z);
 
     if (_selected == nullptr || _selected->Rot == nullptr) {
         return;
@@ -214,7 +214,7 @@ void Gizmo::Rotate() {
 }
 
 void Gizmo::Scale() {
-    FVector cam = FVector(cameras[0].pos[0], cameras[0].pos[1], cameras[0].pos[2]);
+    FVector cam = FVector(cameras[0].pos.x, cameras[0].pos.y, cameras[0].pos.z);
     if (_selected == nullptr || _selected->Scale == nullptr) {
         return;
     }
@@ -320,7 +320,7 @@ void Gizmo::DrawHandles() {
         Editor_MatrixIdentity(CenterMtx);
 
         // Calculate camera-to-object distance
-        FVector cameraDir = FVector(Pos.x - cameras[0].pos[0], Pos.y - cameras[0].pos[1], Pos.z - cameras[0].pos[2]);
+        FVector cameraDir = FVector(Pos.x - cameras[0].pos.x, Pos.y - cameras[0].pos.y, Pos.z - cameras[0].pos.z);
         cameraDir = cameraDir.Normalize();
 
         IRotator centerRot;

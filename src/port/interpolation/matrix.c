@@ -394,14 +394,14 @@ void Matrix_GetYRPAngles(Matrix* mtx, Vec3f* rot) {
     xHatP[0] -= originP[0];
     xHatP[1] -= originP[1];
     xHatP[2] -= originP[2];
-    *rot[1] = atan2f(zHatP[0], zHatP[2]);
-    *rot[0] = -atan2f(zHatP[1], sqrtf(SQ(zHatP[0]) + SQ(zHatP[2])));
-    Matrix_RotateX(&invYP, -*rot[0], MTXF_NEW);
-    Matrix_RotateY(&invYP, -*rot[1], MTXF_APPLY);
+    *rot.y = atan2f(zHatP[0], zHatP[2]);
+    *rot.x = -atan2f(zHatP[1], sqrtf(SQ(zHatP[0]) + SQ(zHatP[2])));
+    Matrix_RotateX(&invYP, -*rot.x, MTXF_NEW);
+    Matrix_RotateY(&invYP, -*rot.y, MTXF_APPLY);
     Matrix_MultVec3fNoTranslate(&invYP, &xHatP, &xHat);
-    *rot[0] *= M_RTOD;
-    *rot[1] *= M_RTOD;
-    *rot[2] = atan2f(xHat[1], xHat[0]) * M_RTOD;
+    *rot.x *= M_RTOD;
+    *rot.y *= M_RTOD;
+    *rot.z = atan2f(xHat[1], xHat[0]) * M_RTOD;
 }
 
 // Expresses the rotational part of the transform mtx as Tait-Bryan angles, in the extrinsic XYZ convention used in
@@ -424,14 +424,14 @@ void Matrix_GetXYZAngles(Matrix* mtx, Vec3f* rot) {
     yHatP[0] -= originP[0];
     yHatP[1] -= originP[1];
     yHatP[2] -= originP[2];
-    *rot[2] = atan2f(xHatP[1], xHatP[0]);
-    *rot[1] = -atan2f(xHatP[2], sqrtf(SQ(xHatP[0]) + SQ(xHatP[1])));
-    Matrix_RotateY(&invYZ, -*rot[1], MTXF_NEW);
-    Matrix_RotateZ(&invYZ, -*rot[2], MTXF_APPLY);
+    *rot.z = atan2f(xHatP[1], xHatP[0]);
+    *rot.y = -atan2f(xHatP[2], sqrtf(SQ(xHatP[0]) + SQ(xHatP[1])));
+    Matrix_RotateY(&invYZ, -*rot.y, MTXF_NEW);
+    Matrix_RotateZ(&invYZ, -*rot.z, MTXF_APPLY);
     Matrix_MultVec3fNoTranslate(&invYZ, &yHatP, &yHat);
-    *rot[0] = atan2f(yHat[2], yHat[1]) * M_RTOD;
-    *rot[1] *= M_RTOD;
-    *rot[2] *= M_RTOD;
+    *rot.x = atan2f(yHat[2], yHat[1]) * M_RTOD;
+    *rot.y *= M_RTOD;
+    *rot.z *= M_RTOD;
 }
 
 // Creates a look-at matrix from Eye, At, and Up in mtx (MTXF_NEW) or applies one to mtx (MTXF_APPLY).

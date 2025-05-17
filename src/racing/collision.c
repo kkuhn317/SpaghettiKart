@@ -464,15 +464,15 @@ f32 calculate_surface_height(f32 x, f32 y, f32 z, u16 index) {
 
 f32 func_802ABEAC(Collision* collision, Vec3f pos) {
     if (collision->unk34 == 1) {
-        return calculate_surface_height(pos[0], pos[1], pos[2], collision->meshIndexZX);
+        return calculate_surface_height(pos.x, pos.y, pos.z, collision->meshIndexZX);
     }
     if (collision->unk30 == 1) {
-        return calculate_surface_height(pos[0], pos[1], pos[2], collision->meshIndexYX);
+        return calculate_surface_height(pos.x, pos.y, pos.z, collision->meshIndexYX);
     }
     if (collision->unk32 == 1) {
-        return calculate_surface_height(pos[0], pos[1], pos[2], collision->meshIndexZY);
+        return calculate_surface_height(pos.x, pos.y, pos.z, collision->meshIndexZY);
     }
-    return pos[1];
+    return pos.y;
 }
 
 void process_shell_collision(Vec3f pos, UNUSED f32 boundingBoxSize, Vec3f velocity, UNUSED f32 unk) {
@@ -490,35 +490,35 @@ void process_shell_collision(Vec3f pos, UNUSED f32 boundingBoxSize, Vec3f veloci
     UNUSED f32 z2;
     f32 scaleFactor;
 
-    x = velocity[0];
-    y = velocity[1];
-    z = velocity[2];
+    x = velocity.x;
+    y = velocity.y;
+    z = velocity.z;
     velocityMagnitude = sqrtf((x * x) + (y * y) + (z * z));
 
     if ((velocityMagnitude > 4.5) || (velocityMagnitude < 3.5)) {
         velocityMagnitude = 4.0f;
     }
 
-    x2 = pos[0];
-    y2 = pos[1];
-    z2 = pos[2];
+    x2 = pos.x;
+    y2 = pos.y;
+    z2 = pos.z;
 
-    dotProduct = (pos[0] * x) + (pos[1] * y) + (pos[2] * z);
-    scaleX = x - dotProduct * pos[0];
-    scaleY = y - dotProduct * pos[1];
-    scaleZ = z - dotProduct * pos[2];
+    dotProduct = (pos.x * x) + (pos.y * y) + (pos.z * z);
+    scaleX = x - dotProduct * pos.x;
+    scaleY = y - dotProduct * pos.y;
+    scaleZ = z - dotProduct * pos.z;
 
-    x = scaleX - dotProduct * pos[0];
-    y = scaleY - dotProduct * pos[1];
-    z = scaleZ - dotProduct * pos[2];
+    x = scaleX - dotProduct * pos.x;
+    y = scaleY - dotProduct * pos.y;
+    z = scaleZ - dotProduct * pos.z;
 
     magnitude = sqrtf((x * x) + (y * y) + (z * z));
 
     scaleFactor = 1.0f / magnitude * velocityMagnitude;
 
-    velocity[0] = x * scaleFactor;
-    velocity[1] = y * scaleFactor;
-    velocity[2] = z * scaleFactor;
+    velocity.x = x * scaleFactor;
+    velocity.y = y * scaleFactor;
+    velocity.z = z * scaleFactor;
 }
 
 void shell_collision(Collision* collision, Vec3f velocity) {
@@ -592,9 +592,9 @@ UNUSED s32 detect_tyre_collision(KartTyre* tyre) {
     collision.surfaceDistance[0] = 1000.0f;
     collision.surfaceDistance[1] = 1000.0f;
     collision.surfaceDistance[2] = 1000.0f;
-    tyreX = tyre->pos[0];
-    tyreY = tyre->pos[1];
-    tyreZ = tyre->pos[2];
+    tyreX = tyre->pos.x;
+    tyreY = tyre->pos.y;
+    tyreZ = tyre->pos.z;
     switch (tyre->surfaceFlags) { /* irregular */
         case 0x80:
             if (check_collision_zy(&collision, 5.0f, tyreX, tyreY, tyreZ, (u16) (s32) tyre->collisionMeshIndex) == 1) {
@@ -2190,15 +2190,15 @@ u16 player_terrain_collision(Player* player, KartTyre* tyre, f32 tyre2X, f32 tyr
     collision->unk30 = 0;
     collision->unk32 = 0;
     collision->unk34 = 0;
-    tyreX = tyre->pos[0];
-    tyreY = tyre->pos[1];
-    tyreZ = tyre->pos[2];
+    tyreX = tyre->pos.x;
+    tyreY = tyre->pos.y;
+    tyreZ = tyre->pos.z;
     switch (tyre->surfaceFlags) {
         case 0x80:
             if (is_colliding_with_wall1(collision, boundingBoxSize, tyreX, tyreY, tyreZ, tyre->collisionMeshIndex,
                                         tyre2X, tyre2Y, tyre2Z) == 1) {
                 height = calculate_surface_height(tyreX, tyreY, tyreZ, tyre->collisionMeshIndex);
-                if ((!(height > player->pos[1])) && !((player->pos[1] - height) > (2 * boundingBoxSize))) {
+                if ((!(height > player->pos.y)) && !((player->pos.y - height) > (2 * boundingBoxSize))) {
                     tyre->baseHeight = height;
                     subtract_scaled_vector(collision->unk54, collision->surfaceDistance[1], tyre->pos);
                     return 1;
@@ -2209,7 +2209,7 @@ u16 player_terrain_collision(Player* player, KartTyre* tyre, f32 tyre2X, f32 tyr
             if (is_colliding_with_drivable_surface(collision, boundingBoxSize, tyreX, tyreY, tyreZ,
                                                    tyre->collisionMeshIndex, tyre2X, tyre2Y, tyre2Z) == 1) {
                 height = calculate_surface_height(tyreX, tyreY, tyreZ, tyre->collisionMeshIndex);
-                if (!(player->pos[1] < height) && !((2 * boundingBoxSize) < (player->pos[1] - height))) {
+                if (!(player->pos.y < height) && !((2 * boundingBoxSize) < (player->pos.y - height))) {
                     tyre->baseHeight = height;
                     subtract_scaled_vector(collision->orientationVector, collision->surfaceDistance[2], tyre->pos);
                     return 1;
@@ -2220,7 +2220,7 @@ u16 player_terrain_collision(Player* player, KartTyre* tyre, f32 tyre2X, f32 tyr
             if (is_colliding_with_wall2(collision, boundingBoxSize, tyreX, tyreY, tyreZ, tyre->collisionMeshIndex,
                                         tyre2X, tyre2Y, tyre2Z) == 1) {
                 height = calculate_surface_height(tyreX, tyreY, tyreZ, tyre->collisionMeshIndex);
-                if (!(player->pos[1] < height) && !((2 * boundingBoxSize) < (player->pos[1] - height))) {
+                if (!(player->pos.y < height) && !((2 * boundingBoxSize) < (player->pos.y - height))) {
                     tyre->baseHeight = height;
                     subtract_scaled_vector(collision->unk48, collision->surfaceDistance[0], tyre->pos);
                     return 1;
@@ -2272,7 +2272,7 @@ u16 player_terrain_collision(Player* player, KartTyre* tyre, f32 tyre2X, f32 tyr
                                                        tyre2X, tyre2Y, tyre2Z) == 1) {
                     height = calculate_surface_height(tyreX, tyreY, tyreZ, meshIndex);
 
-                    if (!(player->pos[1] < height) && !((2 * boundingBoxSize) < (player->pos[1] - height))) {
+                    if (!(player->pos.y < height) && !((2 * boundingBoxSize) < (player->pos.y - height))) {
                         subtract_scaled_vector(collision->orientationVector, collision->surfaceDistance[2], tyre->pos);
                         tyre->baseHeight = height;
                         tyre->surfaceType = (u8) gCollisionMesh[meshIndex].surfaceType;
@@ -2293,7 +2293,7 @@ u16 player_terrain_collision(Player* player, KartTyre* tyre, f32 tyre2X, f32 tyr
                     if (is_colliding_with_wall1(collision, boundingBoxSize, tyreX, tyreY, tyreZ, meshIndex, tyre2X,
                                                 tyre2Y, tyre2Z) == 1) {
                         height = calculate_surface_height(tyreX, tyreY, tyreZ, meshIndex);
-                        if (!(player->pos[1] < height) && !((2 * boundingBoxSize) < (player->pos[1] - height))) {
+                        if (!(player->pos.y < height) && !((2 * boundingBoxSize) < (player->pos.y - height))) {
                             tyre->baseHeight = height;
                             subtract_scaled_vector(collision->unk54, collision->surfaceDistance[1], tyre->pos);
                             tyre->baseHeight = calculate_surface_height(tyreX, tyreY, tyreZ, meshIndex);
@@ -2311,7 +2311,7 @@ u16 player_terrain_collision(Player* player, KartTyre* tyre, f32 tyre2X, f32 tyr
                     if (is_colliding_with_wall2(collision, boundingBoxSize, tyreX, tyreY, tyreZ, meshIndex, tyre2X,
                                                 tyre2Y, tyre2Z) == 1) {
                         height = calculate_surface_height(tyreX, tyreY, tyreZ, meshIndex);
-                        if (!(player->pos[1] < height) && !((2 * boundingBoxSize) < (player->pos[1] - height))) {
+                        if (!(player->pos.y < height) && !((2 * boundingBoxSize) < (player->pos.y - height))) {
                             tyre->baseHeight = height;
                             subtract_scaled_vector(collision->unk48, collision->surfaceDistance[0], tyre->pos);
                             tyre->surfaceType = (u8) gCollisionMesh[meshIndex].surfaceType;

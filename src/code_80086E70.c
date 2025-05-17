@@ -118,20 +118,20 @@ UNUSED void func_80087258(s32 objectIndex, UNUSED s32 arg1, f32 arg2) {
 }
 
 UNUSED s32 get_angle_between_player_object(s32 objectIndex, Player* player) {
-    return get_angle_between_xy(player->pos[0], gObjectList[objectIndex].pos[0], player->pos[2],
-                                gObjectList[objectIndex].pos[2]);
+    return get_angle_between_xy(player->pos.x, gObjectList[objectIndex].pos.x, player->pos.z,
+                                gObjectList[objectIndex].pos.z);
 }
 
 s32 angle_between_object_camera(s32 objectIndex, Camera* camera) {
-    return atan2s(gObjectList[objectIndex].pos[0] - camera->pos[0], gObjectList[objectIndex].pos[2] - camera->pos[2]);
+    return atan2s(gObjectList[objectIndex].pos.x - camera->pos.x, gObjectList[objectIndex].pos.z - camera->pos.z);
 }
 
 u16 get_x_direction_angle(s32 objectIndex) {
-    return -atan2s(gObjectList[objectIndex].velocity[1], gObjectList[objectIndex].velocity[2]);
+    return -atan2s(gObjectList[objectIndex].velocity.y, gObjectList[objectIndex].velocity.z);
 }
 
 s32 get_y_direction_angle(s32 objectIndex) {
-    return atan2s(gObjectList[objectIndex].velocity[0], gObjectList[objectIndex].velocity[2]);
+    return atan2s(gObjectList[objectIndex].velocity.x, gObjectList[objectIndex].velocity.z);
 }
 
 UNUSED void func_800873A4(s32 objectIndex) {
@@ -145,24 +145,24 @@ void func_800873F4(s32 objectIndex) {
 }
 
 UNUSED void func_80087444(s32 objectIndex) {
-    gObjectList[objectIndex].velocity[0] =
+    gObjectList[objectIndex].velocity.x =
         gObjectList[objectIndex].unk_034 * sins(gObjectList[objectIndex].direction_angle[1]);
 }
 
 UNUSED void func_8008748C(s32 objectIndex) {
-    gObjectList[objectIndex].velocity[1] =
+    gObjectList[objectIndex].velocity.y =
         gObjectList[objectIndex].unk_034 * coss(gObjectList[objectIndex].direction_angle[0]);
 }
 
 UNUSED void func_800874D4(s32 objectIndex) {
-    gObjectList[objectIndex].velocity[2] =
+    gObjectList[objectIndex].velocity.z =
         gObjectList[objectIndex].unk_034 * coss(gObjectList[objectIndex].direction_angle[1]);
 }
 
 void func_8008751C(s32 objectIndex) {
-    gObjectList[objectIndex].velocity[0] =
+    gObjectList[objectIndex].velocity.x =
         gObjectList[objectIndex].unk_034 * sins(gObjectList[objectIndex].direction_angle[1]);
-    gObjectList[objectIndex].velocity[2] =
+    gObjectList[objectIndex].velocity.z =
         gObjectList[objectIndex].unk_034 * coss(gObjectList[objectIndex].direction_angle[1]);
 }
 
@@ -170,19 +170,19 @@ void func_8008757C(s32 objectIndex) {
     f32 sp24;
 
     sp24 = coss(gObjectList[objectIndex].direction_angle[0]);
-    gObjectList[objectIndex].velocity[0] =
+    gObjectList[objectIndex].velocity.x =
         (gObjectList[objectIndex].unk_034 * sp24) * sins(gObjectList[objectIndex].direction_angle[1]);
-    gObjectList[objectIndex].velocity[1] =
+    gObjectList[objectIndex].velocity.y =
         -gObjectList[objectIndex].unk_034 * sins(gObjectList[objectIndex].direction_angle[0]);
     sp24 = coss(gObjectList[objectIndex].direction_angle[0]);
-    gObjectList[objectIndex].velocity[2] =
+    gObjectList[objectIndex].velocity.z =
         (gObjectList[objectIndex].unk_034 * sp24) * coss(gObjectList[objectIndex].direction_angle[1]);
 }
 
 void func_80087620(s32 objectIndex) {
-    gObjectList[objectIndex].velocity[0] =
+    gObjectList[objectIndex].velocity.x =
         gObjectList[objectIndex].unk_034 * sins(gObjectList[objectIndex].direction_angle[1] + 0x8000);
-    gObjectList[objectIndex].velocity[2] =
+    gObjectList[objectIndex].velocity.z =
         gObjectList[objectIndex].unk_034 * coss(gObjectList[objectIndex].direction_angle[1] + 0x8000);
 }
 
@@ -194,26 +194,26 @@ void func_800876A0(s32 objectIndex) {
 }
 
 void object_add_velocity_offset_xyz(s32 objectIndex) {
-    gObjectList[objectIndex].offset[0] += gObjectList[objectIndex].velocity[0];
-    gObjectList[objectIndex].offset[1] += gObjectList[objectIndex].velocity[1];
-    gObjectList[objectIndex].offset[2] += gObjectList[objectIndex].velocity[2];
+    gObjectList[objectIndex].offset[0] += gObjectList[objectIndex].velocity.x;
+    gObjectList[objectIndex].offset[1] += gObjectList[objectIndex].velocity.y;
+    gObjectList[objectIndex].offset[2] += gObjectList[objectIndex].velocity.z;
 }
 
 void object_add_velocity_offset_xz(s32 objectIndex) {
-    gObjectList[objectIndex].offset[0] += gObjectList[objectIndex].velocity[0];
-    gObjectList[objectIndex].offset[2] += gObjectList[objectIndex].velocity[2];
+    gObjectList[objectIndex].offset[0] += gObjectList[objectIndex].velocity.x;
+    gObjectList[objectIndex].offset[2] += gObjectList[objectIndex].velocity.z;
 }
 
 UNUSED void object_add_velocity_offset_x(s32 objectIndex) {
-    gObjectList[objectIndex].offset[0] += gObjectList[objectIndex].velocity[0];
+    gObjectList[objectIndex].offset[0] += gObjectList[objectIndex].velocity.x;
 }
 
 void object_add_velocity_offset_y(s32 objectIndex) {
-    gObjectList[objectIndex].offset[1] += gObjectList[objectIndex].velocity[1];
+    gObjectList[objectIndex].offset[1] += gObjectList[objectIndex].velocity.y;
 }
 
 UNUSED void object_add_velocity_offset_z(s32 objectIndex) {
-    gObjectList[objectIndex].offset[2] += gObjectList[objectIndex].velocity[2];
+    gObjectList[objectIndex].offset[2] += gObjectList[objectIndex].velocity.z;
 }
 
 void func_8008781C(s32 arg0) {
@@ -301,10 +301,10 @@ s32 func_80087B84(s32 objectIndex, f32 arg1, f32 arg2) {
     sp24 = 0;
     if (is_obj_index_flag_status_inactive(objectIndex, 8) != false) {
         set_object_flag(objectIndex, 8);
-        gObjectList[objectIndex].velocity[1] = -arg1;
+        gObjectList[objectIndex].velocity.y = -arg1;
     }
     object_add_velocity_offset_y(objectIndex);
-    if (gObjectList[objectIndex].pos[1] <= arg2) {
+    if (gObjectList[objectIndex].pos.y <= arg2) {
         clear_object_flag(objectIndex, 8);
         func_80086FD4(objectIndex);
         sp24 = 1;
@@ -318,7 +318,7 @@ s32 func_80087C48(s32 objectIndex, f32 arg1, f32 arg2, s32 arg3) {
     sp24 = 0;
     if (is_obj_index_flag_status_inactive(objectIndex, 8) != false) {
         set_object_flag(objectIndex, 8);
-        gObjectList[objectIndex].velocity[1] = arg1;
+        gObjectList[objectIndex].velocity.y = arg1;
         gObjectList[objectIndex].unk_0B0 = (s16) arg3;
     }
     gObjectList[objectIndex].unk_0B0--;
@@ -327,7 +327,7 @@ s32 func_80087C48(s32 objectIndex, f32 arg1, f32 arg2, s32 arg3) {
         func_80086FD4(objectIndex);
         sp24 = 1;
     } else {
-        gObjectList[objectIndex].velocity[1] -= arg2;
+        gObjectList[objectIndex].velocity.y -= arg2;
         object_add_velocity_offset_y(objectIndex);
     }
     return sp24;
@@ -339,9 +339,9 @@ s32 func_80087D24(s32 objectIndex, f32 arg1, f32 arg2, f32 arg3) {
     sp24 = 0;
     if (is_obj_index_flag_status_inactive(objectIndex, 8) != 0) {
         set_object_flag(objectIndex, 8);
-        gObjectList[objectIndex].velocity[1] = arg1;
+        gObjectList[objectIndex].velocity.y = arg1;
     }
-    gObjectList[objectIndex].velocity[1] -= arg2;
+    gObjectList[objectIndex].velocity.y -= arg2;
     object_add_velocity_offset_y(objectIndex);
     if (gObjectList[objectIndex].offset[1] <= arg3) {
         clear_object_flag(objectIndex, 8);
@@ -363,7 +363,7 @@ bool func_80087E08(s32 objectIndex, f32 arg1, f32 arg2, f32 arg3, s16 arg4, s32 
         gObjectList[objectIndex].offset[1] = 0.0f;
         gObjectList[objectIndex].offset[0] = 0.0f;
         gObjectList[objectIndex].unk_034 = arg3;
-        gObjectList[objectIndex].velocity[1] = arg1;
+        gObjectList[objectIndex].velocity.y = arg1;
         gObjectList[objectIndex].direction_angle[1] = arg4;
         func_8008751C(objectIndex);
         gObjectList[objectIndex].unk_0B0 = arg5;
@@ -374,7 +374,7 @@ bool func_80087E08(s32 objectIndex, f32 arg1, f32 arg2, f32 arg3, s16 arg4, s32 
         func_80086FD4(objectIndex);
         sp2C = true;
     } else {
-        gObjectList[objectIndex].velocity[1] -= arg2;
+        gObjectList[objectIndex].velocity.y -= arg2;
         object_add_velocity_offset_xyz(objectIndex);
     }
     return sp2C;
@@ -391,7 +391,7 @@ UNUSED s32 func_80087F14(s32 objectIndex, f32 arg1, f32 arg2, f32 arg3, s16 arg4
         gObjectList[objectIndex].offset[1] = 0.0f;
         gObjectList[objectIndex].offset[0] = 0.0f;
         gObjectList[objectIndex].unk_034 = arg3;
-        gObjectList[objectIndex].velocity[1] = arg1;
+        gObjectList[objectIndex].velocity.y = arg1;
         gObjectList[objectIndex].direction_angle[1] = arg4;
         func_8008751C(objectIndex);
         gObjectList[objectIndex].unk_0B0 = gVBlankTimer;
@@ -401,7 +401,7 @@ UNUSED s32 func_80087F14(s32 objectIndex, f32 arg1, f32 arg2, f32 arg3, s16 arg4
         func_80086FD4(objectIndex);
         sp2C = 1;
     } else {
-        gObjectList[objectIndex].velocity[1] -= arg2;
+        gObjectList[objectIndex].velocity.y -= arg2;
         object_add_velocity_offset_xyz(objectIndex);
     }
     return sp2C;
@@ -416,8 +416,8 @@ void func_80088038(s32 objectIndex, f32 arg1, u16 arg2) {
     gObjectList[objectIndex].unk_0C4 += arg2;
     gObjectList[objectIndex].offset[0] = sins(gObjectList[objectIndex].unk_0C4) * arg1;
     gObjectList[objectIndex].offset[2] = coss(gObjectList[objectIndex].unk_0C4) * arg1;
-    gObjectList[objectIndex].velocity[0] = gObjectList[objectIndex].offset[0] - temp_f4;
-    gObjectList[objectIndex].velocity[2] = gObjectList[objectIndex].offset[2] - sp20;
+    gObjectList[objectIndex].velocity.x = gObjectList[objectIndex].offset[0] - temp_f4;
+    gObjectList[objectIndex].velocity.z = gObjectList[objectIndex].offset[2] - sp20;
 }
 
 UNUSED void func_800880DC(void) {
@@ -428,9 +428,9 @@ void func_800880E4(s32 objectIndex) {
     s32 someIndex;
     phi_v0 = gObjectList[objectIndex].controlPoints;
     for (someIndex = 0; someIndex < 2; someIndex++, phi_v0++) {
-        D_80165760[someIndex] = phi_v0->pos[0];
-        D_80165770[someIndex] = phi_v0->pos[1];
-        D_80165780[someIndex] = phi_v0->pos[2];
+        D_80165760[someIndex] = phi_v0->pos.x;
+        D_80165770[someIndex] = phi_v0->pos.y;
+        D_80165780[someIndex] = phi_v0->pos.z;
     }
 }
 
@@ -464,9 +464,9 @@ void func_80088228(s32 objectIndex) {
     but for some unholy reason that doesn't match
     */
     object->unk_084[8] = *((s16*) object->controlPoints - 1);
-    object->offset[0] = object->controlPoints[0].pos[0];
-    object->offset[1] = object->controlPoints[0].pos[1];
-    object->offset[2] = object->controlPoints[0].pos[2];
+    object->offset[0] = object->controlPoints[0].pos.x;
+    object->offset[1] = object->controlPoints[0].pos.y;
+    object->offset[2] = object->controlPoints[0].pos.z;
     func_80086FD4(objectIndex);
 }
 
@@ -528,14 +528,14 @@ s32 func_8008847C(s32 objectIndex) {
     sp2C = 0;
     clear_object_flag(objectIndex, 0x00800000);
     if (is_obj_flag_status_active(objectIndex, 0x00000400) != 0) {
-        check_bounding_collision(&D_8018C3B0, 10.0f, gObjectList[objectIndex].pos[0], 20.0f,
-                                 gObjectList[objectIndex].pos[2]);
+        check_bounding_collision(&D_8018C3B0, 10.0f, gObjectList[objectIndex].pos.x, 20.0f,
+                                 gObjectList[objectIndex].pos.z);
         if (D_8018C3B0.unk34 == 1) {
             sp2C = 1;
             set_object_flag(objectIndex, 0x00800000);
         }
         gObjectList[objectIndex].surfaceHeight = calculate_surface_height(
-            gObjectList[objectIndex].pos[0], 0.0f, gObjectList[objectIndex].pos[2], D_8018C3B0.meshIndexZX);
+            gObjectList[objectIndex].pos.x, 0.0f, gObjectList[objectIndex].pos.z, D_8018C3B0.meshIndexZX);
     }
     return sp2C;
 }
@@ -546,14 +546,14 @@ s32 func_80088538(s32 objectIndex) {
     sp2C = 0;
     clear_object_flag(objectIndex, 0x00800000);
     if (is_obj_flag_status_active(objectIndex, 0x00000400) != 0) {
-        check_bounding_collision(&D_8018C3B0, 10.0f, gObjectList[objectIndex].pos[0], 20.0f,
-                                 gObjectList[objectIndex].pos[2]);
+        check_bounding_collision(&D_8018C3B0, 10.0f, gObjectList[objectIndex].pos.x, 20.0f,
+                                 gObjectList[objectIndex].pos.z);
         if (D_8018C3B0.unk34 == 1) {
             sp2C = 1;
             set_object_flag(objectIndex, 0x00800000);
         }
         gObjectList[objectIndex].surfaceHeight = calculate_surface_height(
-            gObjectList[objectIndex].pos[0], 0.0f, gObjectList[objectIndex].pos[2], D_8018C3B0.meshIndexZX);
+            gObjectList[objectIndex].pos.x, 0.0f, gObjectList[objectIndex].pos.z, D_8018C3B0.meshIndexZX);
         gObjectList[objectIndex].unk_0B8[0] =
             atan2s(D_8018C3B0.orientationVector[2], D_8018C3B0.orientationVector[1]) + 0x4000;
         gObjectList[objectIndex].unk_0B8[2] = atan2s(D_8018C3B0.orientationVector[0], D_8018C3B0.orientationVector[1]);
@@ -567,14 +567,14 @@ s32 func_8008861C(s32 objectIndex) {
     sp2C = 0;
     clear_object_flag(objectIndex, 0x00800000);
     if (is_obj_flag_status_active(objectIndex, 0x00000400) != 0) {
-        check_bounding_collision(&D_8018C3B0, 10.0f, gObjectList[objectIndex].pos[0], 20.0f,
-                                 gObjectList[objectIndex].pos[2]);
+        check_bounding_collision(&D_8018C3B0, 10.0f, gObjectList[objectIndex].pos.x, 20.0f,
+                                 gObjectList[objectIndex].pos.z);
         if (D_8018C3B0.unk34 == 1) {
             sp2C = 1;
             set_object_flag(objectIndex, 0x00800000);
         }
         gObjectList[objectIndex].surfaceHeight = calculate_surface_height(
-            gObjectList[objectIndex].pos[0], 0.0f, gObjectList[objectIndex].pos[2], D_8018C3B0.meshIndexZX);
+            gObjectList[objectIndex].pos.x, 0.0f, gObjectList[objectIndex].pos.z, D_8018C3B0.meshIndexZX);
         gObjectList[objectIndex].unk_01C[0] = D_8018C3B0.orientationVector[0];
         gObjectList[objectIndex].unk_01C[1] = D_8018C3B0.orientationVector[1];
         gObjectList[objectIndex].unk_01C[2] = D_8018C3B0.orientationVector[2];
@@ -583,12 +583,12 @@ s32 func_8008861C(s32 objectIndex) {
 }
 
 void func_800886F4(s32 objectIndex) {
-    check_bounding_collision(&D_8018C3B0, 10.0f, gObjectList[objectIndex].pos[0], 20.0f,
-                             gObjectList[objectIndex].pos[2]);
+    check_bounding_collision(&D_8018C3B0, 10.0f, gObjectList[objectIndex].pos.x, 20.0f,
+                             gObjectList[objectIndex].pos.z);
     if (D_8018C3B0.unk34 == 1) {
         set_object_flag(objectIndex, 0x00800000);
         gObjectList[objectIndex].surfaceHeight = calculate_surface_height(
-            gObjectList[objectIndex].pos[0], 0.0f, gObjectList[objectIndex].pos[2], D_8018C3B0.meshIndexZX);
+            gObjectList[objectIndex].pos.x, 0.0f, gObjectList[objectIndex].pos.z, D_8018C3B0.meshIndexZX);
         gObjectList[objectIndex].unk_0B8[0] =
             atan2s(D_8018C3B0.orientationVector[2], D_8018C3B0.orientationVector[1]) + 0x4000;
         gObjectList[objectIndex].unk_0B8[2] = atan2s(D_8018C3B0.orientationVector[0], D_8018C3B0.orientationVector[1]);
@@ -598,15 +598,15 @@ void func_800886F4(s32 objectIndex) {
 }
 
 void func_800887C0(s32 objectIndex) {
-    check_bounding_collision(&D_8018C3B0, 10.0f, gObjectList[objectIndex].pos[0], 20.0f,
-                             gObjectList[objectIndex].pos[2]);
+    check_bounding_collision(&D_8018C3B0, 10.0f, gObjectList[objectIndex].pos.x, 20.0f,
+                             gObjectList[objectIndex].pos.z);
     if (D_8018C3B0.unk34 == 1) {
         set_object_flag(objectIndex, 0x00800000);
         gObjectList[objectIndex].surfaceHeight = calculate_surface_height(
-            gObjectList[objectIndex].pos[0], 0.0f, gObjectList[objectIndex].pos[2], D_8018C3B0.meshIndexZX);
-        gObjectList[objectIndex].velocity[0] = D_8018C3B0.orientationVector[0];
-        gObjectList[objectIndex].velocity[1] = D_8018C3B0.orientationVector[1];
-        gObjectList[objectIndex].velocity[2] = D_8018C3B0.orientationVector[2];
+            gObjectList[objectIndex].pos.x, 0.0f, gObjectList[objectIndex].pos.z, D_8018C3B0.meshIndexZX);
+        gObjectList[objectIndex].velocity.x = D_8018C3B0.orientationVector[0];
+        gObjectList[objectIndex].velocity.y = D_8018C3B0.orientationVector[1];
+        gObjectList[objectIndex].velocity.z = D_8018C3B0.orientationVector[2];
         return;
     }
     clear_object_flag(objectIndex, 0x00800000);
@@ -623,8 +623,8 @@ UNUSED s32 get_horizontal_distance_to_player(s32 objectIndex, Player* player) {
     s32 x;
     s32 y;
 
-    x = gObjectList[objectIndex].pos[0] - player->pos[0];
-    y = gObjectList[objectIndex].pos[2] - player->pos[2];
+    x = gObjectList[objectIndex].pos.x - player->pos.x;
+    y = gObjectList[objectIndex].pos.z - player->pos.z;
     return (x * x) + (y * y);
 }
 
@@ -640,9 +640,9 @@ UNUSED s32 get_distance_to_player(s32 objectIndex, Player* player) {
     s32 z;
     s32 y;
 
-    x = gObjectList[objectIndex].pos[0] - player->pos[0];
-    y = gObjectList[objectIndex].pos[1] - player->pos[1];
-    z = gObjectList[objectIndex].pos[2] - player->pos[2];
+    x = gObjectList[objectIndex].pos.x - player->pos.x;
+    y = gObjectList[objectIndex].pos.y - player->pos.y;
+    z = gObjectList[objectIndex].pos.z - player->pos.z;
     return (x * x) + (y * y) + (z * z);
 }
 
@@ -657,8 +657,8 @@ u32 get_horizontal_distance_to_camera(s32 objectIndex, Camera* camera) {
     s32 x;
     s32 y;
 
-    x = gObjectList[objectIndex].pos[0] - camera->pos[0];
-    y = gObjectList[objectIndex].pos[2] - camera->pos[2];
+    x = gObjectList[objectIndex].pos.x - camera->pos.x;
+    y = gObjectList[objectIndex].pos.z - camera->pos.z;
     return (x * x) + (y * y);
 }
 
@@ -674,9 +674,9 @@ UNUSED s32 get_distance_to_camera(s32 objectIndex, Camera* camera) {
     s32 z;
     s32 y;
 
-    x = gObjectList[objectIndex].pos[0] - camera->pos[0];
-    y = gObjectList[objectIndex].pos[1] - camera->pos[1];
-    z = gObjectList[objectIndex].pos[2] - camera->pos[2];
+    x = gObjectList[objectIndex].pos.x - camera->pos.x;
+    y = gObjectList[objectIndex].pos.y - camera->pos.y;
+    z = gObjectList[objectIndex].pos.z - camera->pos.z;
     return (x * x) + (y * y) + (z * z);
 }
 
@@ -695,8 +695,8 @@ bool is_within_horizontal_distance_of_player(s32 objectIndex, Player* player, f3
     bool var_v1;
 
     var_v1 = false;
-    x = gObjectList[objectIndex].pos[0] - player->pos[0];
-    y = gObjectList[objectIndex].pos[2] - player->pos[2];
+    x = gObjectList[objectIndex].pos.x - player->pos.x;
+    y = gObjectList[objectIndex].pos.z - player->pos.z;
     if (((x * x) + (y * y)) <= (distance * distance)) {
         var_v1 = true;
     }
@@ -720,8 +720,8 @@ bool is_in_bounds_to_player(s32 objectIndex, Player* player, f32 distance_min, f
     bool var_v1;
 
     var_v1 = false;
-    x = gObjectList[objectIndex].pos[0] - player->pos[0];
-    z = gObjectList[objectIndex].pos[2] - player->pos[2];
+    x = gObjectList[objectIndex].pos.x - player->pos.x;
+    z = gObjectList[objectIndex].pos.z - player->pos.z;
     distance = (x * x) + (z * z);
     if (((distance_min * distance_min) <= distance) && (distance <= (distance_max * distance_max))) {
         var_v1 = true;
@@ -745,9 +745,9 @@ bool is_within_distance_to_player(s32 objectIndex, Player* player, f32 distance)
     bool var_v1;
 
     var_v1 = false;
-    x = gObjectList[objectIndex].pos[0] - player->pos[0];
-    y = gObjectList[objectIndex].pos[1] - player->pos[1];
-    z = gObjectList[objectIndex].pos[2] - player->pos[2];
+    x = gObjectList[objectIndex].pos.x - player->pos.x;
+    y = gObjectList[objectIndex].pos.y - player->pos.y;
+    z = gObjectList[objectIndex].pos.z - player->pos.z;
     if (((x * x) + (y * y) + (z * z)) <= (distance * distance)) {
         var_v1 = true;
     }
@@ -769,8 +769,8 @@ bool is_within_horizontal_distance_to_camera(s32 objectIndex, Camera* camera, f3
     bool var_v1;
 
     var_v1 = false;
-    x = gObjectList[objectIndex].pos[0] - camera->pos[0];
-    y = gObjectList[objectIndex].pos[2] - camera->pos[2];
+    x = gObjectList[objectIndex].pos.x - camera->pos.x;
+    y = gObjectList[objectIndex].pos.z - camera->pos.z;
     if (((x * x) + (y * y)) <= (distance * distance)) {
         var_v1 = true;
     }
@@ -793,8 +793,8 @@ UNUSED bool is_within_bounds_to_camera(s32 objectIndex, Camera* camera, f32 dist
     bool var_v1;
 
     var_v1 = false;
-    x = gObjectList[objectIndex].pos[0] - camera->pos[0];
-    z = gObjectList[objectIndex].pos[2] - camera->pos[2];
+    x = gObjectList[objectIndex].pos.x - camera->pos.x;
+    z = gObjectList[objectIndex].pos.z - camera->pos.z;
     distance = (x * x) + (z * z);
     if (((distance_min * distance_min) <= distance) && (distance <= (distance_max * distance_max))) {
         var_v1 = true;
@@ -817,9 +817,9 @@ UNUSED bool is_within_distance_to_camera(s32 objectIndex, Camera* camera, f32 di
     bool var_v1;
 
     var_v1 = false;
-    x = gObjectList[objectIndex].pos[0] - camera->pos[0];
-    y = gObjectList[objectIndex].pos[1] - camera->pos[1];
-    z = gObjectList[objectIndex].pos[2] - camera->pos[2];
+    x = gObjectList[objectIndex].pos.x - camera->pos.x;
+    y = gObjectList[objectIndex].pos.y - camera->pos.y;
+    z = gObjectList[objectIndex].pos.z - camera->pos.z;
     if (((x * x) + (y * y) + (z * z)) <= (distance * distance)) {
         var_v1 = true;
     }
@@ -841,8 +841,8 @@ bool has_collided_horizontally_with_player(s32 objectIndex, Player* player) {
     bool var_v1;
 
     var_v1 = false;
-    x = gObjectList[objectIndex].pos[0] - player->pos[0];
-    z = gObjectList[objectIndex].pos[2] - player->pos[2];
+    x = gObjectList[objectIndex].pos.x - player->pos.x;
+    z = gObjectList[objectIndex].pos.z - player->pos.z;
     distance = gObjectList[objectIndex].boundingBoxSize + player->boundingBoxSize;
     if (((x * x) + (z * z)) <= (distance * distance)) {
         var_v1 = true;
@@ -866,9 +866,9 @@ bool has_collided_with_player(s32 objectIndex, Player* player) {
     bool var_v1;
 
     var_v1 = false;
-    x = gObjectList[objectIndex].pos[0] - player->pos[0];
-    y = gObjectList[objectIndex].pos[1] - player->pos[1];
-    z = gObjectList[objectIndex].pos[2] - player->pos[2];
+    x = gObjectList[objectIndex].pos.x - player->pos.x;
+    y = gObjectList[objectIndex].pos.y - player->pos.y;
+    z = gObjectList[objectIndex].pos.z - player->pos.z;
     distance = gObjectList[objectIndex].boundingBoxSize + player->boundingBoxSize;
     if (((x * x) + (y * y) + (z * z)) <= (distance * distance)) {
         var_v1 = true;
@@ -889,7 +889,7 @@ UNUSED bool has_collided_with_player_1d(s32 objectIndex, Player* player, f32 dis
     bool var_v1;
 
     var_v1 = false;
-    x = gObjectList[objectIndex].pos[1] - player->pos[1];
+    x = gObjectList[objectIndex].pos.y - player->pos.y;
     if ((x * x) <= (distance * distance)) {
         var_v1 = true;
     }
@@ -913,9 +913,9 @@ bool has_collided_with_player_and_within_height(s32 objectIndex, Player* player,
     bool var_v1;
 
     var_v1 = false;
-    x = gObjectList[objectIndex].pos[0] - player->pos[0];
-    y = gObjectList[objectIndex].pos[1] - player->pos[1];
-    z = gObjectList[objectIndex].pos[2] - player->pos[2];
+    x = gObjectList[objectIndex].pos.x - player->pos.x;
+    y = gObjectList[objectIndex].pos.y - player->pos.y;
+    z = gObjectList[objectIndex].pos.z - player->pos.z;
     distance = gObjectList[objectIndex].boundingBoxSize + player->boundingBoxSize;
     // abs(y)
     if (y < 0.0f) {
@@ -930,7 +930,7 @@ bool has_collided_with_player_and_within_height(s32 objectIndex, Player* player,
 f32 func_80088F54(s32 objectIndex, Player* player) {
     f32 distance;
 
-    distance = gObjectList[objectIndex].pos[1] - player->unk_074;
+    distance = gObjectList[objectIndex].pos.y - player->unk_074;
     // abs(distance)
     if (distance < 0.0f) {
         distance = -distance;
@@ -942,7 +942,7 @@ UNUSED bool func_80088F94(s32 objectIndex, Player* player, f32 arg2) {
     f32 distance;
     bool var_v1;
 
-    distance = gObjectList[objectIndex].pos[1] - player->unk_074;
+    distance = gObjectList[objectIndex].pos.y - player->unk_074;
     var_v1 = false;
     // abs(distance)
     if (distance < 0.0f) {
@@ -957,8 +957,8 @@ UNUSED bool func_80088F94(s32 objectIndex, Player* player, f32 arg2) {
 void func_80088FF0(Player* player) {
     player->unk_08C = 0.0f;
     player->currentSpeed = 0.0f;
-    player->velocity[0] = 0.0f;
-    player->velocity[2] = 0.0f;
+    player->velocity.x = 0.0f;
+    player->velocity.z = 0.0f;
 }
 
 UNUSED void func_8008900C(Player* player) {
@@ -1045,17 +1045,17 @@ f32 func_8008933C(Player* player, s32 objectIndex, f32 arg2, f32 arg3) {
         player->unk_046 |= 2;
         player->effects |= 0x8000;
         temp_v1->unk_18[6] = 4;
-        something = (player->pos[0] - object->pos[0]) * object->velocity[0];
+        something = (player->pos.x - object->pos.x) * object->velocity.x;
         if (something >= 0.0f) {
-            temp_v1->unk_04[0] = (-player->velocity[0] * arg2) + (object->velocity[0] * arg3);
+            temp_v1->unk_04[0] = (-player->velocity.x * arg2) + (object->velocity.x * arg3);
         } else {
-            temp_v1->unk_04[0] = -player->velocity[0] * arg2;
+            temp_v1->unk_04[0] = -player->velocity.x * arg2;
         }
-        something = (player->pos[2] - object->pos[2]) * object->velocity[2];
+        something = (player->pos.z - object->pos.z) * object->velocity.z;
         if (something >= 0.0f) {
-            temp_v1->unk_04[2] = (-player->velocity[2] * arg2) + (object->velocity[2] * arg3);
+            temp_v1->unk_04[2] = (-player->velocity.z * arg2) + (object->velocity.z * arg3);
         } else {
-            temp_v1->unk_04[2] = -player->velocity[2] * arg2;
+            temp_v1->unk_04[2] = -player->velocity.z * arg2;
         }
         var_f2 = (temp_v1->unk_04[0] * temp_v1->unk_04[0]) + (temp_v1->unk_04[2] * temp_v1->unk_04[2]);
     }
@@ -1260,7 +1260,7 @@ s32 func_8008A060(s32 objectIndex, Camera* camera, u16 arg2) {
     s32 var_v1;
 
     var_v1 = 0;
-    temp_t3 = (((u16) camera->rot[1] - gObjectList[objectIndex].direction_angle[1]) + (arg2 >> 1));
+    temp_t3 = (((u16) camera->rot.y - gObjectList[objectIndex].direction_angle[1]) + (arg2 >> 1));
 
     //! @warning Always true
     if ((temp_t3 >= 0) && (arg2 >= temp_t3)) {
@@ -1276,9 +1276,9 @@ s32 func_8008A0B4(s32 objectIndex, Player* player, Camera* camera, u16 arg3) {
     s32 var_t0;
 
     var_t0 = 0;
-    x_diff = gObjectList[objectIndex].pos[0] - player->pos[0];
-    z_diff = gObjectList[objectIndex].pos[2] - player->pos[2];
-    temp_t3 = ((u16) camera->rot[1] - atan2s(x_diff, z_diff)) + (arg3 >> 1);
+    x_diff = gObjectList[objectIndex].pos.x - player->pos.x;
+    z_diff = gObjectList[objectIndex].pos.z - player->pos.z;
+    temp_t3 = ((u16) camera->rot.y - atan2s(x_diff, z_diff)) + (arg3 >> 1);
     if ((temp_t3 >= 0) && (arg3 >= temp_t3)) {
         var_t0 = 1;
     }
@@ -1294,10 +1294,10 @@ bool is_object_visible_on_camera(s32 objectIndex, Camera* camera, u16 angle) {
     }
 
     var_t0 = false;
-    temp_t2 = (get_angle_between_xy(camera->pos[0], gObjectList[objectIndex].pos[0], camera->pos[2],
-                                    gObjectList[objectIndex].pos[2]) +
+    temp_t2 = (get_angle_between_xy(camera->pos.x, gObjectList[objectIndex].pos.x, camera->pos.z,
+                                    gObjectList[objectIndex].pos.z) +
                ((s32) angle / 2)) -
-              camera->rot[1];
+              camera->rot.y;
     if ((temp_t2 >= 0) && (angle >= temp_t2)) {
         var_t0 = true;
     }
@@ -1463,9 +1463,9 @@ void func_8008A920(s32 objectIndex) {
     SplineControlPoint* temp_v0;
 
     temp_v0 = gObjectList[objectIndex].controlPoints;
-    gObjectList[objectIndex].velocity[0] = (f32) (temp_v0[1].pos[0] - temp_v0[0].pos[0]) / (f32) temp_v0[0].velocity;
-    gObjectList[objectIndex].velocity[1] = (f32) (temp_v0[1].pos[1] - temp_v0[0].pos[1]) / (f32) temp_v0[0].velocity;
-    gObjectList[objectIndex].velocity[2] = (f32) (temp_v0[1].pos[2] - temp_v0[0].pos[2]) / (f32) temp_v0[0].velocity;
+    gObjectList[objectIndex].velocity.x = (f32) (temp_v0[1].pos.x - temp_v0[0].pos.x) / (f32) temp_v0[0].velocity;
+    gObjectList[objectIndex].velocity.y = (f32) (temp_v0[1].pos.y - temp_v0[0].pos.y) / (f32) temp_v0[0].velocity;
+    gObjectList[objectIndex].velocity.z = (f32) (temp_v0[1].pos.z - temp_v0[0].pos.z) / (f32) temp_v0[0].velocity;
 }
 
 void func_8008A9B8(s32 objectIndex) {
@@ -1491,9 +1491,9 @@ void func_8008AA3C(s32 objectIndex) {
     but for some unholy reason that doesn't match
     */
     object->unk_084[8] = *((s16*) object->controlPoints - 1);
-    object->offset[0] = object->controlPoints[0].pos[0];
-    object->offset[1] = object->controlPoints[0].pos[1];
-    object->offset[2] = object->controlPoints[0].pos[2];
+    object->offset[0] = object->controlPoints[0].pos.x;
+    object->offset[1] = object->controlPoints[0].pos.y;
+    object->offset[2] = object->controlPoints[0].pos.z;
     object->unk_09A = (s16) (10000 / object->controlPoints[0].velocity);
     func_8008A920(objectIndex);
     func_80086FD4(objectIndex);
@@ -1504,9 +1504,9 @@ void func_8008AB10(s32 objectIndex) {
     Object* object;
 
     object = &gObjectList[objectIndex];
-    object->offset[0] += object->velocity[0];
-    object->offset[1] += object->velocity[1];
-    object->offset[2] += object->velocity[2];
+    object->offset[0] += object->velocity.x;
+    object->offset[1] += object->velocity.y;
+    object->offset[2] += object->velocity.z;
     object->animationTimer += (u16) object->unk_09A;
     if (object->animationTimer >= 0x2710) {
         object->unk_084[9] = (u16) object->unk_084[9] + 1;
@@ -1595,11 +1595,11 @@ void func_8008AE9C(s32 objectIndex) {
     Object* object;
 
     object = &gObjectList[objectIndex];
-    object->velocity[0] = (D_80183DC8[0] * D_80165760[0]) + (D_80183DC8[1] * D_80165760[1]) +
+    object->velocity.x = (D_80183DC8[0] * D_80165760[0]) + (D_80183DC8[1] * D_80165760[1]) +
                           (D_80183DC8[2] * D_80165760[2]) + (D_80183DC8[3] * D_80165760[3]);
-    object->velocity[1] = (D_80183DC8[0] * D_80165770[0]) + (D_80183DC8[1] * D_80165770[1]) +
+    object->velocity.y = (D_80183DC8[0] * D_80165770[0]) + (D_80183DC8[1] * D_80165770[1]) +
                           (D_80183DC8[2] * D_80165770[2]) + (D_80183DC8[3] * D_80165770[3]);
-    object->velocity[2] = (D_80183DC8[0] * D_80165780[0]) + (D_80183DC8[1] * D_80165780[1]) +
+    object->velocity.z = (D_80183DC8[0] * D_80165780[0]) + (D_80183DC8[1] * D_80165780[1]) +
                           (D_80183DC8[2] * D_80165780[2]) + (D_80183DC8[3] * D_80165780[3]);
 }
 
@@ -1656,9 +1656,9 @@ void func_8008B1D4(s32 objectIndex) {
 
     test = gObjectList[objectIndex].controlPoints;
     for (someIndex = 0; someIndex < 4; someIndex++) {
-        D_80165760[someIndex] = test->pos[0];
-        D_80165770[someIndex] = test->pos[1];
-        D_80165780[someIndex] = test->pos[2];
+        D_80165760[someIndex] = test->pos.x;
+        D_80165770[someIndex] = test->pos.y;
+        D_80165780[someIndex] = test->pos.z;
         test++;
     }
 }
@@ -1683,9 +1683,9 @@ void func_8008B284(s32 objectIndex) {
         sp0 = 0;
     }
     for (someIndex = 0; someIndex < 4; someIndex++) {
-        D_80165760[someIndex] = test->pos[0];
-        D_80165770[someIndex] = test->pos[1];
-        D_80165780[someIndex] = test->pos[2];
+        D_80165760[someIndex] = test->pos.x;
+        D_80165770[someIndex] = test->pos.y;
+        D_80165780[someIndex] = test->pos.z;
         if (sp0 == someIndex) {
             // Reset back to start of the spline path
             test = gObjectList[objectIndex].spline->controlPoints;
@@ -1823,9 +1823,9 @@ void set_obj_origin_offset(s32 objectIndex, f32 arg1, f32 arg2, f32 arg3) {
 void func_8008B844(s32 objectIndex) {
     f32 temp_f0 = gObjectList[objectIndex].origin_pos[0];
 
-    gObjectList[objectIndex].pos[0] = gObjectList[objectIndex].offset[0] + temp_f0;
-    gObjectList[objectIndex].pos[1] = gObjectList[objectIndex].offset[1] + temp_f0;
-    gObjectList[objectIndex].pos[2] = gObjectList[objectIndex].offset[2] + temp_f0;
+    gObjectList[objectIndex].pos.x = gObjectList[objectIndex].offset[0] + temp_f0;
+    gObjectList[objectIndex].pos.y = gObjectList[objectIndex].offset[1] + temp_f0;
+    gObjectList[objectIndex].pos.z = gObjectList[objectIndex].offset[2] + temp_f0;
 }
 
 void set_obj_direction_angle(s32 objectIndex, u16 arg1, u16 arg2, u16 arg3) {
@@ -1841,9 +1841,9 @@ void set_obj_orientation(s32 objectIndex, u16 arg1, u16 arg2, u16 arg3) {
 }
 
 void set_obj_velocity(s32 objectIndex, f32 arg1, f32 arg2, f32 arg3) {
-    gObjectList[objectIndex].velocity[0] = arg1;
-    gObjectList[objectIndex].velocity[1] = arg2;
-    gObjectList[objectIndex].velocity[2] = arg3;
+    gObjectList[objectIndex].velocity.x = arg1;
+    gObjectList[objectIndex].velocity.y = arg2;
+    gObjectList[objectIndex].velocity.z = arg3;
 }
 
 void func_8008B928(s32 objectIndex, s16 arg1, s16 arg2, s16 arg3, SplineData* spline) {
@@ -1854,11 +1854,11 @@ void func_8008B928(s32 objectIndex, s16 arg1, s16 arg2, s16 arg3, SplineData* sp
     object->origin_pos[1] = (f32) arg2;
     object->spline = spline;
     object->origin_pos[2] = (f32) arg3;
-    object->velocity[0] = (f32) (spline->controlPoints[1].pos[0] - spline->controlPoints[0].pos[0]);
-    object->velocity[1] = (f32) (spline->controlPoints[1].pos[1] - spline->controlPoints[0].pos[1]);
-    object->velocity[2] = (f32) (spline->controlPoints[1].pos[2] - spline->controlPoints[0].pos[2]);
+    object->velocity.x = (f32) (spline->controlPoints[1].pos.x - spline->controlPoints[0].pos.x);
+    object->velocity.y = (f32) (spline->controlPoints[1].pos.y - spline->controlPoints[0].pos.y);
+    object->velocity.z = (f32) (spline->controlPoints[1].pos.z - spline->controlPoints[0].pos.z);
     object->direction_angle[1] = get_y_direction_angle(objectIndex);
-    object->velocity[2] = func_800416D8(object->velocity[2], object->velocity[0], -object->direction_angle[1]);
+    object->velocity.z = func_800416D8(object->velocity.z, object->velocity.x, -object->direction_angle[1]);
     object->direction_angle[0] = get_x_direction_angle(objectIndex);
 }
 
@@ -1917,8 +1917,8 @@ void object_origin_pos_randomize_around_xyz(s32 objectIndex, s16 x, s16 y, s16 z
 }
 
 void object_origin_pos_around_player_one(s32 objectIndex, s16 dist, u16 angle) {
-    gObjectList[objectIndex].origin_pos[0] = gPlayerOneCopy->pos[0] + (sins(angle) * dist);
-    gObjectList[objectIndex].origin_pos[2] = gPlayerOneCopy->pos[2] + (coss(angle) * dist);
+    gObjectList[objectIndex].origin_pos[0] = gPlayerOneCopy->pos.x + (sins(angle) * dist);
+    gObjectList[objectIndex].origin_pos[2] = gPlayerOneCopy->pos.z + (coss(angle) * dist);
 }
 
 UNUSED void func_8008BEA4(s32 objectIndex, u16 arg1, u16 arg2) {
@@ -1926,31 +1926,31 @@ UNUSED void func_8008BEA4(s32 objectIndex, u16 arg1, u16 arg2) {
     u16 thing2;
 
     thing = random_int(arg1);
-    thing2 = camera1->rot[1] + random_int(arg2) - ((s32) arg2 / 2);
+    thing2 = camera1->rot.y + random_int(arg2) - ((s32) arg2 / 2);
     object_origin_pos_around_player_one(objectIndex, thing, thing2);
 }
 
 void object_calculate_new_pos_offset(s32 objectIndex) {
-    gObjectList[objectIndex].pos[0] = gObjectList[objectIndex].origin_pos[0] + gObjectList[objectIndex].offset[0];
-    gObjectList[objectIndex].pos[1] = gObjectList[objectIndex].origin_pos[1] + gObjectList[objectIndex].offset[1];
-    gObjectList[objectIndex].pos[2] = gObjectList[objectIndex].origin_pos[2] + gObjectList[objectIndex].offset[2];
+    gObjectList[objectIndex].pos.x = gObjectList[objectIndex].origin_pos[0] + gObjectList[objectIndex].offset[0];
+    gObjectList[objectIndex].pos.y = gObjectList[objectIndex].origin_pos[1] + gObjectList[objectIndex].offset[1];
+    gObjectList[objectIndex].pos.z = gObjectList[objectIndex].origin_pos[2] + gObjectList[objectIndex].offset[2];
 }
 
 void func_8008BF64(s32 objectIndex) {
     Object* object;
 
     object = &gObjectList[objectIndex];
-    D_80183E40[0] = object->pos[0];
-    D_80183E40[1] = object->pos[1];
-    D_80183E40[2] = object->pos[2];
+    D_80183E40[0] = object->pos.x;
+    D_80183E40[1] = object->pos.y;
+    D_80183E40[2] = object->pos.z;
     D_80183E80[0] = object->direction_angle[0];
     D_80183E80[1] = object->direction_angle[1];
     D_80183E80[2] = object->direction_angle[2];
 }
 
 void func_8008BFC0(s32 objectIndex) {
-    gObjectList[objectIndex].unk_09C = gObjectList[objectIndex].pos[0];
-    gObjectList[objectIndex].unk_09E = gObjectList[objectIndex].pos[1];
+    gObjectList[objectIndex].unk_09C = gObjectList[objectIndex].pos.x;
+    gObjectList[objectIndex].unk_09E = gObjectList[objectIndex].pos.y;
 }
 
 void func_8008BFFC(s32 objectIndex) {

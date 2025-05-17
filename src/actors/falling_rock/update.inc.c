@@ -16,9 +16,9 @@ void func_8029CF0C(struct ActorSpawnData* spawnData, struct FallingRock* rock) {
     temp_v0 += rock->unk_06;
 #endif
     rock->respawnTimer = sp24[rock->unk_06]; // * 2
-    rock->pos[0] = (f32) temp_v0[rock->unk_06].pos[0] * gCourseDirection;
-    rock->pos[1] = (f32) temp_v0[rock->unk_06].pos[1] + 10.0f;
-    rock->pos[2] = (f32) temp_v0[rock->unk_06].pos[2];
+    rock->pos.x = (f32) temp_v0[rock->unk_06].pos.x * gCourseDirection;
+    rock->pos.y = (f32) temp_v0[rock->unk_06].pos.y + 10.0f;
+    rock->pos.z = (f32) temp_v0[rock->unk_06].pos.z;
     vec3f_set(rock->velocity, 0, 0, 0);
     vec3s_set(rock->rot, 0, 0, 0);
 }
@@ -46,10 +46,10 @@ void spawn_falling_rocks(struct ActorSpawnData* spawnData) {
     Vec3s startingRot;
     s16 temp;
 
-    while (temp_s0->pos[0] != -0x8000) {
-        startingPos[0] = temp_s0->pos[0] * gCourseDirection;
-        startingPos[1] = temp_s0->pos[1] + 10.0f;
-        startingPos[2] = temp_s0->pos[2];
+    while (temp_s0->pos.x != -0x8000) {
+        startingPos[0] = temp_s0->pos.x * gCourseDirection;
+        startingPos[1] = temp_s0->pos.y + 10.0f;
+        startingPos[2] = temp_s0->pos.z;
         vec3f_set(startingVelocity, 0, 0, 0);
         vec3s_set(startingRot, 0, 0, 0);
         temp = add_actor_to_empty_slot(startingPos, startingRot, startingVelocity, ACTOR_FALLING_ROCK);
@@ -76,46 +76,46 @@ void update_actor_falling_rocks(struct FallingRock* rock) {
         rock->respawnTimer -= 1;
         return;
     }
-    if (rock->pos[1] < CM_GetWaterLevel(rock->pos, NULL)) {
+    if (rock->pos.y < CM_GetWaterLevel(rock->pos, NULL)) {
         func_8029CF0C(sRockSpawnData, rock);
     }
-    rock->rot[0] += (s16) ((rock->velocity[2] * 5461.0f) / 20.0f);
-    rock->rot[2] += (s16) ((rock->velocity[0] * 5461.0f) / 20.0f);
-    rock->velocity[1] -= 0.1;
-    if (rock->velocity[1] < (-2.0f)) {
-        rock->velocity[1] = -2.0f;
+    rock->rot.x += (s16) ((rock->velocity.z * 5461.0f) / 20.0f);
+    rock->rot.z += (s16) ((rock->velocity.x * 5461.0f) / 20.0f);
+    rock->velocity.y -= 0.1;
+    if (rock->velocity.y < (-2.0f)) {
+        rock->velocity.y = -2.0f;
     }
-    rock->pos[0] += rock->velocity[0];
-    rock->pos[1] += rock->velocity[1];
-    rock->pos[2] += rock->velocity[2];
-    pad1 = rock->velocity[1];
-    check_bounding_collision(&rock->unk30, 10.0f, rock->pos[0], rock->pos[1], rock->pos[2]);
+    rock->pos.x += rock->velocity.x;
+    rock->pos.y += rock->velocity.y;
+    rock->pos.z += rock->velocity.z;
+    pad1 = rock->velocity.y;
+    check_bounding_collision(&rock->unk30, 10.0f, rock->pos.x, rock->pos.y, rock->pos.z);
     pad0 = rock->unk30.surfaceDistance[2];
     if (pad0 < 0.0f) {
         unkVec[0] = -rock->unk30.orientationVector[0];
         unkVec[1] = -rock->unk30.orientationVector[1];
         unkVec[2] = -rock->unk30.orientationVector[2];
-        rock->pos[0] += unkVec[0] * rock->unk30.surfaceDistance[2];
-        rock->pos[1] += unkVec[1] * rock->unk30.surfaceDistance[2];
-        rock->pos[2] += unkVec[2] * rock->unk30.surfaceDistance[2];
+        rock->pos.x += unkVec[0] * rock->unk30.surfaceDistance[2];
+        rock->pos.y += unkVec[1] * rock->unk30.surfaceDistance[2];
+        rock->pos.z += unkVec[2] * rock->unk30.surfaceDistance[2];
         adjust_pos_orthogonally(unkVec, pad0, rock->velocity, 2.0f);
-        rock->velocity[1] = -1.2f * pad1;
+        rock->velocity.y = -1.2f * pad1;
         func_800C98B8(rock->pos, rock->velocity, SOUND_ARG_LOAD(0x19, 0x00, 0x80, 0x0F));
     }
     pad0 = rock->unk30.surfaceDistance[0];
     if (pad0 < 0.0f) {
         unkVec[1] = -rock->unk30.unk48[1];
         if (unkVec[1] == 0.0f) {
-            rock->velocity[1] *= -1.2f;
+            rock->velocity.y *= -1.2f;
             return;
         } else {
             unkVec[0] = -rock->unk30.unk48[0];
             unkVec[2] = -rock->unk30.unk48[2];
-            rock->pos[0] += unkVec[0] * rock->unk30.surfaceDistance[0];
-            rock->pos[1] += unkVec[1] * rock->unk30.surfaceDistance[0];
-            rock->pos[2] += unkVec[2] * rock->unk30.surfaceDistance[0];
+            rock->pos.x += unkVec[0] * rock->unk30.surfaceDistance[0];
+            rock->pos.y += unkVec[1] * rock->unk30.surfaceDistance[0];
+            rock->pos.z += unkVec[2] * rock->unk30.surfaceDistance[0];
             adjust_pos_orthogonally(unkVec, pad0, rock->velocity, 2.0f);
-            rock->velocity[1] = -1.2f * pad1;
+            rock->velocity.y = -1.2f * pad1;
             func_800C98B8(rock->pos, rock->velocity, SOUND_ARG_LOAD(0x19, 0x00, 0x80, 0x0F));
         }
     }
@@ -123,16 +123,16 @@ void update_actor_falling_rocks(struct FallingRock* rock) {
     if (pad0 < 0.0f) {
         unkVec[1] = -rock->unk30.unk54[1];
         if (unkVec[1] == 0.0f) {
-            rock->velocity[1] *= -1.2f;
+            rock->velocity.y *= -1.2f;
         } else {
             unkVec[0] = -rock->unk30.unk54[0];
             unkVec[2] = -rock->unk30.unk54[2];
-            rock->pos[0] += unkVec[0] * rock->unk30.surfaceDistance[1];
-            rock->pos[1] += unkVec[1] * rock->unk30.surfaceDistance[1];
-            rock->pos[2] += unkVec[2] * rock->unk30.surfaceDistance[1];
-            pad1 = rock->velocity[1];
+            rock->pos.x += unkVec[0] * rock->unk30.surfaceDistance[1];
+            rock->pos.y += unkVec[1] * rock->unk30.surfaceDistance[1];
+            rock->pos.z += unkVec[2] * rock->unk30.surfaceDistance[1];
+            pad1 = rock->velocity.y;
             adjust_pos_orthogonally(unkVec, pad0, rock->velocity, 2.0f);
-            rock->velocity[1] = -1.2f * pad1;
+            rock->velocity.y = -1.2f * pad1;
             func_800C98B8(rock->pos, rock->velocity, SOUND_ARG_LOAD(0x19, 0x00, 0x80, 0x0F));
         }
     }

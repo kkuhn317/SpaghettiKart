@@ -61,7 +61,7 @@ size_t LightObject::NumLights = 0;
 
 
         // Calculate camera-to-object distance
-        FVector cameraDir = FVector(LightPos.x - cameras[0].pos[0], LightPos.y - cameras[0].pos[1], LightPos.z - cameras[0].pos[2]);
+        FVector cameraDir = FVector(LightPos.x - cameras[0].pos.x, LightPos.y - cameras[0].pos.y, LightPos.z - cameras[0].pos.z);
         cameraDir = cameraDir.Normalize();
 
         IRotator centerRot;

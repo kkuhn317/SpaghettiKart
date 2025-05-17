@@ -21,23 +21,23 @@ void update_actor_fake_item_box(struct FakeItemBox* fake_item_box) {
     switch (fake_item_box->state) {
         case 0:
             fake_item_box->boundingBoxSize = fake_item_box->sizeScaling * 5.5f;
-            fake_item_box->rot[0] -= 0xB6;
-            fake_item_box->rot[1] += 0x16C;
-            fake_item_box->rot[2] -= 0xB6;
+            fake_item_box->rot.x -= 0xB6;
+            fake_item_box->rot.y += 0x16C;
+            fake_item_box->rot.z -= 0xB6;
 
-            temp_f14 = temp_v0_4->pos[0] - fake_item_box->pos[0];
-            temp_f16 = temp_v0_4->pos[1] - fake_item_box->pos[1];
-            temp_f18 = temp_v0_4->pos[2] - fake_item_box->pos[2];
+            temp_f14 = temp_v0_4->pos.x - fake_item_box->pos.x;
+            temp_f16 = temp_v0_4->pos.y - fake_item_box->pos.y;
+            temp_f18 = temp_v0_4->pos.z - fake_item_box->pos.z;
 
             temp_f2_2 = sqrtf((temp_f14 * temp_f14) + (temp_f16 * temp_f16) + (temp_f18 * temp_f18)) / 10.0f;
             temp_f14 /= temp_f2_2;
             temp_f16 /= temp_f2_2;
             temp_f18 /= temp_f2_2;
-            fake_item_box->pos[0] = temp_v0_4->pos[0] - temp_f14;
-            fake_item_box->pos[1] = (temp_v0_4->pos[1] - temp_f16) - 1.0f;
-            fake_item_box->pos[2] = temp_v0_4->pos[2] - temp_f18;
-            check_bounding_collision(&fake_item_box->unk30, fake_item_box->boundingBoxSize, fake_item_box->pos[0],
-                                     fake_item_box->pos[1], fake_item_box->pos[2]);
+            fake_item_box->pos.x = temp_v0_4->pos.x - temp_f14;
+            fake_item_box->pos.y = (temp_v0_4->pos.y - temp_f16) - 1.0f;
+            fake_item_box->pos.z = temp_v0_4->pos.z - temp_f18;
+            check_bounding_collision(&fake_item_box->unk30, fake_item_box->boundingBoxSize, fake_item_box->pos.x,
+                                     fake_item_box->pos.y, fake_item_box->pos.z);
             func_802B4E30((struct Actor*) fake_item_box);
             temp_v1_3 = &gControllers[temp_v1];
             if ((temp_v0_4->type & 0x4000) != 0) {
@@ -58,10 +58,10 @@ void update_actor_fake_item_box(struct FakeItemBox* fake_item_box) {
             }
 
             fake_item_box->boundingBoxSize = fake_item_box->sizeScaling * 5.5f;
-            if (fake_item_box->targetY <= fake_item_box->pos[1]) {
-                fake_item_box->pos[1] = fake_item_box->targetY;
+            if (fake_item_box->targetY <= fake_item_box->pos.y) {
+                fake_item_box->pos.y = fake_item_box->targetY;
             } else {
-                fake_item_box->pos[1] += 0.2f;
+                fake_item_box->pos.y += 0.2f;
             }
             if ((fake_item_box->flags & 0x1000) != 0) {
                 if ((fake_item_box->someTimer <= 0) || (fake_item_box->someTimer >= 0x12D)) {
@@ -71,9 +71,9 @@ void update_actor_fake_item_box(struct FakeItemBox* fake_item_box) {
                     fake_item_box->someTimer--;
                 }
             }
-            fake_item_box->rot[0] -= 0xB6;
-            fake_item_box->rot[1] += 0x16C;
-            fake_item_box->rot[2] -= 0xB6;
+            fake_item_box->rot.x -= 0xB6;
+            fake_item_box->rot.y += 0x16C;
+            fake_item_box->rot.z -= 0xB6;
             break;
 
         case 2:
@@ -81,9 +81,9 @@ void update_actor_fake_item_box(struct FakeItemBox* fake_item_box) {
                 destroy_actor((struct Actor*) fake_item_box);
             } else {
                 fake_item_box->someTimer++;
-                fake_item_box->rot[0] += 0x444;
-                fake_item_box->rot[1] -= 0x2D8;
-                fake_item_box->rot[2] += 0x16C;
+                fake_item_box->rot.x += 0x444;
+                fake_item_box->rot.y -= 0x2D8;
+                fake_item_box->rot.z += 0x16C;
             }
             break;
         default:

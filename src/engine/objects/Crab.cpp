@@ -36,8 +36,8 @@ OCrab::OCrab(const FVector2D& start, const FVector2D& end) {
     find_unused_obj_index(&_objectIndex);
 
     init_object(_objectIndex, 0);
-    gObjectList[_objectIndex].pos[0] = gObjectList[_objectIndex].origin_pos[0] = start.x * xOrientation;
-    gObjectList[_objectIndex].pos[2] = gObjectList[_objectIndex].origin_pos[2] = start.z;
+    gObjectList[_objectIndex].pos.x = gObjectList[_objectIndex].origin_pos[0] = start.x * xOrientation;
+    gObjectList[_objectIndex].pos.z = gObjectList[_objectIndex].origin_pos[2] = start.z;
 
     gObjectList[_objectIndex].unk_01C[0] = end.x * xOrientation;
     gObjectList[_objectIndex].unk_01C[2] = end.z;
@@ -63,7 +63,7 @@ void OCrab::Draw(s32 cameraId) {
         camera = &camera1[cameraId];
         func_8004A6EC(objectIndex, 0.5f);
         gObjectList[objectIndex].orientation[1] =
-            func_800418AC(gObjectList[objectIndex].pos[0], gObjectList[objectIndex].pos[2], camera->pos);
+            func_800418AC(gObjectList[objectIndex].pos.x, gObjectList[objectIndex].pos.z, camera->pos);
         draw_2d_texture_at(gObjectList[objectIndex].pos, gObjectList[objectIndex].orientation,
                            gObjectList[objectIndex].sizeScaling, (u8*) gObjectList[objectIndex].activeTLUT,
                            (uint8_t*)gObjectList[objectIndex].activeTexture, vtx, 64, 64,
@@ -82,7 +82,7 @@ void OCrab::DrawModel(s32 cameraId) {
         if (gObjectList[objectIndex].state >= 2) {
             camera = &camera1[cameraId];
             func_8004A6EC(objectIndex, 0.5f);
-            gObjectList[objectIndex].orientation[1] = func_800418AC(gObjectList[objectIndex].pos[0], gObjectList[objectIndex].pos[2], camera->pos);
+            gObjectList[objectIndex].orientation[1] = func_800418AC(gObjectList[objectIndex].pos.x, gObjectList[objectIndex].pos.z, camera->pos);
             draw_2d_texture_at(gObjectList[objectIndex].pos, gObjectList[objectIndex].orientation, gObjectList[objectIndex].sizeScaling, (u8*) gObjectList[objectIndex].activeTLUT, (u8*)gObjectList[objectIndex].activeTexture, (Vtx*)common_vtx_hedgehog, 0x00000040, 0x00000040, 0x00000040, 0x00000020);
         }
     }
@@ -163,7 +163,7 @@ void OCrab::func_80082C30(s32 objectIndex) {
     object_calculate_new_pos_offset(objectIndex);
     if (is_obj_flag_status_active(objectIndex, VISIBLE) != 0) {
         func_80088538(objectIndex);
-        gObjectList[objectIndex].pos[1] = (f32) (gObjectList[objectIndex].surfaceHeight + 2.5);
+        gObjectList[objectIndex].pos.y = (f32) (gObjectList[objectIndex].surfaceHeight + 2.5);
     }
 }
 

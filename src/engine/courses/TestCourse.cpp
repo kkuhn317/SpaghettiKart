@@ -256,7 +256,7 @@ void TestCourse::BeginPlay() {
     Vec3f crossingPos = {0, 2, 0};
     uintptr_t* crossing1 = (uintptr_t*) gWorldInstance.AddCrossing(crossingPos, 0, 2, 900.0f, 650.0f);
 
-    position[0] *= gCourseDirection;
+    position.x *= gCourseDirection;
     rrxing = (struct RailroadCrossing*) GET_ACTOR(add_actor_to_empty_slot(position, rotation, velocity,
                                                                             ACTOR_RAILROAD_CROSSING));
     rrxing->crossingTrigger = crossing1;

@@ -243,16 +243,16 @@ void BowsersCastle::InitCourseObjects() {
     // Handle the big statue's fire breath
     objectId = indexObjectList2[0];
     init_object(objectId, 0);
-    gObjectList[objectId].pos[0] = -68.0 * xOrientation;
-    gObjectList[objectId].pos[1] = 80.0f;
-    gObjectList[objectId].pos[2] = -1840.0f;
+    gObjectList[objectId].pos.x = -68.0 * xOrientation;
+    gObjectList[objectId].pos.y = 80.0f;
+    gObjectList[objectId].pos.z = -1840.0f;
     // Handle the smaller statues' fire breath
     for (i = 0; i < NUM_FIRE_BREATHS; i++) {
         objectId = indexObjectList3[i];
         init_object(objectId, 0);
-        gObjectList[objectId].pos[0] = gFireBreathsSpawns[i][0] * xOrientation;
-        gObjectList[objectId].pos[1] = gFireBreathsSpawns[i][1];
-        gObjectList[objectId].pos[2] = gFireBreathsSpawns[i][2];
+        gObjectList[objectId].pos.x = gFireBreathsSpawns[i][0] * xOrientation;
+        gObjectList[objectId].pos.y = gFireBreathsSpawns[i][1];
+        gObjectList[objectId].pos.z = gFireBreathsSpawns[i][2];
         gObjectList[objectId].direction_angle[1] = 0;
         if (i % 2U) {
             gObjectList[objectId].direction_angle[1] += 0x8000;

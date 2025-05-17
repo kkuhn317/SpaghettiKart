@@ -172,9 +172,9 @@ void OGrandPrixBalloons::func_80074924(s32 objectIndex) {
 
     set_obj_origin_offset(objectIndex, 0, 0, 0);
     if (gPlayerCount == 1) {
-        object->velocity[1] = (f32) (((f64) (f32) (sp2C % 4) * 0.25) + 0.8);
+        object->velocity.y = (f32) (((f64) (f32) (sp2C % 4) * 0.25) + 0.8);
     } else {
-        object->velocity[1] = (f32) (((f64) (f32) (sp2C % 3) * 0.2) + 0.4);
+        object->velocity.y = (f32) (((f64) (f32) (sp2C % 3) * 0.2) + 0.4);
     }
     temp_a0 = sp2C % 8;
     object->unk_084[0] = D_800E6F30[temp_a0][0];

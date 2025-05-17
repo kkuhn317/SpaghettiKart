@@ -30,9 +30,9 @@ void ABowserStatue::Tick() {
 void ABowserStatue::Draw(Camera *camera) {
     Mat4 mtx;
     Vec3f pos;
-    pos[0] = Pos.x + 76;
-    pos[1] = Pos.y;
-    pos[2] = Pos.z + 1846;
+    pos.x = Pos.x + 76;
+    pos.y = Pos.y;
+    pos.z = Pos.z + 1846;
     gSPSetGeometryMode(gDisplayListHead++, G_SHADING_SMOOTH);
     gSPClearGeometryMode(gDisplayListHead++, G_LIGHTING);
 

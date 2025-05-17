@@ -37,14 +37,14 @@ void StarEmitter::Emit(Vec3f arg1, s32 arg2) { // func_80077138
     set_obj_origin_offset(objectIndex, 0.0f, 0.0f, 0.0f);
     switch (arg2) {
         case 0:
-            gObjectList[objectIndex].velocity[1] = -1.0f;
+            gObjectList[objectIndex].velocity.y = -1.0f;
             gObjectList[objectIndex].unk_034 = (f32) ((random_int(0x004BU) * 0.01) + 0.25);
             gObjectList[objectIndex].direction_angle[1] = random_int(0x0040U) << 0xA;
             func_8008751C(objectIndex);
             gObjectList[objectIndex].unk_084[5] = 0x001E;
             break;
         case 1:
-            gObjectList[objectIndex].velocity[1] = 1.5f;
+            gObjectList[objectIndex].velocity.y = 1.5f;
             gObjectList[objectIndex].unk_034 = (f32) ((random_int(0x0064U) * 0.01) + 0.5);
             gObjectList[objectIndex].direction_angle[1] = random_int(0x0040U) << 0xA;
             func_8008751C(objectIndex);
@@ -114,8 +114,8 @@ void StarEmitter::Draw(s32 cameraId) { // func_80054BE8
 }
 
 void StarEmitter::func_80054AFC(s32 objectIndex, Vec3f arg1) {
-    D_80183E80[0] = func_800418E8(gObjectList[objectIndex].pos[2], gObjectList[objectIndex].pos[1], arg1);
-    D_80183E80[1] = func_800418AC(gObjectList[objectIndex].pos[0], gObjectList[objectIndex].pos[2], arg1);
+    D_80183E80[0] = func_800418E8(gObjectList[objectIndex].pos.z, gObjectList[objectIndex].pos.y, arg1);
+    D_80183E80[1] = func_800418AC(gObjectList[objectIndex].pos.x, gObjectList[objectIndex].pos.z, arg1);
     D_80183E80[2] = (u16) gObjectList[objectIndex].orientation[2];
     func_8004B138((s32) gObjectList[objectIndex].unk_084[0], (s32) gObjectList[objectIndex].unk_084[1],
                   (s32) gObjectList[objectIndex].unk_084[2], (s32) gObjectList[objectIndex].primAlpha);
@@ -135,11 +135,11 @@ void StarEmitter::func_80077584(s32 objectIndex) {
 
     object = &gObjectList[objectIndex];
     if ((object->unk_0AE != 0) && (object->unk_0AE == 1) && ((u8) object->unk_0D8 != 0)) {
-        if (object->velocity[1] >= -0.5) {
-            object->velocity[1] -= 0.15;
+        if (object->velocity.y >= -0.5) {
+            object->velocity.y -= 0.15;
         } else {
-            object->velocity[2] = 0.0f;
-            object->velocity[0] = 0.0f;
+            object->velocity.z = 0.0f;
+            object->velocity.x = 0.0f;
         }
     }
     object->orientation[2] += object->unk_084[3];
@@ -161,7 +161,7 @@ void StarEmitter::func_80077450(s32 objectIndex) {
             break;
         case 2:
             f32_step_up_towards(&gObjectList[objectIndex].sizeScaling, 0.1f, 0.01f);
-            if ((gObjectList[objectIndex].pos[1] <= gObjectList[objectIndex].unk_084[5]) &&
+            if ((gObjectList[objectIndex].pos.y <= gObjectList[objectIndex].unk_084[5]) &&
                 (func_80073B00(objectIndex, &gObjectList[objectIndex].primAlpha, 0x000000FF, 0, 0x00000010, 0, 0) !=
                  0)) {
                 func_80086F60(objectIndex);

@@ -42,9 +42,9 @@ void OHotAirBalloon::Tick() {
             OHotAirBalloon::func_80085534(objectIndex);
             object_calculate_new_pos_offset(objectIndex);
             if (gObjectList[objectIndex].state >= 2) {
-                gActorHotAirBalloonItemBox->pos[0] = gObjectList[objectIndex].pos[0];
-                gActorHotAirBalloonItemBox->pos[1] = gObjectList[objectIndex].pos[1] - 10.0;
-                gActorHotAirBalloonItemBox->pos[2] = gObjectList[objectIndex].pos[2];
+                gActorHotAirBalloonItemBox->pos.x = gObjectList[objectIndex].pos.x;
+                gActorHotAirBalloonItemBox->pos.y = gObjectList[objectIndex].pos.y - 10.0;
+                gActorHotAirBalloonItemBox->pos.z = gObjectList[objectIndex].pos.z;
             }
         }
     }
@@ -74,7 +74,7 @@ void OHotAirBalloon::func_80055CCC(s32 objectIndex, s32 cameraId) {
     camera = &camera1[cameraId];
     if (gObjectList[objectIndex].state >= 2) {
         func_8008A454(objectIndex, cameraId, 0x0000012C);
-        test = gObjectList[objectIndex].pos[1] - gObjectList[objectIndex].surfaceHeight;
+        test = gObjectList[objectIndex].pos.y - gObjectList[objectIndex].surfaceHeight;
         func_8004A6EC(objectIndex, (20.0 / test) + 0.5);
         if (is_obj_index_flag_status_inactive(objectIndex, 0x00100000) != 0) {
             func_80043328(gObjectList[objectIndex].pos, (u16*) gObjectList[objectIndex].direction_angle,
@@ -83,7 +83,7 @@ void OHotAirBalloon::func_80055CCC(s32 objectIndex, s32 cameraId) {
         } else {
             D_80183E80[0] = (s16) gObjectList[objectIndex].direction_angle[0];
             D_80183E80[1] =
-                (s16) (func_800418AC(gObjectList[objectIndex].pos[0], gObjectList[objectIndex].pos[2], camera->pos) +
+                (s16) (func_800418AC(gObjectList[objectIndex].pos.x, gObjectList[objectIndex].pos.z, camera->pos) +
                        0x8000);
             D_80183E80[2] = (u16) gObjectList[objectIndex].direction_angle[2];
             func_80043328(gObjectList[objectIndex].pos, D_80183E80, gObjectList[objectIndex].sizeScaling,
@@ -109,7 +109,7 @@ void OHotAirBalloon::init_hot_air_balloon(s32 objectIndex) {
     func_8008B844(objectIndex);
     func_800886F4(objectIndex);
     func_80086EF0(objectIndex);
-    gObjectList[objectIndex].velocity[1] = -2.0f;
+    gObjectList[objectIndex].velocity.y = -2.0f;
     init_actor_hot_air_balloon_item_box(0.0f, 0.0f, 0.0f);
     object_next_state(objectIndex);
 }
@@ -122,8 +122,8 @@ void OHotAirBalloon::func_80085534(s32 objectIndex) {
             }
             break;
         case 2:
-            f32_step_towards(&gObjectList[objectIndex].velocity[1], 0.0f, 0.05f);
-            if (gObjectList[objectIndex].velocity[1] == 0.0) {
+            f32_step_towards(&gObjectList[objectIndex].velocity.y, 0.0f, 0.05f);
+            if (gObjectList[objectIndex].velocity.y == 0.0) {
                 func_80086FD4(objectIndex);
             }
             break;
@@ -131,8 +131,8 @@ void OHotAirBalloon::func_80085534(s32 objectIndex) {
             func_800871AC(objectIndex, 1);
             break;
         case 4:
-            f32_step_towards(&gObjectList[objectIndex].velocity[1], 1.0f, 0.05f);
-            if (gObjectList[objectIndex].velocity[1] == 1.0) {
+            f32_step_towards(&gObjectList[objectIndex].velocity.y, 1.0f, 0.05f);
+            if (gObjectList[objectIndex].velocity.y == 1.0) {
                 func_80086FD4(objectIndex);
             }
             break;
@@ -140,14 +140,14 @@ void OHotAirBalloon::func_80085534(s32 objectIndex) {
             func_800871AC(objectIndex, 90);
             break;
         case 6:
-            f32_step_towards(&gObjectList[objectIndex].velocity[1], 0.0f, 0.05f);
-            if (gObjectList[objectIndex].velocity[1] == 0.0) {
+            f32_step_towards(&gObjectList[objectIndex].velocity.y, 0.0f, 0.05f);
+            if (gObjectList[objectIndex].velocity.y == 0.0) {
                 func_80086FD4(objectIndex);
             }
             break;
         case 7:
-            f32_step_towards(&gObjectList[objectIndex].velocity[1], -1.0f, 0.05f);
-            if (gObjectList[objectIndex].velocity[1] == -1.0) {
+            f32_step_towards(&gObjectList[objectIndex].velocity.y, -1.0f, 0.05f);
+            if (gObjectList[objectIndex].velocity.y == -1.0) {
                 func_80086FD4(objectIndex);
             }
             break;
@@ -155,7 +155,7 @@ void OHotAirBalloon::func_80085534(s32 objectIndex) {
             func_800871AC(objectIndex, 90);
             break;
         case 9:
-            f32_step_towards(&gObjectList[objectIndex].velocity[1], 0.0f, 0.05f);
+            f32_step_towards(&gObjectList[objectIndex].velocity.y, 0.0f, 0.05f);
             if (func_80087060(objectIndex, 90) != 0) {
                 func_8008701C(objectIndex, 3);
             }

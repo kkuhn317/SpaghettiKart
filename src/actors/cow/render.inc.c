@@ -13,15 +13,15 @@
  * @param arg2
  */
 void render_actor_cow(Camera* camera, Mat4 arg1, struct Actor* arg2) {
-    if (is_within_render_distance(camera->pos, arg2->pos, camera->rot[1], 0, gCameraZoom[camera - camera1],
+    if (is_within_render_distance(camera->pos, arg2->pos, camera->rot.y, 0, gCameraZoom[camera - camera1],
                                   4000000.0f) < 0 &&
         CVarGetInteger("gNoCulling", 0) == 0) {
         return;
     }
 
-    arg1[3][0] = arg2->pos[0];
-    arg1[3][1] = arg2->pos[1];
-    arg1[3][2] = arg2->pos[2];
+    arg1[3][0] = arg2->pos.x;
+    arg1[3][1] = arg2->pos.y;
+    arg1[3][2] = arg2->pos.z;
 
     if (render_set_position(arg1, 0) != 0) {
         switch (arg2->state) {

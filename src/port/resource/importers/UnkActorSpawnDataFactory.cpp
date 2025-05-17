@@ -20,9 +20,9 @@ ResourceFactoryBinaryUnkActorSpawnDataV0::ReadResource(std::shared_ptr<Ship::Fil
 
     for (uint32_t i = 0; i < count; i++) {
         UnkActorSpawnData data;
-        data.pos[0] = reader->ReadInt16();
-        data.pos[1] = reader->ReadInt16();
-        data.pos[2] = reader->ReadInt16();
+        data.pos.x = reader->ReadInt16();
+        data.pos.y = reader->ReadInt16();
+        data.pos.z = reader->ReadInt16();
         data.someId = reader->ReadInt16();
         data.unk8 = reader->ReadInt16();
 

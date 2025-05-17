@@ -454,7 +454,7 @@ bool is_particle_on_screen(Vec3f arg0, Camera* arg1, u16 arg2) {
     }
 
     ret = false;
-    temp_t9 = (get_angle_between_xy(arg1->pos[0], arg0[0], arg1->pos[2], arg0[2]) + (arg2 / 2)) - arg1->rot[1];
+    temp_t9 = (get_angle_between_xy(arg1->pos.x, arg0[0], arg1->pos.z, arg0[2]) + (arg2 / 2)) - arg1->rot.y;
     if ((temp_t9 >= 0) && (arg2 >= temp_t9)) {
         ret = true;
     }
@@ -465,9 +465,9 @@ void func_800419F8(void) {
     Vec3f pos;
     Vec3f vec;
 
-    pos[0] = 0.0f;
-    pos[1] = 0.0f;
-    pos[2] = 120.0f;
+    pos.x = 0.0f;
+    pos.y = 0.0f;
+    pos.z = 120.0f;
     vec3f_rotate_x_y(vec, pos, (s16*) D_80165834);
     D_80165840[0] = vec[0];
     D_80165840[1] = vec[1];
@@ -880,15 +880,15 @@ void mtxf_set_matrix_gObjectList(s32 objectIndex, Mat4 transformMatrix) {
     transformMatrix[0][0] = object->sizeScaling * ((cosY * cosZ) + (sinX * sinY * sinZ));
     transformMatrix[1][0] = object->sizeScaling * ((-cosY * sinZ) + sinX * sinY * cosZ);
     transformMatrix[2][0] = object->sizeScaling * (cosX * sinY);
-    transformMatrix[3][0] = object->pos[0];
+    transformMatrix[3][0] = object->pos.x;
     transformMatrix[0][1] = object->sizeScaling * (cosX * sinZ);
     transformMatrix[1][1] = object->sizeScaling * (cosX * cosZ);
     transformMatrix[2][1] = object->sizeScaling * -sinX;
-    transformMatrix[3][1] = object->pos[1];
+    transformMatrix[3][1] = object->pos.y;
     transformMatrix[0][2] = object->sizeScaling * ((-sinY * cosZ) + (sinX * cosY * sinZ));
     transformMatrix[1][2] = object->sizeScaling * ((sinY * sinZ) + (sinX * cosY * cosZ));
     transformMatrix[2][2] = object->sizeScaling * (cosX * cosY);
-    transformMatrix[3][2] = object->pos[2];
+    transformMatrix[3][2] = object->pos.z;
     transformMatrix[0][3] = 0.0f;
     transformMatrix[1][3] = 0.0f;
     transformMatrix[2][3] = 0.0f;
@@ -961,22 +961,22 @@ UNUSED void vec3f_rotate(Vec3f dest, Vec3f pos, Vec3s rot) {
     f32 sine3;
     f32 cosine3;
 
-    sine1 = sins(rot[0]);
-    cosine1 = coss(rot[0]);
-    sine2 = sins(rot[1]);
-    cosine2 = coss(rot[1]);
-    sine3 = sins(rot[2]);
-    cosine3 = coss(rot[2]);
+    sine1 = sins(rot.x);
+    cosine1 = coss(rot.x);
+    sine2 = sins(rot.y);
+    cosine2 = coss(rot.y);
+    sine3 = sins(rot.z);
+    cosine3 = coss(rot.z);
     // it's a matrix multiplication
-    sp74 = pos[0] * ((cosine2 * cosine3) + ((sine1 * sine2) * sine3));
-    temp_f4 = pos[1] * ((-cosine2 * sine3) + ((sine1 * sine2) * cosine3));
-    temp_f8 = pos[2] * (cosine1 * sine2);
-    sp70 = pos[0] * (cosine1 * sine3);
-    sp64 = pos[1] * (cosine1 * cosine3);
-    sp58 = pos[2] * -sine1;
-    sp6C = pos[0] * ((-sine2 * cosine3) + ((sine1 * cosine2) * sine3));
-    sp60 = pos[1] * ((sine2 * sine3) + ((sine1 * cosine2) * cosine3));
-    sp54 = pos[2] * (cosine1 * cosine2);
+    sp74 = pos.x * ((cosine2 * cosine3) + ((sine1 * sine2) * sine3));
+    temp_f4 = pos.y * ((-cosine2 * sine3) + ((sine1 * sine2) * cosine3));
+    temp_f8 = pos.z * (cosine1 * sine2);
+    sp70 = pos.x * (cosine1 * sine3);
+    sp64 = pos.y * (cosine1 * cosine3);
+    sp58 = pos.z * -sine1;
+    sp6C = pos.x * ((-sine2 * cosine3) + ((sine1 * cosine2) * sine3));
+    sp60 = pos.y * ((sine2 * sine3) + ((sine1 * cosine2) * cosine3));
+    sp54 = pos.z * (cosine1 * cosine2);
     dest[0] = sp74 + temp_f4 + temp_f8;
     dest[1] = sp70 + sp64 + sp58;
     dest[2] = sp6C + sp60 + sp54;
@@ -992,13 +992,13 @@ void vec3f_rotate_x_y(Vec3f dest, Vec3f pos, Vec3s rot) {
     f32 sine2;
     f32 cosine2;
 
-    sp2C = pos[0];
-    sp28 = pos[1];
-    sp24 = pos[2];
-    sine1 = sins(rot[0]);
-    cosine1 = coss(rot[0]);
-    sine2 = sins(rot[1]);
-    cosine2 = coss(rot[1]);
+    sp2C = pos.x;
+    sp28 = pos.y;
+    sp24 = pos.z;
+    sine1 = sins(rot.x);
+    cosine1 = coss(rot.x);
+    sine2 = sins(rot.y);
+    cosine2 = coss(rot.y);
     dest[0] = (sp2C * cosine2) - (sp24 * sine2);
     dest[1] = (sp2C * sine1 * sine2) + (sp28 * cosine1) + (sp24 * sine1 * cosine2);
     dest[2] = ((sp2C * cosine1 * sine2) - (sp28 * sine1)) + (sp24 * cosine1 * cosine2);

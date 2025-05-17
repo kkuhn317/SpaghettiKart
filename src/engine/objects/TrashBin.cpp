@@ -80,17 +80,17 @@ void OTrashBin::init_bb_trash_bin(s32 objectIndex) {
     gObjectList[objectIndex].orientation[0] = DEGREES_FLOAT_TO_SHORT(_rot.pitch);
     gObjectList[objectIndex].orientation[1] = DEGREES_FLOAT_TO_SHORT(_rot.yaw);
     gObjectList[objectIndex].orientation[2] = DEGREES_FLOAT_TO_SHORT(_rot.roll);
-    gObjectList[objectIndex].pos[0] = _pos.x;
+    gObjectList[objectIndex].pos.x = _pos.x;
     if (_drawBin) {
         // Position the lid on-top of the box.
         // This might not be the best fix, but this allows the box to be placed on a surface
         // when spawned at 0,0,0
-        gObjectList[objectIndex].pos[0] = _pos.y + 32.0f;
+        gObjectList[objectIndex].pos.x = _pos.y + 32.0f;
     } else {
         // Stock implementation for banshee boardwalk
-        gObjectList[objectIndex].pos[1] = _pos.y;
+        gObjectList[objectIndex].pos.y = _pos.y;
     }
-    gObjectList[objectIndex].pos[2] = _pos.z;
+    gObjectList[objectIndex].pos.z = _pos.z;
     set_obj_velocity(objectIndex, 0.0f, 0.0f, 0.0f);
     gObjectList[objectIndex].type = 0;
     object_next_state(objectIndex);

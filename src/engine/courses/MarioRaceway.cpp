@@ -194,10 +194,10 @@ void MarioRaceway::BeginPlay() {
     spawn_piranha_plants((struct ActorSpawnData*)LOAD_ASSET_RAW(d_course_mario_raceway_piranha_plant_spawns));
     spawn_all_item_boxes((struct ActorSpawnData*)LOAD_ASSET_RAW(d_course_mario_raceway_item_box_spawns));
     vec3f_set(position, 150.0f, 40.0f, -1300.0f);
-    position[0] *= gCourseDirection;
+    position.x *= gCourseDirection;
     add_actor_to_empty_slot(position, rotation, velocity, ACTOR_MARIO_SIGN);
     vec3f_set(position, 2520.0f, 0.0f, 1240.0f);
-    position[0] *= gCourseDirection;
+    position.x *= gCourseDirection;
     add_actor_to_empty_slot(position, rotation, velocity, ACTOR_MARIO_SIGN);
 
     if (gModeSelection == VERSUS) {
