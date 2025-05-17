@@ -7,6 +7,7 @@
 #include <memory>
 #include "objects/Object.h"
 #include "port/Game.h"
+#include "src/port/interpolation/FrameInterpolation.h"
 
 #include "editor/GameObject.h"
 
@@ -238,8 +239,11 @@ ParticleEmitter* World::AddEmitter(ParticleEmitter* emitter) {
 }
 
 void World::DrawObjects(s32 cameraId) {
+    size_t i = 0;
     for (const auto& object : Objects) {
+       FrameInterpolation_RecordOpenChild(object, TAG_OBJECT(((u32)&object << 8) + i++));
        object->Draw(cameraId);
+       FrameInterpolation_RecordCloseChild();
     }
 }
 

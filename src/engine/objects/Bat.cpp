@@ -1,6 +1,7 @@
 #include "Bat.h"
 #include "World.h"
 #include "CoreMath.h"
+#include "src/port/interpolation/FrameInterpolation.h"
 
 extern "C" {
 #include "render_objects.h"
@@ -114,6 +115,7 @@ void OBat::Draw(s32 cameraId) {
     if ((D_8018CFB0 != 0) || (D_8018CFC8 != 0)) {
         for (var_s2 = 0; var_s2 < 40; var_s2++) {
             objectIndex = gObjectParticle2[var_s2];
+            FrameInterpolation_RecordOpenChild(&gObjectList[objectIndex], TAG_OBJECT((objectIndex << 8) + var_s2));
             if (objectIndex == -1) {
                 continue;
             }
@@ -124,11 +126,13 @@ void OBat::Draw(s32 cameraId) {
                 func_800431B0(gObjectList[objectIndex].pos, D_80183E80, gObjectList[objectIndex].sizeScaling,
                               (Vtx*)D_0D0062B0);
             }
+            FrameInterpolation_RecordCloseChild();
         }
     }
     if ((D_8018CFE8 != 0) || (D_8018D000 != 0)) {
         for (var_s2 = 0; var_s2 < 30; var_s2++) {
             objectIndex = gObjectParticle3[var_s2];
+            FrameInterpolation_RecordOpenChild(&gObjectList[objectIndex], TAG_OBJECT((objectIndex << 8) + var_s2));
             if (objectIndex == -1) {
                 continue;
             }
@@ -139,6 +143,7 @@ void OBat::Draw(s32 cameraId) {
                 func_800431B0(gObjectList[objectIndex].pos, D_80183E80, gObjectList[objectIndex].sizeScaling,
                               (Vtx*)D_0D0062B0);
             }
+            FrameInterpolation_RecordCloseChild();
         }
     }
     gSPTexture(gDisplayListHead++, 0x0001, 0x0001, 0, G_TX_RENDERTILE, G_OFF);

@@ -2445,7 +2445,7 @@ void render_course_actors(struct UnkStruct_800DC5EC* arg0) {
             continue;
         }
 
-        FrameInterpolation_RecordOpenChild(actor, i);
+        FrameInterpolation_RecordOpenChild(actor, TAG_OBJECT(((u32) &actor << 8) + i));
 
         switch (actor->type) {
             default: // Draw custom actor

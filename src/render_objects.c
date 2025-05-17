@@ -3417,10 +3417,12 @@ void render_object_snowflakes_particles(void) {
     func_80044F34(D_0D0293D8, 0x10, 0x10);
     for (someIndex = 0; someIndex < NUM_SNOWFLAKES; someIndex++) {
         snowflakeIndex = gObjectParticle1[someIndex];
+        FrameInterpolation_RecordOpenChild(&gObjectList[snowflakeIndex], TAG_OBJECT(snowflakeIndex << 8) + someIndex);
         if (gObjectList[snowflakeIndex].state >= 2) {
             rsp_set_matrix_gObjectList(snowflakeIndex);
             gSPDisplayList(gDisplayListHead++, D_0D006980);
         }
+        FrameInterpolation_RecordCloseChild();
     }
     gSPTexture(gDisplayListHead++, 1, 1, 0, G_TX_RENDERTILE, G_OFF);
 }
@@ -3943,6 +3945,8 @@ void render_object_neon(s32 cameraId) {
         objectIndex = indexObjectList1[var_s2];
         if (D_8018E838[cameraId] == 0) {
             object = &gObjectList[objectIndex];
+            FrameInterpolation_RecordOpenChild(object, TAG_OBJECT((objectIndex << 8) + var_s2));
+
             if ((object->state >= 2) && (is_obj_index_flag_status_inactive(objectIndex, 0x00080000) != 0) &&
                 (is_object_visible_on_camera(objectIndex, camera, 0x2AABU) != 0)) {
                 Vtx* vtx = (Vtx*) LOAD_ASSET(common_vtx_hedgehog);
@@ -3950,6 +3954,7 @@ void render_object_neon(s32 cameraId) {
                 draw_2d_texture_at(object->pos, object->orientation, object->sizeScaling, (u8*) object->activeTLUT,
                                    object->activeTexture, vtx, 0x00000040, 0x00000040, 0x00000040, 0x00000020);
             }
+            FrameInterpolation_RecordCloseChild();
         }
     }
 }
