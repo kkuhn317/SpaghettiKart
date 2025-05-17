@@ -165,8 +165,8 @@ union Data {
 
     struct {
         Mat4* dest;
-        Vec3f orientationVector;
-        Vec3f positionVector;
+        Vec3f* orientationVector;
+        Vec3f* positionVector;
         u16 rotationAngle;
         f32 scaleFactor;
     } set_transform_matrix_data;
@@ -457,25 +457,17 @@ struct InterpolateCtx {
                         }
 
                         case Op::SetTransformMatrix: {
-                            /*
-                             Mat4 dest, Vec3f orientationVector, Vec3f positionVector, u16 rotationAngle,
-                                f32 scaleFactor
+                            lerp_vec3f(&tmp_vec3f, &old_op.set_transform_matrix_data.orientationVector[0],
+                                       &new_op.set_transform_matrix_data.orientationVector[0]);
 
-                                set_transform_matrix_data
-                             */
-                            interpolate_mtxf(&tmp_mtxf, (MtxF *)&old_op.set_transform_matrix_data.dest, (MtxF *)&new_op.set_transform_matrix_data.dest);
-                            Vec3f orientationVectorTemp;
-                            lerp_vec3f(&orientationVectorTemp, &old_op.set_transform_matrix_data.orientationVector,
-                                       &new_op.set_transform_matrix_data.orientationVector);
-                            Vec3f positionVector;
-                            lerp_vec3f(&orientationVectorTemp, &old_op.set_transform_matrix_data.positionVector,
-                                       &new_op.set_transform_matrix_data.positionVector);
+                            lerp_vec3f(&tmp_vec3f2, &old_op.set_transform_matrix_data.positionVector[0],
+                                       &new_op.set_transform_matrix_data.positionVector[0]);
 
                             u16 rotationAngleTemp = lerp_s16(old_op.set_transform_matrix_data.rotationAngle,
                                        new_op.set_transform_matrix_data.rotationAngle);
                             f32 scaleFactorTemp = lerp(old_op.set_transform_matrix_data.scaleFactor, new_op.set_transform_matrix_data.scaleFactor);
 
-                            set_transform_matrix(tmp_mtxf.mf, orientationVectorTemp, positionVector, rotationAngleTemp, scaleFactorTemp);
+                            set_transform_matrix(*gInterpolationMatrix, tmp_vec3f, tmp_vec3f2, rotationAngleTemp, scaleFactorTemp);
 
                             break;
                         }
@@ -612,7 +604,7 @@ void FrameInterpolation_Record_set_transform_matrix(Mat4* dest, Vec3f orientatio
                           f32 scaleFactor) {
     if (!is_recording)
         return;
-    append(Op::SetTransformMatrix).set_transform_matrix_data = { dest, orientationVector[0], positionVector[0], (f32)rotationAngle, scaleFactor};
+    append(Op::SetTransformMatrix).set_transform_matrix_data = { dest, (Vec3f*)&orientationVector[0], (Vec3f*)&positionVector[0], rotationAngle, scaleFactor};
 }
 
 // Make a template for deref
