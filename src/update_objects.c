@@ -40,6 +40,8 @@
 #include <assets/boo_frames.h>
 #include "port/Game.h"
 
+float OTRGetAspectRatio(void);
+
 //! @todo unused?
 f32 D_800E43B0[] = { 65536.0, 0.0, 1.0, 0.0, 0.0, 65536.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
 
@@ -2455,20 +2457,28 @@ void update_snowflakes(void) {
 }
 
 void func_800788F8(s32 objectIndex, u16 rot, Camera* camera) {
-    s16 temp_v0;
+    s16 cameraRot;
+    // Adjustable culling factor
+    const float cullingFactor = OTRGetAspectRatio();
 
-    temp_v0 = camera->rot[1] + rot;
-    if ((temp_v0 >= D_8018D210) && (D_8018D208 >= temp_v0)) {
-        gObjectList[objectIndex].unk_09C = (D_8018D218 + (D_8018D1E8 * temp_v0));
-        set_object_flag(objectIndex, 0x00000010);
-        return;
+    // Calculate object's rotation relative to the camera
+    cameraRot = camera->rot[1] + rot;
+
+    // Adjust bounds based on the culling factor
+    s16 adjustedLowerBound = (s16) (D_8018D210 * cullingFactor);
+    s16 adjustedUpperBound = (s16) (D_8018D208 * cullingFactor);
+
+    // Check if the object is within the adjusted bounds
+    if ((cameraRot >= adjustedLowerBound) && (adjustedUpperBound >= cameraRot)) {
+        // Calculate and update the object's position
+        gObjectList[objectIndex].unk_09C = (D_8018D218 + (D_8018D1E8 * cameraRot));
+
+        // Mark the object as visible
+        set_object_flag(objectIndex, 0x10);
+    } else {
+        // If outside the bounds, mark the object as not visible
+        set_object_flag(objectIndex, 0x10);
     }
-    if (CVarGetInteger("gNoCulling", 0) == 1) {
-        gObjectList[objectIndex].unk_09C = (D_8018D218 + (D_8018D1E8 * temp_v0));
-        set_object_flag(objectIndex, 0x00000010);
-        return;
-    }
-    clear_object_flag(objectIndex, 0x00000010);
 }
 
 void update_clouds(s32 arg0, Camera* arg1, CloudData* cloudList) {
