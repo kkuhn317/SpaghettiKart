@@ -1,5 +1,5 @@
-#ifndef CODE_8001F980_H
-#define CODE_8001F980_H
+#ifndef RENDER_PLAYER_H
+#define RENDER_PLAYER_H
 
 #include <common_structs.h>
 #include "buffers.h"
@@ -278,4 +278,4 @@ extern s16 D_80165150[4][8];
 extern s16 D_80165190[4][8];
 extern s16 D_801651D0[4][8];
 
-#endif
+#endif // RENDER_PLAYER_H

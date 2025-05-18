@@ -74,6 +74,10 @@ void FrameInterpolation_RecordSetMatrixTransformation(Mat4* dest, Vec3f location
 
 void FrameInterpolation_RecordCalculateOrientationMatrix(Mat3*, f32, f32, f32, s16);
 
+void FrameInterpolation_RecordTranslateRotate(Mat4* dest, Vec3f pos, Vec3s rotation);
+
+//void FrameInterpolation_func_80062B18(f32* arg0, f32* arg1, f32* arg2, arg3, arg4, arg5, arg6, arg7);
+
 #ifdef __cplusplus
 }
 #endif
