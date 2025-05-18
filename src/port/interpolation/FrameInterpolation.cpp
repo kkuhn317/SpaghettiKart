@@ -391,7 +391,8 @@ struct InterpolateCtx {
                             //     break;
 
                         case Op::MatrixMult:
-                            //interpolate_mtxf(&tmp_mtxf, &old_op.matrix_mult.mf, &new_op.matrix_mult.mf);
+                            interpolate_mtxf(&tmp_mtxf, &old_op.matrix_mult.mf, &new_op.matrix_mult.mf);
+                            mtxf_multiplication(*gInterpolationMatrix, tmp_mtxf.mf, new_op.matrix_mult.mf.mf);
                             // Matrix_Mult(gInterpolationMatrix, (Matrix*) &tmp_mtxf, new_op.matrix_mult.mode);
                             break;
 
