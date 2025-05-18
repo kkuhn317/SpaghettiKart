@@ -46,6 +46,8 @@ class World {
         std::vector<Mtx> Shadows;
         std::vector<Mtx> Karts;
         std::vector<Mtx> Effects;
+        std::vector<Mtx> Persp;
+        std::vector<Mtx> LookAt;
     } Matrix;
 
 public:

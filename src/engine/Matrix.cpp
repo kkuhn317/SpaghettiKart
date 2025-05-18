@@ -136,6 +136,14 @@ extern "C" {
         AddMatrix(gWorldInstance.Mtx.Hud, mtx, flags);
     }
 
+    void AddPerspMatrix(Mat4 mtx, s32 flags) {
+        AddMatrix(gWorldInstance.Mtx.Persp, mtx, flags);
+    }
+
+    void AddLookAtMatrix(Mat4 mtx, s32 flags) {
+        AddMatrix(gWorldInstance.Mtx.LookAt, mtx, flags);
+    }
+
     void AddObjectMatrix(Mat4 mtx, s32 flags) {
         AddMatrix(gWorldInstance.Mtx.Objects, mtx, flags);
     }
