@@ -11,6 +11,7 @@
 extern "C" {
 #include "math_util.h"
 #include "math_util_2.h"
+#include "render_player.h"
 }
 /*
 Frame interpolation.
@@ -72,7 +73,7 @@ enum class Op {
     SkinMatrixMtxFToMtx,
     SetTransformMatrix,
     SetMatrixTransformation,
-    CalculateOrientationMatrix
+    SetTranslateRotate
 };
 
 typedef pair<const void*, int> label;
@@ -184,6 +185,12 @@ union Data {
         Vec3su rotation;
         f32 scale;
     } set_matrix_transformation_data;
+
+    struct {
+        Mat4* dest;
+        Vec3f location;
+        Vec3s rotation;
+    } set_translate_rotate_data;
 
     struct {
         Mat3* dest;
@@ -384,7 +391,7 @@ struct InterpolateCtx {
                             //     break;
 
                         case Op::MatrixMult:
-                            interpolate_mtxf(&tmp_mtxf, &old_op.matrix_mult.mf, &new_op.matrix_mult.mf);
+                            //interpolate_mtxf(&tmp_mtxf, &old_op.matrix_mult.mf, &new_op.matrix_mult.mf);
                             // Matrix_Mult(gInterpolationMatrix, (Matrix*) &tmp_mtxf, new_op.matrix_mult.mode);
                             break;
 
@@ -512,10 +519,14 @@ struct InterpolateCtx {
                             break;
                         }
                         
-                        case Op::CalculateOrientationMatrix: {
+                        case Op::SetTranslateRotate: {
+                            lerp_vec3f(&tmp_vec3f, &old_op.set_translate_rotate_data.location,
+                                       &new_op.set_translate_rotate_data.location);
 
+                            lerp_vec3s(&tmp_vec3s, old_op.set_translate_rotate_data.rotation,
+                                                   new_op.set_translate_rotate_data.rotation);
 
-                            calculate_orientation_matrix(* tmp_mat3);
+                            mtxf_translate_rotate(*gInterpolationMatrix, tmp_vec3f, tmp_vec3s);
                             break;
                         }
                     }
@@ -654,6 +665,11 @@ void FrameInterpolation_RecordSetTransformMatrix(Mat4* dest, Vec3f orientationVe
     append(Op::SetTransformMatrix).set_transform_matrix_data = { dest, {orientationVector[0], orientationVector[1], orientationVector[2]}, { positionVector[0], positionVector[1], positionVector[2] }, rotationAngle, scaleFactor};
 }
 
+void FrameInterpolation_RecordTranslateRotate(Mat4* dest, Vec3f pos, Vec3s rotation) {
+    if (!is_recording) { return; }
+
+    append(Op::SetTranslateRotate).set_translate_rotate_data = { dest, {pos[0], pos[1], pos[2]}, { rotation[0], rotation[1], rotation[2] }};
+}
 
 void FrameInterpolation_RecordSetMatrixTransformation(Mat4* dest, Vec3f location, Vec3su rotation, f32 scale) {
     if (!is_recording)
@@ -664,7 +680,7 @@ void FrameInterpolation_RecordSetMatrixTransformation(Mat4* dest, Vec3f location
 void FrameInterpolation_RecordCalculateOrientationMatrix(Mat3* dest, f32 x, f32 y, f32 z, s16 rot) {
     if (!is_recording) return;
 
-    append(Op::SetMatrixTransformation).set_calculate_orientation_matrix_data = { dest, x, y, z, rot};
+  //  append(Op::SetMatrixTransformation).set_calculate_orientation_matrix_data = { dest, x, y, z, rot};
 }
 
 // Make a template for deref
