@@ -25,11 +25,12 @@
 
 f32 D_800DDB30[] = { 0.4f, 0.6f, 0.275f, 0.3f };
 
-Camera cameras[4];
+Camera cameras[5];
 Camera* camera1 = &cameras[0];
 Camera* camera2 = &cameras[1];
 Camera* camera3 = &cameras[2];
 Camera* camera4 = &cameras[3];
+Camera* gFreecamCamera = &cameras[4];
 
 UNUSED s32 D_801649D0[2];
 
@@ -189,6 +190,146 @@ void camera_init(f32 posX, f32 posY, f32 posZ, UNUSED s16 rot, u32 arg4, s32 cam
                 D_80164A48[cameraId] = 1.5f;
                 D_80164A78[cameraId] = 1.0f;
             }
+            break;
+    }
+    func_802B7F7C(camera->pos, camera->lookAt, camera->rot);
+}
+
+// Many arrays are hard-coded to 4. Skip those.
+void freecam_init(f32 posX, f32 posY, f32 posZ, UNUSED s16 rot, u32 arg4, s32 cameraId) {
+    Player* player = gPlayerOne;
+    Camera* camera = &cameras[cameraId];
+
+    camera->cameraId = cameraId;
+
+    //D_80152300[cameraId] = arg4;
+    switch (arg4) {
+        case 0:
+        case 1:
+        case 3:
+        case 8:
+        case 9:
+        case 10:
+            D_80164A89 = 0;
+            camera->pos[0] = posX;
+            camera->pos[1] = posY;
+            camera->pos[2] = posZ;
+            camera->someBitFlags = 0;
+            camera->lookAt[0] = 0.0f;
+            camera->lookAt[2] = 150.0f;
+            camera->lookAt[1] = posY - 3.0;
+            camera->up[0] = 0.0f;
+            camera->up[1] = 1.0f;
+            camera->up[2] = 0.0f;
+            camera->playerId = (s16) 0;
+            camera->unk_B0 = 0;
+            camera->unk_A0 = 0.0f;
+
+            // D_801649D8[cameraId] = 20.0f;
+            // D_801649E8[cameraId] = 10.0f;
+            // D_801649F8[cameraId] = 7.0f;
+            // D_80164A2C = 0;
+            // D_80164A30 = 30.0f;
+            // D_80164A38[cameraId] = 0.0f;
+            // D_80164A48[cameraId] = 0.0f;
+
+            // D_80164A90[cameraId] = 0.0f;
+            // D_80164AA0[cameraId] = 0.0f;
+            // D_80164A78[cameraId] = D_800DDB30[gActiveScreenMode];
+            // D_80164A18[cameraId] = 0;
+            // D_80164A08[cameraId] = 0;
+            // D_80164498[cameraId] = 0.0f;
+            camera->unk_94.unk_8 = 0;
+            camera->unk_94.unk_0 = 0.0f;
+
+            player += cameraId;
+            camera->unk_2C = player->rotation[1];
+            camera->unk_AC = player->rotation[1];
+            switch (gActiveScreenMode) {
+                case SCREEN_MODE_1P:
+                case SCREEN_MODE_2P_SPLITSCREEN_VERTICAL:
+                    if (gModeSelection == BATTLE) {
+                        camera->unk_30[0] = 0.0f;
+                        camera->unk_30[1] = 11.6f;
+                        camera->unk_30[2] = -38.5f;
+                        camera->unk_3C[0] = 0.0f;
+                        camera->unk_3C[1] = 0.0f;
+                        camera->unk_3C[2] = 19.2f;
+                        D_80164A88 = 0;
+                    } else {
+                        camera->unk_30[0] = 0.0f;
+                        camera->unk_30[1] = 9.5f;
+                        camera->unk_30[2] = -50.0f;
+                        camera->unk_3C[0] = 0.0f;
+                        camera->unk_3C[1] = 0.0f;
+                        camera->unk_3C[2] = 70.0f;
+                    }
+                    break;
+                case SCREEN_MODE_2P_SPLITSCREEN_HORIZONTAL:
+                    if (gModeSelection == BATTLE) {
+                        camera->unk_30[0] = 0.0f;
+                        camera->unk_30[1] = 11.6f;
+                        camera->unk_30[2] = -38.5f;
+                        camera->unk_3C[0] = 0.0f;
+                        camera->unk_3C[1] = 0.0f;
+                        camera->unk_3C[2] = 19.2f;
+                    } else {
+                        camera->unk_30[0] = 0.0f;
+                        camera->unk_30[1] = 9.6f;
+                        camera->unk_30[2] = -35.0f;
+                        camera->unk_3C[0] = 0.0f;
+                        camera->unk_3C[1] = 0.0f;
+                        camera->unk_3C[2] = 30.0f;
+                    }
+                    break;
+                case SCREEN_MODE_3P_4P_SPLITSCREEN:
+                    if (gModeSelection == BATTLE) {
+                        camera->unk_30[0] = 0.0f;
+                        camera->unk_30[1] = 11.6f;
+                        camera->unk_30[2] = -38.5f;
+                        camera->unk_3C[0] = 0.0f;
+                        camera->unk_3C[1] = 0.0f;
+                        camera->unk_3C[2] = 19.2f;
+                    } else {
+                        camera->unk_30[0] = 0.0f;
+                        camera->unk_30[1] = 9.0f;
+                        camera->unk_30[2] = -40.0f;
+                        camera->unk_3C[0] = 0.0f;
+                        camera->unk_3C[1] = 0.0f;
+                        camera->unk_3C[2] = 18.0f;
+                    }
+                    break;
+            }
+
+            //func_80014DE4(cameraId);
+
+           // if (D_80164678[cameraId] == 0) {
+                if (D_80164A28 == 1) {
+                  //  gCameraZoom[cameraId] = 80.0f;
+                } else {
+                   // gCameraZoom[cameraId] = 40.0f;
+                }
+                camera->unk_B4 = gCameraZoom[0];
+           // }
+            // if (D_80164678[cameraId] == 1) {
+            //     if (D_80164A28 == 1) {
+            //         gCameraZoom[cameraId] = 100.0f;
+            //     } else {
+            //         gCameraZoom[cameraId] = 60.0f;
+            //     }
+            //     camera->unk_B4 = gCameraZoom[cameraId];
+            // // }
+            // if (D_80164678[cameraId] == 2) {
+            //     if (D_80164A28 == 1) {
+            //         gCameraZoom[cameraId] = 100.0f;
+            //     } else {
+            //         gCameraZoom[cameraId] = 60.0f;
+            //     }
+            //     camera->unk_B4 = gCameraZoom[cameraId];
+            //     D_80164A38[cameraId] = 20.0f;
+            //     D_80164A48[cameraId] = 1.5f;
+            //     D_80164A78[cameraId] = 1.0f;
+            // }
             break;
     }
     func_802B7F7C(camera->pos, camera->lookAt, camera->rot);
@@ -994,7 +1135,8 @@ void func_8001EE98(Player* player, Camera* camera, s8 index) {
                     func_8001E8E8(camera, player, index);
                     break;
                 }
-                freecam(camera, player, index); // Runs func_8001E45C when freecam is disabled
+                //freecam(camera, player, index); // Runs func_8001E45C when freecam is disabled
+                func_8001E45C(camera, player, index);
                 break;
             case 8:
                 func_8001E0C4(camera, player, index);

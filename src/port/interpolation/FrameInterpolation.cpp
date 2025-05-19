@@ -550,7 +550,7 @@ unordered_map<Mtx*, MtxF> FrameInterpolation_Interpolate(float step) {
 bool camera_interpolation = true;
 
 void FrameInterpolation_ShouldInterpolateFrame(bool shouldInterpolate) {
-    // camera_interpolation = shouldInterpolate;
+    camera_interpolation = shouldInterpolate;
     is_recording = shouldInterpolate;
 }
 
@@ -559,12 +559,12 @@ void FrameInterpolation_StartRecord(void) {
     current_recording = {};
     current_path.clear();
     current_path.push_back(&current_recording.root_path);
-    // if (!camera_interpolation) {
-    //     // default to interpolating
-    //     camera_interpolation = true;
-    //     is_recording = false;
-    //     return;
-    // }
+    if (!camera_interpolation) {
+        // default to interpolating
+        camera_interpolation = true;
+        is_recording = false;
+        return;
+    }
     if (GameEngine::GetInterpolationFPS() != 20) {
         is_recording = true;
     }

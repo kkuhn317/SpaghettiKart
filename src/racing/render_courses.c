@@ -7,6 +7,7 @@
 #include <course.h>
 #include "../camera.h"
 #include "framebuffer_effects.h"
+#include "port/interpolation/FrameInterpolation.h"
 
 #include "render_courses.h"
 #include "code_800029B0.h"
@@ -240,9 +241,15 @@ void func_8029122C(struct UnkStruct_800DC5EC* arg0, s32 playerId) {
                       G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
             break;
     }
+
+    FrameInterpolation_RecordOpenChild("track_water", playerId);
+
     mtxf_identity(matrix);
     render_set_position(matrix, 0);
+        //FrameInterpolation_RecordCloseChild();
+
     CM_DrawWater(arg0, pathCounter, cameraRot, playerDirection);
+    FrameInterpolation_RecordCloseChild();
     // switch (gCurrentCourseId) {
     //     case COURSE_BOWSER_CASTLE:
     //         if (gActiveScreenMode != SCREEN_MODE_1P) {
