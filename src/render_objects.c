@@ -2629,6 +2629,8 @@ void draw_simplified_lap_count(s32 playerId) {
 }
 
 void func_8004E800(s32 playerId) {
+    // @port: Tag the transform.
+    FrameInterpolation_RecordOpenChild("Player place HUD", playerId << 8);
     if (playerHUD[playerId].unk_81 != 0) {
         if (playerHUD[playerId].lapCount != 3) {
             func_8004A384(playerHUD[playerId].rankX + playerHUD[playerId].slideRankX,
@@ -2644,6 +2646,8 @@ void func_8004E800(s32 playerId) {
                           0x00000040, 0x00000080, 0x00000040);
         }
     }
+    // @port Pop the transform id.
+    FrameInterpolation_RecordCloseChild();
 }
 
 void func_8004E998(s32 playerId) {
@@ -3051,47 +3055,57 @@ void func_8004FDB4(f32 arg0, f32 arg1, s16 arg2, s16 arg3, s16 characterId, s32 
 void func_80050320(void) {
     s16 temp_v0;
     s16 characterId;
-    s32 var_s0;
+    s32 i;
     s32 lapCount;
     s32 var_a0;
 
     if (D_801657E2 == 0) {
-        for (var_s0 = 0; var_s0 < 4; var_s0++) {
+        for (i = 0; i < 4; i++) {
             var_a0 = 0;
-            if (D_8018D050[var_s0] >= 0.0f) {
-                if (D_8018D078[var_s0] < 0.0) {
+            if (D_8018D050[i] >= 0.0f) {
+                if (D_8018D078[i] < 0.0) {
                     var_a0 = 1;
                 }
-                temp_v0 = gGPCurrentRacePlayerIdByRank[var_s0];
-                characterId = gGPCurrentRaceCharacterIdByRank[var_s0];
+
+                // @port: Tag the transform.
+                FrameInterpolation_RecordOpenChild("ranking portraits", i | var_a0 << 16);
+
+                temp_v0 = gGPCurrentRacePlayerIdByRank[i];
+                characterId = gGPCurrentRaceCharacterIdByRank[i];
                 lapCount = gLapCountByPlayerId[temp_v0];
                 if (characterId == gPlayerOne->characterId) {
-                    func_8004FDB4(D_8018D028[var_s0], D_8018D050[var_s0], var_s0, lapCount, characterId, 0x000000FF, 1,
-                                  var_a0, 0);
+                    func_8004FDB4(D_8018D028[i], D_8018D050[i], i, lapCount, characterId, 0x000000FF, 1, var_a0, 0);
                 } else {
-                    func_8004FDB4(D_8018D028[var_s0], D_8018D050[var_s0], var_s0, lapCount, characterId, D_8018D3E0, 0,
-                                  var_a0, 0);
+                    func_8004FDB4(D_8018D028[i], D_8018D050[i], i, lapCount, characterId, D_8018D3E0, 0, var_a0, 0);
                 }
+
+                // @port Pop the transform id.
+                FrameInterpolation_RecordCloseChild();
             }
         }
     } else {
-        for (var_s0 = 0; var_s0 < 8; var_s0++) {
+        for (i = 0; i < 8; i++) {
             var_a0 = 0;
-            if (D_8018D050[var_s0] >= 0.0f) {
-                if (D_8018D078[var_s0] <= 0.0) {
+            if (D_8018D050[i] >= 0.0f) {
+                if (D_8018D078[i] <= 0.0) {
                     var_a0 = 1;
                 }
-                temp_v0 = gGPCurrentRacePlayerIdByRank[var_s0];
+
+                // @port: Tag the transform.
+                FrameInterpolation_RecordOpenChild("ranking portraits 2", i | var_a0 << 16);
+
+                temp_v0 = gGPCurrentRacePlayerIdByRank[i];
                 // ????
                 characterId = (gPlayerOne + temp_v0)->characterId;
                 lapCount = gLapCountByPlayerId[temp_v0];
                 if (temp_v0 == 0) {
-                    func_8004FDB4(D_8018D028[var_s0], D_8018D050[var_s0], var_s0, lapCount, characterId, 0x000000FF, 1,
-                                  var_a0, 1);
+                    func_8004FDB4(D_8018D028[i], D_8018D050[i], i, lapCount, characterId, 0x000000FF, 1, var_a0, 1);
                 } else {
-                    func_8004FDB4(D_8018D028[var_s0], D_8018D050[var_s0], var_s0, lapCount, characterId, 0x000000FF, 0,
-                                  var_a0, 1);
+                    func_8004FDB4(D_8018D028[i], D_8018D050[i], i, lapCount, characterId, 0x000000FF, 0, var_a0, 1);
                 }
+
+                // @port Pop the transform id.
+                FrameInterpolation_RecordCloseChild();
             }
         }
     }
@@ -3387,15 +3401,19 @@ void func_800514BC(void) {
 }
 
 void render_object_leaf_particle(UNUSED s32 cameraId) {
-    s32 someIndex;
+    size_t i;
     s32 leafIndex;
     Object* object;
 
     gSPDisplayList(gDisplayListHead++, D_0D0079C8);
     gSPClearGeometryMode(gDisplayListHead++, G_CULL_BOTH);
     load_texture_block_rgba16_mirror((u8*) common_texture_particle_leaf, 0x00000020, 0x00000010);
-    for (someIndex = 0; someIndex < gLeafParticle_SIZE; someIndex++) {
-        leafIndex = gLeafParticle[someIndex];
+    for (i = 0; i < gLeafParticle_SIZE; i++) {
+        leafIndex = gLeafParticle[i];
+
+        // @port: Tag the transform.
+        FrameInterpolation_RecordOpenChild("Leaves", leafIndex);
+
         if (leafIndex != -1) {
             object = &gObjectList[leafIndex];
             if ((object->state >= 2) && (object->unk_0D5 == 7) && (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX)) {
@@ -3403,23 +3421,27 @@ void render_object_leaf_particle(UNUSED s32 cameraId) {
                 gSPDisplayList(gDisplayListHead++, D_0D0069C8);
             }
         }
+
+        // @port Pop the transform id.
+        FrameInterpolation_RecordCloseChild();
     }
     gSPSetGeometryMode(gDisplayListHead++, G_CULL_BACK);
     gSPTexture(gDisplayListHead++, 1, 1, 0, G_TX_RENDERTILE, G_OFF);
 }
 
 void render_object_snowflakes_particles(void) {
-    s32 someIndex;
+    size_t i;
     s32 snowflakeIndex;
 
     gSPDisplayList(gDisplayListHead++, D_0D007AE0);
     gDPSetCombineLERP(gDisplayListHead++, 1, 0, SHADE, 0, 0, 0, 0, TEXEL0, 1, 0, SHADE, 0, 0, 0, 0, TEXEL0);
     func_80044F34(D_0D0293D8, 0x10, 0x10);
-    for (someIndex = 0; someIndex < NUM_SNOWFLAKES; someIndex++) {
-        snowflakeIndex = gObjectParticle1[someIndex];
+    for (i = 0; i < NUM_SNOWFLAKES; i++) {
+        snowflakeIndex = gObjectParticle1[i];
 
         // @port: Tag the transform.
         FrameInterpolation_RecordOpenChild("SnowFlakes", snowflakeIndex);
+
         if (gObjectList[snowflakeIndex].state >= 2) {
             rsp_set_matrix_gObjectList(snowflakeIndex);
             gSPDisplayList(gDisplayListHead++, D_0D006980);
@@ -3454,7 +3476,7 @@ void func_800518F8(s32 objectIndex, s16 x, s16 y) {
     }
 
     if (gObjectList[objectIndex].status & 0x10) {
-        
+
         // @port: Tag the transform.
         FrameInterpolation_RecordOpenChild("func_800518F8", (uintptr_t) &gObjectList[objectIndex]);
 
