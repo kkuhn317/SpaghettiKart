@@ -29,7 +29,7 @@ void FrameInterpolation_StopRecord(void);
 
 void FrameInterpolation_RecordMarker(const char* file, int line);
 
-void FrameInterpolation_RecordOpenChild(const void* a, int b);
+void FrameInterpolation_RecordOpenChild(const void* a, uintptr_t b);
 
 void FrameInterpolation_RecordCloseChild(void);
 

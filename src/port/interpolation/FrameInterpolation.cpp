@@ -76,7 +76,7 @@ enum class Op {
     SetTranslateRotate
 };
 
-typedef pair<const void*, int> label;
+typedef pair<const void*, uintptr_t> label;
 
 union Data {
     Data() {
@@ -575,7 +575,7 @@ void FrameInterpolation_StopRecord(void) {
     is_recording = false;
 }
 
-void FrameInterpolation_RecordOpenChild(const void* a, int b) {
+void FrameInterpolation_RecordOpenChild(const void* a, uintptr_t b) {
     if (!is_recording)
         return;
     label key = { a, b };
