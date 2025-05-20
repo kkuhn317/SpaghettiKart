@@ -3905,6 +3905,7 @@ void render_object_smoke_particles(s32 cameraId) {
     Object* object;
 
     sp54 = &camera1[cameraId];
+    FrameInterpolation_RecordOpenChild("SmokeParticles", TAG_OBJECT(sp54));
     gSPDisplayList(gDisplayListHead++, D_0D007AE0);
     load_texture_block_i8_nomirror(common_texture_particle_smoke[D_80165598], 32, 32);
     func_8004B72C(255, 255, 255, 255, 255, 255, 255);
@@ -3926,6 +3927,7 @@ void render_object_smoke_particles(s32 cameraId) {
             }
         }
     }
+    FrameInterpolation_RecordCloseChild();
 }
 
 UNUSED void func_800557AC() {
