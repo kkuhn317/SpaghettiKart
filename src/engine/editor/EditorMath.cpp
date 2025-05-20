@@ -31,9 +31,9 @@ bool IsInGameScreen() {
 
     // Define viewport boundaries
     auto gfx_current_game_window_viewport = GetInterpreter()->mGameWindowViewport;
-    int left = gfx_current_game_window_viewport.width;
+    int left = gfx_current_game_window_viewport.x;
     int right = left + OTRGetGameRenderWidth();
-    int top = gfx_current_game_window_viewport.height;
+    int top = gfx_current_game_window_viewport.y;
     int bottom = top + OTRGetGameRenderHeight();
 
     // Check if the mouse is within the game render area
@@ -46,8 +46,8 @@ FVector ScreenRayTrace() {
 
     Ship::Coords mouse = wnd->GetMousePos();
     auto gfx_current_game_window_viewport = GetInterpreter()->mGameWindowViewport;
-    mouse.x -= gfx_current_game_window_viewport.width;
-    mouse.y -= gfx_current_game_window_viewport.height;
+    mouse.x -= gfx_current_game_window_viewport.x;
+    mouse.y -= gfx_current_game_window_viewport.y;
     // Get screen dimensions
     uint32_t width = OTRGetGameViewportWidth();
     uint32_t height = OTRGetGameViewportHeight();
