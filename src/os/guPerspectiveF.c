@@ -1,4 +1,5 @@
 #include "libultra_internal.h"
+#include "port/interpolation/FrameInterpolation.h"
 
 void guPerspectiveF(float mf[4][4], u16* perspNorm, float fovy, float aspect, float near, float far, float scale) {
     float yscale;

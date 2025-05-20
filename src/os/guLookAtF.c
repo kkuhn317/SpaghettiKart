@@ -11,6 +11,7 @@
  **************************************************************************/
 
 #include "libultra_internal.h"
+#include "port/interpolation/FrameInterpolation.h"
 
 void guLookAtF(float mf[4][4], float xEye, float yEye, float zEye, float xAt, float yAt, float zAt, float xUp,
                float yUp, float zUp) {
