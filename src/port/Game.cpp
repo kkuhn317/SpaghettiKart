@@ -69,29 +69,29 @@ extern "C" void Timer_Update();
 // Create the world instance
 World gWorldInstance;
 
-MarioRaceway* gMarioRaceway;
-ChocoMountain* gChocoMountain;
-BowsersCastle* gBowsersCastle;
-BansheeBoardwalk* gBansheeBoardwalk;
-YoshiValley* gYoshiValley;
-FrappeSnowland* gFrappeSnowland;
-KoopaTroopaBeach* gKoopaTroopaBeach;
-RoyalRaceway* gRoyalRaceway;
-LuigiRaceway* gLuigiRaceway;
-MooMooFarm* gMooMooFarm;
-ToadsTurnpike* gToadsTurnpike;
-KalimariDesert* gKalimariDesert;
-SherbetLand* gSherbetLand;
-RainbowRoad* gRainbowRoad;
-WarioStadium* gWarioStadium;
-BlockFort* gBlockFort;
-Skyscraper* gSkyscraper;
-DoubleDeck* gDoubleDeck;
-DKJungle* gDkJungle;
-BigDonut* gBigDonut;
-PodiumCeremony* gPodiumCeremony;
-Harbour* gHarbour;
-TestCourse* gTestCourse;
+// auto gMarioRaceway;
+// ChocoMountain* gChocoMountain;
+// BowsersCastle* gBowsersCastle;
+// BansheeBoardwalk* gBansheeBoardwalk;
+// YoshiValley* gYoshiValley;
+// FrappeSnowland* gFrappeSnowland;
+// KoopaTroopaBeach* gKoopaTroopaBeach;
+// RoyalRaceway* gRoyalRaceway;
+// LuigiRaceway* gLuigiRaceway;
+// MooMooFarm* gMooMooFarm;
+// ToadsTurnpike* gToadsTurnpike;
+// KalimariDesert* gKalimariDesert;
+// SherbetLand* gSherbetLand;
+// RainbowRoad* gRainbowRoad;
+// WarioStadium* gWarioStadium;
+// BlockFort* gBlockFort;
+// Skyscraper* gSkyscraper;
+// DoubleDeck* gDoubleDeck;
+// DKJungle* gDkJungle;
+// BigDonut* gBigDonut;
+// PodiumCeremony* gPodiumCeremony;
+// Harbour* gHarbour;
+// TestCourse* gTestCourse;
 
 Cup* gMushroomCup;
 Cup* gFlowerCup;
@@ -109,71 +109,72 @@ s32 gTrophyIndex = NULL;
 
 void CustomEngineInit() {
 
-    gMarioRaceway = new MarioRaceway();
-    gChocoMountain = new ChocoMountain();
-    gBowsersCastle = new BowsersCastle();
-    gBansheeBoardwalk = new BansheeBoardwalk();
-    gYoshiValley = new YoshiValley();
-    gFrappeSnowland = new FrappeSnowland();
-    gKoopaTroopaBeach = new KoopaTroopaBeach();
-    gRoyalRaceway = new RoyalRaceway();
-    gLuigiRaceway = new LuigiRaceway();
-    gMooMooFarm = new MooMooFarm();
-    gToadsTurnpike = new ToadsTurnpike();
-    gKalimariDesert = new KalimariDesert();
-    gSherbetLand = new SherbetLand();
-    gRainbowRoad = new RainbowRoad();
-    gWarioStadium = new WarioStadium();
-    gBlockFort = new BlockFort();
-    gSkyscraper = new Skyscraper();
-    gDoubleDeck = new DoubleDeck();
-    gDkJungle = new DKJungle();
-    gBigDonut = new BigDonut();
-    gPodiumCeremony = new PodiumCeremony();
-    gHarbour = new Harbour();
-    gTestCourse = new TestCourse();
+    // auto gMarioRaceway = std::make_unique<MarioRaceway>();
+    // gChocoMountain = new ChocoMountain();
+    // gBowsersCastle = new BowsersCastle();
+    // gBansheeBoardwalk = new BansheeBoardwalk();
+    // gYoshiValley = new YoshiValley();
+    // gFrappeSnowland = new FrappeSnowland();
+    // gKoopaTroopaBeach = new KoopaTroopaBeach();
+    // gRoyalRaceway = new RoyalRaceway();
+    // gLuigiRaceway = new LuigiRaceway();
+    // gMooMooFarm = new MooMooFarm();
+    // gToadsTurnpike = new ToadsTurnpike();
+    // gKalimariDesert = new KalimariDesert();
+    // gSherbetLand = new SherbetLand();
+    // gRainbowRoad = new RainbowRoad();
+    // gWarioStadium = new WarioStadium();
+    // gBlockFort = new BlockFort();
+    // gSkyscraper = new Skyscraper();
+    // gDoubleDeck = new DoubleDeck();
+    // gDkJungle = new DKJungle();
+    // gBigDonut = new BigDonut();
+    // gPodiumCeremony = new PodiumCeremony();
+    // gHarbour = new Harbour();
+    // gTestCourse = new TestCourse();
 
     /* Add all courses to the global course list */
-    gWorldInstance.AddCourse(gMarioRaceway);
-    gWorldInstance.AddCourse(gChocoMountain);
-    gWorldInstance.AddCourse(gBowsersCastle);
-    gWorldInstance.AddCourse(gBansheeBoardwalk);
-    gWorldInstance.AddCourse(gYoshiValley);
-    gWorldInstance.AddCourse(gFrappeSnowland);
-    gWorldInstance.AddCourse(gKoopaTroopaBeach);
-    gWorldInstance.AddCourse(gRoyalRaceway);
-    gWorldInstance.AddCourse(gLuigiRaceway);
-    gWorldInstance.AddCourse(gMooMooFarm);
-    gWorldInstance.AddCourse(gToadsTurnpike);
-    gWorldInstance.AddCourse(gKalimariDesert);
-    gWorldInstance.AddCourse(gSherbetLand);
-    gWorldInstance.AddCourse(gRainbowRoad);
-    gWorldInstance.AddCourse(gWarioStadium);
-    gWorldInstance.AddCourse(gBlockFort);
-    gWorldInstance.AddCourse(gSkyscraper);
-    gWorldInstance.AddCourse(gDoubleDeck);
-    gWorldInstance.AddCourse(gDkJungle);
-    gWorldInstance.AddCourse(gBigDonut);
-    gWorldInstance.AddCourse(gHarbour);
-    gWorldInstance.AddCourse(gTestCourse);
+    gWorldInstance.AddCourse(std::make_unique<MarioRaceway>());
+    gWorldInstance.AddCourse(std::make_unique<ChocoMountain>());
+    gWorldInstance.AddCourse(std::make_unique<BowsersCastle>());
+    gWorldInstance.AddCourse(std::make_unique<BansheeBoardwalk>());
+    gWorldInstance.AddCourse(std::make_unique<YoshiValley>());
+    gWorldInstance.AddCourse(std::make_unique<FrappeSnowland>());
+    gWorldInstance.AddCourse(std::make_unique<KoopaTroopaBeach>());
+    gWorldInstance.AddCourse(std::make_unique<RoyalRaceway>());
+    gWorldInstance.AddCourse(std::make_unique<LuigiRaceway>());
+    gWorldInstance.AddCourse(std::make_unique<MooMooFarm>());
+    gWorldInstance.AddCourse(std::make_unique<ToadsTurnpike>());
+    gWorldInstance.AddCourse(std::make_unique<KalimariDesert>());
+    gWorldInstance.AddCourse(std::make_unique<SherbetLand>());
+    gWorldInstance.AddCourse(std::make_unique<RainbowRoad>());
+    gWorldInstance.AddCourse(std::make_unique<WarioStadium>());
+    gWorldInstance.AddCourse(std::make_unique<BlockFort>());
+    gWorldInstance.AddCourse(std::make_unique<Skyscraper>());
+    gWorldInstance.AddCourse(std::make_unique<DoubleDeck>());
+    gWorldInstance.AddCourse(std::make_unique<DKJungle>());
+    gWorldInstance.AddCourse(std::make_unique<BigDonut>());
+    gWorldInstance.AddCourse(std::make_unique<PodiumCeremony>());
+    gWorldInstance.AddCourse(std::make_unique<Harbour>());
+    gWorldInstance.AddCourse(std::make_unique<TestCourse>());
 
-    gMushroomCup = new Cup("mk:mushroom_cup", "mushroom cup",
-                           std::vector<Course*>{ gLuigiRaceway, gMooMooFarm, gKoopaTroopaBeach, gKalimariDesert });
-    gFlowerCup = new Cup("mk:flower_cup", "flower cup",
-                         std::vector<Course*>{ gToadsTurnpike, gFrappeSnowland, gChocoMountain, gMarioRaceway });
-    gStarCup = new Cup("mk:star_cup", "star cup",
-                       std::vector<Course*>{ gWarioStadium, gSherbetLand, gRoyalRaceway, gBowsersCastle });
-    gSpecialCup = new Cup("mk:special_cup", "special cup",
-                          std::vector<Course*>{ gDkJungle, gYoshiValley, gBansheeBoardwalk, gRainbowRoad });
-    gBattleCup =
-        new Cup("mk:battle_cup", "battle", std::vector<Course*>{ gBigDonut, gBlockFort, gDoubleDeck, gSkyscraper });
+    // gMushroomCup = new Cup("mk:mushroom_cup", "mushroom cup",
+    //                        std::vector<Course*>{ gLuigiRaceway, gMooMooFarm, gKoopaTroopaBeach, gKalimariDesert });
+    // gFlowerCup = new Cup("mk:flower_cup", "flower cup",
+    //                      std::vector<Course*>{ gToadsTurnpike, gFrappeSnowland, gChocoMountain, gMarioRaceway });
+    // gStarCup = new Cup("mk:star_cup", "star cup",
+    //                    std::vector<Course*>{ gWarioStadium, gSherbetLand, gRoyalRaceway, gBowsersCastle });
+    // gSpecialCup = new Cup("mk:special_cup", "special cup",
+    //                       std::vector<Course*>{ gDkJungle, gYoshiValley, gBansheeBoardwalk, gRainbowRoad });
+    // gBattleCup =
+ //       new Cup("mk:battle_cup", "battle", std::vector<Course*>{ gBigDonut, gBlockFort, gDoubleDeck, gSkyscraper });
 
     /* Instantiate Cups */
-    gWorldInstance.AddCup(gMushroomCup);
-    gWorldInstance.AddCup(gFlowerCup);
-    gWorldInstance.AddCup(gStarCup);
-    gWorldInstance.AddCup(gSpecialCup);
-    gWorldInstance.AddCup(gBattleCup);
+    // gWorldInstance.AddCup(gMushroomCup);
+    // gWorldInstance.AddCup(gFlowerCup);
+    // gWorldInstance.AddCup(gStarCup);
+    // gWorldInstance.AddCup(gSpecialCup);
+    // gWorldInstance.AddCup(gBattleCup);
 
     /* Set default course; mario raceway */
     gWorldInstance.CurrentCourse = gMarioRaceway;
@@ -723,8 +724,10 @@ f32 CM_GetWaterLevel(Vec3f pos, Collision* collision) {
     return gWorldInstance.CurrentCourse->GetWaterLevel(fPos, collision);
 }
 
-void* GetMarioRaceway(void) {
-    return gMarioRaceway;
+bool GetMarioRaceway(Course* course) {
+    if (dynamic_cast<MarioRaceway*>(gWorldInstance.CurrentCourse)) {
+        return true; // It's Mario Raceway
+    }
 }
 
 void* GetLuigiRaceway(void) {

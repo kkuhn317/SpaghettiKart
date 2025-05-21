@@ -53,7 +53,7 @@ class World {
 public:
     explicit World();
 
-    void AddCourse(Course* course);
+    void AddCourse(std::unique_ptr<Course> course);
 
     AActor* AddActor(AActor* actor);
     struct Actor* AddBaseActor();
@@ -120,7 +120,7 @@ public:
     std::vector<std::shared_ptr<TrainCrossing>> Crossings;
 
     // Holds all available courses
-    std::vector<Course*> Courses;
+    std::vector<std::unique_ptr<Course>> Courses;
     size_t CourseIndex = 0; // For browsing courses.
 private:
 

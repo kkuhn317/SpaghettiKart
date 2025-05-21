@@ -26,7 +26,7 @@ World::World() {}
 Course* CurrentCourse;
 Cup* CurrentCup;
 
-void World::AddCourse(Course* course) {
+void World::AddCourse(std::unique_ptr<Course> course) {
     gWorldInstance.Courses.push_back(course);
 }
 
