@@ -21,10 +21,6 @@ extern f32 gKartGravityTable[];
 AFinishline::AFinishline(std::optional<FVector> pos) {
     Name = "Finishline";
 
-    if (GetCup() == GetBattleCup()) {
-        return;
-    }
-
     if (pos.has_value()) {
         // Set spawn point to the provided position
         Pos[0] = D_8015F8D0[0] = pos.value().x;
