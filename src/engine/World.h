@@ -82,6 +82,7 @@ public:
 
     void AddCup(Cup*);
     void SetCup(Cup* cup);
+    void SetCupIndex(size_t index);
     const char* GetCupName();
     u32 GetCupIndex();
     u32 NextCup();

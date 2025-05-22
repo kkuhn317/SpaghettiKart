@@ -2005,6 +2005,7 @@ void load_menu_states(s32 menuSelection) {
                 CM_SetCup(GetBattleCup());
                 // gCupSelection = BATTLE_CUP;
                 D_800DC540 = 4;
+                CM_SetCupIndex(BATTLE_CUP);
                 gSubMenuSelection = SUB_MENU_MAP_SELECT_BATTLE_COURSE;
             } else {
                 if (GetCup() == GetBattleCup()) {

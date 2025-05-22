@@ -244,6 +244,10 @@ u32 GetCupIndex(void) {
     return gWorldInstance.GetCupIndex();
 }
 
+void CM_SetCupIndex(size_t index) {
+    gWorldInstance.SetCupIndex(index);
+}
+
 const char* GetCupName(void) {
     return gWorldInstance.CurrentCup->Name;
 }
@@ -394,10 +398,11 @@ void CM_BeginPlay() {
 
     if (course) {
         // Do not spawn finishline in credits or battle mode. And if bSpawnFinishline.
-        if ((gGamestate != CREDITS_SEQUENCE) && (gGamestate != BATTLE) && (course->bSpawnFinishline)) {
-            gWorldInstance.AddActor(new AFinishline(course->FinishlineSpawnPoint));
+        if ((gGamestate != CREDITS_SEQUENCE) && (gModeSelection != BATTLE)) {
+            if (course->bSpawnFinishline) {
+                gWorldInstance.AddActor(new AFinishline(course->FinishlineSpawnPoint));
+            }
         }
-
         gEditor.AddLight("Sun", nullptr, D_800DC610[1].l->l.dir);
 
         course->BeginPlay();
