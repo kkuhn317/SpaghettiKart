@@ -2630,7 +2630,7 @@ void draw_simplified_lap_count(s32 playerId) {
 
 void func_8004E800(s32 playerId) {
     // @port: Tag the transform.
-    FrameInterpolation_RecordOpenChild("Player place HUD", playerId << 8);
+    FrameInterpolation_RecordOpenChild("Player place HUD", playerId);
     if (playerHUD[playerId].unk_81 != 0) {
         if (playerHUD[playerId].lapCount != 3) {
             func_8004A384(playerHUD[playerId].rankX + playerHUD[playerId].slideRankX,
@@ -3453,23 +3453,24 @@ void render_object_snowflakes_particles(void) {
     gSPTexture(gDisplayListHead++, 1, 1, 0, G_TX_RENDERTILE, G_OFF);
 }
 
-struct CloudInterpData {
+struct ObjectInterpData {
     s32 objectIndex;
-    s16 x;
+    s16 x, y;
 };
 
-struct CloudInterpData prevClouds[OBJECT_LIST_SIZE] = { 0 };
+struct ObjectInterpData prevObject[OBJECT_LIST_SIZE] = { 0 };
 
 void func_800518F8(s32 objectIndex, s16 x, s16 y) {
 
-    // Search all recorded clouds for the one we're drawing
+    // Search all recorded objects for the one we're drawing
     for (int i = 0; i < OBJECT_LIST_SIZE; i++) {
-        if (objectIndex == prevClouds[i].objectIndex) {
+        if (objectIndex == prevObject[i].objectIndex) {
             // Coincidence!
-            // Skip drawing the cloud this frame if it warped to the other side of the screen
-            if (fabs(x - prevClouds[i].x) > SCREEN_WIDTH / 2) {
-                prevClouds[objectIndex].x = x;
-                prevClouds[objectIndex].objectIndex = objectIndex;
+            // Skip drawing the object this frame if it warped to the other side of the screen
+            if ((fabs(x - prevObject[i].x) > SCREEN_WIDTH / 2) || (fabs(y - prevObject[i].y) > SCREEN_HEIGHT / 2)) {
+                prevObject[objectIndex].x = x;
+                prevObject[objectIndex].y = y;
+                prevObject[objectIndex].objectIndex = objectIndex;
                 return;
             }
         }
@@ -3494,8 +3495,9 @@ void func_800518F8(s32 objectIndex, s16 x, s16 y) {
     }
 
     // Save current cloud index and x position
-    prevClouds[objectIndex].x = x;
-    prevClouds[objectIndex].objectIndex = objectIndex;
+    prevObject[objectIndex].x = x;
+    prevObject[objectIndex].y = y;
+    prevObject[objectIndex].objectIndex = objectIndex;
 }
 
 void func_800519D4(s32 objectIndex, s16 arg1, s16 arg2) {
@@ -3512,6 +3514,7 @@ void func_800519D4(s32 objectIndex, s16 arg1, s16 arg2) {
     }
 }
 
+// Render clouds
 void func_80051ABC(s16 arg0, s32 arg1) {
     s32 var_s0;
     s32 objectIndex;
@@ -3928,21 +3931,23 @@ void func_8005477C(s32 objectIndex, u8 arg1, Vec3f arg2) {
 void render_object_smoke_particles(s32 cameraId) {
     UNUSED s32 stackPadding[2];
     Camera* sp54;
-    s32 var_s0;
+    s32 i;
     s32 objectIndex;
     Object* object;
 
     sp54 = &camera1[cameraId];
-    FrameInterpolation_RecordOpenChild("SmokeParticles", TAG_OBJECT(sp54));
+
     gSPDisplayList(gDisplayListHead++, D_0D007AE0);
     load_texture_block_i8_nomirror(common_texture_particle_smoke[D_80165598], 32, 32);
     func_8004B72C(255, 255, 255, 255, 255, 255, 255);
     D_80183E80[0] = 0;
     D_80183E80[2] = 0x8000;
-    for (var_s0 = 0; var_s0 < gObjectParticle4_SIZE; var_s0++) {
-        objectIndex = gObjectParticle4[var_s0];
+    for (i = 0; i < gObjectParticle4_SIZE; i++) {
+        objectIndex = gObjectParticle4[i];
         if (objectIndex != NULL_OBJECT_ID) {
             object = &gObjectList[objectIndex];
+            // @port: Tag the transform.
+            FrameInterpolation_RecordOpenChild("SmokeParticles", (uintptr_t) object);
             if (object->state >= 2) {
                 if (object->unk_0D8 == 3) {
                     func_8008A364(objectIndex, cameraId, 0x4000U, 0x00000514);
@@ -3953,9 +3958,10 @@ void render_object_smoke_particles(s32 cameraId) {
                     func_8005477C(objectIndex, object->unk_0D8, sp54->pos);
                 }
             }
+            // @port Pop the transform id.
+            FrameInterpolation_RecordCloseChild();
         }
     }
-    FrameInterpolation_RecordCloseChild();
 }
 
 UNUSED void func_800557AC() {
