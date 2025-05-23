@@ -4889,7 +4889,7 @@ void func_8009CE64(s32 arg0) {
                     gCCSelection = (s32) 1;
                     switch (gNextDemoId) { /* switch 4 */
                         case 0:            /* switch 4 */
-                            SetCourseByClass(GetMarioRaceway());
+                            SelectMarioRaceway();
                             CM_SetCup(GetFlowerCup());
                             SetCupCursorPosition(COURSE_FOUR);
                             gCurrentCourseId = 0;
@@ -4900,7 +4900,7 @@ void func_8009CE64(s32 arg0) {
                             gModeSelection = 0;
                             break;
                         case 1: /* switch 4 */
-                            SetCourseByClass(GetLuigiRaceway());
+                            SelectLuigiRaceway();
                             CM_SetCup(GetMushroomCup());
                             SetCupCursorPosition(COURSE_ONE);
                             gCurrentCourseId = (s16) 1;
@@ -4912,7 +4912,7 @@ void func_8009CE64(s32 arg0) {
                             gModeSelection = 2;
                             break;
                         case 2: /* switch 4 */
-                            SetCourseByClass(GetKalimariDesert());
+                            SelectKalimariDesert();
                             CM_SetCup(GetMushroomCup());
                             SetCupCursorPosition(COURSE_FOUR);
                             gCurrentCourseId = COURSE_KALIMARI_DESERT;
@@ -4923,7 +4923,7 @@ void func_8009CE64(s32 arg0) {
                             gModeSelection = 0;
                             break;
                         case 3: /* switch 4 */
-                            SetCourseByClass(GetWarioStadium());
+                            SelectWarioStadium();
                             CM_SetCup(GetStarCup());
                             SetCupCursorPosition(COURSE_ONE);
                             gCurrentCourseId = 0x000E;
@@ -4936,7 +4936,7 @@ void func_8009CE64(s32 arg0) {
                             gModeSelection = (s32) 2;
                             break;
                         case 4: /* switch 4 */
-                            SetCourseByClass(GetBowsersCastle());
+                            SelectBowsersCastle();
                             CM_SetCup(GetStarCup());
                             SetCupCursorPosition(COURSE_FOUR);
                             gCurrentCourseId = 2;
@@ -4947,7 +4947,7 @@ void func_8009CE64(s32 arg0) {
                             gModeSelection = 0;
                             break;
                         case 5: /* switch 4 */
-                            SetCourseByClass(GetSherbetLand());
+                            SelectSherbetLand();
                             CM_SetCup(GetFlowerCup());
                             SetCupCursorPosition(COURSE_TWO);
                             gCurrentCourseId = 0x000C;
@@ -5034,8 +5034,8 @@ void func_8009CE64(s32 arg0) {
                 }
             }
 
-            if (GetCourse() == GetBlockFort() || GetCourse() == GetSkyscraper() || GetCourse() == GetDoubleDeck() ||
-                GetCourse() == GetBigDonut()) {
+            if (IsBlockFort() || IsSkyscraper() || IsDoubleDeck() ||
+                IsBigDonut()) {
 
                 gModeSelection = BATTLE;
                 if (gPlayerCountSelection1 == 1) {

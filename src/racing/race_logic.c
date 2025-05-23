@@ -897,9 +897,9 @@ void func_8028FCBC(void) {
             func_8028F914();
             if (D_802BA034 == 1.0f) {
                 if (gActiveScreenMode != SCREEN_MODE_1P) {
-                    if (GetCourse() == GetLuigiRaceway()) {
+                    if (IsLuigiRaceway()) {
                         func_802A7940();
-                    } else if (GetCourse() == GetWarioStadium()) {
+                    } else if (IsWarioStadium()) {
                         func_802A7728();
                     }
                 }

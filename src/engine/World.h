@@ -94,6 +94,8 @@ public:
 
     // These are only for browsing through the course list
     void SetCourse(const char*);
+    template<typename T>
+    void SetCourseByType();
     void NextCourse(void);
     void PreviousCourse(void);
 

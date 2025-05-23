@@ -191,7 +191,7 @@ void func_8006F008(void) {
         xOrientation = -1.0f;
     }
 
-    if (GetCourse() != GetPodiumCeremony()) {
+    if (!IsPodiumCeremony()) {
         func_8006EEE8((s32) gCurrentCourseId);
     }
 
@@ -203,7 +203,7 @@ void func_8006F008(void) {
     switch(gPlayerCount) {
         case 2:
             // Set X coord
-            if (GetCourse() != GetToadsTurnpike()) {
+            if (!IsToadsTurnpike()) {
                 CM_GetProps()->Minimap.Pos[PLAYER_ONE].X = 265;
                 CM_GetProps()->Minimap.Pos[PLAYER_TWO].X = 265;
             } else {

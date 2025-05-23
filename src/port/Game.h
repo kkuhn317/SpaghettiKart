@@ -155,47 +155,27 @@ void CM_CleanWorld(void);
 
 f32 CM_GetWaterLevel(Vec3f pos, Collision* collision);
 
-void* GetMarioRaceway(void);
-
-void* GetLuigiRaceway(void);
-
-void* GetChocoMountain(void);
-
-void* GetBowsersCastle(void);
-
-void* GetBansheeBoardwalk(void);
-
-void* GetYoshiValley(void);
-
-void* GetFrappeSnowland(void);
-
-void* GetKoopaTroopaBeach(void);
-
-void* GetRoyalRaceway(void);
-
-void* GetMooMooFarm(void);
-
-void* GetToadsTurnpike(void);
-
-void* GetKalimariDesert(void);
-
-void* GetSherbetLand(void);
-
-void* GetRainbowRoad(void);
-
-void* GetWarioStadium(void);
-
-void* GetBlockFort(void);
-
-void* GetSkyscraper(void);
-
-void* GetDoubleDeck(void);
-
-void* GetDkJungle(void);
-
-void* GetBigDonut(void);
-
-void* GetPodiumCeremony(void);
+bool IsMarioRaceway();
+bool IsLuigiRaceway();
+bool IsChocoMountain();
+bool IsBowsersCastle();
+bool IsBansheeBoardwalk();
+bool IsYoshiValley();
+bool IsFrappeSnowland();
+bool IsKoopaTroopaBeach();
+bool IsRoyalRaceway();
+bool IsMooMooFarm();
+bool IsToadsTurnpike();
+bool IsKalimariDesert();
+bool IsSherbetLand();
+bool IsRainbowRoad();
+bool IsWarioStadium();
+bool IsBlockFort();
+bool IsSkyscraper();
+bool IsDoubleDeck();
+bool IsDkJungle();
+bool IsBigDonut();
+bool IsPodiumCeremony();
 
 void* GetMushroomCup(void);
 

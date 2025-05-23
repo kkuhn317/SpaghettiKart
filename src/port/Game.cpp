@@ -177,7 +177,7 @@ void CustomEngineInit() {
     // gWorldInstance.AddCup(gBattleCup);
 
     /* Set default course; mario raceway */
-    gWorldInstance.CurrentCourse = gMarioRaceway;
+    SelectMarioRaceway();
     gWorldInstance.CurrentCup = gMushroomCup;
     gWorldInstance.CurrentCup->CursorPosition = 3;
     gWorldInstance.CupIndex = 0;
@@ -276,7 +276,7 @@ void SetCourseById(s32 course) {
         return;
     }
     gWorldInstance.CourseIndex = course;
-    gWorldInstance.CurrentCourse = gWorldInstance.Courses[gWorldInstance.CourseIndex];
+    gWorldInstance.CurrentCourse = gWorldInstance.Courses[gWorldInstance.CourseIndex].get();
 }
 
 void CM_VehicleCollision(s32 playerId, Player* player) {
@@ -724,91 +724,51 @@ f32 CM_GetWaterLevel(Vec3f pos, Collision* collision) {
     return gWorldInstance.CurrentCourse->GetWaterLevel(fPos, collision);
 }
 
-bool GetMarioRaceway(Course* course) {
-    if (dynamic_cast<MarioRaceway*>(gWorldInstance.CurrentCourse)) {
-        return true; // It's Mario Raceway
-    }
-}
+// clang-format off
+bool IsMarioRaceway()     { return dynamic_cast<MarioRaceway*>(gWorldInstance.CurrentCourse) != nullptr; }
+bool IsLuigiRaceway()     { return dynamic_cast<LuigiRaceway*>(gWorldInstance.CurrentCourse) != nullptr; }
+bool IsChocoMountain()    { return dynamic_cast<ChocoMountain*>(gWorldInstance.CurrentCourse) != nullptr; }
+bool IsBowsersCastle()    { return dynamic_cast<BowsersCastle*>(gWorldInstance.CurrentCourse) != nullptr; }
+bool IsBansheeBoardwalk() { return dynamic_cast<BansheeBoardwalk*>(gWorldInstance.CurrentCourse) != nullptr; }
+bool IsYoshiValley()      { return dynamic_cast<YoshiValley*>(gWorldInstance.CurrentCourse) != nullptr; }
+bool IsFrappeSnowland()   { return dynamic_cast<FrappeSnowland*>(gWorldInstance.CurrentCourse) != nullptr; }
+bool IsKoopaTroopaBeach() { return dynamic_cast<KoopaTroopaBeach*>(gWorldInstance.CurrentCourse) != nullptr; }
+bool IsRoyalRaceway()     { return dynamic_cast<RoyalRaceway*>(gWorldInstance.CurrentCourse) != nullptr; }
+bool IsMooMooFarm()       { return dynamic_cast<MooMooFarm*>(gWorldInstance.CurrentCourse) != nullptr; }
+bool IsToadsTurnpike()    { return dynamic_cast<ToadsTurnpike*>(gWorldInstance.CurrentCourse) != nullptr; }
+bool IsKalimariDesert()   { return dynamic_cast<KalimariDesert*>(gWorldInstance.CurrentCourse) != nullptr; }
+bool IsSherbetLand()      { return dynamic_cast<SherbetLand*>(gWorldInstance.CurrentCourse) != nullptr; }
+bool IsRainbowRoad()      { return dynamic_cast<RainbowRoad*>(gWorldInstance.CurrentCourse) != nullptr; }
+bool IsWarioStadium()     { return dynamic_cast<WarioStadium*>(gWorldInstance.CurrentCourse) != nullptr; }
+bool IsBlockFort()        { return dynamic_cast<BlockFort*>(gWorldInstance.CurrentCourse) != nullptr; }
+bool IsSkyscraper()       { return dynamic_cast<Skyscraper*>(gWorldInstance.CurrentCourse) != nullptr; }
+bool IsDoubleDeck()       { return dynamic_cast<DoubleDeck*>(gWorldInstance.CurrentCourse) != nullptr; }
+bool IsDkJungle()         { return dynamic_cast<DKJungle*>(gWorldInstance.CurrentCourse) != nullptr; }
+bool IsBigDonut()         { return dynamic_cast<BigDonut*>(gWorldInstance.CurrentCourse) != nullptr; }
+bool IsPodiumCeremony()   { return dynamic_cast<PodiumCeremony*>(gWorldInstance.CurrentCourse) != nullptr; }
 
-void* GetLuigiRaceway(void) {
-    return gLuigiRaceway;
-}
-
-void* GetChocoMountain(void) {
-    return gChocoMountain;
-}
-
-void* GetBowsersCastle(void) {
-    return gBowsersCastle;
-}
-
-void* GetBansheeBoardwalk(void) {
-    return gBansheeBoardwalk;
-}
-
-void* GetYoshiValley(void) {
-    return gYoshiValley;
-}
-
-void* GetFrappeSnowland(void) {
-    return gFrappeSnowland;
-}
-
-void* GetKoopaTroopaBeach(void) {
-    return gKoopaTroopaBeach;
-}
-
-void* GetRoyalRaceway(void) {
-    return gRoyalRaceway;
-}
-
-void* GetMooMooFarm(void) {
-    return gMooMooFarm;
-}
-
-void* GetToadsTurnpike(void) {
-    return gToadsTurnpike;
-}
-
-void* GetKalimariDesert(void) {
-    return gKalimariDesert;
-}
-
-void* GetSherbetLand(void) {
-    return gSherbetLand;
-}
-
-void* GetRainbowRoad(void) {
-    return gRainbowRoad;
-}
-
-void* GetWarioStadium(void) {
-    return gWarioStadium;
-}
-
-void* GetBlockFort(void) {
-    return gBlockFort;
-}
-
-void* GetSkyscraper(void) {
-    return gSkyscraper;
-}
-
-void* GetDoubleDeck(void) {
-    return gDoubleDeck;
-}
-
-void* GetDkJungle(void) {
-    return gDkJungle;
-}
-
-void* GetBigDonut(void) {
-    return gBigDonut;
-}
-
-void* GetPodiumCeremony(void) {
-    return gPodiumCeremony;
-}
+void SelectMarioRaceway()       { gWorldInstance.SetCourseByType<MarioRaceway>(); }
+void SelectLuigiRaceway()       { gWorldInstance.SetCourseByType<LuigiRaceway>(); }
+void SelectChocoMountain()      { gWorldInstance.SetCourseByType<ChocoMountain>(); }
+void SelectBowsersCastle()      { gWorldInstance.SetCourseByType<BowsersCastle>(); }
+void SelectBansheeBoardwalk()   { gWorldInstance.SetCourseByType<BansheeBoardwalk>(); }
+void SelectYoshiValley()        { gWorldInstance.SetCourseByType<YoshiValley>(); }
+void SelectFrappeSnowland()     { gWorldInstance.SetCourseByType<FrappeSnowland>(); }
+void SelectKoopaTroopaBeach()   { gWorldInstance.SetCourseByType<KoopaTroopaBeach>(); }
+void SelectRoyalRaceway()       { gWorldInstance.SetCourseByType<RoyalRaceway>(); }
+void SelectMooMooFarm()         { gWorldInstance.SetCourseByType<MooMooFarm>(); }
+void SelectToadsTurnpike()      { gWorldInstance.SetCourseByType<ToadsTurnpike>(); }
+void SelectKalimariDesert()     { gWorldInstance.SetCourseByType<KalimariDesert>(); }
+void SelectSherbetLand()        { gWorldInstance.SetCourseByType<SherbetLand>(); }
+void SelectRainbowRoad()        { gWorldInstance.SetCourseByType<RainbowRoad>(); }
+void SelectWarioStadium()       { gWorldInstance.SetCourseByType<WarioStadium>(); }
+void SelectBlockFort()          { gWorldInstance.SetCourseByType<BlockFort>(); }
+void SelectSkyscraper()         { gWorldInstance.SetCourseByType<Skyscraper>(); }
+void SelectDoubleDeck()         { gWorldInstance.SetCourseByType<DoubleDeck>(); }
+void SelectDkJungle()           { gWorldInstance.SetCourseByType<DKJungle>(); }
+void SelectBigDonut()           { gWorldInstance.SetCourseByType<BigDonut>(); }
+void SelectPodiumCeremony()     { gWorldInstance.SetCourseByType<PodiumCeremony>(); }
+// clang-format on
 
 void* GetMushroomCup(void) {
     return gMushroomCup;

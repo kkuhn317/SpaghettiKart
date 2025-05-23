@@ -90,11 +90,22 @@ void World::SetCourse(const char* name) {
     //! @todo Use content dictionary instead
     for (size_t i = 0; i < Courses.size(); i++) {
         if (strcmp(Courses[i]->Props.Name, name) == 0) {
-            CurrentCourse = Courses[i];
+            CurrentCourse = Courses[i].get();
             break;
         }
     }
     std::runtime_error("SetCourse() Course name not found in Courses list");
+}
+
+template<typename T>
+void World::SetCourseByType() {
+    for (const auto& course : Courses) {
+        if (dynamic_cast<T*>(course.get())) {
+            CurrentCourse = course.get();
+            return;
+        }
+    }
+    printf("World::SetCourseByType() No course by the type found");
 }
 
 void World::NextCourse() {
@@ -103,7 +114,7 @@ void World::NextCourse() {
     } else {
         CourseIndex = 0;
     }
-    gWorldInstance.CurrentCourse = Courses[CourseIndex];
+    gWorldInstance.CurrentCourse = Courses[CourseIndex].get();
 }
 
 void World::PreviousCourse() {
@@ -112,7 +123,7 @@ void World::PreviousCourse() {
     } else {
         CourseIndex = Courses.size() - 1;
     }
-    gWorldInstance.CurrentCourse = Courses[CourseIndex];
+    gWorldInstance.CurrentCourse = Courses[CourseIndex].get();
 }
 
 AActor* World::AddActor(AActor* actor) {

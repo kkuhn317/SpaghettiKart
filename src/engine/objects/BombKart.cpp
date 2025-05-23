@@ -118,7 +118,7 @@ void OBombKart::Tick() {
         return;
     }
 
-    if (((Unk_4A != 1) || (GetCourse() == GetPodiumCeremony()))) {
+    if (((Unk_4A != 1) || (IsPodiumCeremony()))) {
         newPos[0] = Pos[0];
         newPos[1] = Pos[1];
         newPos[2] = Pos[2];
@@ -128,7 +128,7 @@ void OBombKart::Tick() {
         bounceTimer = BounceTimer;
         circleTimer = CircleTimer;
         if ((state != States::DISABLED) && (state != States::EXPLODE)) {
-            if (GetCourse() == GetPodiumCeremony()) {
+            if (IsPodiumCeremony()) {
                 if (D_8016347E == 1) {
                     player = gPlayerFour;
                     temp_f0 = newPos[0] - player->pos[0];
@@ -152,7 +152,7 @@ void OBombKart::Tick() {
                         if ((((temp_f0 * temp_f0) + (temp_f2 * temp_f2)) + (temp_f12 * temp_f12)) < 25.0f) {
                             state = States::EXPLODE;
                             circleTimer = 0;
-                            if (GetCourse() == GetFrappeSnowland()) {
+                            if (IsFrappeSnowland()) {
                                 player->soundEffects |= 0x01000000;
                             } else {
                                 player->soundEffects |= 0x400000;
@@ -346,7 +346,7 @@ void OBombKart::Draw(s32 cameraId) {
         return;
     }
 
-    if (GetCourse() == GetPodiumCeremony()) {
+    if (IsPodiumCeremony()) {
         if ((_idx == 0) && (WaypointIndex < 16)) {
             return;
         } else {
