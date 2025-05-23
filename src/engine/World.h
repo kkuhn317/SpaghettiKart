@@ -54,7 +54,7 @@ public:
     explicit World();
     ~World();
 
-    void AddCourse(Course* course);
+    Course* AddCourse(std::unique_ptr<Course> course);
 
     AActor* AddActor(AActor* actor);
     struct Actor* AddBaseActor();
@@ -96,6 +96,16 @@ public:
 
     // These are only for browsing through the course list
     void SetCourse(const char*);
+    template<typename T>
+    void SetCourseByType() {
+        for (const auto& course : Courses) {
+            if (dynamic_cast<T*>(course.get())) {
+                CurrentCourse = course.get();
+                return;
+            }
+        }
+        printf("World::SetCourseByType() No course by the type found");
+    }
     void NextCourse(void);
     void PreviousCourse(void);
 
@@ -122,7 +132,7 @@ public:
     std::vector<std::shared_ptr<TrainCrossing>> Crossings;
 
     // Holds all available courses
-    std::vector<Course*> Courses;
+    std::vector<std::unique_ptr<Course>> Courses;
     size_t CourseIndex = 0; // For browsing courses.
 private:
 

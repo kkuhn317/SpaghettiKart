@@ -233,16 +233,18 @@ void setup_race(void) {
     //     D_8015F8D0[1] = (f32) (D_80164490->posY - 15);
     //     D_8015F8D0[2] = D_80164490->posZ;
 
-    //     if (GetCourse() == GetToadsTurnpike()) {
+    //     if (IsToadsTurnpike()) {
     //         D_8015F8D0[0] = (gIsMirrorMode != 0) ? D_80164490->posX + 138.0f : D_80164490->posX - 138.0f;
-    //     } else if (GetCourse() == GetWarioStadium()) {
+    //     } else if (IsWarioStadium()) {
     //         D_8015F8D0[0] = (gIsMirrorMode != 0) ? D_80164490->posX + 12.0f : D_80164490->posX - 12.0f;
     //     } else {
     //         D_8015F8D0[0] = D_80164490->posX;
     //     }
     // }
     if (!gDemoMode) {
-        func_800CA008(gPlayerCountSelection1 - 1, gCurrentCourseId + 4);
+        //! @warning this used to be gCurrentCourseId + 4
+        // Hopefully this is equivallent.
+        func_800CA008(gPlayerCountSelection1 - 1, GetCourseIndex() + 4);
         func_800CB2C4();
     }
 

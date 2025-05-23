@@ -147,12 +147,13 @@ namespace Editor {
         }
     }
 
+    // When resetting the known content, we need to also pop the custom courses
+    // out of World::Courses vector. Otherwise, duplicate courses would show up for users.
     void ContentBrowserWindow::RemoveCustomTracksFromTrackList() {
         for (auto& track : Tracks) {
             auto it = gWorldInstance.Courses.begin();
             while (it != gWorldInstance.Courses.end()) {
-                if (track.course == *it) {
-                    delete *it;
+                if (track.course == it->get()) {
                     it = gWorldInstance.Courses.erase(it);
                 } else {
                     ++it;
@@ -233,27 +234,31 @@ namespace Editor {
                 std::string name = dir.substr(dir.find_last_of('/') + 1);
                 std::string sceneFile = dir + "/scene.json";
                 std::string minimapFile = dir + "/minimap.png";
+                // The track has a valid scene file
                 if (manager->HasFile(sceneFile)) {
                     auto archive = manager->GetArchiveFromFile(sceneFile);
                     
-                    Course* course = new Course();
+                    auto course = std::make_unique<Course>();
                     course->LoadO2R(dir);
-                    gWorldInstance.Courses.push_back(course);
-                    LoadLevel(archive, course, sceneFile);
-                    LoadMinimap(archive, course, minimapFile);
-                    Tracks.push_back({course, sceneFile, name, dir, archive});
-                } else {
+                    gWorldInstance.Courses.push_back(std::move(course));
+                    LoadLevel(archive, course.get(), sceneFile);
+                    LoadMinimap(archive, course.get(), minimapFile);
+                    Tracks.push_back({course.get(), sceneFile, name, dir, archive});
+                } else { // The track does not have a valid scene file
                     const std::string file = dir + "/data_track_sections";
                     
+                    // If the track has a data_track_sections file,
+                    // then it must at least be a valid track.
+                    // So lets add it as an uninitialized track.
                     if (manager->HasFile(file)) {
 
-                        Course* course = new Course();
+                        auto course = std::make_unique<Course>();
                         course->Id = (std::string("mods:") + name).c_str();
                         course->Props.SetText(course->Props.Name, name.c_str(), sizeof(course->Props.Name));
                         course->Props.SetText(course->Props.DebugName, name.c_str(), sizeof(course->Props.Name));
 
                         auto archive = manager->GetArchiveFromFile(file);
-                        Tracks.push_back({course, "", name, dir, archive});
+                        Tracks.push_back({course.get(), "", name, dir, archive});
                     } else {
                         printf("ContentBrowser.cpp: Track '%s' missing required track files. Cannot add to game\n  Missing %s/data_track_sections file\n", name.c_str(), dir.c_str());
                     }
