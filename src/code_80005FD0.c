@@ -3934,7 +3934,7 @@ s32 func_80011014(TrackWaypoint* pathDest, TrackWaypoint* path, s32 numPathPoint
     var_s0 = 0;
     temp_f20 = (f32) path[0].posX;
     temp_f22 = (f32) path[0].posZ;
-    var_f28 = func_80010F40(temp_f20, 2000.0f, temp_f22, gCurrentCourseId, 0);
+    var_f28 = func_80010F40(temp_f20, 2000.0f, temp_f22, 0, 0);
 
     for (i = 0; i < numPathPoints; i++) {
         point1 = &path[i % numPathPoints];
@@ -3969,10 +3969,10 @@ s32 func_80011014(TrackWaypoint* pathDest, TrackWaypoint* path, s32 numPathPoint
                 if (gIsMirrorMode) {
                     // temp_f12 = -temp_f24_2;
                     pathDest->posX = (s16) -temp_f24_2;
-                    var_f20_2 = func_80010FA0(-temp_f24_2, var_f28, x1_2, gCurrentCourseId, var_s0);
+                    var_f20_2 = func_80010FA0(-temp_f24_2, var_f28, x1_2, 0, var_s0);
                 } else {
                     pathDest->posX = (s16) temp_f24_2;
-                    var_f20_2 = func_80010FA0(temp_f24_2, var_f28, x1_2, gCurrentCourseId, var_s0);
+                    var_f20_2 = func_80010FA0(temp_f24_2, var_f28, x1_2, 0, var_s0);
                 }
 
                 pathDest->posZ = (s16) temp_f22;
@@ -5892,8 +5892,7 @@ void func_80017054(Camera* camera, UNUSED Player* player, UNUSED s32 index, s32 
     D_80163238 = playerId;
     sp56 = gNearestWaypointByCameraId[cameraId];
     gNearestWaypointByCameraId[cameraId] = func_8000D33C(camera->pos[0], camera->pos[1], camera->pos[2], gNearestWaypointByCameraId[cameraId], pathIndex);
-    // if (IsYoshiValley()) {
-    if (gCurrentCourseId == 4) {
+    if (IsYoshiValley()) {
         if ((sp56 != gNearestWaypointByCameraId[cameraId]) && (gNearestWaypointByCameraId[cameraId] == 1)) {
             pathIndex = (D_80163DD8[cameraId] = random_int(4U));
             gNearestWaypointByCameraId[cameraId] = func_8000D33C(camera->pos[0], camera->pos[1], camera->pos[2], gNearestWaypointByCameraId[cameraId], pathIndex);

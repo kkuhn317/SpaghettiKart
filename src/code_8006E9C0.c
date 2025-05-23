@@ -162,7 +162,7 @@ void init_item_window(s32 objectIndex) {
     temp_v0->sizeScaling = 1.0f;
 }
 
-void func_8006EEE8(s32 courseId) {
+void get_minimap_properties() {
     D_8018D240 = (uintptr_t) CM_GetProps()->Minimap.Texture;
     // This is incredibly dumb. MinimapDimensions ought to be something more like
     // `u16 MinimapDimensions[][2]` but that doesn't match for some insane reason
@@ -192,7 +192,7 @@ void func_8006F008(void) {
     }
 
     if (!IsPodiumCeremony()) {
-        func_8006EEE8((s32) gCurrentCourseId);
+        get_minimap_properties();
     }
 
     // Flip the minimap player markers

@@ -39,7 +39,7 @@ u32* D_80162DB4;
 s16 D_80162DB8;
 u32* D_80162DBC;
 
-u16 D_80162DC0;
+uintptr_t staff_ghost_track_ptr;
 StaffGhost* D_80162DC4;
 s32 D_80162DC8;
 s32 D_80162DCC;
@@ -164,11 +164,11 @@ void func_80005310(void) {
 
         set_staff_ghost();
 
-        if (D_80162DC0 != gCurrentCourseId) {
+        if (staff_ghost_track_ptr != (uintptr_t)GetCourse()) {
             D_80162DD4 = 1;
         }
 
-        D_80162DC0 = (u16) gCurrentCourseId;
+        staff_ghost_track_ptr = (uintptr_t)GetCourse();
         D_80162DF0 = 0;
         D_80162DEC = 0;
         D_80162DF8 = 0;
