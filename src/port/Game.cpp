@@ -86,31 +86,6 @@ Editor::Editor gEditor;
 s32 gTrophyIndex = NULL;
 
 void CustomEngineInit() {
-
-    // auto gMarioRaceway = std::make_unique<MarioRaceway>();
-    // gChocoMountain = new ChocoMountain();
-    // gBowsersCastle = new BowsersCastle();
-    // gBansheeBoardwalk = new BansheeBoardwalk();
-    // gYoshiValley = new YoshiValley();
-    // gFrappeSnowland = new FrappeSnowland();
-    // gKoopaTroopaBeach = new KoopaTroopaBeach();
-    // gRoyalRaceway = new RoyalRaceway();
-    // gLuigiRaceway = new LuigiRaceway();
-    // gMooMooFarm = new MooMooFarm();
-    // gToadsTurnpike = new ToadsTurnpike();
-    // gKalimariDesert = new KalimariDesert();
-    // gSherbetLand = new SherbetLand();
-    // gRainbowRoad = new RainbowRoad();
-    // gWarioStadium = new WarioStadium();
-    // gBlockFort = new BlockFort();
-    // gSkyscraper = new Skyscraper();
-    // gDoubleDeck = new DoubleDeck();
-    // gDkJungle = new DKJungle();
-    // gBigDonut = new BigDonut();
-    // gPodiumCeremony = new PodiumCeremony();
-    // gHarbour = new Harbour();
-    // gTestCourse = new TestCourse();
-
     /* Add all courses to the global course list */
     Course* mario         = gWorldInstance.AddCourse(std::make_unique<MarioRaceway>());
     Course* choco         = gWorldInstance.AddCourse(std::make_unique<ChocoMountain>());
