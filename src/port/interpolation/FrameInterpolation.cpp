@@ -52,6 +52,11 @@ static bool invert_matrix(const float m[16], float invOut[16]);
 
 using namespace std;
 
+extern "C" {
+extern Mat4* gInterpolationMatrix;
+void mtxf_translate(Mat4, Vec3f);
+}
+
 namespace {
 
 enum class Op {

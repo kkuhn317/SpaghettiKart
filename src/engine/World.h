@@ -52,6 +52,7 @@ class World {
 
 public:
     explicit World();
+    ~World();
 
     void AddCourse(Course* course);
 

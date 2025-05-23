@@ -198,6 +198,38 @@ void CustomEngineInit() {
     // gModelLoader.Load();
 }
 
+void CustomEngineDestroy() {
+    delete gMarioRaceway;
+    delete gChocoMountain;
+    delete gBowsersCastle;
+    delete gBansheeBoardwalk;
+    delete gYoshiValley;
+    delete gFrappeSnowland;
+    delete gKoopaTroopaBeach;
+    delete gRoyalRaceway;
+    delete gLuigiRaceway;
+    delete gMooMooFarm;
+    delete gToadsTurnpike;
+    delete gKalimariDesert;
+    delete gSherbetLand;
+    delete gRainbowRoad;
+    delete gWarioStadium;
+    delete gBlockFort;
+    delete gSkyscraper;
+    delete gDoubleDeck;
+    delete gDkJungle;
+    delete gBigDonut;
+    delete gPodiumCeremony;
+    delete gHarbour;
+    delete gTestCourse;
+
+    delete gMushroomCup;
+    delete gFlowerCup;
+    delete gStarCup;
+    delete gSpecialCup;
+    delete gBattleCup;
+}
+
 extern "C" {
 
 void HM_InitIntro() {
@@ -873,6 +905,7 @@ extern "C"
     while (WindowIsRunning()) {
         push_frame();
     }
+    CustomEngineDestroy();
     // GameEngine::Instance->ProcessFrame(push_frame);
     GameEngine::Instance->Destroy();
     return 0;

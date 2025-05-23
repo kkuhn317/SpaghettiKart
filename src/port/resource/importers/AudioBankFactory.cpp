@@ -21,6 +21,7 @@ SM64::AudioBankFactoryV0::ReadResource(std::shared_ptr<Ship::File> file,
         auto* instrument = new Instrument();
         bool valid = reader->ReadUByte();
         if(!valid){
+            delete instrument;
             bank->instruments.push_back(nullptr);
             continue;
         }

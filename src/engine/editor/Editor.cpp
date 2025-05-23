@@ -30,6 +30,11 @@ namespace Editor {
     Editor::Editor() {
     }
 
+    Editor::~Editor() {
+        ClearObjects();
+        ClearMatrixPool();
+    }
+
     void Editor::Load() {
         printf("Editor: Loading Editor...\n");
         eObjectPicker.Load();
@@ -58,10 +63,16 @@ namespace Editor {
         Ship::Coords mousePos = wnd->GetMousePos();
         bool isMouseDown = wnd->GetMouseState(Ship::LUS_MOUSE_BTN_LEFT);
 
-        eGameObjects.erase(
-            std::remove_if(eGameObjects.begin(), eGameObjects.end(),
-                        [](const auto& object) { return (*object->DespawnFlag) == object->DespawnValue; }),
-            eGameObjects.end());
+        auto it = std::remove_if(eGameObjects.begin(), eGameObjects.end(),
+            [](auto& object) {
+                if (*object->DespawnFlag == object->DespawnValue) {
+                    delete object; // Free the pointed-to memory
+                    return true;   // Remove the pointer from the vector
+                }
+                return false;
+            });
+
+        eGameObjects.erase(it, eGameObjects.end());
 
         if (isMouseDown && !wasMouseDown) {  
             // Mouse just pressed (Pressed state)

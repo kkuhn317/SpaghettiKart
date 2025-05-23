@@ -22,6 +22,9 @@ extern "C" {
 }
 
 World::World() {}
+World::~World() {
+    CM_CleanWorld();
+}
 
 Course* CurrentCourse;
 Cup* CurrentCup;
