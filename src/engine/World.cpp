@@ -26,8 +26,10 @@ World::World() {}
 Course* CurrentCourse;
 Cup* CurrentCup;
 
-void World::AddCourse(std::unique_ptr<Course> course) {
-    gWorldInstance.Courses.push_back(course);
+Course* World::AddCourse(std::unique_ptr<Course> course) {
+    Course* ptr = course.get();
+    gWorldInstance.Courses.push_back(std::move(course));
+    return ptr;
 }
 
 void World::AddCup(Cup* cup) {
@@ -95,17 +97,6 @@ void World::SetCourse(const char* name) {
         }
     }
     std::runtime_error("SetCourse() Course name not found in Courses list");
-}
-
-template<typename T>
-void World::SetCourseByType() {
-    for (const auto& course : Courses) {
-        if (dynamic_cast<T*>(course.get())) {
-            CurrentCourse = course.get();
-            return;
-        }
-    }
-    printf("World::SetCourseByType() No course by the type found");
 }
 
 void World::NextCourse() {

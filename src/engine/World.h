@@ -53,7 +53,7 @@ class World {
 public:
     explicit World();
 
-    void AddCourse(std::unique_ptr<Course> course);
+    Course* AddCourse(std::unique_ptr<Course> course);
 
     AActor* AddActor(AActor* actor);
     struct Actor* AddBaseActor();
@@ -95,7 +95,15 @@ public:
     // These are only for browsing through the course list
     void SetCourse(const char*);
     template<typename T>
-    void SetCourseByType();
+    void SetCourseByType() {
+        for (const auto& course : Courses) {
+            if (dynamic_cast<T*>(course.get())) {
+                CurrentCourse = course.get();
+                return;
+            }
+        }
+        printf("World::SetCourseByType() No course by the type found");
+    }
     void NextCourse(void);
     void PreviousCourse(void);
 

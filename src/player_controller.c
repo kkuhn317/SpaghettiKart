@@ -1778,7 +1778,7 @@ void func_8002C4F8(Player* player, s8 arg1) {
         if ((player->unk_0DE & 4) != 4) {
             player->unk_0DE |= 8;
             player->unk_0DE |= 4;
-            if ((IsKoopaTroopaBeach()) && (GetCourse() != GetSkyscraper()) &&
+            if ((!IsKoopaTroopaBeach()) && (!IsSkyscraper()) &&
                 (!IsRainbowRoad()) && ((player->type & PLAYER_HUMAN) == PLAYER_HUMAN)) {
                 if ((IsBowsersCastle()) || (IsBigDonut())) {
                     func_800C9060((u8) arg1, 0x1900801CU);

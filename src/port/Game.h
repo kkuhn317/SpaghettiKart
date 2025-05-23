@@ -177,6 +177,28 @@ bool IsDkJungle();
 bool IsBigDonut();
 bool IsPodiumCeremony();
 
+void SelectMarioRaceway();
+void SelectLuigiRaceway();
+void SelectChocoMountain();
+void SelectBowsersCastle();
+void SelectBansheeBoardwalk();
+void SelectYoshiValley();
+void SelectFrappeSnowland();
+void SelectKoopaTroopaBeach();
+void SelectRoyalRaceway();
+void SelectMooMooFarm();
+void SelectToadsTurnpike();
+void SelectKalimariDesert();
+void SelectSherbetLand();
+void SelectRainbowRoad();
+void SelectWarioStadium();
+void SelectBlockFort();
+void SelectSkyscraper();
+void SelectDoubleDeck();
+void SelectDkJungle();
+void SelectBigDonut();
+void SelectPodiumCeremony();
+
 void* GetMushroomCup(void);
 
 void* GetFlowerCup(void);

@@ -1644,7 +1644,7 @@ void update_object(void) {
     //    func_80074EE8(); // Grand prix balloons
     //}
     func_80076F2C();
-    if ((s16) GetCourse() != GetFrappeSnowland()) {
+    if (!IsFrappeSnowland()) {
         update_leaf();
     }
 }
@@ -3638,7 +3638,7 @@ void func_800608E0(Player* player, s16 arg1, UNUSED s32 arg2, s8 arg3, UNUSED s8
         var_f0 = 0.0f;
     }
     sp4C = (D_801652A0[arg3] - player->pos[1]) - 3.0f;
-    if ((player->unk_0DE & 1) && (IsKoopaTroopaBeach())) {
+    if ((player->unk_0DE & 1) && (!IsKoopaTroopaBeach())) {
         var_f0 = 2.5f;
         sp4C = (f32) ((f64) (D_801652A0[arg3] - player->pos[1]) + 0.1);
     }
@@ -3658,7 +3658,7 @@ void func_800608E0(Player* player, s16 arg1, UNUSED s32 arg2, s8 arg3, UNUSED s8
 }
 
 void func_80060B14(Player* player, s16 arg1, s32 arg2, s8 arg3, s8 arg4) {
-    if ((GetCourse() != GetSkyscraper()) && (!IsRainbowRoad())) {
+    if ((!IsSkyscraper()) && (!IsRainbowRoad())) {
         if ((arg1 == 0) && ((player->unk_258[arg2].unk_01E > 0) || (player->unk_258[arg2].unk_01C == 0))) {
             func_800608E0(player, arg1, arg2, arg3, arg4);
         } else if (player->unk_258[arg2].unk_01E > 0) {
@@ -4628,7 +4628,7 @@ void func_80064184(Player* player, s16 arg1, s8 arg2, UNUSED s8 arg3) {
     f32 sp3C;
 
     sp40 = D_801652A0[arg2] - player->pos[1] - 3.0f;
-    if (((player->unk_0DE & 1) != 0) && (IsKoopaTroopaBeach())) {
+    if (((player->unk_0DE & 1) != 0) && (!IsKoopaTroopaBeach())) {
         sp40 = D_801652A0[arg2] - player->pos[1] + 0.1;
     }
 
