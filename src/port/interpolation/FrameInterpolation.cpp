@@ -12,6 +12,9 @@ extern "C" {
 #include "math_util.h"
 #include "math_util_2.h"
 #include "render_player.h"
+
+extern Mat4* gInterpolationMatrix;
+void mtxf_translate(Mat4, Vec3f);
 }
 /*
 Frame interpolation.
@@ -232,11 +235,6 @@ Data& append(Op op) {
     auto& m = current_path.back()->ops[op];
     current_path.back()->items.emplace_back(op, m.size());
     return m.emplace_back();
-}
-
-extern "C" {
-extern Mat4* gInterpolationMatrix;
-void mtxf_translate(Mat4, Vec3f);
 }
 
 MtxF* Matrix_GetCurrent() {
