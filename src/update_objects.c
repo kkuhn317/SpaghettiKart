@@ -2106,7 +2106,7 @@ void init_object_leaf_particle(s32 objectIndex, Vec3f arg1, s32 num) {
     gObjectList[objectIndex].sizeScaling = 0.1f;
     gObjectList[objectIndex].surfaceHeight = arg1[1];
 
-    if (IsMarioRaceway) {
+    if (IsMarioRaceway()) {
         object_origin_pos_randomize_around_xyz(objectIndex, arg1[0], arg1[1] + 25.0, arg1[2], 0x14, 0x1E, 0x14);
         gObjectList[objectIndex].unk_034 = 1.5f;
         gObjectList[objectIndex].velocity[1] = 1.5f;

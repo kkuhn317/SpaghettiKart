@@ -139,7 +139,7 @@ void OGrandPrixBalloons::func_80074924(s32 objectIndex) {
     object = &gObjectList[objectIndex];
     object->sizeScaling = 0.15f;
 
-    if (IsMarioRaceway) {
+    if (IsMarioRaceway()) {
         sp2C = random_int(0x00C8U);
         sp28 = random_int(_numBalloons3);
         sp24 = random_int(0x0096U);
