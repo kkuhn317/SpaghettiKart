@@ -22,6 +22,9 @@ extern "C" {
 }
 
 World::World() {}
+World::~World() {
+    CM_CleanWorld();
+}
 
 Course* CurrentCourse;
 Cup* CurrentCup;
@@ -79,6 +82,10 @@ u32 World::PreviousCup() {
         return CupIndex;
     }
     return 0;
+}
+
+void World::SetCupIndex(size_t index) {
+    CupIndex = index;
 }
 
 void World::SetCup(Cup* cup) {

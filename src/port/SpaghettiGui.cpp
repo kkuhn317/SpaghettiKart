@@ -12,7 +12,7 @@
 #include <SDL_hints.h>
 #include <SDL_video.h>
 
-#include "graphic/Fast3D/gfx_metal.h"
+#include "graphic/Fast3D/backends/gfx_metal.h"
 #include <imgui_impl_metal.h>
 #include <imgui_impl_sdl2.h>
 #else

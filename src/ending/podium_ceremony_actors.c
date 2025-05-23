@@ -18,6 +18,7 @@
 #include "code_80281C40.h"
 #include "math_util.h"
 #include <string.h>
+#include "port/interpolation/FrameInterpolation.h"
 
 #include "src/port/Game.h"
 #include "engine/Matrix.h"
@@ -262,6 +263,9 @@ void render_fireworks(Vec3f arg0, f32 arg1, s32 rgb, s16 alpha) {
 void firework_update(Firework* actor) {
     s32 i;
     Vec3f pos;
+    
+    // @port: Tag the transform.
+    FrameInterpolation_RecordOpenChild("render_fireworks", (uintptr_t) actor);
     if (actor->unk44 < 30) {
         for (i = 0; i < 10; i++) {
             pos[0] = actor->pos[0];
@@ -290,6 +294,8 @@ void firework_update(Firework* actor) {
         }
     }
     actor->unk44 += 1;
+    // @port Pop the transform id.
+    FrameInterpolation_RecordCloseChild();  
 }
 
 void unused_80280FA0(UNUSED CeremonyActor* actor) {

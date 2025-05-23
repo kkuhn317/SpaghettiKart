@@ -52,6 +52,7 @@ class World {
 
 public:
     explicit World();
+    ~World();
 
     Course* AddCourse(std::unique_ptr<Course> course);
 
@@ -82,6 +83,7 @@ public:
 
     void AddCup(Cup*);
     void SetCup(Cup* cup);
+    void SetCupIndex(size_t index);
     const char* GetCupName();
     u32 GetCupIndex();
     u32 NextCup();

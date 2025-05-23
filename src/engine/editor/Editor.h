@@ -14,6 +14,7 @@ namespace Editor {
     class Editor {
 public:
     Editor();
+    ~Editor();
 
     ObjectPicker eObjectPicker;
     std::vector<GameObject*> eGameObjects;
