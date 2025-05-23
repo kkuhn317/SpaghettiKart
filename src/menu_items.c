@@ -2528,12 +2528,15 @@ void func_80095574(void) {
         } else {
             debug_print_str2(0x000000AA, 0x00000064, "off");
         }
-        if ((gCurrentCourseId >= (NUM_COURSES - 1)) || (gCurrentCourseId < 0)) {
-            gCurrentCourseId = 0;
-        }
+
+        // This reset is not necessary. It wraps around automatically.
+        // if ((GetCourseIndex() >= (NUM_COURSES - 1)) || (GetCourseIndex() < 0)) {
+        //     gCurrentCourseId = 0;
+        // }
         print_str_num(0x00000050, 0x0000006E, "map_number", GetCourseIndex());
-        // This isn't functionally equivallent, but who cares.
-        if (gCurrentCourseId < COURSE_TOADS_TURNPIKE) {
+
+        // Bump the text over by 1 character width when the track id becomes two digits (10, 11, 12 etc.)
+        if (GetCourseIndex() < 10) {
             var_v0 = 0;
         } else {
             var_v0 = 8;
@@ -8230,7 +8233,9 @@ void func_800A6034(MenuItem* arg0) {
         set_text_color(TEXT_BLUE_GREEN_RED_CYCLE_2);
         print_text1_center_mode_2(arg0->column + 0x41, arg0->row + 0xA0, text, 0, 0.85f, 1.0f);
         text = CM_GetProps()->Name;
-        set_text_color((s32) gCurrentCourseId % 4);
+        //! @warning this used to be gCurrentCourseId % 4
+        // Hopefully this is equivallent.
+        set_text_color((s32) GetCourseIndex() % 4);
         print_text1_center_mode_2(arg0->column + 0x41, arg0->row + 0xC3, text, 0, 0.65f, 0.85f);
     }
 }
