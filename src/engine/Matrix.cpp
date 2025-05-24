@@ -54,7 +54,7 @@ Mtx* SetTextMatrix(Mat4 matrix, f32 x, f32 y, f32 arg3, f32 arg4) {
     matrix[3][2] = 0.0f;
     matrix[3][3] = 1.0f;
     Mtx* mtx = GetMatrix(gWorldInstance.Mtx.Effects);
-    FrameInterpolation_RecordMatrixMtxFToMtx((MtxF*)mtx, &stack.back());
+    FrameInterpolation_RecordMatrixMtxFToMtx((MtxF*)matrix, mtx);
     guMtxF2L(matrix, mtx);
 
     return mtx;
