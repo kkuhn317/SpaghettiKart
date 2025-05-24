@@ -51,6 +51,12 @@ void FrameInterpolation_RecordMatrixTranslate(Mat4* matrix, Vec3f b);
 
 void FrameInterpolation_RecordMatrixScale(Mat4* matrix, f32 scale);
 
+void FrameInterpolation_Record_guRotate(Mat4* matrix, f32 a, f32 x, f32 y, f32 z);
+
+void FrameInterpolation_Record_guScale(Mat4* matrix, f32 x, f32 y, f32 z);
+
+void FrameInterpolation_Record_SetTextMatrix(Mat4* matrix, f32 x, f32 y, f32 arg3, f32 arg4);
+
 void FrameInterpolation_RecordMatrixRotate1Coord(Mat4* matrix, u32 coord, s16 value);
 
 void FrameInterpolation_RecordMatrixMtxFToMtx(MtxF* src, Mtx* dest);

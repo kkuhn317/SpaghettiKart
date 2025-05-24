@@ -170,41 +170,37 @@ void func_800AFF58(Vtx* arg0) {
     }
 }
 
-#ifdef NON_MATCHING
-// Credit to SpazzyLemon for the updated and better attempt
 void func_800B0004(void) {
-    Vtx* vtxs;
-    s32 res1, res2;
-    UNUSED u32 pad[0x5];
-    s32 i, j;
-
+    Vtx *vtxs;
+    s32 res1;
+    s32 res2;
+    UNUSED u32 pad[0x4];
+    s32 i;
+    s32 j;
+    s32 k;
+    s16 idx;
+    idx = 4;
     gSPLight(gDisplayListHead++, VIRTUAL_TO_PHYSICAL2(&D_800E8680.l[0]), LIGHT_1);
     gSPLight(gDisplayListHead++, VIRTUAL_TO_PHYSICAL2(&D_800E8680.a), LIGHT_2);
     gSPNumLights(gDisplayListHead++, NUMLIGHTS_1);
     gSPSetGeometryMode(gDisplayListHead++, G_SHADE | G_SHADING_SMOOTH);
-    gDPSetCombineLERP(gDisplayListHead++, PRIMITIVE, 0, SHADE, 0, 0, 0, 0, SHADE, PRIMITIVE, 0, SHADE, 0, 0, 0, 0,
-                      SHADE);
+    gDPSetCombineLERP(gDisplayListHead++, PRIMITIVE, 0, SHADE, 0, 0, 0, 0, SHADE, PRIMITIVE, 0, SHADE, 0, 0, 0, 0, SHADE);
     gSPClearGeometryMode(gDisplayListHead++, G_CULL_BACK);
     gSPSetGeometryMode(gDisplayListHead++, G_LIGHTING);
-
-    vtxs = D_8018EDB4 % 2 ? D_8018EDB8 : D_8018EDBC;
+    vtxs = (D_8018EDB4 % 2) ? (D_8018EDB8) : (D_8018EDBC);
     D_8018EDB2 = 0x9C0;
     for (i = 0; i < 10; i++) {
-        for (j = 0; j < 12; j++) {
-            res1 = sins(D_8018EDB0 - (j * D_8018EDB2)) * 84.0f * j * 0.18f;
-            res2 = sins(D_8018EDB0 - ((j + 1) * D_8018EDB2)) * 84.0f * (j + 1) * 0.18f;
-            func_800AF9E4(&vtxs[j * 4 + i * 48], j, i, 84, res1, res2, (j * 84), 84);
+        for (k = 0, j = 0; j < 12; j++, k += 84) {
+        res1 = ((sins(D_8018EDB0 - (j * D_8018EDB2)) * 84.0f) * j) * 0.18f;
+        res2 = ((sins(D_8018EDB0 - ((j + 1) * D_8018EDB2)) * 84.0f) * (j + 1)) * 0.18f;
+        func_800AF9E4(&(&vtxs[j * idx])[i * 48], j, i, 84, res1, res2, k, 84);
         }
     }
+
     func_800AFF58(vtxs);
-    if (gTickVisuals) {
-        D_8018EDB0 += D_8018EDB2;
-        ++D_8018EDB4;
-    }
+    D_8018EDB0 += D_8018EDB2;
+    ++D_8018EDB4;
     gSPSetGeometryMode(gDisplayListHead++, G_CULL_BACK);
     gSPNumLights(gDisplayListHead++, NUMLIGHTS_1);
     gSPClearGeometryMode(gDisplayListHead++, G_LIGHTING);
 }
-#else
-GLOBAL_ASM("asm/non_matchings/code_800AF9B0/func_800B0004.s")
-#endif

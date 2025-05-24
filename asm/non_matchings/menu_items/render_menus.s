@@ -188,7 +188,7 @@ glabel render_menus
 glabel L8009F6CC
 /* 0A02CC 8009F6CC 3C048015 */  lui   $a0, %hi(gGfxPool) # $a0, 0x8015
 /* 0A02D0 8009F6D0 8C84EF40 */  lw    $a0, %lo(gGfxPool)($a0)
-/* 0A02D4 8009F6D4 0C025198 */  jal   func_80094660
+/* 0A02D4 8009F6D4 0C025198 */  jal   setup_intro_camera
 /* 0A02D8 8009F6D8 8E25001C */   lw    $a1, 0x1c($s1)
 /* 0A02DC 8009F6DC 1000047A */  b     .L800A08C8
 /* 0A02E0 8009F6E0 8FBF0034 */   lw    $ra, 0x34($sp)

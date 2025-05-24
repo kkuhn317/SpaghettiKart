@@ -35,8 +35,8 @@ void AddMatrixFixed(std::vector<Mtx>& stack, s32 flags) {
 }
 
 // Used in func_80095BD0
-Mtx* SetTextMatrix(f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
-    Mat4 matrix;
+Mtx* SetTextMatrix(Mat4 matrix, f32 x, f32 y, f32 arg3, f32 arg4) {
+    FrameInterpolation_Record_SetTextMatrix((Mat4*)&matrix, x, y, arg3, arg4);
     matrix[0][0] = arg3;
     matrix[0][1] = 0.0f;
     matrix[0][2] = 0.0f;
@@ -49,11 +49,12 @@ Mtx* SetTextMatrix(f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
     matrix[2][1] = 0.0f;
     matrix[2][2] = 1.0f;
     matrix[2][3] = 0.0f;
-    matrix[3][0] = arg1;
-    matrix[3][1] = arg2;
+    matrix[3][0] = x;
+    matrix[3][1] = y;
     matrix[3][2] = 0.0f;
     matrix[3][3] = 1.0f;
     Mtx* mtx = GetMatrix(gWorldInstance.Mtx.Effects);
+    FrameInterpolation_RecordMatrixMtxFToMtx((MtxF*)mtx, &stack.back());
     guMtxF2L(matrix, mtx);
 
     return mtx;
@@ -175,6 +176,10 @@ extern "C" {
 
     Mtx* GetEffectMatrix(void) {
         return GetMatrix(gWorldInstance.Mtx.Effects);
+    }
+
+    Mtx* GetObjectMatrix(void) {
+        return GetMatrix(gWorldInstance.Mtx.Objects);
     }
 
 

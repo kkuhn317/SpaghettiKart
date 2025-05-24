@@ -2216,18 +2216,23 @@ void func_800942D0(void) {
     s32 i;
     s32 alpha;
 
+//    FrameInterpolation_RecordOpenChild("logo", 0);
     gSPMatrix(gDisplayListHead++, &gGfxPool->mtxScreen, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
     gSPMatrix(gDisplayListHead++, &gGfxPool->mtxLookAt[0], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     guRotate(mtx, gIntroModelRotX, 1.0f, 0.0f, 0.0f);
     guRotate(mtx + 1, gIntroModelRotY, 0.0f, 1.0f, 0.0f);
     guScale(mtx + 2, 1.0f, 1.0f, gIntroModelScale);
+//    FrameInterpolation_RecordMatrixToMtx(mtx);
     gSPMatrix(gDisplayListHead++, mtx++, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+//    FrameInterpolation_RecordMatrixToMtx(mtx);
     gSPMatrix(gDisplayListHead++, mtx++, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+//    FrameInterpolation_RecordMatrixToMtx(mtx);
     gSPMatrix(gDisplayListHead++, mtx++, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
     gDPSetEnvColor(gDisplayListHead++, 0x00, 0x00, 0x00, 0x00);
     gSPDisplayList(gDisplayListHead++, D_02007F60);
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+//    FrameInterpolation_RecordCloseChild();
 
     if (sIntroModelMotionSpeed > 0) {
         introModelSpeed = sIntroModelSpeed;
@@ -2236,21 +2241,27 @@ void func_800942D0(void) {
         }
 
         for (i = 0, alpha = 192; i < 12; i++, alpha -= 16) {
+//            FrameInterpolation_RecordOpenChild("logo", i + 1);
             guRotate(mtx, 0.0f, 1.0f, 0.0f, 0.0f);
             guRotate(mtx + 1, (i + 1) * sIntroModelMotionSpeed * introModelSpeed, 0.0f, 1.0f, 0.0f);
             guScale(mtx + 2, 1.0f, 1.0f, 2.0f);
+//            FrameInterpolation_RecordMatrixToMtx(mtx);
             gSPMatrix(gDisplayListHead++, mtx++, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+//            FrameInterpolation_RecordMatrixToMtx(mtx);
             gSPMatrix(gDisplayListHead++, mtx++, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+//            FrameInterpolation_RecordMatrixToMtx(mtx);
             gSPMatrix(gDisplayListHead++, mtx++, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_XLU_SURF, G_RM_AA_ZB_XLU_SURF2);
             gDPSetEnvColor(gDisplayListHead++, 0x00, 0x00, 0x00, alpha);
             gSPDisplayList(gDisplayListHead++, startup_texture_dl4);
             gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+//            FrameInterpolation_RecordCloseChild();
         }
     }
 }
 
-void func_80094660(struct GfxPool* arg0, UNUSED s32 arg1) {
+void setup_intro_camera(struct GfxPool* arg0, UNUSED s32 arg1) {
     u16 perspNorm;
 
     move_segment_table_to_dmem();
@@ -2267,6 +2278,7 @@ void func_80094660(struct GfxPool* arg0, UNUSED s32 arg1) {
 void render_checkered_flag(struct GfxPool* arg0, UNUSED s32 arg1) {
     u16 perspNorm;
 
+    FrameInterpolation_RecordOpenChild("start_flag", 0);
     move_segment_table_to_dmem();
     guPerspective(&arg0->mtxPersp[0], &perspNorm, 45.0f, 1.3333334f, 100.0f, 12800.0f, 1.0f);
     gSPPerspNormalize(gDisplayListHead++, perspNorm);
@@ -2276,16 +2288,24 @@ void render_checkered_flag(struct GfxPool* arg0, UNUSED s32 arg1) {
     guRotate(&arg0->mtxObject[2], gIntroModelRotZ, 0, 0, 1.0f);
     guScale(&arg0->mtxObject[3], gIntroModelScale, gIntroModelScale, gIntroModelScale);
     guTranslate(&arg0->mtxObject[4], gIntroModelPosX, gIntroModelPosY, gIntroModelPosZ);
+    FrameInterpolation_RecordMatrixToMtx(arg0->mtxPersp[0]);
     gSPMatrix(gDisplayListHead++, &arg0->mtxPersp[0], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+    FrameInterpolation_RecordMatrixToMtx(arg0->mtxLookAt[1]);
     gSPMatrix(gDisplayListHead++, &arg0->mtxLookAt[1], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    FrameInterpolation_RecordMatrixToMtx(arg0->mtxObject[0]);
     gSPMatrix(gDisplayListHead++, &arg0->mtxObject[0], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    FrameInterpolation_RecordMatrixToMtx(arg0->mtxObject[1]);
     gSPMatrix(gDisplayListHead++, &arg0->mtxObject[1], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    FrameInterpolation_RecordMatrixToMtx(arg0->mtxObject[2]);
     gSPMatrix(gDisplayListHead++, &arg0->mtxObject[2], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    FrameInterpolation_RecordMatrixToMtx(arg0->mtxObject[3]);
     gSPMatrix(gDisplayListHead++, &arg0->mtxObject[3], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    FrameInterpolation_RecordMatrixToMtx(arg0->mtxObject[4]);
     gSPMatrix(gDisplayListHead++, &arg0->mtxObject[4], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPDisplayList(gDisplayListHead++, D_02007FC8);
     func_800B0004();
     gSPDisplayList(gDisplayListHead++, D_02007650);
+    FrameInterpolation_RecordCloseChild();
 }
 
 void func_80094A64(struct GfxPool* pool) {
@@ -2706,7 +2726,7 @@ void func_80095AE0(MTX_TYPE* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
 
 #undef MTX_TYPE
 
-Gfx* func_80095BD0(Gfx* displayListHead, u8* arg1, f32 arg2, f32 arg3, u32 arg4, u32 arg5, f32 arg6, f32 arg7) {
+Gfx* func_80095BD0(Gfx* displayListHead, u8* arg1, f32 x, f32 y, u32 arg4, u32 arg5, f32 arg6, f32 arg7) {
     Vtx* var_a1;
     // A match is a match, but why are goto's required here?
     if (gMatrixEffectCount >= 0x2F7) {
@@ -2717,7 +2737,10 @@ Gfx* func_80095BD0(Gfx* displayListHead, u8* arg1, f32 arg2, f32 arg3, u32 arg4,
         rmonPrintf("effectcount < 0 !!!!!!(kawano)\n");
     }
     // func_80095AE0(&gGfxPool->mtxEffect[gMatrixEffectCount], arg2, arg3, arg6, arg7);
-    Mtx* mtx = SetTextMatrix(arg2, arg3, arg6, arg7);
+
+    FrameInterpolation_RecordOpenChild("flashing_text", ((s32)x) | ((s32)y) | arg4 | arg5);
+    Mat4 matrix;
+    Mtx* mtx = SetTextMatrix(matrix, x, y, arg6, arg7);
     gSPMatrix(displayListHead++, mtx, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gMKLoadTextureTile_4b(displayListHead++, arg1, G_IM_FMT_I, arg4, 0, 0, 0, arg4, arg5, 0, G_TX_NOMIRROR | G_TX_WRAP,
                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
@@ -2735,8 +2758,9 @@ Gfx* func_80095BD0(Gfx* displayListHead, u8* arg1, f32 arg2, f32 arg3, u32 arg4,
             var_a1 = D_02007DF8;
             break;
     }
-
-    return func_800959F8(displayListHead, var_a1);
+    Gfx* gfx = func_800959F8(displayListHead, var_a1);
+    FrameInterpolation_RecordCloseChild();
+    return gfx;
 }
 
 Gfx* func_80095BD0_wide_right(Gfx* displayListHead, u8* arg1, f32 arg2, f32 arg3, u32 arg4, u32 arg5, f32 arg6,
@@ -5985,7 +6009,7 @@ void render_menus(MenuItem* arg0) {
                 HM_DrawIntro();
                 break;
             case MENU_ITEM_UI_LOGO_INTRO:
-                func_80094660(gGfxPool, arg0->param1);
+                setup_intro_camera(gGfxPool, arg0->param1);
                 break;
             case START_MENU_FLAG:
                 render_checkered_flag(gGfxPool, arg0->param1);

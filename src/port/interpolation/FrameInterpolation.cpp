@@ -7,6 +7,7 @@
 #include "port/Engine.h"
 #include "FrameInterpolation.h"
 #include "matrix.h"
+#include "src/engine/Matrix.h"
 
 extern "C" {
 #include "math_util.h"
@@ -81,7 +82,10 @@ enum class Op {
     SkinMatrixMtxFToMtx,
     SetTransformMatrix,
     SetMatrixTransformation,
-    SetTranslateRotate
+    SetTranslateRotate,
+    guRotate,
+    guScale,
+    SetTextMatrix,
 };
 
 typedef pair<const void*, uintptr_t> label;
@@ -114,6 +118,29 @@ union Data {
         Mat4* matrix;
         f32 scale;
     } matrix_scale;
+
+    struct {
+        Mat4* matrix;
+        f32 a;
+        f32 x;
+        f32 y;
+        f32 z;
+    } matrix_gu_rotate;
+
+    struct {
+        Mat4* matrix;
+        f32 x;
+        f32 y;
+        f32 z;
+    } matrix_scale_xyz;
+
+    struct {
+        Mat4* matrix;
+        f32 x;
+        f32 y;
+        f32 arg3;
+        f32 arg4;
+    } matrix_text;
 
     struct {
         Mat4* matrix;
@@ -249,6 +276,7 @@ MtxF* Matrix_GetCurrent() {
 struct InterpolateCtx {
     float step;
     float w;
+    float tmp_f;
     unordered_map<Mtx*, MtxF> mtx_replacements;
     MtxF tmp_mtxf, tmp_mtxf2;
     Mat3 tmp_mat3;
@@ -533,6 +561,33 @@ struct InterpolateCtx {
                             mtxf_translate_rotate(*gInterpolationMatrix, tmp_vec3f, tmp_vec3s);
                             break;
                         }
+                        case Op::guRotate: {
+                            tmp_f = lerp(old_op.matrix_gu_rotate.a, new_op.matrix_gu_rotate.a);
+
+                            tmp_vec3f[0] = lerp(old_op.matrix_gu_rotate.x, new_op.matrix_gu_rotate.x);
+                            tmp_vec3f[1] = lerp(old_op.matrix_gu_rotate.y, new_op.matrix_gu_rotate.y);
+                            tmp_vec3f[2] = lerp(old_op.matrix_gu_rotate.z, new_op.matrix_gu_rotate.z);
+
+                            guRotateF(*gInterpolationMatrix, tmp_f, tmp_vec3f[0], tmp_vec3f[1], tmp_vec3f[2]);
+                            break;
+                        }
+                        case Op::guScale: {
+                            tmp_vec3f[0] = lerp(old_op.matrix_scale_xyz.x, new_op.matrix_scale_xyz.x);
+                            tmp_vec3f[1] = lerp(old_op.matrix_scale_xyz.y, new_op.matrix_scale_xyz.y);
+                            tmp_vec3f[2] = lerp(old_op.matrix_scale_xyz.z, new_op.matrix_scale_xyz.z);
+                            guScaleF(*gInterpolationMatrix, tmp_vec3f[0], tmp_vec3f[1], tmp_vec3f[2]);
+                            break;
+                        }
+                        case Op::SetTextMatrix: {
+
+                            tmp_vec3f[0] = lerp(old_op.matrix_text.x, new_op.matrix_text.x);
+                            tmp_vec3f[1] = lerp(old_op.matrix_text.y, new_op.matrix_text.y);
+                            tmp_vec3f[2] = lerp(old_op.matrix_text.arg3, new_op.matrix_text.arg3);
+                            tmp_f = lerp(old_op.matrix_text.arg4, new_op.matrix_text.arg4);
+
+                            SetTextMatrix(*gInterpolationMatrix, tmp_vec3f[0], tmp_vec3f[1], tmp_vec3f[2], tmp_f);
+                            break;
+                        }
                     }
                 }
             }
@@ -654,6 +709,24 @@ void FrameInterpolation_RecordMatrixScale(Mat4* matrix, f32 scale) {
     if (!is_recording)
         return;
     append(Op::MatrixScale).matrix_scale = { matrix, scale };
+}
+
+void FrameInterpolation_Record_guRotate(Mat4* matrix, f32 a, f32 x, f32 y, f32 z) {
+    if (!is_recording)
+        return;
+    append(Op::guRotate).matrix_gu_rotate = {matrix, a, x, y, z};
+}
+
+void FrameInterpolation_Record_guScale(Mat4* matrix, f32 x, f32 y, f32 z) {
+    if (!is_recording)
+        return;
+    append(Op::guScale).matrix_scale_xyz = {matrix, x, y, z};
+}
+
+void FrameInterpolation_Record_SetTextMatrix(Mat4* matrix, f32 x, f32 y, f32 arg3, f32 arg4) {
+    if (!is_recording)
+        return;
+    append(Op::SetTextMatrix).matrix_text = {matrix, x, y, arg3, arg4};
 }
 
 void FrameInterpolation_RecordMatrixMultVec3fNoTranslate(Mat4* matrix, Vec3f src, Vec3f dest) {

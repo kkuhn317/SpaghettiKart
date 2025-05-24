@@ -392,7 +392,7 @@ void func_80093E60(void);
 void func_80093F10(void);
 void func_800940EC(s32);
 void func_800942D0(void);
-void func_80094660(struct GfxPool*, s32);
+void setup_intro_camera(struct GfxPool*, s32);
 void render_checkered_flag(struct GfxPool*, s32);
 void func_80094A64(struct GfxPool*);
 void setup_menus(void);
