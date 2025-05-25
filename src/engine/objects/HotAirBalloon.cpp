@@ -21,7 +21,7 @@ OHotAirBalloon::OHotAirBalloon(const FVector& pos) {
     D_80165898 = 0;
 
     // Spawn balloon on second lap.
-    if (GetCourse() == GetLuigiRaceway()) {
+    if (IsLuigiRaceway()) {
         _visible = (bool*)&D_80165898;
     } else { // Spawn balloon on race start
         bool mod = true;

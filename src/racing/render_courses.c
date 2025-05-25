@@ -7,6 +7,7 @@
 #include <course.h>
 #include "../camera.h"
 #include "framebuffer_effects.h"
+#include "port/interpolation/FrameInterpolation.h"
 
 #include "render_courses.h"
 #include "code_800029B0.h"
@@ -132,7 +133,7 @@ void render_course_segments(const char* addr[], struct UnkStruct_800DC5EC* arg1)
                 index = sp1E;
             }
         } else {
-            if (GetCourse() == GetBowsersCastle()) {
+            if (IsBowsersCastle()) {
                 if ((temp_v0_3 >= 0x11) && (temp_v0_3 < 0x18)) {
                     index = temp_v0_3;
                 } else if ((temp_v0_3 == 255) && (sp1E != 255)) {
@@ -142,7 +143,7 @@ void render_course_segments(const char* addr[], struct UnkStruct_800DC5EC* arg1)
                 } else {
                     index = arg1->pathCounter;
                 }
-            } else if (GetCourse() == GetChocoMountain()) {
+            } else if (IsChocoMountain()) {
                 if ((temp_v0_3 >= 0xE) && (temp_v0_3 < 0x16)) {
                     index = temp_v0_3;
                 } else if ((temp_v0_3 == 255) && (sp1E != 255)) {
@@ -175,7 +176,7 @@ void render_course_segments(const char* addr[], struct UnkStruct_800DC5EC* arg1)
     index = ((index - 1) * 4) + direction;
     gSPDisplayList(gDisplayListHead++, addr[index]);
 
-    if (CVarGetInteger("gDisableLod", 1) == 1 && (GetCourse() == GetBowsersCastle()) &&
+    if (CVarGetInteger("gDisableLod", 1) == 1 && (IsBowsersCastle()) &&
         (index < 20 || index > 99)) { // always render higher version of bowser statue
         gDisplayListHead--;
         gSPDisplayList(gDisplayListHead++, d_course_bowsers_castle_dl_9148); // use credit version of the course
@@ -240,9 +241,15 @@ void func_8029122C(struct UnkStruct_800DC5EC* arg0, s32 playerId) {
                       G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
             break;
     }
+
+    FrameInterpolation_RecordOpenChild("track_water", playerId);
+
     mtxf_identity(matrix);
     render_set_position(matrix, 0);
+        //FrameInterpolation_RecordCloseChild();
+
     CM_DrawWater(arg0, pathCounter, cameraRot, playerDirection);
+    FrameInterpolation_RecordCloseChild();
     // switch (gCurrentCourseId) {
     //     case COURSE_BOWSER_CASTLE:
     //         if (gActiveScreenMode != SCREEN_MODE_1P) {

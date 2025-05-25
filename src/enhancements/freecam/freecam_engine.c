@@ -11,9 +11,9 @@
 #include <camera.h>
 #include "freecam_engine.h"
 
-FreeCam freeCam;
-
 #include <math.h>
+
+FreeCam freeCam;
 
 f32 gDampValue = 0.99f;
 f32 gRotDampValue = 0.96f;

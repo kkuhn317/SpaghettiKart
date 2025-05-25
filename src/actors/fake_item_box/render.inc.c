@@ -2,6 +2,7 @@
 #include <code_800029B0.h>
 #include <libultra/gbi.h>
 #include <main.h>
+#include "port/interpolation/FrameInterpolation.h"
 
 /**
  * @brief Renders the fake item box actor.
@@ -23,6 +24,9 @@ void render_actor_fake_item_box(Camera* camera, struct FakeItemBox* fakeItemBox)
     f32 thing;
     f32 temp_f2_2;
     f32 someMultiplier;
+
+    // @port: Tag the transform.
+    FrameInterpolation_RecordOpenChild("Fake Item Box", TAG_ITEM_ADDR(fakeItemBox));
 
     if (is_within_render_distance(camera->pos, fakeItemBox->pos, camera->rot[1], 2500.0f, gCameraZoom[camera - camera1],
                                   1000000.0f) < 0 &&
@@ -163,4 +167,6 @@ void render_actor_fake_item_box(Camera* camera, struct FakeItemBox* fakeItemBox)
         gSPDisplayList(gDisplayListHead++, D_0D0030F8);
         gSPSetGeometryMode(gDisplayListHead++, G_CULL_BACK);
     }
+    // @port Pop the transform id.
+    FrameInterpolation_RecordCloseChild();
 }

@@ -21,6 +21,7 @@ extern "C" {
 #include "sounds.h"
 #include "external.h"
 }
+#include "port/interpolation/FrameInterpolation.h"
 
 size_t OMole::_count = 0;
 
@@ -145,7 +146,7 @@ void OMole::func_80081AFC(s32 objectIndex, s32 arg1) {
                 //         sp2C = D_8018D1B8;
                 //         break;
                 // }
-                //sp2C[object->type] = 0;
+                // sp2C[object->type] = 0;
             }
             break;
         case 0:
@@ -179,20 +180,20 @@ void OMole::func_8008153C(s32 objectIndex) {
             }
 
             u8* mole = (u8*) LOAD_ASSET_RAW(d_course_moo_moo_farm_mole_dirt);
-                init_object(loopObjectIndex, 0);
-                gObjectList[loopObjectIndex].activeTLUT = d_course_moo_moo_farm_mole_dirt;
-                gObjectList[loopObjectIndex].tlutList = mole;
-                gObjectList[loopObjectIndex].sizeScaling = 0.15f;
-                gObjectList[loopObjectIndex].velocity[1] = random_int(0x000AU);
-                gObjectList[loopObjectIndex].velocity[1] = (gObjectList[loopObjectIndex].velocity[1] * 0.1) + 4.8;
-                gObjectList[loopObjectIndex].unk_034 = random_int(5U);
-                gObjectList[loopObjectIndex].unk_034 = (gObjectList[loopObjectIndex].unk_034 * 0.01) + 0.8;
-                gObjectList[loopObjectIndex].orientation[1] = (0x10000 / sp70) * var_s1;
-                gObjectList[loopObjectIndex].origin_pos[0] = gObjectList[objectIndex].origin_pos[0];
-                gObjectList[loopObjectIndex].origin_pos[1] = gObjectList[objectIndex].origin_pos[1] - 13.0;
-                gObjectList[loopObjectIndex].origin_pos[2] = gObjectList[objectIndex].origin_pos[2];
-                break;
-            }
+            init_object(loopObjectIndex, 0);
+            gObjectList[loopObjectIndex].activeTLUT = d_course_moo_moo_farm_mole_dirt;
+            gObjectList[loopObjectIndex].tlutList = mole;
+            gObjectList[loopObjectIndex].sizeScaling = 0.15f;
+            gObjectList[loopObjectIndex].velocity[1] = random_int(0x000AU);
+            gObjectList[loopObjectIndex].velocity[1] = (gObjectList[loopObjectIndex].velocity[1] * 0.1) + 4.8;
+            gObjectList[loopObjectIndex].unk_034 = random_int(5U);
+            gObjectList[loopObjectIndex].unk_034 = (gObjectList[loopObjectIndex].unk_034 * 0.01) + 0.8;
+            gObjectList[loopObjectIndex].orientation[1] = (0x10000 / sp70) * var_s1;
+            gObjectList[loopObjectIndex].origin_pos[0] = gObjectList[objectIndex].origin_pos[0];
+            gObjectList[loopObjectIndex].origin_pos[1] = gObjectList[objectIndex].origin_pos[1] - 13.0;
+            gObjectList[loopObjectIndex].origin_pos[2] = gObjectList[objectIndex].origin_pos[2];
+            break;
+        }
     }
 }
 
@@ -243,21 +244,15 @@ void OMole::func_80081D34(s32 objectIndex) {
 }
 
 static const char* frames[] = {
-	gTextureMole1,
-	gTextureMole2,
-	gTextureMole3,
-	gTextureMole4,
-	gTextureMole5,
-	gTextureMole6,
-	gTextureMole7,
-	d_course_moo_moo_farm_mole_dirt,
+    gTextureMole1, gTextureMole2, gTextureMole3, gTextureMole4,
+    gTextureMole5, gTextureMole6, gTextureMole7, d_course_moo_moo_farm_mole_dirt,
 };
 
-
 void OMole::func_80081848(s32 objectIndex) {
-    init_texture_object(objectIndex, (u8*)d_course_moo_moo_farm_mole_tlut, (const char**) frames, 0x20U, (u16) 0x00000040);
-    //gObjectList[objectIndex].activeTexture = (const char*)d_course_moo_moo_farm_mole_frames;
-    //gObjectList[objectIndex].activeTLUT = (const char*)d_course_moo_moo_farm_mole_tlut;
+    init_texture_object(objectIndex, (u8*) d_course_moo_moo_farm_mole_tlut, (const char**) frames, 0x20U,
+                        (u16) 0x00000040);
+    // gObjectList[objectIndex].activeTexture = (const char*)d_course_moo_moo_farm_mole_frames;
+    // gObjectList[objectIndex].activeTLUT = (const char*)d_course_moo_moo_farm_mole_tlut;
 
     gObjectList[objectIndex].sizeScaling = 0.15f;
     gObjectList[objectIndex].textureListIndex = 0;
@@ -269,7 +264,6 @@ void OMole::func_80081848(s32 objectIndex) {
     set_object_flag(objectIndex, 0x04000000);
     object_next_state(objectIndex);
 }
-
 
 void OMole::func_80081924(s32 objectIndex) {
     switch (gObjectList[objectIndex].unk_0AE) {
@@ -307,7 +301,6 @@ void OMole::func_80081924(s32 objectIndex) {
     }
 }
 
-
 void OMole::func_80081A88(s32 objectIndex) {
     switch (gObjectList[objectIndex].unk_0DD) { /* irregular */
         case 0:
@@ -330,9 +323,14 @@ void OMole::func_800821AC(s32 objectIndex, s32 arg1) {
     }
 }
 
+// Holes
 void OMole::func_80054E10(s32 objectIndex) {
     if (gObjectList[objectIndex].state > 0) {
         if (is_obj_flag_status_active(objectIndex, 0x00800000) != 0) {
+
+            // @port: Tag the transform.
+            FrameInterpolation_RecordOpenChild("func_80054E10", TAG_OBJECT(&gObjectList[objectIndex]));
+
             D_80183E50[0] = gObjectList[objectIndex].pos[0];
             D_80183E50[1] = gObjectList[objectIndex].surfaceHeight + 0.8;
             D_80183E50[2] = gObjectList[objectIndex].pos[2];
@@ -340,6 +338,9 @@ void OMole::func_80054E10(s32 objectIndex) {
             D_80183E70[1] = gObjectList[objectIndex].velocity[1];
             D_80183E70[2] = gObjectList[objectIndex].velocity[2];
             func_8004A9B8(gObjectList[objectIndex].sizeScaling);
+
+            // @port Pop the transform id.
+            FrameInterpolation_RecordCloseChild();
         }
     }
 }
@@ -348,8 +349,8 @@ void OMole::func_80054E10(s32 objectIndex) {
 void OMole::func_80054EB8() {
     s32 someIndex;
 
-    //for (someIndex = 0; someIndex < NUM_TOTAL_MOLES; someIndex++) {
-        func_80054E10(_moleIndex);
+    // for (someIndex = 0; someIndex < NUM_TOTAL_MOLES; someIndex++) {
+    func_80054E10(_moleIndex);
     //}
 }
 
@@ -360,36 +361,52 @@ void OMole::func_80054D00(s32 objectIndex, s32 cameraId) {
     if (gObjectList[objectIndex].state >= 3) {
         func_8008A364(objectIndex, cameraId, 0x2AABU, 0x0000012C);
         if (is_obj_flag_status_active(objectIndex, VISIBLE) != 0) {
+
+            // @port: Tag the transform.
+            FrameInterpolation_RecordOpenChild("func_80054D00", (uintptr_t)&gObjectList[objectIndex]);
+
             D_80183E80[0] = (s16) gObjectList[objectIndex].orientation[0];
             D_80183E80[1] =
                 func_800418AC(gObjectList[objectIndex].pos[0], gObjectList[objectIndex].pos[2], camera->pos);
             D_80183E80[2] = (u16) gObjectList[objectIndex].orientation[2];
             func_80048130(gObjectList[objectIndex].pos, (u16*) D_80183E80, gObjectList[objectIndex].sizeScaling,
-                          (u8*) gObjectList[objectIndex].activeTLUT, (u8*)gObjectList[objectIndex].activeTexture,
-                          (Vtx*)LOAD_ASSET_RAW(D_0D0062B0), 0x00000020, 0x00000040, 0x00000020, 0x00000040, 5);
+                          (u8*) gObjectList[objectIndex].activeTLUT, (u8*) gObjectList[objectIndex].activeTexture,
+                          (Vtx*) LOAD_ASSET_RAW(D_0D0062B0), 0x00000020, 0x00000040, 0x00000020, 0x00000040, 5);
+
+            // @port Pop the transform id.
+            FrameInterpolation_RecordCloseChild();
         }
     }
 }
 
+// Mole rocks
 void OMole::func_80054F04(s32 cameraId) {
     Camera* camera = &camera1[cameraId];
 
-    gSPDisplayList(gDisplayListHead++, (Gfx*)D_0D0079C8);
+    gSPDisplayList(gDisplayListHead++, (Gfx*) D_0D0079C8);
     load_texture_block_rgba16_mirror((u8*) LOAD_ASSET_RAW(d_course_moo_moo_farm_mole_dirt), 0x00000010, 0x00000010);
 
-if (_idx == 0) {
-    for (size_t i = 0; i < gObjectParticle2_SIZE; i++) {
-        s32 objectIndex = gObjectParticle2[i];
-        Object* object = &gObjectList[objectIndex];
-        if (object->state > 0) {
-            func_8008A364(objectIndex, cameraId, 0x2AABU, 0x000000C8);
-            if ((is_obj_flag_status_active(objectIndex, VISIBLE) != 0) && (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX)) {
-                object->orientation[1] = func_800418AC(object->pos[0], object->pos[2], camera->pos);
-                rsp_set_matrix_gObjectList(objectIndex);
-                gSPDisplayList(gDisplayListHead++, (Gfx*)D_0D006980);
+    if (_idx == 0) {
+        for (size_t i = 0; i < gObjectParticle2_SIZE; i++) {
+            s32 objectIndex = gObjectParticle2[i];
+            Object* object = &gObjectList[objectIndex];
+            if (object->state > 0) {
+                func_8008A364(objectIndex, cameraId, 0x2AABU, 0x000000C8);
+                if ((is_obj_flag_status_active(objectIndex, VISIBLE) != 0) &&
+                    (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX)) {
+
+                    // @port: Tag the transform.
+                    FrameInterpolation_RecordOpenChild("func_80054F04", TAG_OBJECT(object) | (i << 32));
+
+                    object->orientation[1] = func_800418AC(object->pos[0], object->pos[2], camera->pos);
+                    rsp_set_matrix_gObjectList(objectIndex);
+                    gSPDisplayList(gDisplayListHead++, (Gfx*) D_0D006980);
+
+                    // @port Pop the transform id.
+                    FrameInterpolation_RecordCloseChild();
+                }
             }
         }
     }
-}
     gSPTexture(gDisplayListHead++, 1, 1, 0, G_TX_RENDERTILE, G_OFF);
 }

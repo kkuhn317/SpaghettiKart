@@ -4,6 +4,7 @@
 #include "port/Game.h"
 #include <controller/controldevice/controller/mapping/keyboard/KeyboardScancodes.h>
 #include <window/Window.h>
+#include "port/interpolation/FrameInterpolation.h"
 
 extern "C" {
 #include <macros.h>
@@ -85,7 +86,7 @@ void freecam(Camera* camera, Player* player, s8 index) {
     if (enabled && (player == gPlayerOne)) {
         freecam_loop(camera, player, index);
     } else {
-        func_8001E45C(camera, player, index);
+        func_8001EE98(gPlayerOneCopy, camera, index);
     }
 }
 
@@ -104,7 +105,6 @@ void freecam_loop(Camera* camera, Player* player, s8 index) {
         // Toggle freecam
         CVarSetInteger("gFreecam", !CVarGetInteger("gFreecam", 0));
     }
-
     // Calculate forward direction
     freecam_calculate_forward_vector_allow_rotation(camera, freeCam.forwardVector);
 
@@ -389,24 +389,33 @@ void freecam_update_controller(void) {
     // Note that D Pad as stick code has been removed. So if it's needed, it needs to be put back in.
 }
 
-void freecam_render_setup(void) {
+Mtx fPersp;
+Mtx fLookAt;
+void freecam_render_setup(Camera* camera) {
     u16 perspNorm;
     Mat4 matrix;
-    init_rdp();
-    func_802A53A4();
-    init_rdp();
-    func_80057FC4(0);
+
+    Mat4 persp;
+    Mat4 lookAt;
+
     gSPSetGeometryMode(gDisplayListHead++, G_ZBUFFER | G_SHADE | G_SHADING_SMOOTH);
     gSPClearGeometryMode(gDisplayListHead++, G_CULL_BACK | G_CULL_BOTH | G_CULL_FRONT);
-    guPerspective(&gGfxPool->mtxPersp[0], &perspNorm, gCameraZoom[0], gScreenAspect,
+
+    // Perspective (camera movement)
+    FrameInterpolation_RecordOpenChild("freecam_persp", FrameInterpolation_GetCameraEpoch());
+    guPerspective(&fPersp, &perspNorm, gCameraZoom[0], gScreenAspect,
                   CM_GetProps()->NearPersp, CM_GetProps()->FarPersp, 1.0f);
     gSPPerspNormalize(gDisplayListHead++, perspNorm);
-    gSPMatrix(gDisplayListHead++, (&gGfxPool->mtxPersp[0]), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-    guLookAt(&gGfxPool->mtxLookAt[0], camera1->pos[0], camera1->pos[1], camera1->pos[2], camera1->lookAt[0],
-             camera1->lookAt[1], camera1->lookAt[2], camera1->up[0], camera1->up[1], camera1->up[2]);
-    gSPMatrix(gDisplayListHead++, (&gGfxPool->mtxLookAt[0]), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
-    mtxf_identity(matrix);
-    gSPSetGeometryMode(gDisplayListHead++, G_CULL_BACK);
-    render_set_position(matrix, 0);
-    init_rdp();
+    gSPMatrix(gDisplayListHead++, (&fPersp), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+    FrameInterpolation_RecordCloseChild();
+
+    // LookAt (camera rotation)
+    FrameInterpolation_RecordOpenChild("freecam_lookAt", FrameInterpolation_GetCameraEpoch());
+    guLookAt(&fLookAt, camera->pos[0], camera->pos[1], camera->pos[2], camera->lookAt[0],
+             camera->lookAt[1], camera->lookAt[2], camera->up[0], camera->up[1], camera->up[2]);
+    gSPMatrix(gDisplayListHead++, (&fLookAt), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
+    FrameInterpolation_RecordCloseChild();
+
+    gDPPipeSync(gDisplayListHead++);
+
 }

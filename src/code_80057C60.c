@@ -39,6 +39,7 @@
 #include <assets/some_data.h>
 #include "port/Game.h"
 #include "engine/Matrix.h"
+#include "port/interpolation/FrameInterpolation.h"
 
 //! @warning this macro is undef'd at the end of this file
 #define MAKE_RGB(r, g, b) (((r) << 0x10) | ((g) << 0x08) | (b << 0x00))
@@ -769,7 +770,7 @@ void render_object_for_player(s32 cameraId) {
     render_object_leaf_particle(cameraId);
 
     if (D_80165730 != 0) {
-        //render_balloons_grand_prix(cameraId);
+        // render_balloons_grand_prix(cameraId);
     }
     if (gModeSelection == BATTLE) {
         CM_DrawBattleBombKarts(cameraId);
@@ -777,7 +778,7 @@ void render_object_for_player(s32 cameraId) {
 }
 
 void render_snowing_effect(s32 playerId) {
-    if (GetCourse() == GetFrappeSnowland()) {
+    if (IsFrappeSnowland()) {
         if (gGamestate != 9) {
             if ((D_8015F894 == 0) && (gPlayerCountSelection1 == 1)) {
                 render_object_snowflakes_particles();
@@ -938,6 +939,10 @@ void func_80058F48(void) {
 
 void func_80058F78(void) {
     if (gHUDDisable == 0) {
+
+        // @port: Tag the transform.
+        FrameInterpolation_RecordOpenChild("HudMatrix", 0);
+
         set_matrix_hud_screen();
         if ((!gDemoMode) && (gIsHUDVisible != 0) && (D_801657D8 == 0)) {
             draw_item_window(PLAYER_ONE);
@@ -950,6 +955,9 @@ void func_80058F78(void) {
                 }
             }
         }
+
+        // @port Pop the transform id.
+        FrameInterpolation_RecordCloseChild();
     }
 }
 
@@ -1555,7 +1563,7 @@ void func_8005A3C0(void) {
 }
 
 void func_8005A71C(void) {
-    // if (GetCourse() == GetBowsersCastle()) {
+    // if (IsBowsersCastle()) {
     // func_80081210();
     //}
 }
@@ -1632,11 +1640,11 @@ void update_object(void) {
     //         update_ferries_smoke_particle();
     //         break;
     // }
-    //if (D_80165730 != 0) {
+    // if (D_80165730 != 0) {
     //    func_80074EE8(); // Grand prix balloons
     //}
     func_80076F2C();
-    if ((s16) GetCourse() != GetFrappeSnowland()) {
+    if (!IsFrappeSnowland()) {
         update_leaf();
     }
 }
@@ -2588,7 +2596,7 @@ void func_8005CB60(s32 playerId, s32 lapCount) {
                 case 1:                                   /* switch 1 */
                     CM_ActivateSecondLapLakitu(playerId); // func_80079084(playerId);
                     func_800C9060(playerId, SOUND_ARG_LOAD(0x19, 0x00, 0xF0, 0x15));
-                    if ((GetCourse() == GetLuigiRaceway()) && (D_80165898 == 0) &&
+                    if ((IsLuigiRaceway()) && (D_80165898 == 0) &&
                         (gModeSelection != (s32) TIME_TRIALS)) {
                         D_80165898 = 1;
                     }
@@ -2610,7 +2618,7 @@ void func_8005CB60(s32 playerId, s32 lapCount) {
                     if (D_8018D114 == 2) {
                         D_80165800[playerId] = 0;
                     }
-                    if (GetCourse() == GetYoshiValley()) {
+                    if (IsYoshiValley()) {
                         playerHUD[playerId].unk_81 = 1;
                     }
                     playerHUD[playerId].lap1CompletionTimeX = 0x0140;
@@ -2927,22 +2935,22 @@ void func_8005DAF4(Player* player, s16 arg1, s32 arg2, UNUSED s8 arg3, UNUSED s8
                     func_8005D794(player, &player->unk_258[10 + arg1], var_f2, var_f12, var_f14, (s8) surfaceType,
                                   (s8) var_t3);
                     func_8005D7D8(&player->unk_258[10 + arg1], 2, 0.46f);
-                    if ((GetCourse() == GetChocoMountain()) || (GetCourse() == GetRoyalRaceway())) {
+                    if ((IsChocoMountain()) || (IsRoyalRaceway())) {
                         func_8005DAD8(&player->unk_258[10 + arg1], 1, 0, 0x0080);
                     }
-                    if (GetCourse() == GetKalimariDesert()) {
+                    if (IsKalimariDesert()) {
                         func_8005DAD8(&player->unk_258[10 + arg1], 7, 0, 0x0080);
                     }
-                    if (GetCourse() == GetMooMooFarm()) {
+                    if (IsMooMooFarm()) {
                         func_8005DAD8(&player->unk_258[10 + arg1], 8, 0, 0x0080);
                     }
-                    if (GetCourse() == GetWarioStadium()) {
+                    if (IsWarioStadium()) {
                         func_8005DAD8(&player->unk_258[10 + arg1], 9, 0, 0x0080);
                     }
-                    if (GetCourse() == GetYoshiValley()) {
+                    if (IsYoshiValley()) {
                         func_8005DAD8(&player->unk_258[10 + arg1], 10, 0, 0x0080);
                     }
-                    if (GetCourse() == GetDkJungle()) {
+                    if (IsDkJungle()) {
                         func_8005DAD8(&player->unk_258[10 + arg1], 11, 0, 0x0080);
                     }
                     player->unk_258[10 + arg1].unk_03A = random_int(0x0010U);
@@ -2951,22 +2959,22 @@ void func_8005DAF4(Player* player, s16 arg1, s32 arg2, UNUSED s8 arg3, UNUSED s8
                 func_8005D794(player, &player->unk_258[10 + arg1], var_f2, var_f12, var_f14, (s8) surfaceType,
                               (s8) var_t3);
                 func_8005D7D8(&player->unk_258[10 + arg1], 2, 0.46f);
-                if ((GetCourse() == GetChocoMountain()) || (GetCourse() == GetRoyalRaceway())) {
+                if ((IsChocoMountain()) || (IsRoyalRaceway())) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 1, 0, 0x0080);
                 }
-                if (GetCourse() == GetKalimariDesert()) {
+                if (IsKalimariDesert()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 7, 0, 0x0080);
                 }
-                if (GetCourse() == GetMooMooFarm()) {
+                if (IsMooMooFarm()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 8, 0, 0x0080);
                 }
-                if (GetCourse() == GetWarioStadium()) {
+                if (IsWarioStadium()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 9, 0, 0x0080);
                 }
-                if (GetCourse() == GetYoshiValley()) {
+                if (IsYoshiValley()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 10, 0, 0x0080);
                 }
-                if (GetCourse() == GetDkJungle()) {
+                if (IsDkJungle()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 11, 0, 0x0080);
                 }
                 player->unk_258[10 + arg1].unk_03A = random_int(0x0010U);
@@ -3193,44 +3201,44 @@ void func_8005ED48(Player* player, s16 arg1, s32 arg2, UNUSED s8 arg3, UNUSED s8
                 ((player->unk_258[10 + arg2].unk_01E > 0) || (player->unk_258[10 + arg2].unk_01C == 0))) {
                 func_8005D794(player, &player->unk_258[10 + arg1], var_f0, var_f2, var_f12, surfaceType, var_t3);
                 func_8005D7D8(&player->unk_258[10 + arg1], 5, 0.46f);
-                if ((GetCourse() == GetChocoMountain()) || (GetCourse() == GetRoyalRaceway())) {
+                if ((IsChocoMountain()) || (IsRoyalRaceway())) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 1, 0, 0x0080);
                 }
-                if (GetCourse() == GetKalimariDesert()) {
+                if (IsKalimariDesert()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 7, 0, 0x0080);
                 }
-                if (GetCourse() == GetMooMooFarm()) {
+                if (IsMooMooFarm()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 8, 0, 0x0080);
                 }
-                if (GetCourse() == GetWarioStadium()) {
+                if (IsWarioStadium()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 9, 0, 0x0080);
                 }
-                if (GetCourse() == GetYoshiValley()) {
+                if (IsYoshiValley()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 10, 0, 0x0080);
                 }
-                if (GetCourse() == GetDkJungle()) {
+                if (IsDkJungle()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 11, 0, 0x0080);
                 }
                 player->unk_258[10 + arg1].unk_03A = random_int(0x0010U);
             } else if (player->unk_258[10 + arg2].unk_01E > 0) {
                 func_8005D794(player, &player->unk_258[10 + arg1], var_f0, var_f2, var_f12, surfaceType, var_t3);
                 func_8005D7D8(&player->unk_258[10 + arg1], 5, 0.46f);
-                if ((GetCourse() == GetChocoMountain()) || (GetCourse() == GetRoyalRaceway())) {
+                if ((IsChocoMountain()) || (IsRoyalRaceway())) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 1, 0, 0x0080);
                 }
-                if (GetCourse() == GetKalimariDesert()) {
+                if (IsKalimariDesert()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 7, 0, 0x0080);
                 }
-                if (GetCourse() == GetMooMooFarm()) {
+                if (IsMooMooFarm()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 8, 0, 0x0080);
                 }
-                if (GetCourse() == GetWarioStadium()) {
+                if (IsWarioStadium()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 9, 0, 0x0080);
                 }
-                if (GetCourse() == GetYoshiValley()) {
+                if (IsYoshiValley()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 0x000A, 0, 0x0080);
                 }
-                if (GetCourse() == GetDkJungle()) {
+                if (IsDkJungle()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 0x000B, 0, 0x0080);
                 }
                 player->unk_258[10 + arg1].unk_03A = random_int(0x0010U);
@@ -3394,44 +3402,44 @@ void func_8005F90C(Player* player, s16 arg1, s32 arg2, UNUSED s8 arg3, UNUSED s8
                 ((player->unk_258[10 + arg2].unk_01E > 0) || (player->unk_258[10 + arg2].unk_01C == 0))) {
                 func_8005D794(player, &player->unk_258[10 + arg1], var_f0, var_f2, var_f12, surfaceType, var_t1);
                 func_8005D7D8(&player->unk_258[10 + arg1], 4, 0.46f);
-                if ((GetCourse() == GetChocoMountain()) || (GetCourse() == GetRoyalRaceway())) {
+                if ((IsChocoMountain()) || (IsRoyalRaceway())) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 1, 0, 0x0080);
                 }
-                if (GetCourse() == GetKalimariDesert()) {
+                if (IsKalimariDesert()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 7, 0, 0x0080);
                 }
-                if (GetCourse() == GetMooMooFarm()) {
+                if (IsMooMooFarm()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 8, 0, 0x0080);
                 }
-                if (GetCourse() == GetWarioStadium()) {
+                if (IsWarioStadium()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 9, 0, 0x0080);
                 }
-                if (GetCourse() == GetYoshiValley()) {
+                if (IsYoshiValley()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 0x000A, 0, 0x0080);
                 }
-                if (GetCourse() == GetDkJungle()) {
+                if (IsDkJungle()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 0x000B, 0, 0x0080);
                 }
                 player->unk_258[10 + arg1].unk_03A = random_int(0x0010U);
             } else if (player->unk_258[10 + arg2].unk_01E > 0) {
                 func_8005D794(player, &player->unk_258[10 + arg1], var_f0, var_f2, var_f12, surfaceType, var_t1);
                 func_8005D7D8(&player->unk_258[10 + arg1], 4, 0.46f);
-                if ((GetCourse() == GetChocoMountain()) || (GetCourse() == GetRoyalRaceway())) {
+                if ((IsChocoMountain()) || (IsRoyalRaceway())) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 1, 0, 0x0080);
                 }
-                if (GetCourse() == GetKalimariDesert()) {
+                if (IsKalimariDesert()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 7, 0, 0x0080);
                 }
-                if (GetCourse() == GetMooMooFarm()) {
+                if (IsMooMooFarm()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 8, 0, 0x0080);
                 }
-                if (GetCourse() == GetWarioStadium()) {
+                if (IsWarioStadium()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 9, 0, 0x0080);
                 }
-                if (GetCourse() == GetYoshiValley()) {
+                if (IsYoshiValley()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 0x000A, 0, 0x0080);
                 }
-                if (GetCourse() == GetDkJungle()) {
+                if (IsDkJungle()) {
                     func_8005DAD8(&player->unk_258[10 + arg1], 0x000B, 0, 0x0080);
                 }
                 player->unk_258[10 + arg1].unk_03A = random_int(0x0010U);
@@ -3630,13 +3638,13 @@ void func_800608E0(Player* player, s16 arg1, UNUSED s32 arg2, s8 arg3, UNUSED s8
         var_f0 = 0.0f;
     }
     sp4C = (D_801652A0[arg3] - player->pos[1]) - 3.0f;
-    if ((player->unk_0DE & 1) && (GetCourse() != GetKoopaTroopaBeach())) {
+    if ((player->unk_0DE & 1) && (!IsKoopaTroopaBeach())) {
         var_f0 = 2.5f;
         sp4C = (f32) ((f64) (D_801652A0[arg3] - player->pos[1]) + 0.1);
     }
     func_8005D794(player, &player->unk_258[arg1], 0.0f, 0.0f, 0.0f, (s8) 0, (s8) 0);
     func_8005D7D8(&player->unk_258[arg1], 3, var_f0);
-    if ((GetCourse() == GetBowsersCastle()) || (GetCourse() == GetBigDonut())) {
+    if ((IsBowsersCastle()) || (IsBigDonut())) {
         func_8005D800(&player->unk_258[arg1], 0, 0x00AF);
     } else {
         func_8005D800(&player->unk_258[arg1], 0x00FFFFFF, 0x00CF);
@@ -3650,7 +3658,7 @@ void func_800608E0(Player* player, s16 arg1, UNUSED s32 arg2, s8 arg3, UNUSED s8
 }
 
 void func_80060B14(Player* player, s16 arg1, s32 arg2, s8 arg3, s8 arg4) {
-    if ((GetCourse() != GetSkyscraper()) && (GetCourse() != GetRainbowRoad())) {
+    if ((!IsSkyscraper()) && (!IsRainbowRoad())) {
         if ((arg1 == 0) && ((player->unk_258[arg2].unk_01E > 0) || (player->unk_258[arg2].unk_01C == 0))) {
             func_800608E0(player, arg1, arg2, arg3, arg4);
         } else if (player->unk_258[arg2].unk_01E > 0) {
@@ -3666,10 +3674,10 @@ void func_80060BCC(Player* player, s16 arg1, s32 arg2, UNUSED s8 arg3, UNUSED s8
     f32 sp48;
     f32 sp44;
 
-    if (GetCourse() == GetSkyscraper()) {
+    if (IsSkyscraper()) {
         return;
     }
-    if (GetCourse() == GetRainbowRoad()) {
+    if (IsRainbowRoad()) {
         return;
     }
     sp54 = random_int(0x0168U) - 0xB4;
@@ -3704,7 +3712,7 @@ void func_80060F50(Player* player, s16 arg1, UNUSED s32 arg2, s8 arg3, UNUSED s8
     func_8005D794(player, &player->unk_258[arg1], 0.0f, 0.0f, 0.0f, 0, 0);
     func_8005D7D8(&player->unk_258[arg1], 5, 4.0f);
 
-    if ((GetCourse() == GetBowsersCastle()) || (GetCourse() == GetBigDonut())) {
+    if ((IsBowsersCastle()) || (IsBigDonut())) {
         func_8005D800(&player->unk_258[arg1], 0xFF0000, 0xFF);
     } else {
         func_8005D800(&player->unk_258[arg1], 0xFFFFFF, 0xFF);
@@ -4050,22 +4058,22 @@ void func_800624D8(Player* player, UNUSED s32 arg1, UNUSED s32 arg2, UNUSED s8 a
     switch (player->surfaceType) {
         case DIRT:
             for (var_s1 = 0; var_s1 < 10; var_s1++) {
-                if ((GetCourse() == GetChocoMountain()) || (GetCourse() == GetRoyalRaceway())) {
+                if ((IsChocoMountain()) || (IsRoyalRaceway())) {
                     func_8005DAD8(&player->unk_258[0x1E + var_s1], 1, 0, 0x00A8);
                 }
-                if (GetCourse() == GetKalimariDesert()) {
+                if (IsKalimariDesert()) {
                     func_8005DAD8(&player->unk_258[0x1E + var_s1], 7, 0, 0x00A8);
                 }
-                if (GetCourse() == GetMooMooFarm()) {
+                if (IsMooMooFarm()) {
                     func_8005DAD8(&player->unk_258[0x1E + var_s1], 8, 0, 0x00A8);
                 }
-                if (GetCourse() == GetWarioStadium()) {
+                if (IsWarioStadium()) {
                     func_8005DAD8(&player->unk_258[0x1E + var_s1], 9, 0, 0x00A8);
                 }
-                if (GetCourse() == GetYoshiValley()) {
+                if (IsYoshiValley()) {
                     func_8005DAD8(&player->unk_258[0x1E + var_s1], 0x000A, 0, 0x00A8);
                 }
-                if (GetCourse() == GetDkJungle()) {
+                if (IsDkJungle()) {
                     func_8005DAD8(&player->unk_258[0x1E + var_s1], 0x000B, 0, 0x00A8);
                 }
                 func_80062484(player, &player->unk_258[0x1E + var_s1], var_s1);
@@ -4620,7 +4628,7 @@ void func_80064184(Player* player, s16 arg1, s8 arg2, UNUSED s8 arg3) {
     f32 sp3C;
 
     sp40 = D_801652A0[arg2] - player->pos[1] - 3.0f;
-    if (((player->unk_0DE & 1) != 0) && (GetCourse() != GetKoopaTroopaBeach())) {
+    if (((player->unk_0DE & 1) != 0) && (!IsKoopaTroopaBeach())) {
         sp40 = D_801652A0[arg2] - player->pos[1] + 0.1;
     }
 
@@ -4966,16 +4974,18 @@ void func_800651F4(Player* player, UNUSED s8 arg1, UNUSED s8 arg2, s8 arg3) {
     }
 }
 
+s32 D_func_800652D4_counter = 0;
 void func_800652D4(Vec3f arg0, Vec3s arg1, f32 arg2) {
     Mat4 mtx;
-
+    FrameInterpolation_RecordOpenChild("some_thing", D_func_800652D4_counter++ << 8);
     mtxf_translate_rotate(mtx, arg0, arg1);
-    mtxf_scale2(mtx, arg2);
+    mtxf_scale(mtx, arg2);
     // convert_to_fixed_point_matrix(&gGfxPool->mtxEffect[gMatrixEffectCount], mtx);
     // gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(&gGfxPool->mtxEffect[gMatrixEffectCount]),
     //           G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     AddEffectMatrix(mtx, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    FrameInterpolation_RecordCloseChild();
 }
 
 void func_8006538C(Player* player, s8 arg1, s16 arg2, s8 arg3) {
@@ -5098,6 +5108,13 @@ void func_80065AB0(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
         spAC[0] = 0;
         spAC[1] = player->unk_048[arg3];
         spAC[2] = 0;
+
+        // // @port: Tag the transform.
+        FrameInterpolation_RecordOpenChild("EEEEEEEEE", player->type << 8 | arg2 | var_s0 << 16);
+
+        // @port Skip interpolation
+        // FrameInterpolation_ShouldInterpolateFrame(false);
+
         func_800652D4(spB4, spAC, player->unk_258[10 + arg2].unk_00C * player->size);
         if (var_s0 == 0) {
             gSPDisplayList(gDisplayListHead++, D_0D008DB8);
@@ -5117,6 +5134,11 @@ void func_80065AB0(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
             gSPDisplayList(gDisplayListHead++, D_0D008E48);
         }
         gMatrixEffectCount += 1;
+
+        // @port Pop the transform id.
+        FrameInterpolation_RecordCloseChild();
+        // @port renable interpolation
+        // FrameInterpolation_ShouldInterpolateFrame(true);
     }
 }
 #else
@@ -5667,6 +5689,10 @@ void func_800691B8(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
         sp54[1] = player->unk_048[arg3];
         player->unk_258[30 + arg2].unk_03A += 0x1C71;
         sp54[2] = player->unk_258[30 + arg2].unk_03A;
+
+        // @port: Tag the transform.
+        FrameInterpolation_RecordOpenChild("func_800691B8", TAG_OBJECT(arg2));
+
         func_800652D4(sp5C, sp54, player->size * 0.5);
         gSPDisplayList(gDisplayListHead++, D_0D008D58);
         gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
@@ -5678,6 +5704,9 @@ void func_800691B8(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
         gSPVertex(gDisplayListHead++, D_800E87C0, 4, 0);
         gSPDisplayList(gDisplayListHead++, D_0D008DA0);
         gMatrixEffectCount++;
+
+        // @port Pop the transform id.
+        FrameInterpolation_RecordCloseChild();
     }
 }
 
@@ -5737,6 +5766,10 @@ void func_800696CC(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3, f32 arg4) 
         sp54[0] = 0;
         sp54[1] = player->unk_048[arg3];
         sp54[2] = 0;
+
+        // @port: Tag the transform.
+        FrameInterpolation_RecordOpenChild("func_800696CC", TAG_OBJECT(arg2));
+
         func_800652D4(sp5C, sp54, player->size * arg4);
         gSPDisplayList(gDisplayListHead++, D_0D008D58);
         gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
@@ -5748,6 +5781,9 @@ void func_800696CC(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3, f32 arg4) 
         gSPVertex(gDisplayListHead++, D_800E87C0, 4, 0);
         gSPDisplayList(gDisplayListHead++, D_0D008DA0);
         gMatrixEffectCount += 1;
+
+        // @port Pop the transform id.
+        FrameInterpolation_RecordCloseChild();
     }
 }
 
@@ -5764,6 +5800,10 @@ void func_80069938(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
         sp54[0] = 0;
         sp54[1] = player->unk_048[arg3];
         sp54[2] = player->unk_258[30 + arg2].unk_038;
+
+        // @port: Tag the transform.
+        FrameInterpolation_RecordOpenChild("func_80069938", TAG_OBJECT(arg2));
+
         func_800652D4(sp5C, sp54, player->unk_258[30 + arg2].unk_00C * player->size);
         gSPDisplayList(gDisplayListHead++, D_0D008D58);
         gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
@@ -5775,6 +5815,9 @@ void func_80069938(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
         gSPVertex(gDisplayListHead++, D_800E87C0, 4, 0);
         gSPDisplayList(gDisplayListHead++, D_0D008DA0);
         gMatrixEffectCount += 1;
+
+        // @port Pop the transform id.
+        FrameInterpolation_RecordCloseChild();
     }
 }
 
@@ -6058,8 +6101,12 @@ void render_battle_balloon(Player* player, s8 arg1, s16 arg2, s8 arg3) {
     sp12C[1] = player->unk_048[arg3];
     sp12C[2] = D_8018D7D0[arg1][arg2] - (D_8018D860[arg1][arg2] * coss(temp_t1)) -
                ((D_8018D890[arg1][arg2] * 8) * sins(temp_t1));
+
+    // @port: Tag the transform.
+    FrameInterpolation_RecordOpenChild((uintptr_t) player, arg1 | arg2 << 16);
+
     mtxf_translate_rotate(mtx, sp134, sp12C);
-    mtxf_scale2(mtx, var_f20);
+    mtxf_scale(mtx, var_f20);
     // convert_to_fixed_point_matrix(&gGfxPool->mtxEffect[gMatrixEffectCount], sp140);
 
     // gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(&gGfxPool->mtxEffect[gMatrixEffectCount]),
@@ -6087,6 +6134,10 @@ void render_battle_balloon(Player* player, s8 arg1, s16 arg2, s8 arg3) {
     gSPVertex(gDisplayListHead++, gBalloonVertexPlane2, 4, 0);
     gSPDisplayList(gDisplayListHead++, common_square_plain_render);
     gSPTexture(gDisplayListHead++, 0x0001, 0x0001, 0, G_TX_RENDERTILE, G_OFF);
+
+    // @port Pop the transform id.
+    FrameInterpolation_RecordCloseChild();
+
     gMatrixEffectCount++;
 }
 
@@ -6184,7 +6235,7 @@ void render_balloon(Vec3f arg0, f32 arg1, s16 arg2, s16 arg3) {
     spF4[1] = camera1->rot[1];
     spF4[2] = arg2;
     mtxf_translate_rotate(mtx, spFC, spF4);
-    mtxf_scale2(mtx, arg1);
+    mtxf_scale(mtx, arg1);
     // convert_to_fixed_point_matrix(&gGfxPool->mtxEffect[gMatrixEffectCount], sp108);
     // gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(&gGfxPool->mtxEffect[gMatrixEffectCount]),
     //           G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
@@ -6566,6 +6617,10 @@ void func_8006D474(Player* player, s8 playerId, s8 screenId) {
     s16 var_s2;
     if ((player->unk_002 & (8 << (screenId * 4))) == (8 << (screenId * 4))) {
         for (var_s2 = 0; var_s2 < 10; var_s2++) {
+            // @port: Tag the transform.
+            FrameInterpolation_RecordOpenChild(
+                "SmokeDust", TAG_SMOKE_DUST(((u32) player->unk_258[var_s2].unk_012 << 8) + (playerId << 16) + var_s2));
+
             switch (player->unk_258[var_s2].unk_012) {
                 case 1:
                     if (gActiveScreenMode == SCREEN_MODE_3P_4P_SPLITSCREEN) {
@@ -6686,6 +6741,8 @@ void func_8006D474(Player* player, s8 playerId, s8 screenId) {
                     }
                     break;
             }
+            // @port Pop the transform id.
+            FrameInterpolation_RecordCloseChild();
         }
     }
     if ((gModeSelection == BATTLE) && (player->unk_002 & (2 << (screenId * 4)))) {

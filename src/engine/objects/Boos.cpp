@@ -1,6 +1,7 @@
 #include "Boos.h"
 #include "World.h"
 #include "CoreMath.h"
+#include "port/interpolation/FrameInterpolation.h"
 
 extern "C" {
 #include "render_objects.h"
@@ -88,9 +89,16 @@ void OBoos::Draw(s32 cameraId) {
             if (CVarGetInteger("gNoCulling", 0) == 1) {
                 temp_s2 = MIN(temp_s2, 0x15F91U);
             }
+
+            // @port: Tag the transform.
+            FrameInterpolation_RecordOpenChild("Boo", (uintptr_t)&gObjectList[objectIndex]);
+            
             if (is_obj_flag_status_active(objectIndex, VISIBLE) != 0) {
                 func_800523B8(objectIndex, cameraId, temp_s2);
             }
+
+            // @port Pop the transform id.
+            FrameInterpolation_RecordCloseChild();
         }
     }
 }

@@ -2528,12 +2528,15 @@ void func_80095574(void) {
         } else {
             debug_print_str2(0x000000AA, 0x00000064, "off");
         }
-        if ((gCurrentCourseId >= (NUM_COURSES - 1)) || (gCurrentCourseId < 0)) {
-            gCurrentCourseId = 0;
-        }
+
+        // This reset is not necessary. It wraps around automatically.
+        // if ((GetCourseIndex() >= (NUM_COURSES - 1)) || (GetCourseIndex() < 0)) {
+        //     gCurrentCourseId = 0;
+        // }
         print_str_num(0x00000050, 0x0000006E, "map_number", GetCourseIndex());
-        // This isn't functionally equivallent, but who cares.
-        if (gCurrentCourseId < COURSE_TOADS_TURNPIKE) {
+
+        // Bump the text over by 1 character width when the track id becomes two digits (10, 11, 12 etc.)
+        if (GetCourseIndex() < 10) {
             var_v0 = 0;
         } else {
             var_v0 = 8;
@@ -4889,7 +4892,7 @@ void func_8009CE64(s32 arg0) {
                     gCCSelection = (s32) 1;
                     switch (gNextDemoId) { /* switch 4 */
                         case 0:            /* switch 4 */
-                            SetCourseByClass(GetMarioRaceway());
+                            SelectMarioRaceway();
                             CM_SetCup(GetFlowerCup());
                             SetCupCursorPosition(COURSE_FOUR);
                             gCurrentCourseId = 0;
@@ -4900,7 +4903,7 @@ void func_8009CE64(s32 arg0) {
                             gModeSelection = 0;
                             break;
                         case 1: /* switch 4 */
-                            SetCourseByClass(GetLuigiRaceway());
+                            SelectLuigiRaceway();
                             CM_SetCup(GetMushroomCup());
                             SetCupCursorPosition(COURSE_ONE);
                             gCurrentCourseId = (s16) 1;
@@ -4912,7 +4915,7 @@ void func_8009CE64(s32 arg0) {
                             gModeSelection = 2;
                             break;
                         case 2: /* switch 4 */
-                            SetCourseByClass(GetKalimariDesert());
+                            SelectKalimariDesert();
                             CM_SetCup(GetMushroomCup());
                             SetCupCursorPosition(COURSE_FOUR);
                             gCurrentCourseId = COURSE_KALIMARI_DESERT;
@@ -4923,7 +4926,7 @@ void func_8009CE64(s32 arg0) {
                             gModeSelection = 0;
                             break;
                         case 3: /* switch 4 */
-                            SetCourseByClass(GetWarioStadium());
+                            SelectWarioStadium();
                             CM_SetCup(GetStarCup());
                             SetCupCursorPosition(COURSE_ONE);
                             gCurrentCourseId = 0x000E;
@@ -4936,7 +4939,7 @@ void func_8009CE64(s32 arg0) {
                             gModeSelection = (s32) 2;
                             break;
                         case 4: /* switch 4 */
-                            SetCourseByClass(GetBowsersCastle());
+                            SelectBowsersCastle();
                             CM_SetCup(GetStarCup());
                             SetCupCursorPosition(COURSE_FOUR);
                             gCurrentCourseId = 2;
@@ -4947,7 +4950,7 @@ void func_8009CE64(s32 arg0) {
                             gModeSelection = 0;
                             break;
                         case 5: /* switch 4 */
-                            SetCourseByClass(GetSherbetLand());
+                            SelectSherbetLand();
                             CM_SetCup(GetFlowerCup());
                             SetCupCursorPosition(COURSE_TWO);
                             gCurrentCourseId = 0x000C;
@@ -5034,8 +5037,8 @@ void func_8009CE64(s32 arg0) {
                 }
             }
 
-            if (GetCourse() == GetBlockFort() || GetCourse() == GetSkyscraper() || GetCourse() == GetDoubleDeck() ||
-                GetCourse() == GetBigDonut()) {
+            if (IsBlockFort() || IsSkyscraper() || IsDoubleDeck() ||
+                IsBigDonut()) {
 
                 gModeSelection = BATTLE;
                 if (gPlayerCountSelection1 == 1) {
@@ -8230,7 +8233,9 @@ void func_800A6034(MenuItem* arg0) {
         set_text_color(TEXT_BLUE_GREEN_RED_CYCLE_2);
         print_text1_center_mode_2(arg0->column + 0x41, arg0->row + 0xA0, text, 0, 0.85f, 1.0f);
         text = CM_GetProps()->Name;
-        set_text_color((s32) gCurrentCourseId % 4);
+        //! @warning this used to be gCurrentCourseId % 4
+        // Hopefully this is equivallent.
+        set_text_color((s32) GetCourseIndex() % 4);
         print_text1_center_mode_2(arg0->column + 0x41, arg0->row + 0xC3, text, 0, 0.65f, 0.85f);
     }
 }

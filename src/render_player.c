@@ -32,6 +32,7 @@
 #include <assets/donkeykong_kart.h>
 #include "port/Game.h"
 #include "engine/Matrix.h"
+#include "port/interpolation/FrameInterpolation.h"
 
 s8 gRenderingFramebufferByPlayer[] = { 0x00, 0x02, 0x00, 0x01, 0x00, 0x01, 0x00, 0x02 };
 
@@ -47,7 +48,6 @@ s16 gMatrixEffectCount;
 s32 D_80164AF4[3];
 struct_D_802F1F80* gPlayerPalette;
 static const char* sKartUpperTexture;
-static const char* sKartLowerTexture;
 u16 gPlayerRedEffect[8];
 u16 gPlayerGreenEffect[8];
 u16 gPlayerBlueEffect[8];
@@ -722,7 +722,7 @@ const char** wheelPtr[] = {
     donkeykong_kart_wheels, wario_kart_wheels, peach_kart_wheels, bowser_kart_wheels,
 };
 
-s32 D_800DDE74[] = { 96, 128, 192, 256, 288, 384, 512, 544, 576, 0, 0};
+s32 D_800DDE74[] = { 96, 128, 192, 256, 288, 384, 512, 544, 576, 0, 0 };
 
 void render_players_on_screen_two(void) {
     gPlayersToRenderCount = 0;
@@ -902,6 +902,8 @@ void mtxf_translate_rotate(Mat4 dest, Vec3f pos, Vec3s orientation) {
     f32 sinZ = sins(orientation[2]);
     f32 cosZ = coss(orientation[2]);
 
+    FrameInterpolation_RecordTranslateRotate(dest, pos, orientation);
+
     dest[0][0] = (cosY * cosZ) + ((sinX * sinY) * sinZ);
     dest[1][0] = (-cosY * sinZ) + ((sinX * sinY) * cosZ);
     dest[2][0] = cosX * sinY;
@@ -924,18 +926,6 @@ UNUSED void func_80021F50(Mat4 arg0, Vec3f arg1) {
     arg0[3][0] += arg1[0];
     arg0[3][1] += arg1[1];
     arg0[3][2] += arg1[2];
-}
-
-void mtxf_scale2(Mat4 arg0, f32 scale) {
-    arg0[0][0] *= scale;
-    arg0[1][0] *= scale;
-    arg0[2][0] *= scale;
-    arg0[0][1] *= scale;
-    arg0[1][1] *= scale;
-    arg0[2][1] *= scale;
-    arg0[0][2] *= scale;
-    arg0[1][2] *= scale;
-    arg0[2][2] *= scale;
 }
 
 /**
@@ -1287,7 +1277,7 @@ void change_player_color_effect_cmy(UNUSED Player* player, s8 arg1, s32 arg2, f3
  * Sort of an atmospheric effect.
  */
 bool is_player_under_light_luigi_raceway(Player* player, s8 arg1) {
-    if (GetCourse() == GetLuigiRaceway()) {
+    if (IsLuigiRaceway()) {
         if (((gNearestWaypointByPlayerId[arg1] >= 0x14F) && (gNearestWaypointByPlayerId[arg1] < 0x158)) ||
             ((gNearestWaypointByPlayerId[arg1] >= 0x15E) && (gNearestWaypointByPlayerId[arg1] < 0x164)) ||
             ((gNearestWaypointByPlayerId[arg1] >= 0x169) && (gNearestWaypointByPlayerId[arg1] < 0x170)) ||
@@ -1305,7 +1295,7 @@ bool is_player_under_light_luigi_raceway(Player* player, s8 arg1) {
 }
 
 void render_light_environment_on_player(Player* player, s8 arg1) {
-    if (GetCourse() == GetBowsersCastle()) {
+    if (IsBowsersCastle()) {
         if (((gNearestWaypointByPlayerId[arg1] >= 0x15) && (gNearestWaypointByPlayerId[arg1] < 0x2A)) ||
             ((gNearestWaypointByPlayerId[arg1] >= 0x14D) && (gNearestWaypointByPlayerId[arg1] < 0x15C)) ||
             ((gNearestWaypointByPlayerId[arg1] >= 0x1D1) && (gNearestWaypointByPlayerId[arg1] < 0x1E4)) ||
@@ -1328,7 +1318,7 @@ void render_light_environment_on_player(Player* player, s8 arg1) {
             change_player_color_effect_cmy(player, arg1, 0, 0.3f);
             D_80164B80[arg1] = 0;
         }
-    } else if (GetCourse() == GetBansheeBoardwalk()) {
+    } else if (IsBansheeBoardwalk()) {
         if (((gNearestWaypointByPlayerId[arg1] >= 0xD) && (gNearestWaypointByPlayerId[arg1] < 0x15)) ||
             ((gNearestWaypointByPlayerId[arg1] >= 0x29) && (gNearestWaypointByPlayerId[arg1] < 0x39)) ||
             ((gNearestWaypointByPlayerId[arg1] >= 0x46) && (gNearestWaypointByPlayerId[arg1] < 0x4E)) ||
@@ -1483,6 +1473,8 @@ void render_player_shadow(Player* player, s8 playerId, s8 screenId) {
     UNUSED Vec3f pad2;
     f32 var_f2;
 
+    // @port: Tag the transform.
+    FrameInterpolation_RecordOpenChild("Kart Shadow", TAG_ITEM_ADDR(player));
     temp_t9 = (u16) (player->unk_048[screenId] + player->rotation[1] + player->unk_0C0) / 128; // << 7) & 0xFFFF;
     spC0 = -player->rotation[1] - player->unk_0C0;
 
@@ -1520,7 +1512,7 @@ void render_player_shadow(Player* player, s8 playerId, s8 screenId) {
         spCC[1] = player->unk_074 + 1.0f;
         spCC[2] = player->pos[2] + ((spB0 * coss(spC0)) - (spAC * sins(spC0)));
         mtxf_translate_rotate(mtx, spCC, spC4);
-        mtxf_scale2(mtx, gCharacterSize[player->characterId] * player->size);
+        mtxf_scale(mtx, gCharacterSize[player->characterId] * player->size);
     }
     // convert_to_fixed_point_matrix(&gGfxPool->mtxShadow[playerId + (screenId * 8)], mtx);
 
@@ -1546,6 +1538,9 @@ void render_player_shadow(Player* player, s8 playerId, s8 screenId) {
 
     gSPDisplayList(gDisplayListHead++, common_square_plain_render);
     gSPTexture(gDisplayListHead++, 1, 1, 0, G_TX_RENDERTILE, G_OFF);
+
+    // @port Pop the transform id.
+    FrameInterpolation_RecordCloseChild();
 }
 
 void render_player_shadow_credits(Player* player, s8 playerId, s8 arg2) {
@@ -1576,7 +1571,7 @@ void render_player_shadow_credits(Player* player, s8 playerId, s8 arg2) {
     spCC[1] = gObjectList[indexObjectList1[playerId]].pos[1] + sp94[playerId];
 
     mtxf_translate_rotate(mtx, spCC, spC4);
-    mtxf_scale2(mtx, gCharacterSize[player->characterId] * player->size);
+    mtxf_scale(mtx, gCharacterSize[player->characterId] * player->size);
     // convert_to_fixed_point_matrix(&gGfxPool->mtxShadow[playerId + (arg2 * 8)], mtx);
 
     // gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(&gGfxPool->mtxShadow[playerId + (arg2 * 8)]),
@@ -1604,6 +1599,19 @@ void render_player_shadow_credits(Player* player, s8 playerId, s8 arg2) {
     gSPTexture(gDisplayListHead++, 1, 1, 0, G_TX_RENDERTILE, G_OFF);
 }
 
+Vtx player_vtx[] = {
+    { { { 9, 18, -6 }, 0, { 4032, 0 }, { 0xFF, 0xFF, 0xFF, 0xFF } } },
+    { { { 9, 0, -6 }, 0, { 4032, 4032 }, { 0xFF, 0xFF, 0xFF, 0xFF } } },
+    { { { -9, 18, -6 }, 0, { 0, 0 }, { 0xFF, 0xFF, 0xFF, 0xFF } } },
+    { { { -9, 0, -6 }, 0, { 0, 4032 }, { 0xFF, 0xFF, 0xFF, 0xFF } } },
+};
+Vtx player_vtx_flip[] = {
+    { { { 9, 18, -6 }, 0, { 0, 0 }, { 0xFF, 0xFF, 0xFF, 0xFF } } },
+    { { { 9, 0, -6 }, 0, { 0, 4032 }, { 0xFF, 0xFF, 0xFF, 0xFF } } },
+    { { { -9, 18, -6 }, 0, { 4032, 0 }, { 0xFF, 0xFF, 0xFF, 0xFF } } },
+    { { { -9, 0, -6 }, 0, { 4032, 4032 }, { 0xFF, 0xFF, 0xFF, 0xFF } } },
+};
+
 void render_kart(Player* player, s8 playerId, s8 screenId, s8 arg3) {
     UNUSED s32 pad;
     Mat4 mtx;
@@ -1616,6 +1624,7 @@ void render_kart(Player* player, s8 playerId, s8 screenId, s8 arg3) {
     s16 temp_v1;
     s16 thing;
 
+    FrameInterpolation_RecordOpenChild("player_kart", playerId | screenId << 8);
     if (player->unk_044 & 0x2000) {
         sp14C[0] = 0;
         sp14C[1] = player->unk_048[screenId];
@@ -1668,8 +1677,10 @@ void render_kart(Player* player, s8 playerId, s8 screenId, s8 arg3) {
 #endif
     }
     mtxf_translate_rotate(mtx, sp154, sp14C);
-    mtxf_scale2(mtx, gCharacterSize[player->characterId] * player->size);
+    mtxf_scale(mtx, gCharacterSize[player->characterId] * player->size);
     // convert_to_fixed_point_matrix(&gGfxPool->mtxKart[playerId + (screenId * 8)], mtx);
+
+    // @port: Tag the transform.
 
     if ((player->effects & BOO_EFFECT) == BOO_EFFECT) {
         if (screenId == playerId) {
@@ -1728,21 +1739,20 @@ void render_kart(Player* player, s8 playerId, s8 screenId, s8 arg3) {
     }
 
     // Render heads
-    gDPLoadTextureBlock(gDisplayListHead++, sKartUpperTexture, G_IM_FMT_CI, G_IM_SIZ_8b, 64, 32, 0,
+    gDPLoadTextureBlock(gDisplayListHead++, sKartUpperTexture, G_IM_FMT_CI, G_IM_SIZ_8b, 64, 64, 0,
                         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);
-    gSPVertex(gDisplayListHead++, &D_800DDBB4[playerId][arg3], 4, 0);
-    gSPDisplayList(gDisplayListHead++, common_square_plain_render);
-
-    // Render karts
-    u8* test = (u8*) LOAD_ASSET(sKartUpperTexture);
-    gDPLoadTextureBlock(gDisplayListHead++, test + 0x7C0, G_IM_FMT_CI, G_IM_SIZ_8b, 64, 32, 0,
-                        G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
-                        G_TX_NOLOD);
-    gSPVertex(gDisplayListHead++, &D_800DDBB4[playerId][arg3 + 4], 4, 0);
-    gSPDisplayList(gDisplayListHead++, common_square_plain_render);
+    if (arg3 == 0) {
+        gSPVertex(gDisplayListHead++, player_vtx, 4, 0);
+    } else {
+        gSPVertex(gDisplayListHead++, player_vtx_flip, 4, 0);
+    }
+    gSP2Triangles(gDisplayListHead++, 0, 1, 2, 0, 1, 3, 2, 0);
     gSPTexture(gDisplayListHead++, 1, 1, 0, G_TX_RENDERTILE, G_OFF);
     gDPSetAlphaCompare(gDisplayListHead++, G_AC_NONE);
+
+    // @port Pop the transform id.
+    FrameInterpolation_RecordCloseChild();
 }
 
 void render_ghost(Player* player, s8 playerId, s8 screenId, s8 arg3) {
@@ -1789,7 +1799,7 @@ void render_ghost(Player* player, s8 playerId, s8 screenId, s8 arg3) {
     }
 
     mtxf_translate_rotate(mtx, spDC, spD4);
-    mtxf_scale2(mtx, gCharacterSize[player->characterId] * player->size);
+    mtxf_scale(mtx, gCharacterSize[player->characterId] * player->size);
     // convert_to_fixed_point_matrix(&gGfxPool->mtxKart[playerId + (screenId * 8)], mtx);
 
     // gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(&gGfxPool->mtxKart[playerId + (screenId * 8)]),
@@ -1834,8 +1844,11 @@ void func_80025DE8(Player* player, s8 playerId, s8 screenId, s8 arg3) {
     sp94[1] = player->unk_048[screenId];
     sp94[2] = player->unk_050[screenId];
 
+    FrameInterpolation_RecordOpenChild("player_boost", playerId | screenId << 8);
+
+
     mtxf_translate_rotate(mtx, sp9C, sp94);
-    mtxf_scale2(mtx, gCharacterSize[player->characterId] * player->size);
+    mtxf_scale(mtx, gCharacterSize[player->characterId] * player->size);
     // convert_to_fixed_point_matrix(&gGfxPool->mtxEffect[gMatrixEffectCount], mtx);
 
     // gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(&gGfxPool->mtxEffect[gMatrixEffectCount]),
@@ -1865,6 +1878,8 @@ void func_80025DE8(Player* player, s8 playerId, s8 screenId, s8 arg3) {
     gSPDisplayList(gDisplayListHead++, common_square_plain_render);
     gSPTexture(gDisplayListHead++, 1, 1, 0, G_TX_RENDERTILE, G_OFF);
     gMatrixEffectCount += 1;
+
+    FrameInterpolation_RecordCloseChild();
 }
 
 void render_player_ice_reflection(Player* player, s8 playerId, s8 screenId, s8 arg3) {
@@ -1884,8 +1899,11 @@ void render_player_ice_reflection(Player* player, s8 playerId, s8 screenId, s8 a
         arg3 = 0;
     }
 
+    // @port: Tag the transform.
+    FrameInterpolation_RecordOpenChild("PlayerReflection", playerId | screenId << 8);
+
     mtxf_translate_rotate(mtx, sp9C, sp94);
-    mtxf_scale2(mtx, gCharacterSize[player->characterId] * player->size);
+    mtxf_scale(mtx, gCharacterSize[player->characterId] * player->size);
     // convert_to_fixed_point_matrix(&gGfxPool->mtxEffect[gMatrixEffectCount], mtx);
 
     // gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(&gGfxPool->mtxEffect[gMatrixEffectCount]),
@@ -1911,6 +1929,9 @@ void render_player_ice_reflection(Player* player, s8 playerId, s8 screenId, s8 a
     gSPDisplayList(gDisplayListHead++, common_square_plain_render);
     gSPTexture(gDisplayListHead++, 1, 1, 0, G_TX_RENDERTILE, G_OFF);
     gMatrixEffectCount += 1;
+
+    // @port Pop the transform id.
+    FrameInterpolation_RecordCloseChild();
 }
 
 void render_player(Player* player, s8 playerId, s8 screenId) {
@@ -1951,7 +1972,7 @@ void render_player(Player* player, s8 playerId, s8 screenId) {
         func_80025DE8(player, playerId, screenId, var_v1);
     }
     // Allows wheels to spin
-    gSPInvalidateTexCache(gDisplayListHead++, sKartLowerTexture);
+    gSPInvalidateTexCache(gDisplayListHead++, sKartUpperTexture);
 }
 
 void func_80026A48(Player* player, s8 arg1) {

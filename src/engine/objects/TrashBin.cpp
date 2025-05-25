@@ -3,6 +3,7 @@
 #include "TrashBin.h"
 #include "World.h"
 #include "port/Game.h"
+#include "port/interpolation/FrameInterpolation.h"
 
 extern "C" {
 #include "main.h"
@@ -31,7 +32,7 @@ OTrashBin::OTrashBin(const FVector& pos, const IRotator& rotation, f32 scale, OT
 
     init_object(_objectIndex, 0);
 
-    if (GetCourse() != GetBansheeBoardwalk()) {
+    if (!IsBansheeBoardwalk()) {
         _drawBin = true;
     }
 }
@@ -62,11 +63,18 @@ void OTrashBin::Draw(s32 cameraId) {
             Mat4 mtx;
             Vec3f Pos = { _pos.x + 63, _pos.y + 12, _pos.z + 25 };
             Vec3s Rot = { 0, 0x4000, 0 };
+
+            // @port: Tag the transform.
+            FrameInterpolation_RecordOpenChild("OTrashBin", (uintptr_t) object);
+
             mtxf_pos_rotation_xyz(mtx, Pos, Rot);
             //mtxf_scale(mtx, 1.0f);
             if (render_set_position(mtx, 0) != 0) {
                 gSPDisplayList(gDisplayListHead++, BinMod);
             }
+
+            // @port Pop the transform id.
+            FrameInterpolation_RecordCloseChild();
         }
     }
 }

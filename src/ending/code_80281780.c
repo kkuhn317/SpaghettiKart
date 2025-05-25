@@ -93,7 +93,7 @@ void setup_podium_ceremony(void) {
     Camera* camera = &cameras[0];
 
     gCurrentCourseId = COURSE_ROYAL_RACEWAY;
-    SetCourseByClass(GetPodiumCeremony());
+    SelectPodiumCeremony();
     D_800DC5B4 = (u16) 1;
     gIsMirrorMode = 0;
     gGotoMenu = 0xFFFF;

@@ -418,7 +418,7 @@ void func_8028EC38(s32 arg0) {
 
 void func_8028EC98(s32 arg0) {
 
-    // We want music in mutilplayer
+    // We want music in multiplayer, so this was removed
     //if (gScreenModeSelection == SCREEN_MODE_3P_4P_SPLITSCREEN) {
     //    return;
     //}
@@ -897,9 +897,9 @@ void func_8028FCBC(void) {
             func_8028F914();
             if (D_802BA034 == 1.0f) {
                 if (gActiveScreenMode != SCREEN_MODE_1P) {
-                    if (GetCourse() == GetLuigiRaceway()) {
+                    if (IsLuigiRaceway()) {
                         func_802A7940();
-                    } else if (GetCourse() == GetWarioStadium()) {
+                    } else if (IsWarioStadium()) {
                         func_802A7728();
                     }
                 }
@@ -909,7 +909,9 @@ void func_8028FCBC(void) {
                 CM_SpawnStarterLakitu(); // func_80078F64();
                 if ((gModeSelection == TIME_TRIALS) && (D_80162DD6 == 0)) {
                     phi_v0_4 = 0x1;
-                    for (i = 0; i < gCurrentCourseId; i++) {
+                    //! @warning this used to be < gCurrentCourseId
+                    // Hopefully this is equivallent.
+                    for (i = 0; i < GetCourseIndex(); i++) {
                         phi_v0_4 <<= 1;
                     }
                     if ((D_8015F890 == 0) && (!(D_800DC5AC & phi_v0_4))) {

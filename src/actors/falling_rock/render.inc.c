@@ -1,6 +1,7 @@
 #include <actors.h>
 #include <main.h>
 #include <assets/choco_mountain_data.h>
+#include "port/interpolation/FrameInterpolation.h"
 
 /**
  * @brief Renders the falling rock actor.
@@ -12,7 +13,7 @@
 void render_actor_falling_rock(Camera* camera, struct FallingRock* rock) {
     Vec3s sp98;
     Vec3f sp8C;
-    Mat4 sp4C;
+    Mat4 mtx;
     f32 height;
     UNUSED s32 pad[4];
 
@@ -41,16 +42,26 @@ void render_actor_falling_rock(Camera* camera, struct FallingRock* rock) {
             sp98[1] = 0;
             sp98[2] = 0;
             sp8C[1] = height + 2.0f;
-            mtxf_pos_rotation_xyz(sp4C, sp8C, sp98);
-            if (render_set_position(sp4C, 0) == 0) {
+
+            mtxf_pos_rotation_xyz(mtx, sp8C, sp98);
+            if (render_set_position(mtx, 0) == 0) {
                 return;
             }
             gSPDisplayList(gDisplayListHead++, d_course_choco_mountain_dl_6F88);
         }
     }
-    mtxf_pos_rotation_xyz(sp4C, rock->pos, rock->rot);
-    if (render_set_position(sp4C, 0) == 0) {
+
+    // @port: Tag the transform.
+    FrameInterpolation_RecordOpenChild("rock", (uintptr_t) rock);
+
+    mtxf_pos_rotation_xyz(mtx, rock->pos, rock->rot);
+    if (render_set_position(mtx, 0) == 0) {
+        // @port Pop the transform id.
+        FrameInterpolation_RecordCloseChild();
         return;
     }
     gSPDisplayList(gDisplayListHead++, d_course_choco_mountain_dl_falling_rock);
+
+    // @port Pop the transform id.
+    FrameInterpolation_RecordCloseChild();
 }

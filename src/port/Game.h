@@ -51,6 +51,8 @@ void PreviousCourse();
 
 void CM_SetCup(void*);
 
+void CM_SetCupIndex(size_t index);
+
 void CM_LoadTextures();
 
 void CM_RenderCourse(struct UnkStruct_800DC5EC* arg0);
@@ -155,47 +157,49 @@ void CM_CleanWorld(void);
 
 f32 CM_GetWaterLevel(Vec3f pos, Collision* collision);
 
-void* GetMarioRaceway(void);
+bool IsMarioRaceway();
+bool IsLuigiRaceway();
+bool IsChocoMountain();
+bool IsBowsersCastle();
+bool IsBansheeBoardwalk();
+bool IsYoshiValley();
+bool IsFrappeSnowland();
+bool IsKoopaTroopaBeach();
+bool IsRoyalRaceway();
+bool IsMooMooFarm();
+bool IsToadsTurnpike();
+bool IsKalimariDesert();
+bool IsSherbetLand();
+bool IsRainbowRoad();
+bool IsWarioStadium();
+bool IsBlockFort();
+bool IsSkyscraper();
+bool IsDoubleDeck();
+bool IsDkJungle();
+bool IsBigDonut();
+bool IsPodiumCeremony();
 
-void* GetLuigiRaceway(void);
-
-void* GetChocoMountain(void);
-
-void* GetBowsersCastle(void);
-
-void* GetBansheeBoardwalk(void);
-
-void* GetYoshiValley(void);
-
-void* GetFrappeSnowland(void);
-
-void* GetKoopaTroopaBeach(void);
-
-void* GetRoyalRaceway(void);
-
-void* GetMooMooFarm(void);
-
-void* GetToadsTurnpike(void);
-
-void* GetKalimariDesert(void);
-
-void* GetSherbetLand(void);
-
-void* GetRainbowRoad(void);
-
-void* GetWarioStadium(void);
-
-void* GetBlockFort(void);
-
-void* GetSkyscraper(void);
-
-void* GetDoubleDeck(void);
-
-void* GetDkJungle(void);
-
-void* GetBigDonut(void);
-
-void* GetPodiumCeremony(void);
+void SelectMarioRaceway();
+void SelectLuigiRaceway();
+void SelectChocoMountain();
+void SelectBowsersCastle();
+void SelectBansheeBoardwalk();
+void SelectYoshiValley();
+void SelectFrappeSnowland();
+void SelectKoopaTroopaBeach();
+void SelectRoyalRaceway();
+void SelectMooMooFarm();
+void SelectToadsTurnpike();
+void SelectKalimariDesert();
+void SelectSherbetLand();
+void SelectRainbowRoad();
+void SelectWarioStadium();
+void SelectBlockFort();
+void SelectSkyscraper();
+void SelectDoubleDeck();
+void SelectDkJungle();
+void SelectBigDonut();
+void SelectPodiumCeremony();
 
 void* GetMushroomCup(void);
 

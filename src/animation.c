@@ -8,6 +8,7 @@
 #include <libultra/gbi.h>
 #include "code_80057C60.h"
 #include "engine/Matrix.h"
+#include "port/interpolation/FrameInterpolation.h"
 
 Vec3s sOriginalPosAnimation;
 s16 isNotTheFirst;
@@ -35,6 +36,9 @@ void convert_to_fixed_point_matrix_animation(Mtx* dest, Mat4 src) {
 }
 
 void mtxf_translate_rotate2(Mat4 dest, Vec3f pos, Vec3s angle) {
+
+    FrameInterpolation_RecordMatrixPosRotXYZ(&dest, pos, angle);
+
     f32 sx = sins(angle[0]);
     f32 cx = coss(angle[0]);
 
@@ -92,7 +96,7 @@ void render_limb_or_add_mtx(Armature* arg0, s16* arg1, AnimationLimbVector arg2,
         }
         angle[i] = arg1[arg2[i].indexCycle + some_offset];
     }
-
+    FrameInterpolation_RecordMatrixPush(modelMatrix);
     mtxf_translate_rotate2(modelMatrix, pos, angle);
     //convert_to_fixed_point_matrix_animation(&gGfxPool->mtxHud[gMatrixHudCount], modelMatrix);
     sMatrixStackSize += 1;
@@ -104,6 +108,7 @@ void render_limb_or_add_mtx(Armature* arg0, s16* arg1, AnimationLimbVector arg2,
         model = (virtualModel);
         gSPDisplayList(gDisplayListHead++, model);
     }
+    FrameInterpolation_RecordMatrixPop(modelMatrix);
 }
 
 void render_armature(Armature* animation, Animation* arg1, s16 timeCycle) {

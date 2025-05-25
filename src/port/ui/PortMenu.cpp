@@ -244,25 +244,25 @@ void PortMenu::AddSettings() {
                 .DefaultValue(1));
 #endif
 
-    // AddWidget(path, "Current FPS: %d", WIDGET_CVAR_SLIDER_INT)
-    //     .CVar("gInterpolationFPS")
-    //     .Callback([](WidgetInfo& info) {
-    //         int32_t defaultValue = std::static_pointer_cast<IntSliderOptions>(info.options)->defaultValue;
-    //         if (CVarGetInteger(info.cVar, defaultValue) == defaultValue) {
-    //             info.name = "Current FPS: Original (%d)";
-    //         } else {
-    //             info.name = "Current FPS: %d";
-    //         }
-    //     })
-    //     .PreFunc([](WidgetInfo& info) {
-    //         if (mPortMenu->disabledMap.at(DISABLE_FOR_MATCH_REFRESH_RATE_ON).active)
-    //             info.activeDisables.push_back(DISABLE_FOR_MATCH_REFRESH_RATE_ON);
-    //     })
-    //     .Options(IntSliderOptions().Tooltip(tooltip).Min(20).Max(maxFps).DefaultValue(20));
+    AddWidget(path, "Current FPS: %d", WIDGET_CVAR_SLIDER_INT)
+        .CVar("gInterpolationFPS")
+        .Callback([](WidgetInfo& info) {
+            int32_t defaultValue = std::static_pointer_cast<IntSliderOptions>(info.options)->defaultValue;
+            if (CVarGetInteger(info.cVar, defaultValue) == defaultValue) {
+                info.name = "Current FPS: Original (%d)";
+            } else {
+                info.name = "Current FPS: %d";
+            }
+        })
+        .PreFunc([](WidgetInfo& info) {
+            if (mPortMenu->disabledMap.at(DISABLE_FOR_MATCH_REFRESH_RATE_ON).active)
+                info.activeDisables.push_back(DISABLE_FOR_MATCH_REFRESH_RATE_ON);
+        })
+        .Options(IntSliderOptions().Tooltip(tooltip).Min(30).Max(maxFps).DefaultValue(30));
     AddWidget(path, "Match Refresh Rate", WIDGET_BUTTON)
         .Callback([](WidgetInfo& info) {
             int hz = Ship::Context::GetInstance()->GetWindow()->GetCurrentRefreshRate();
-            if (hz >= 20 && hz <= 360) {
+            if (hz >= 30 && hz <= 360) {
                 CVarSetInteger("gInterpolationFPS", hz);
                 Ship::Context::GetInstance()->GetWindow()->GetGui()->SaveConsoleVariablesNextFrame();
             }
@@ -368,6 +368,7 @@ void PortMenu::AddEnhancements() {
         .Options(FloatSliderOptions().Min(-50.0f).Max(50.0f).DefaultValue(0.0f)
                      .Tooltip("When Disable Wall Collision are enable what is the minimal height you can get."));
 
+    #if not defined(__SWITCH__) and not defined(__WIIU__)
     path = { "Enhancements", "HM64 Lab", SECTION_COLUMN_1 };
     AddSidebarEntry("Enhancements", "HM64 Lab", 4);
     AddWidget(path, "Enable HM64 Labs", WIDGET_CVAR_CHECKBOX)
@@ -380,6 +381,7 @@ void PortMenu::AddEnhancements() {
         Ship::Context::GetInstance()->GetWindow()->GetGui()->GetGuiWindow("Properties")->ToggleVisibility();
     })
     .Options(UIWidgets::CheckboxOptions({{ .tooltip = "Edit the universe!"}}));
+    #endif
 }
 
 #ifdef __SWITCH__

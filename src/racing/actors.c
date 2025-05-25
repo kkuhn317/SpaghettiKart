@@ -34,6 +34,7 @@
 #include <assets/wario_stadium_data.h>
 #include <assets/frappe_snowland_data.h>
 #include "port/Game.h"
+#include "port/interpolation/FrameInterpolation.h"
 
 // Appears to be textures
 // or tluts
@@ -509,6 +510,7 @@ void render_cows(Camera* camera, Mat4 arg1) {
     gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
     var_s5 = NULL;
     var_s1 = var_t1;
+
     while (var_s1->pos[0] != END_OF_SPAWN_DATA) {
         sp88[0] = var_s1->pos[0] * gCourseDirection;
         sp88[1] = var_s1->pos[1];
@@ -523,6 +525,12 @@ void render_cows(Camera* camera, Mat4 arg1) {
             arg1[3][0] = sp88[0];
             arg1[3][1] = sp88[1];
             arg1[3][2] = sp88[2];
+
+            // @port: Tag the transform.
+            FrameInterpolation_RecordOpenChild("render_actor_cow", ((var_s1->pos[0] & 0xFFFF) << 32) |
+                                                                       ((var_s1->pos[1] & 0xFFFF) << 16) |
+                                                                       (var_s1->pos[2] & 0xFFFF));
+
             if ((gMatrixObjectCount < MTX_OBJECT_POOL_SIZE) && (render_set_position(arg1, 0) != 0)) {
                 switch (var_s1->someId) {
                     case 0:
@@ -544,6 +552,9 @@ void render_cows(Camera* camera, Mat4 arg1) {
             } else {
                 return;
             }
+
+            // @port Pop the transform id.
+            FrameInterpolation_RecordCloseChild();
         }
         var_s1++;
     }
@@ -654,6 +665,11 @@ void render_palm_trees(Camera* camera, Mat4 arg1) {
             continue;
         }
 
+        // @port: Tag the transform.
+        FrameInterpolation_RecordOpenChild("render_actor_cow", ((var_s1->pos[0] & 0xFFFF) << 32) |
+                                                                   ((var_s1->pos[1] & 0xFFFF) << 16) |
+                                                                   (var_s1->pos[2] & 0xFFFF));
+
         test &= 0xF;
         test = (s16) test;
         if (test == 6) {
@@ -690,6 +706,8 @@ void render_palm_trees(Camera* camera, Mat4 arg1) {
             }
             var_s1++;
         }
+        // @port Pop the transform id.
+        FrameInterpolation_RecordCloseChild();
     }
 }
 
@@ -707,6 +725,9 @@ void render_actor_shell(Camera* camera, Mat4 matrix, struct ShellActor* shell) {
     //! @todo Is this making the shell spin?
     // Is it doing this by modifying a an address?
     uintptr_t phi_t3;
+
+    // @port: Tag the transform.
+    FrameInterpolation_RecordOpenChild("Shell", TAG_ITEM_ADDR(shell));
 
     f32 temp_f0 =
         is_within_render_distance(camera->pos, shell->pos, camera->rot[1], 0, gCameraZoom[camera - camera1], 490000.0f);
@@ -749,6 +770,9 @@ void render_actor_shell(Camera* camera, Mat4 matrix, struct ShellActor* shell) {
     } else {
         gSPDisplayList(gDisplayListHead++, D_0D005368);
     }
+
+    // @port Pop the transform id.
+    FrameInterpolation_RecordCloseChild();
 }
 
 UNUSED s16 D_802B8808[] = { 0x0014, 0x0028, 0x0000, 0x0000 };
@@ -920,15 +944,15 @@ void spawn_foliage(struct ActorSpawnData* actor) {
         position[2] = var_s3->pos[2];
         position[1] = var_s3->pos[1];
 
-        if (GetCourse() == GetMarioRaceway()) {
+        if (IsMarioRaceway()) {
             actorType = 2;
-        } else if (GetCourse() == GetBowsersCastle()) {
+        } else if (IsBowsersCastle()) {
             actorType = 0x0021;
-        } else if (GetCourse() == GetYoshiValley()) {
+        } else if (IsYoshiValley()) {
             actorType = 3;
-        } else if (GetCourse() == GetFrappeSnowland()) {
+        } else if (IsFrappeSnowland()) {
             actorType = 0x001D;
-        } else if (GetCourse() == GetRoyalRaceway()) {
+        } else if (IsRoyalRaceway()) {
             switch (var_s3->signedSomeId) {
                 case 6:
                     actorType = 0x001C;
@@ -937,11 +961,11 @@ void spawn_foliage(struct ActorSpawnData* actor) {
                     actorType = 4;
                     break;
             }
-        } else if (GetCourse() == GetLuigiRaceway()) {
+        } else if (IsLuigiRaceway()) {
             actorType = 0x001A;
-        } else if (GetCourse() == GetMooMooFarm()) {
+        } else if (IsMooMooFarm()) {
             actorType = 0x0013;
-        } else if (GetCourse() == GetKalimariDesert()) {
+        } else if (IsKalimariDesert()) {
             switch (var_s3->signedSomeId) {
                 case 5:
                     actorType = 0x001E;
@@ -1682,8 +1706,8 @@ bool collision_tree(Player* player, struct Actor* actor) {
     actorPos[0] = actor->pos[0];
     actorPos[1] = actor->pos[1];
     actorPos[2] = actor->pos[2];
-    if (((GetCourse() == GetMarioRaceway()) || (GetCourse() == GetYoshiValley()) ||
-         (GetCourse() == GetRoyalRaceway()) || (GetCourse() == GetLuigiRaceway())) &&
+    if (((IsMarioRaceway()) || (IsYoshiValley()) ||
+         (IsRoyalRaceway()) || (IsLuigiRaceway())) &&
         (player->unk_094 > 1.0f)) {
         spawn_leaf(actorPos, 0);
     }
@@ -2437,11 +2461,15 @@ void render_course_actors(struct UnkStruct_800DC5EC* arg0) {
         if (actor->flags == 0) {
             continue;
         }
+
+        FrameInterpolation_RecordOpenChild(actor, i);
+
         switch (actor->type) {
             default: // Draw custom actor
                 CM_DrawActors(D_800DC5EC->camera, actor);
                 break;
             case ACTOR_TREE_MARIO_RACEWAY:
+
                 render_actor_tree_mario_raceway(camera, sBillBoardMtx, actor);
                 break;
             case ACTOR_TREE_YOSHI_VALLEY:
@@ -2541,10 +2569,11 @@ void render_course_actors(struct UnkStruct_800DC5EC* arg0) {
                 render_actor_yoshi_egg(camera, sBillBoardMtx, (struct YoshiValleyEgg*) actor, pathCounter);
                 break;
         }
+        FrameInterpolation_RecordCloseChild();
     }
-    if (GetCourse() == GetMooMooFarm()) {
+    if (IsMooMooFarm()) {
         render_cows(camera, sBillBoardMtx);
-    } else if (GetCourse() == GetDkJungle()) {
+    } else if (IsDkJungle()) {
         render_palm_trees(camera, sBillBoardMtx);
     }
 }
@@ -2645,7 +2674,7 @@ void update_course_actors(void) {
 }
 
 const char* get_actor_name(s32 id) {
-    switch(id) {
+    switch (id) {
         case ACTOR_FALLING_ROCK:
             return "Falling Rock";
         case ACTOR_GREEN_SHELL:

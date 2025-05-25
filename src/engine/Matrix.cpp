@@ -1,6 +1,7 @@
 #include <libultraship.h>
 #include <libultra/gbi.h>
 #include "engine/World.h"
+#include "src/port/interpolation/FrameInterpolation.h"
 
 extern "C" {
 #include "common_structs.h"
@@ -9,13 +10,11 @@ extern "C" {
 }
 
 void AddMatrix(std::vector<Mtx>& stack, Mat4 mtx, s32 flags) {
-    // Reserve space if needed to avoid reallocation overhead
-    stack.reserve(1000);
-
     // Push a new matrix to the stack
     stack.emplace_back();
 
     // Convert to a fixed-point matrix
+    FrameInterpolation_RecordMatrixMtxFToMtx((MtxF*)mtx, &stack.back());
     guMtxF2L(mtx, &stack.back());
 
     // Load the matrix
@@ -135,6 +134,14 @@ extern "C" {
 
     void AddHudMatrix(Mat4 mtx, s32 flags) {
         AddMatrix(gWorldInstance.Mtx.Hud, mtx, flags);
+    }
+
+    void AddPerspMatrix(Mat4 mtx, s32 flags) {
+        AddMatrix(gWorldInstance.Mtx.Persp, mtx, flags);
+    }
+
+    void AddLookAtMatrix(Mat4 mtx, s32 flags) {
+        AddMatrix(gWorldInstance.Mtx.LookAt, mtx, flags);
     }
 
     void AddObjectMatrix(Mat4 mtx, s32 flags) {

@@ -13,7 +13,7 @@ void on_freecam(void);
 void off_freecam(void);
 void freecam_loop(Camera*, Player*, s8);
 void freecam_update_controller(void);
-void freecam_render_setup(void);
+void freecam_render_setup(Camera* camera);
 void freecam_mouse_manager(Camera*, Vec3f);
 void freecam_keyboard_manager(Camera*, Vec3f);
 

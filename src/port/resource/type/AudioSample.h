@@ -34,6 +34,7 @@ class AudioSample : public Ship::Resource<AudioBankSample> {
     using Resource::Resource;
 
     AudioSample() : Resource(std::shared_ptr<Ship::ResourceInitData>()) {}
+    ~AudioSample() override;
 
     AudioBankSample* GetPointer();
     size_t GetPointerSize();
