@@ -5,6 +5,7 @@
 #include "World.h"
 #include "vehicles/Train.h"
 #include "vehicles/Boat.h"
+#include <port/interpolation/FrameInterpolation.h>
 
 extern "C" {
 #include "macros.h"
@@ -13,7 +14,6 @@ extern "C" {
 #include "update_objects.h"
 #include "math_util_2.h"
 #include "assets/common_data.h"
-#include <port/interpolation/FrameInterpolation.h>
 }
 
 //! @todo: This should be an Object class one day
