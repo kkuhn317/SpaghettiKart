@@ -49,6 +49,10 @@ given a specific interpolation factor (0=old frame, 0.5=average of frames,
 1.0=new frame).
 */
 
+// These are defined in windows
+#undef far
+#undef near
+
 static bool invert_matrix(const float m[16], float invOut[16]);
 
 using namespace std;
@@ -85,7 +89,11 @@ enum class Op {
     SetTranslateRotate,
     guRotate,
     guScale,
+    guOrtho,
     SetTextMatrix,
+    guTranslate,
+    guPersp,
+    guLookAt,
 };
 
 typedef pair<const void*, uintptr_t> label;
@@ -121,11 +129,45 @@ union Data {
 
     struct {
         Mat4* matrix;
+        u16* perspNorm;
+        f32 fovy;
+        f32 aspect;
+        f32 near;
+        f32 far;
+        f32 scale;
+    } matrix_gu_persp;
+
+    struct {
+        Mat4* matrix;
+        f32 xEye;
+        f32 yEye;
+        f32 zEye;
+        f32 xAt;
+        f32 yAt;
+        f32 zAt;
+        f32 xUp;
+        f32 yUp;
+        f32 zUp;
+    } matrix_gu_lookAt;
+
+    struct {
+        Mat4* matrix;
         f32 a;
         f32 x;
         f32 y;
         f32 z;
     } matrix_gu_rotate;
+
+    struct {
+        Mat4* matrix;
+        f32 left;
+        f32 right;
+        f32 bottom;
+        f32 top;
+        f32 near;
+        f32 far;
+        f32 scale;
+    } matrix_gu_ortho;
 
     struct {
         Mat4* matrix;
@@ -280,7 +322,7 @@ struct InterpolateCtx {
     unordered_map<Mtx*, MtxF> mtx_replacements;
     MtxF tmp_mtxf, tmp_mtxf2;
     Mat3 tmp_mat3;
-    Vec3f tmp_vec3f, tmp_vec3f2;
+    Vec3f tmp_vec3f, tmp_vec3f2, tmp_vec3f3;
     Vec3s tmp_vec3s;
     MtxF actor_mtx;
 
@@ -561,6 +603,36 @@ struct InterpolateCtx {
                             mtxf_translate_rotate(*gInterpolationMatrix, tmp_vec3f, tmp_vec3s);
                             break;
                         }
+                        case Op::guPersp: {
+
+                            tmp_vec3f[0] = lerp(old_op.matrix_gu_persp.fovy, new_op.matrix_gu_persp.fovy);
+                            tmp_vec3f[1] = lerp(old_op.matrix_gu_persp.aspect, new_op.matrix_gu_persp.aspect);
+                            tmp_vec3f[2] = lerp(old_op.matrix_gu_persp.near, new_op.matrix_gu_persp.near);
+                            tmp_vec3f2[0] = lerp(old_op.matrix_gu_persp.far, new_op.matrix_gu_persp.far);
+                            tmp_vec3f2[1] = lerp(old_op.matrix_gu_persp.scale, new_op.matrix_gu_persp.scale);
+
+                            tmp_vec3s[0] = *old_op.matrix_gu_persp.perspNorm;
+
+                            guPerspectiveF(*gInterpolationMatrix, (uint16_t*)&tmp_vec3s[0], tmp_vec3f[0], tmp_vec3f[1], tmp_vec3f[2], tmp_vec3f2[0], tmp_vec3f2[1]);
+                            break;
+                        }
+                        case Op::guLookAt: {
+
+                            tmp_vec3f[0] = lerp(old_op.matrix_gu_lookAt.xEye, new_op.matrix_gu_lookAt.xEye);
+                            tmp_vec3f[1] = lerp(old_op.matrix_gu_lookAt.yEye, new_op.matrix_gu_lookAt.yEye);
+                            tmp_vec3f[2] = lerp(old_op.matrix_gu_lookAt.zEye, new_op.matrix_gu_lookAt.zEye);
+
+                            tmp_vec3f2[0] = lerp(old_op.matrix_gu_lookAt.xAt, new_op.matrix_gu_lookAt.xAt);
+                            tmp_vec3f2[1] = lerp(old_op.matrix_gu_lookAt.yAt, new_op.matrix_gu_lookAt.yAt);
+                            tmp_vec3f2[2] = lerp(old_op.matrix_gu_lookAt.zAt, new_op.matrix_gu_lookAt.zAt);
+
+                            tmp_vec3f3[0] = lerp(old_op.matrix_gu_lookAt.xUp, new_op.matrix_gu_lookAt.xUp);
+                            tmp_vec3f3[1] = lerp(old_op.matrix_gu_lookAt.yUp, new_op.matrix_gu_lookAt.yUp);
+                            tmp_vec3f3[2] = lerp(old_op.matrix_gu_lookAt.zUp, new_op.matrix_gu_lookAt.zUp);
+
+                            guLookAtF(*gInterpolationMatrix, tmp_vec3f[0], tmp_vec3f[1], tmp_vec3f[2], tmp_vec3f2[0], tmp_vec3f2[1], tmp_vec3f2[2], tmp_vec3f3[0], tmp_vec3f3[1], tmp_vec3f3[2]);
+                            break;
+                        }
                         case Op::guRotate: {
                             tmp_f = lerp(old_op.matrix_gu_rotate.a, new_op.matrix_gu_rotate.a);
 
@@ -576,6 +648,20 @@ struct InterpolateCtx {
                             tmp_vec3f[1] = lerp(old_op.matrix_scale_xyz.y, new_op.matrix_scale_xyz.y);
                             tmp_vec3f[2] = lerp(old_op.matrix_scale_xyz.z, new_op.matrix_scale_xyz.z);
                             guScaleF(*gInterpolationMatrix, tmp_vec3f[0], tmp_vec3f[1], tmp_vec3f[2]);
+                            break;
+                        }
+                        case Op::guOrtho: {
+                            tmp_vec3f[0] = lerp(old_op.matrix_gu_ortho.left, new_op.matrix_gu_ortho.left);
+                            tmp_vec3f[1] = lerp(old_op.matrix_gu_ortho.right, new_op.matrix_gu_ortho.right);
+                            tmp_vec3f[2] = lerp(old_op.matrix_gu_ortho.bottom, new_op.matrix_gu_ortho.bottom);
+
+                            tmp_vec3f2[0] = lerp(old_op.matrix_gu_ortho.top, new_op.matrix_gu_ortho.top);
+                            tmp_vec3f2[1] = lerp(old_op.matrix_gu_ortho.near, new_op.matrix_gu_ortho.near);
+                            tmp_vec3f2[2] = lerp(old_op.matrix_gu_ortho.far, new_op.matrix_gu_ortho.far);
+
+                            tmp_f = lerp(old_op.matrix_gu_ortho.scale, new_op.matrix_gu_ortho.scale);
+
+                            guOrthoF(*gInterpolationMatrix, tmp_vec3f[0], tmp_vec3f[1], tmp_vec3f[2], tmp_vec3f2[0], tmp_vec3f2[1], tmp_vec3f2[2], tmp_f);
                             break;
                         }
                         case Op::SetTextMatrix: {
@@ -711,6 +797,18 @@ void FrameInterpolation_RecordMatrixScale(Mat4* matrix, f32 scale) {
     append(Op::MatrixScale).matrix_scale = { matrix, scale };
 }
 
+void FrameInterpolation_Record_guPerspective(Mat4* matrix, u16* perspNorm, f32 fovy, f32 aspect, f32 near, f32 far, f32 scale) {
+    if (!is_recording)
+        return;
+    append(Op::guPersp).matrix_gu_persp = {matrix, perspNorm, fovy, aspect, near, far, scale};
+}
+
+void FrameInterpolation_Record_guLookAt(Mat4* matrix, f32 xEye, f32 yEye, f32 zEye, f32 xAt, f32 yAt, f32 zAt, f32 xUp, f32 yUp, f32 zUp) {
+    if (!is_recording)
+        return;
+    append(Op::guLookAt).matrix_gu_lookAt = {matrix, xEye, yEye, zEye, xAt, yAt, zAt, xUp, yUp, zUp};
+}
+
 void FrameInterpolation_Record_guRotate(Mat4* matrix, f32 a, f32 x, f32 y, f32 z) {
     if (!is_recording)
         return;
@@ -721,6 +819,12 @@ void FrameInterpolation_Record_guScale(Mat4* matrix, f32 x, f32 y, f32 z) {
     if (!is_recording)
         return;
     append(Op::guScale).matrix_scale_xyz = {matrix, x, y, z};
+}
+
+void FrameInterpolation_Record_guOrtho(Mat4* matrix, f32 left, f32 right, f32 bottom, f32 top, f32 near, f32 far, f32 scale) {
+    if (!is_recording)
+        return;
+    append(Op::guOrtho).matrix_gu_ortho = {matrix, left, right, bottom, top, near, far, scale};
 }
 
 void FrameInterpolation_Record_SetTextMatrix(Mat4* matrix, f32 x, f32 y, f32 arg3, f32 arg4) {

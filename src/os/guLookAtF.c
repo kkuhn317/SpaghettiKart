@@ -17,6 +17,7 @@ void guLookAtF(float mf[4][4], float xEye, float yEye, float zEye, float xAt, fl
                float yUp, float zUp) {
     float len, xLook, yLook, zLook, xRight, yRight, zRight;
 
+    FrameInterpolation_Record_guLookAt(mf, xEye, yEye, zEye, xAt, yAt, zAt, xUp, yUp, zUp);
     guMtxIdentF(mf);
 
     xLook = xAt - xEye;
@@ -74,8 +75,8 @@ void guLookAt(Mtx* m, float xEye, float yEye, float zEye, float xAt, float yAt, 
               float zUp) {
     float mf[4][4];
 
+    //FrameInterpolation_RecordMatrixMtxFToMtx((MtxF*)mf, m);
     guLookAtF(mf, xEye, yEye, zEye, xAt, yAt, zAt, xUp, yUp, zUp);
-
-    guMtxF2L(mf, m);
     FrameInterpolation_RecordMatrixMtxFToMtx((MtxF*)mf, m);
+    guMtxF2L(mf, m);
 }

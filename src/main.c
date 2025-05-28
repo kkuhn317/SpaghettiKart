@@ -1264,10 +1264,13 @@ void thread5_game_loop(void) {
     read_controllers();
     func_800C5CB8();
 }
-
+extern size_t gTextMatrixCount;
+extern size_t gTextMatrixCount_wide_right;
 void thread5_iteration(void) {
     func_800CB2C4();
     calculate_delta_time();
+    gTextMatrixCount = 0;
+    gTextMatrixCount_wide_right = 0;
 #ifdef TARGET_N64
     while (true) {
         func_800CB2C4();

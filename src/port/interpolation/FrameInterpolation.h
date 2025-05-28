@@ -51,9 +51,15 @@ void FrameInterpolation_RecordMatrixTranslate(Mat4* matrix, Vec3f b);
 
 void FrameInterpolation_RecordMatrixScale(Mat4* matrix, f32 scale);
 
+void FrameInterpolation_Record_guPerspective(Mat4* matrix, u16* perspNorm, f32 fovy, f32 aspect, f32 near, f32 far, f32 scale);
+
+void FrameInterpolation_Record_guLookAt(Mat4* matrix, f32 xEye, f32 yEye, f32 zEye, f32 xAt, f32 yAt, f32 zAt, f32 xUp, f32 yUp, f32 zUp);
+
 void FrameInterpolation_Record_guRotate(Mat4* matrix, f32 a, f32 x, f32 y, f32 z);
 
 void FrameInterpolation_Record_guScale(Mat4* matrix, f32 x, f32 y, f32 z);
+
+void FrameInterpolation_Record_guOrtho(Mat4* matrix, f32 left, f32 right, f32 bottom, f32 top, f32 near, f32 far, f32 scale);
 
 void FrameInterpolation_Record_SetTextMatrix(Mat4* matrix, f32 x, f32 y, f32 arg3, f32 arg4);
 
