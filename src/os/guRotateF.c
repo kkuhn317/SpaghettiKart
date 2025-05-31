@@ -38,5 +38,6 @@ void guRotateF(float m[4][4], float a, float x, float y, float z) {
 void guRotate(Mtx* m, float a, float x, float y, float z) {
     float mf[4][4];
     guRotateF(mf, a, x, y, z);
+    FrameInterpolation_RecordMatrixMtxFToMtx((MtxF*)mf, m);
     guMtxF2L(mf, m);
 }
