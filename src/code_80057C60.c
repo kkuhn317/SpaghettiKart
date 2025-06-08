@@ -5785,8 +5785,6 @@ void func_80069938(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
         gSPVertex(gDisplayListHead++, D_800E87C0, 4, 0);
         gSPDisplayList(gDisplayListHead++, D_0D008DA0);
         gMatrixEffectCount += 1;
-
-        // @port Pop the transform id.
     }
 }
 
