@@ -5105,11 +5105,6 @@ void func_80065AB0(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
         spAC[1] = player->unk_048[arg3];
         spAC[2] = 0;
 
-        // // @port: Tag the transform.
-
-        // @port Skip interpolation
-        // FrameInterpolation_ShouldInterpolateFrame(false);
-
         func_800652D4(spB4, spAC, player->unk_258[10 + arg2].unk_00C * player->size);
         if (var_s0 == 0) {
             gSPDisplayList(gDisplayListHead++, D_0D008DB8);
@@ -5129,10 +5124,6 @@ void func_80065AB0(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
             gSPDisplayList(gDisplayListHead++, D_0D008E48);
         }
         gMatrixEffectCount += 1;
-
-        // @port Pop the transform id.
-        // @port renable interpolation
-        // FrameInterpolation_ShouldInterpolateFrame(true);
     }
 }
 #else
@@ -5684,8 +5675,6 @@ void func_800691B8(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
         player->unk_258[30 + arg2].unk_03A += 0x1C71;
         sp54[2] = player->unk_258[30 + arg2].unk_03A;
 
-        // @port: Tag the transform.
-
         func_800652D4(sp5C, sp54, player->size * 0.5);
         gSPDisplayList(gDisplayListHead++, D_0D008D58);
         gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
@@ -5697,8 +5686,6 @@ void func_800691B8(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3) {
         gSPVertex(gDisplayListHead++, D_800E87C0, 4, 0);
         gSPDisplayList(gDisplayListHead++, D_0D008DA0);
         gMatrixEffectCount++;
-
-        // @port Pop the transform id.
     }
 }
 
@@ -5759,8 +5746,6 @@ void func_800696CC(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3, f32 arg4) 
         sp54[1] = player->unk_048[arg3];
         sp54[2] = 0;
 
-        // @port: Tag the transform.
-
         func_800652D4(sp5C, sp54, player->size * arg4);
         gSPDisplayList(gDisplayListHead++, D_0D008D58);
         gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
@@ -5772,8 +5757,6 @@ void func_800696CC(Player* player, UNUSED s8 arg1, s16 arg2, s8 arg3, f32 arg4) 
         gSPVertex(gDisplayListHead++, D_800E87C0, 4, 0);
         gSPDisplayList(gDisplayListHead++, D_0D008DA0);
         gMatrixEffectCount += 1;
-
-        // @port Pop the transform id.
     }
 }
 
