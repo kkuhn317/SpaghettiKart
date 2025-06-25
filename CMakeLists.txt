@@ -108,7 +108,8 @@ set(COMMON_FLAGS "-Wall -Wextra -Wno-error \
           -Wno-missing-braces \
           -Wno-int-conversion \
           -fpermissive \
-          -ffast-math"
+          -ffast-math \
+          -pipe"
 )
 set(COMMON_C_FLAGS "${COMMON_FLAGS} -Werror-implicit-function-declaration -Wno-incompatible-pointer-types")
 set(COMMON_CXX_FLAGS "${COMMON_FLAGS} -Wno-c++11-narrowing -Wno-deprecated-enum-enum-conversion")
