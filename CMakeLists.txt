@@ -95,25 +95,37 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 endif()
 
 ################################################################################
+# Compiler specific configuration types
+################################################################################
+if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU|Clang|AppleClang")
+    set(COMMON_FLAGS "-Wall -Wextra -Wno-error \
+            -Wno-return-type \
+            -Wno-unused-parameter \
+            -Wno-unused-function \
+            -Wno-unused-variable \
+            -Wno-missing-field-initializers \
+            -Wno-parentheses \
+            -Wno-narrowing \
+            -Wno-missing-braces \
+            -fpermissive \
+            -ffast-math \
+            -pipe"
+    )
+
+    set(COMMON_C_FLAGS "${COMMON_FLAGS} -Wno-int-conversion -Werror-implicit-function-declaration -Wno-incompatible-pointer-types")
+    set(COMMON_CXX_FLAGS "${COMMON_FLAGS} -Wno-c++11-narrowing -Wno-deprecated-enum-enum-conversion")
+elseif (MSVC)
+    set(COMMON_FLAGS "/fp:fast")
+    set(COMMON_C_FLAGS "${COMMON_FLAGS}")
+    set(COMMON_CXX_FLAGS "${COMMON_FLAGS}")
+else()
+    set(COMMON_C_FLAGS "")
+    set(COMMON_CXX_FLAGS "")
+endif()
+
+################################################################################
 # Global configuration types
 ################################################################################
-set(COMMON_FLAGS "-Wall -Wextra -Wno-error \
-          -Wno-return-type \
-          -Wno-unused-parameter \
-          -Wno-unused-function \
-          -Wno-unused-variable \
-          -Wno-missing-field-initializers \
-          -Wno-parentheses \
-          -Wno-narrowing \
-          -Wno-missing-braces \
-          -Wno-int-conversion \
-          -fpermissive \
-          -ffast-math \
-          -pipe"
-)
-set(COMMON_C_FLAGS "${COMMON_FLAGS} -Werror-implicit-function-declaration -Wno-incompatible-pointer-types")
-set(COMMON_CXX_FLAGS "${COMMON_FLAGS} -Wno-c++11-narrowing -Wno-deprecated-enum-enum-conversion")
-
 set(CMAKE_C_FLAGS_DEBUG "-g -DDEBUG ${COMMON_C_FLAGS}")
 set(CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG ${COMMON_CXX_FLAGS}")
 set(CMAKE_C_FLAGS_RELEASE "-O3 -DNDEBUG ${COMMON_C_FLAGS}")
