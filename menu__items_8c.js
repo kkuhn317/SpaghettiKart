@@ -88,6 +88,7 @@ var menu__items_8c =
     [ "func_80099A94", "menu__items_8c.html#a66e95f019bfd0b516ee71baf91daa2f6", null ],
     [ "func_80099E54", "menu__items_8c.html#a80ec798e2d55b54cd3bcd7dfa05c62cf", null ],
     [ "func_80099E60", "menu__items_8c.html#a34e938762875c4c1d00067a4ab30e177", null ],
+    [ "func_80099EC4", "menu__items_8c.html#abb491fbf848c6e5509054ad65807818b", null ],
     [ "func_8009A238", "menu__items_8c.html#ab50e1eaa9ded7a80c9c14aaaeb533fbf", null ],
     [ "func_8009A2F0", "menu__items_8c.html#af8a43216551bc7fec0b6c1bbca329391", null ],
     [ "func_8009A344", "menu__items_8c.html#ae938fb8c5b56456f2f0caf7dd552a51e", null ],
