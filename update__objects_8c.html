@@ -119,6 +119,7 @@ $(function(){initNavTree('update__objects_8c.html',''); initResizable(true); });
 <code>#include &lt;<a class="el" href="defines_8h_source.html">defines.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="decode_8h_source.html">decode.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="mk64_8h_source.html">mk64.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="stdio_8h_source.html">stdio.h</a>&gt;</code><br />
 <code>#include &quot;<a class="el" href="update__objects_8h_source.html">update_objects.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="main_8h_source.html">main.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="memory_8h_source.html">memory.h</a>&quot;</code><br />
@@ -521,8 +522,8 @@ Functions</h2></td></tr>
 <tr class="separator:ad088fd4ce9beca25bd05ffb28cf99247"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3aaa8e38eb0600810c23ff7d14f0ef30" id="r_a3aaa8e38eb0600810c23ff7d14f0ef30"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3aaa8e38eb0600810c23ff7d14f0ef30">verify_probability_table</a> (char *str, const <a class="el" href="structItemProbabilities.html">ItemProbabilities</a> *probs, int16_t rank)</td></tr>
 <tr class="separator:a3aaa8e38eb0600810c23ff7d14f0ef30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d5e90510363f2db4ec1d76839b76d95" id="r_a5d5e90510363f2db4ec1d76839b76d95"><td class="memItemLeft" align="right" valign="top">u8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5d5e90510363f2db4ec1d76839b76d95">gen_random_item</a> (s16 rank, s16 isCpu)</td></tr>
-<tr class="separator:a5d5e90510363f2db4ec1d76839b76d95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a456e12fbd8dfd73574b91d4a860e12a2" id="r_a456e12fbd8dfd73574b91d4a860e12a2"><td class="memItemLeft" align="right" valign="top">u8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a456e12fbd8dfd73574b91d4a860e12a2">gen_random_item</a> (s16 rank, s16 option)</td></tr>
+<tr class="separator:a456e12fbd8dfd73574b91d4a860e12a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a475d92dfa4779b85886956f18cc59a0c" id="r_a475d92dfa4779b85886956f18cc59a0c"><td class="memItemLeft" align="right" valign="top">u8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a475d92dfa4779b85886956f18cc59a0c">gen_random_item_human</a> (<a class="el" href="macros_8h.html#addf5ec070e9499d36b7f2009ce736076">UNUSED</a> s16 arg0, s16 rank)</td></tr>
 <tr class="separator:a475d92dfa4779b85886956f18cc59a0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d9457500a57829bf6c622122fd2393c" id="r_a7d9457500a57829bf6c622122fd2393c"><td class="memItemLeft" align="right" valign="top">u8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7d9457500a57829bf6c622122fd2393c">cpu_gen_random_item</a> (<a class="el" href="macros_8h.html#addf5ec070e9499d36b7f2009ce736076">UNUSED</a> s32 arg0, s16 rank)</td></tr>
@@ -6018,8 +6019,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a5d5e90510363f2db4ec1d76839b76d95" name="a5d5e90510363f2db4ec1d76839b76d95"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d5e90510363f2db4ec1d76839b76d95">&#9670;&#160;</a></span>gen_random_item()</h2>
+<a id="a456e12fbd8dfd73574b91d4a860e12a2" name="a456e12fbd8dfd73574b91d4a860e12a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a456e12fbd8dfd73574b91d4a860e12a2">&#9670;&#160;</a></span>gen_random_item()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6032,7 +6033,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">s16</td>          <td class="paramname"><span class="paramname"><em>isCpu</em></span>&#160;)</td>
+          <td class="paramtype">s16</td>          <td class="paramname"><span class="paramname"><em>option</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -6040,12 +6041,12 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="update__objects_8c_a5d5e90510363f2db4ec1d76839b76d95_cgraph.svg" width="531" height="122"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="update__objects_8c_a456e12fbd8dfd73574b91d4a860e12a2_cgraph.svg" width="531" height="122"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="update__objects_8c_a5d5e90510363f2db4ec1d76839b76d95_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="update__objects_8c_a456e12fbd8dfd73574b91d4a860e12a2_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>

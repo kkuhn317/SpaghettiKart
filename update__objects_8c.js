@@ -177,7 +177,7 @@ var update__objects_8c =
     [ "func_80085EF8", "update__objects_8c.html#abef9e21ca75285520cc71d37b6ef71b5", null ],
     [ "func_80085F74", "update__objects_8c.html#a611ea98550b46aa887eb34b7472ef871", null ],
     [ "func_80086110", "update__objects_8c.html#a0bbcf658cc179abdfa00efd79207efed", null ],
-    [ "gen_random_item", "update__objects_8c.html#a5d5e90510363f2db4ec1d76839b76d95", null ],
+    [ "gen_random_item", "update__objects_8c.html#a456e12fbd8dfd73574b91d4a860e12a2", null ],
     [ "gen_random_item_human", "update__objects_8c.html#a475d92dfa4779b85886956f18cc59a0c", null ],
     [ "getProbabilityArray", "update__objects_8c.html#ad088fd4ce9beca25bd05ffb28cf99247", null ],
     [ "hard_cpu_gen_random_item", "update__objects_8c.html#a37e27700d709ac969f6456aa1e3d134f", null ],
