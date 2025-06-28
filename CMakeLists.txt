@@ -107,13 +107,12 @@ if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU|Clang|AppleClang")
             -Wno-parentheses \
             -Wno-narrowing \
             -Wno-missing-braces \
-            -fpermissive \
             -ffast-math \
             -pipe"
     )
 
     set(COMMON_C_FLAGS "${COMMON_FLAGS} -Wno-int-conversion -Werror-implicit-function-declaration -Wno-incompatible-pointer-types")
-    set(COMMON_CXX_FLAGS "${COMMON_FLAGS} -Wno-c++11-narrowing -Wno-deprecated-enum-enum-conversion")
+    set(COMMON_CXX_FLAGS "${COMMON_FLAGS} -Wno-c++11-narrowing -Wno-deprecated-enum-enum-conversion -fpermissive")
 elseif (MSVC)
     set(COMMON_FLAGS "/fp:fast")
     set(COMMON_C_FLAGS "${COMMON_FLAGS}")
