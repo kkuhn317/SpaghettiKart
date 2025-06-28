@@ -27,7 +27,7 @@ var NAVTREE =
   [ "Mario Kart 64", "index.html", [
     [ "Actors", "actorsmenu.html", "actorsmenu" ],
     [ "Understanding the Basics", "basics.html", "basics" ],
-    [ "Building Starship", "md_docs_2BUILDING.html", [
+    [ "Building SpagettiKart", "md_docs_2BUILDING.html", [
       [ "Windows", "md_docs_2BUILDING.html#windows-1", [
         [ "Developing SpaghettiKart", "md_docs_2BUILDING.html#developing-spaghettikart", [
           [ "Visual Studio", "md_docs_2BUILDING.html#visual-studio", null ],

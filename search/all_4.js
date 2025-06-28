@@ -227,7 +227,7 @@ var searchData=
   ['build_20instructions_224',['Build Instructions',['../compiling.html#build-instructions',1,'']]],
   ['build_5fsynthetic_5fwave_225',['build_synthetic_wave',['../playback_8c.html#acd82370edabb02666da36b6537ef7ed2',1,'build_synthetic_wave(struct Note *note, struct SequenceChannelLayer *seqLayer, s32 waveId):&#160;playback.c'],['../playback_8h.html#acd82370edabb02666da36b6537ef7ed2',1,'build_synthetic_wave(struct Note *note, struct SequenceChannelLayer *seqLayer, s32 waveId):&#160;playback.c']]],
   ['building_20eu_226',['Building EU',['../compiling.html#building-eu',1,'']]],
-  ['building_20starship_227',['Building Starship',['../md_docs_2BUILDING.html',1,'']]],
+  ['building_20spagettikart_227',['Building SpagettiKart',['../md_docs_2BUILDING.html',1,'']]],
   ['building_20us_228',['Building US',['../compiling.html#building-us',1,'']]],
   ['building_2emd_229',['BUILDING.md',['../BUILDING_8md.html',1,'']]],
   ['bus_2ecpp_230',['Bus.cpp',['../Bus_8cpp.html',1,'']]],
