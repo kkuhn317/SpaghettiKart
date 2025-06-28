@@ -684,7 +684,7 @@ var searchData=
   ['gplayerwhiteeffect_681',['gPlayerWhiteEffect',['../render__player_8c.html#a5602d986a3cc7ffb88c3c5f9788b58ae',1,'render_player.c']]],
   ['gplayerwinningindex_682',['gPlayerWinningIndex',['../code__800029B0_8c.html#a8a6a0e5ed8709356fba948d0beeb6a95',1,'gPlayerWinningIndex:&#160;code_800029B0.c'],['../code__800029B0_8h.html#a8a6a0e5ed8709356fba948d0beeb6a95',1,'gPlayerWinningIndex:&#160;code_800029B0.c']]],
   ['gplayeryelloweffect_683',['gPlayerYellowEffect',['../render__player_8c.html#a73f0ed443decfea50dfc237462168010',1,'gPlayerYellowEffect:&#160;render_player.c'],['../render__player_8h.html#ad7203466f3adc56a702fdfeafd5aed88',1,'gPlayerYellowEffect:&#160;render_player.c']]],
-  ['gpodiumceremony_684',['gPodiumCeremony',['../Game_8cpp.html#ac904f85e419407ce7ad71bbeef74edf0',1,'Game.cpp']]],
+  ['gpodiumceremony_684',['gPodiumCeremony',['../Game_8cpp.html#a3229bdb738b135960d355513a7feca5c',1,'Game.cpp']]],
   ['gportframebuffers_685',['gPortFramebuffers',['../main_8c.html#a8c5d3813c0c58c32e7c52a37b3a85bfe',1,'gPortFramebuffers:&#160;main.c'],['../main_8h.html#a8c5d3813c0c58c32e7c52a37b3a85bfe',1,'gPortFramebuffers:&#160;main.c']]],
   ['gportraittextures_686',['gPortraitTextures',['../render__objects_8h.html#a601231686d436717b1f26ad0303fe7e3',1,'gPortraitTextures:&#160;update_objects.c'],['../update__objects_8c.html#a601231686d436717b1f26ad0303fe7e3',1,'gPortraitTextures:&#160;update_objects.c']]],
   ['gportraittluts_687',['gPortraitTLUTs',['../update__objects_8c.html#af8ea7f4f544e6fa5e403f9af931ad5da',1,'update_objects.c']]],
