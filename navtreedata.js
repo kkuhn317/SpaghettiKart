@@ -29,7 +29,7 @@ var NAVTREE =
     [ "Understanding the Basics", "basics.html", "basics" ],
     [ "Building Starship", "md_docs_2BUILDING.html", [
       [ "Windows", "md_docs_2BUILDING.html#windows-1", [
-        [ "Developing Starship", "md_docs_2BUILDING.html#developing-starship", [
+        [ "Developing SpaghettiKart", "md_docs_2BUILDING.html#developing-spaghettikart", [
           [ "Visual Studio", "md_docs_2BUILDING.html#visual-studio", null ],
           [ "Visual Studio Code or another editor", "md_docs_2BUILDING.html#visual-studio-code-or-another-editor", null ]
         ] ],

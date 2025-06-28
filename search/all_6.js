@@ -2329,7 +2329,7 @@ var searchData=
   ['determine_5fideal_5fcpu_5fposition_5foffset_2326',['determine_ideal_cpu_position_offset',['../code__80005FD0_8c.html#a9abccb5b7f1742a03cf47170990ef4d5',1,'determine_ideal_cpu_position_offset(s32 arg0, u16 arg1):&#160;code_80005FD0.c'],['../code__80005FD0_8h.html#acbcd787ba1afe6f752572365170f5856',1,'determine_ideal_cpu_position_offset(s32, u16):&#160;code_80005FD0.c']]],
   ['detune_2327',['detune',['../structALKeyMap.html#a4b2f22128a8067b9ff9b8ee2e94f9a2d',1,'ALKeyMap']]],
   ['devaddr2_2328',['devaddr2',['../update__objects_8c.html#a2bf55cab1ddd28bbf2ff323d496c288e',1,'update_objects.c']]],
-  ['developing_20starship_2329',['Developing Starship',['../md_docs_2BUILDING.html#developing-starship',1,'']]],
+  ['developing_20spaghettikart_2329',['Developing SpaghettiKart',['../md_docs_2BUILDING.html#developing-spaghettikart',1,'']]],
   ['deviceid_2330',['deviceid',['../struct____OSPackId.html#a52c6e3b7cd0f0d6fc55e5579c70beb3f',1,'__OSPackId']]],
   ['dialog_2331',['dialog',['../classpfd_1_1internal_1_1dialog.html',1,'pfd::internal::dialog'],['../classpfd_1_1internal_1_1executor.html#aa8dc7e75bd1ac2cf825fa04ed657c0aa',1,'pfd::internal::executor::dialog()'],['../classpfd_1_1internal_1_1dialog.html#a05f9a4fcba8f8a9411d7dfaf18ee11ad',1,'pfd::internal::dialog::dialog()']]],
   ['diameter_2332',['Diameter',['../classOPenguin.html#a3851b1389998d86d6917846e65170906',1,'OPenguin::Diameter'],['../classStarEmitter.html#a3c610a7bd7bc2c43f6223cb84dfb73c1',1,'StarEmitter::Diameter']]],

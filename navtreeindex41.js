@@ -134,7 +134,7 @@ var NAVTREEINDEX41 =
 "md_docs_2BUILDING.html#clean-1":[2,1,3,0],
 "md_docs_2BUILDING.html#clean-2":[2,2,1,0],
 "md_docs_2BUILDING.html#debianubuntu":[2,1,0,0],
-"md_docs_2BUILDING.html#developing-starship":[2,0,0],
+"md_docs_2BUILDING.html#developing-spaghettikart":[2,0,0],
 "md_docs_2BUILDING.html#fedora-1":[2,1,0,2],
 "md_docs_2BUILDING.html#generate-a-distributable":[2,1,2],
 "md_docs_2BUILDING.html#generating-a-distributable":[2,2,0],
