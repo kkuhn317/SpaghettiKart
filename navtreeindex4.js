@@ -1,5 +1,10 @@
 var NAVTREEINDEX4 =
 {
+"RoyalRaceway_8cpp.html#a16768b11051ff2525aea44815a1a845d":[12,0,3,6,1,34,0],
+"RoyalRaceway_8cpp.html#abd8f2148ac79b42d3a5f36670490052a":[12,0,3,6,1,34,1],
+"RoyalRaceway_8h.html":[12,0,3,6,1,35],
+"RoyalRaceway_8h.html#abd8f2148ac79b42d3a5f36670490052a":[12,0,3,6,1,35,1],
+"RoyalRaceway_8h_source.html":[12,0,3,6,1,35],
 "SceneExplorer_8cpp.html":[12,0,3,10,2,17],
 "SceneExplorer_8h.html":[12,0,3,10,2,18],
 "SceneExplorer_8h_source.html":[12,0,3,10,2,18],
@@ -244,10 +249,5 @@ var NAVTREEINDEX4 =
 "__Printf_8c.html#a5a33028196be271f183bd8aff867d897":[12,0,3,9,29,0],
 "__Printf_8c.html#a693ec549fe145d11ba1c780dbecda450":[12,0,3,9,29,10],
 "__Printf_8c.html#a78be9534200581ba7896f384d8b4c6ca":[12,0,3,9,29,7],
-"__Printf_8c.html#aa730182efed14513bcdb1de045dfc434":[12,0,3,9,29,9],
-"__Printf_8c.html#ad73a5847f2d7c9de14cc2723da86bf45":[12,0,3,9,29,5],
-"__Printf_8c.html#ae2bc8b7a49a07ccb955c3ea5a3c60cdf":[12,0,3,9,29,1],
-"__Printf_8c.html#aebab167b5338849aa942f73732bfece2":[12,0,3,9,29,2],
-"____osAiDeviceBusy_8c.html":[12,0,3,9,1],
-"____osAiDeviceBusy_8c.html#aa9e8840bd3019cfee79abcb10f96ae55":[12,0,3,9,1,0]
+"__Printf_8c.html#aa730182efed14513bcdb1de045dfc434":[12,0,3,9,29,9]
 };
