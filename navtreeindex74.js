@@ -1,5 +1,6 @@
 var NAVTREEINDEX74 =
 {
+"structUIWidgets_1_1IntSliderOptions.html#a36cc2a03c84c8a4cc82553cbd8cf1300":[11,0,7,4,14],
 "structUIWidgets_1_1IntSliderOptions.html#a3780816abc3bc7bbce45109ebae46ff5":[10,0,11,5,2],
 "structUIWidgets_1_1IntSliderOptions.html#a3780816abc3bc7bbce45109ebae46ff5":[11,0,7,4,2],
 "structUIWidgets_1_1IntSliderOptions.html#a40ef9e299408f886a4f309878d67b3ef":[10,0,11,5,13],
@@ -248,6 +249,5 @@ var NAVTREEINDEX74 =
 "structUnk__D__800E70A0.html#a3568de4ca5a26d43cc4cf2a40bfd387e":[11,0,309,2],
 "structUnk__D__800E70A0.html#a36748d7e5b4a6ad0591f59a7ad3457e8":[11,0,309,0],
 "structUnk__D__800E70A0.html#aabcceb1f6566aaed3021b847d616f391":[11,0,309,3],
-"structUnk__D__800E70A0.html#ab0e69f5a8689bd33772493a71c02fff2":[11,0,309,1],
-"structVblankHandler.html":[11,0,329]
+"structUnk__D__800E70A0.html#ab0e69f5a8689bd33772493a71c02fff2":[11,0,309,1]
 };

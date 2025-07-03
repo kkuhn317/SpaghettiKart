@@ -1,6 +1,5 @@
 var NAVTREEINDEX34 =
 {
-"hardware_8h.html#ab557675b7c6ec208fb67fae9c4119f00":[12,0,3,9,49,62],
 "hardware_8h.html#ab5c404ee2d59387ef78d0f1e2caa0303":[12,0,3,9,49,64],
 "hardware_8h.html#ab6aa222b5a81bd1a22cce49a02dbb763":[12,0,3,9,49,36],
 "hardware_8h.html#abadfe4519bb6146b068907a7828b21f0":[12,0,3,9,49,75],
@@ -249,5 +248,6 @@ var NAVTREEINDEX34 =
 "kalimari__desert__data_8h_source.html":[12,0,2,0,32],
 "kalimari__desert__displaylists_8h.html":[12,0,2,0,33],
 "kalimari__desert__displaylists_8h.html#ac695a81ac777918b1823ce5722863a7f":[12,0,2,0,33,0],
-"kalimari__desert__displaylists_8h_source.html":[12,0,2,0,33]
+"kalimari__desert__displaylists_8h_source.html":[12,0,2,0,33],
+"kalimari__desert__vertices_8h.html":[12,0,2,0,34]
 };

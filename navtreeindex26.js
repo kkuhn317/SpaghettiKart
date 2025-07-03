@@ -1,6 +1,5 @@
 var NAVTREEINDEX26 =
 {
-"collision_8c.html#a1e07ff5a06746e194715b46aa899c8e5":[12,0,3,11,4,1],
 "collision_8c.html#a21fef964ab48191a1c0341954ef27a40":[12,0,3,11,4,9],
 "collision_8c.html#a23443870e0d3a6797de707a89ded7ef0":[12,0,3,11,4,28],
 "collision_8c.html#a2419eefe1cdba5b280babacc4a15fc6c":[12,0,3,11,4,29],
@@ -136,9 +135,9 @@ var NAVTREEINDEX26 =
 "compiling.html#building-eu":[1,0,6],
 "compiling.html#building-us":[1,0,5],
 "compiling.html#docker":[1,0,4],
-"compiling.html#linux":[1,0,1],
-"compiling.html#macos":[1,0,3],
-"compiling.html#windows":[1,0,2],
+"compiling.html#linux-1":[1,0,1],
+"compiling.html#macos-1":[1,0,3],
+"compiling.html#windows-1":[1,0,2],
 "concepts.html":[1,1],
 "concepts.html#addresses":[1,1,0],
 "concepts.html#array-overflows":[1,1,1,0],
@@ -249,5 +248,6 @@ var NAVTREEINDEX26 =
 "cosf_8c.html#a930c6354299da6653ced4e299fa5a39c":[12,0,3,9,0,0,8],
 "cosf_8c.html#aa5128078c1b944aee4d12ffc96e1ebc5":[12,0,3,9,0,0,7],
 "cosf_8c.html#ae9391927e0a6b95f8872b8dd70ded279":[12,0,3,9,0,0,4],
-"cosf_8c.html#af55f5c5fb6d3288e48e23c84991d6800":[12,0,3,9,0,0,6]
+"cosf_8c.html#af55f5c5fb6d3288e48e23c84991d6800":[12,0,3,9,0,0,6],
+"courseTable_8c.html":[12,0,0,25]
 };
