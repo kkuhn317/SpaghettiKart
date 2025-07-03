@@ -28,7 +28,7 @@ var NAVTREE =
     [ "Actors", "actorsmenu.html", "actorsmenu" ],
     [ "Understanding the Basics", "basics.html", "basics" ],
     [ "Building SpagettiKart", "md_docs_2BUILDING.html", [
-      [ "Windows", "md_docs_2BUILDING.html#windows", [
+      [ "Windows", "md_docs_2BUILDING.html#windows-1", [
         [ "Developing SpaghettiKart", "md_docs_2BUILDING.html#developing-spaghettikart", [
           [ "Visual Studio", "md_docs_2BUILDING.html#visual-studio", null ],
           [ "Visual Studio Code or another editor", "md_docs_2BUILDING.html#visual-studio-code-or-another-editor", null ]
@@ -38,11 +38,11 @@ var NAVTREE =
           [ "Clean", "md_docs_2BUILDING.html#clean", null ]
         ] ]
       ] ],
-      [ "Linux", "md_docs_2BUILDING.html#linux", [
+      [ "Linux", "md_docs_2BUILDING.html#linux-1", [
         [ "Install dependencies", "md_docs_2BUILDING.html#install-dependencies", [
           [ "Debian/Ubuntu", "md_docs_2BUILDING.html#debianubuntu", null ],
-          [ "Arch", "md_docs_2BUILDING.html#arch", null ],
-          [ "Fedora", "md_docs_2BUILDING.html#fedora", null ],
+          [ "Arch", "md_docs_2BUILDING.html#arch-1", null ],
+          [ "Fedora", "md_docs_2BUILDING.html#fedora-1", null ],
           [ "openSUSE", "md_docs_2BUILDING.html#opensuse", null ]
         ] ],
         [ "Build", "md_docs_2BUILDING.html#build", null ],
@@ -51,7 +51,7 @@ var NAVTREE =
           [ "Clean", "md_docs_2BUILDING.html#clean-1", null ]
         ] ]
       ] ],
-      [ "macOS", "md_docs_2BUILDING.html#macos", [
+      [ "macOS", "md_docs_2BUILDING.html#macos-1", [
         [ "Generating a distributable", "md_docs_2BUILDING.html#generating-a-distributable", null ],
         [ "Additional CMake Targets", "md_docs_2BUILDING.html#additional-cmake-targets-2", [
           [ "Clean", "md_docs_2BUILDING.html#clean-2", null ]
@@ -170,44 +170,44 @@ var NAVTREEINDEX =
 "menu__items_8h.html#a5b0661979d1f6c0ea9432647ab4f0ecfa6b272323ff3b0cc61e821b364e35a03c",
 "menu__items_8h.html#acd98d5241e070cc824663c7bafb7cc94",
 "menus_8h.html#aa8db4705a38fb4254f7ec67212635423a51244a857f61c20ca5faef19bb53eaca",
-"mk64_8h.html#a5344f2bdca4f9506c40f044e08ea8c98ac73ff93c632d693d7e8eb610091ce637",
-"namespaceSF64.html#a1130ee4440f43e7a45454de29f6bc813a476bf781fb66b23778b1004edc3a1028",
-"objects_8h.html#a56fac65e20c52f1411d4372b527652c2",
-"osSetThreadPri_8c.html",
-"piint_8h.html#ad9351199a454a6de1dd66513d20cd4f7",
-"player__controller_8c.html#af9651bf87a9264e8c268338cf30fbe5a",
-"podium__ceremony__actors_8h.html#abe5e7d6664a9f39449fbf6848898baa1",
-"race__logic_8h.html#ace0a9e0f3aa6865267ff2c5e58613d5a",
-"render__objects_8c.html#a50e8e7af07b8f51c524740b30edd454b",
-"render__objects_8c.html#ae72b31ac68c2e5cc29b863f175944e3e",
-"render__objects_8h.html#a885b15e2fbbf6a4829cca6b19e907f2a",
-"render__player_8c.html#a96c11e6aee3351fed77627c1ef0d11f5",
-"save_8h.html#a297dc1f4d0dac25e6703838ad78ae54f",
-"ship2__model_8c.html#a5531a272d65c826eb5062add18419d8c",
-"ship__model_8h.html#a67fe1d2208bebb0f6f5d08fcb940695f",
-"sounds_8h.html#a462955cf4ece430059af4e4185a8727ca0a2404a1f97ab04a579f8de1670972db",
-"staff__ghost__data_8c.html#ae77d47a3c471592acad735903cf09f5f",
-"structALInstrument.html#ab7c4dc5f550d5c938036b6095fd21c7a",
-"structBombKartSpawn.html#a2433b7d49cd9dbe30178490a1c5996a0",
-"structEuAudioCmd.html#a598fc34477c8c7d54816fcbd191aa13b",
-"structKiwanoFruit.html#af729769e8645be38eacc0d73e46f442f",
-"structObject.html#a6b14e6850347a9c3e4c05a3aa9b80480",
-"structProperties.html",
-"structSF64_1_1Vec3s.html#adc6534a77ca3c5c5f1783c692d288fe8",
-"structSoundCharacteristics.html#ad543f04b8b3c903dd7b60c8c23dbe9e6",
-"structUIWidgets_1_1IntSliderOptions.html#a36cc2a03c84c8a4cc82553cbd8cf1300",
-"structVblankHandler.html",
-"structcredits__data__1FA0.html#a892c6898ac8801a41ee69c91a9256021",
-"structunkStruct.html#a396a48d87f773dfd1879879953ea4944",
-"textures_8c.html#a23d17ed8a6897af6bef6f2073d349707",
-"textures_8c.html#a7f51c6df3ccad93183352ad214a1637e",
-"textures_8c.html#adb248583c1f081e31b9e1023d26d63c3",
-"textures_8h.html#a3279f52dbcffc7904ae8de8aabdad6e6",
-"textures_8h.html#a8c9f65db30aa45af8b8cc3963a2568d2",
-"textures_8h.html#ae5f2df25b93f752cf80bb8ae0e26556f",
-"track_8c.html#aace89a5aca3b78b58ea210a65c8691e9",
-"track_8h.html#ad99f23a614fd98f9eeff038d1a9ca551",
-"update__objects_8c.html#a8b4c61991cddbf212dac08c2de7d3224"
+"mk64_8h.html#a5344f2bdca4f9506c40f044e08ea8c98acc4e9a6b72b8cb231cf382b6320aeed2",
+"namespaceSF64.html#a1130ee4440f43e7a45454de29f6bc813a55c807567022223d5149b51efe888efc",
+"objects_8h.html#a5da8f460a22c441fb5bb00bd5b3bac2a",
+"osSetTime_8c.html",
+"piint_8h.html#ad9dce828bafed1d869464766fc0bb13a",
+"player__controller_8c.html#afa8731d4ae7f001614eccce9868c78d9",
+"podium__ceremony__actors_8h.html#ac807b5b35b56b3891588833e061c369d",
+"race__logic_8h.html#adcc151267561a295d13a90cea8f0bf31",
+"render__objects_8c.html#a518a47716fedfed39155550330dbaf9b",
+"render__objects_8c.html#ae985b0a09b73941a7296d59877ea7bc7",
+"render__objects_8h.html#a8adca412539426fe85bb675063bbcc44",
+"render__player_8c.html#a9cae291a52866c8bd0790403ba4bf323",
+"save_8h.html#a2ab0af6800288debbd9f4ae53f91325b",
+"ship2__model_8c.html#a6b11fcc5ae85e8d7a07c6675a8c50b79",
+"ship__model_8h.html#a78260699ce083feb7e922ef0284a2490",
+"sounds_8h.html#a462955cf4ece430059af4e4185a8727ca1907055ad76432e88968bcde5646335d",
+"staff__ghost__data_8h.html#a6f3c6ea6f76b69287b236332154ec7c0",
+"structALInstrument.html#ac66f9d02bc16b60dc63642a041d07940",
+"structBombKartSpawn.html#aa5a1b58b434f18873799513b06f82022",
+"structEuAudioCmd.html#a73b7194b0b4a3f110110489703db82df",
+"structM64ScriptState.html#a1aae4070b924b65d1a69253f2f5bf565",
+"structObject.html#a76355530da0c28dacc811011d5e01de2",
+"structProperties.html#a03cd75aab731622f02d631906ab7d481",
+"structSF64_1_1Vec3sData.html",
+"structSoundCharacteristics.html#af61da05719188f6ab5b0bb0fe7765375",
+"structUIWidgets_1_1IntSliderOptions.html#a3780816abc3bc7bbce45109ebae46ff5",
+"structVblankHandler.html#afc8f0516d47e98661d3308c307f64b29",
+"structcredits__data__1FA0.html#a96c1ab64ca2de7eca828abf06b689feb",
+"structunkStruct.html#a74daa572feb494ae94f9bce49bb8a2cd",
+"textures_8c.html#a24f02ac05b3ee3e9378539f521cd34bc",
+"textures_8c.html#a805e02ab52f9f59179d6739267745163",
+"textures_8c.html#adb947fb47d7e967eb8b014666621c098",
+"textures_8h.html#a340b6914c0f97b61b6f6b378ba7a4ada",
+"textures_8h.html#a8d1031a5204316c3df4c77f27c5a9261",
+"textures_8h.html#ae740e15429611b2db84588266dba56d5",
+"track_8c.html#aaea7fc5d26b868203824b791682ac09e",
+"track_8h.html#adbb62a2dc4aa29e15213a3c5393adf45",
+"update__objects_8c.html#a8b78df2a0f2c85d40c26869d99437a6d"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

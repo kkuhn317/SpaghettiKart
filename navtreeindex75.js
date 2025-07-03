@@ -1,7 +1,5 @@
 var NAVTREEINDEX75 =
 {
-"structVblankHandler.html":[11,0,329],
-"structVblankHandler.html#a78e5c201c12778e84361f487c5dd5763":[11,0,329,0],
 "structVblankHandler.html#afc8f0516d47e98661d3308c307f64b29":[11,0,329,1],
 "structVec3fInterp.html":[11,0,330],
 "structVec3fInterp.html#a05078880be7958a806d57a96047440f3":[11,0,330,0],
@@ -249,5 +247,7 @@ var NAVTREEINDEX75 =
 "structcredits__data__1FA0.html#a54f01e22474563537ec9d8adb6841837":[11,0,102,16],
 "structcredits__data__1FA0.html#a5acab6a9564538a29f27adfc20675000":[11,0,102,3],
 "structcredits__data__1FA0.html#a7ce81c22cc4b44fee6fb66c64f7f0785":[11,0,102,11],
-"structcredits__data__1FA0.html#a87eeb15a308d47d851decba58cb357f2":[11,0,102,8]
+"structcredits__data__1FA0.html#a87eeb15a308d47d851decba58cb357f2":[11,0,102,8],
+"structcredits__data__1FA0.html#a892c6898ac8801a41ee69c91a9256021":[11,0,102,7],
+"structcredits__data__1FA0.html#a960e4fdf9a02668fece6ba4431588041":[11,0,102,1]
 };

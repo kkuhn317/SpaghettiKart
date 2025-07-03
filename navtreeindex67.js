@@ -1,7 +1,5 @@
 var NAVTREEINDEX67 =
 {
-"structBombKartSpawn.html#a2433b7d49cd9dbe30178490a1c5996a0":[11,0,81,6],
-"structBombKartSpawn.html#a25fe99726407a9478d5993b6344bc382":[11,0,81,0],
 "structBombKartSpawn.html#aa5a1b58b434f18873799513b06f82022":[11,0,81,3],
 "structBombKartSpawn.html#ab18c65ba3270593b6670ef45a16270b5":[11,0,81,5],
 "structBombKartSpawn.html#af1f4926d93bde76f108119f5bc18aff9":[11,0,81,2],
@@ -249,5 +247,7 @@ var NAVTREEINDEX67 =
 "structEuAudioCmd.html#a3184afa0f4f6c79ebdb11238833aab62":[11,0,115,14],
 "structEuAudioCmd.html#a404f41fbdbf49c38c50a1f1bbcb8e52a":[11,0,115,10],
 "structEuAudioCmd.html#a44ee160469c9b32e444a3773f1b10344":[11,0,115,3],
-"structEuAudioCmd.html#a477905af6a47c662f2fef066cdc3a0e1":[11,0,115,9]
+"structEuAudioCmd.html#a477905af6a47c662f2fef066cdc3a0e1":[11,0,115,9],
+"structEuAudioCmd.html#a598fc34477c8c7d54816fcbd191aa13b":[11,0,115,7],
+"structEuAudioCmd.html#a7008418adb1cdddb0b1d1bd0f3a2507f":[11,0,115,13]
 };
