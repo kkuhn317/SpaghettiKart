@@ -1,7 +1,5 @@
 var NAVTREEINDEX8 =
 {
-"ceremony__and__credits_8c.html#aed398d4f2353243d48ad2b45d9348964":[12,0,3,5,2,137],
-"ceremony__and__credits_8c.html#aeecbc0801f7140ebd3d6299c73c2a862":[12,0,3,5,2,123],
 "ceremony__and__credits_8c.html#af042d7aa62f3c06f1a9274cdfd33534f":[12,0,3,5,2,130],
 "ceremony__and__credits_8c.html#af416b1f15fb96b9e7782ea43479fb102":[12,0,3,5,2,134],
 "ceremony__and__credits_8c.html#af67d4dc7e1b9e9e331291a7c0d6d9ff6":[12,0,3,5,2,139],
@@ -249,5 +247,7 @@ var NAVTREEINDEX8 =
 "classABus.html#a3e1399c7b4fab8165d641d0d305a477a":[11,0,27,21],
 "classABus.html#a5246880511fb76b4cc5d02b9df8effc4":[11,0,27,6],
 "classABus.html#a664d535dc60bf3d1672792a14cff2089":[11,0,27,0],
-"classABus.html#a6c86380ccddc4d2ae1b41b4e727f5c2b":[11,0,27,12]
+"classABus.html#a6c86380ccddc4d2ae1b41b4e727f5c2b":[11,0,27,12],
+"classABus.html#a72ca8420de7269d6490e0010ba0567c5":[11,0,27,16],
+"classABus.html#a74320f8811f317a821f344241a803957":[11,0,27,11]
 };

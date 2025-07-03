@@ -165,7 +165,7 @@
 <!-- Node117 -->
 <g id="Node000117" class="node">
 <title>Node117</title>
-<g id="a_Node000117"><a xlink:href="player__controller_8c.html#a9012e6e88cbe45c001f8e82e2da28089" target="_top" xlink:title=" ">
+<g id="a_Node000117"><a xlink:href="player__controller_8c.html#a00cefaa8d71014a1d48552d81dca87bb" target="_top" xlink:title=" ">
 <polygon fill="#fff0f0" stroke="red" points="235.5,-576 143.5,-576 143.5,-557 235.5,-557 235.5,-576"/>
 <text text-anchor="middle" x="189.5" y="-564" font-family="Helvetica,sans-Serif" font-size="10.00">func_8002A194</text>
 </a>
@@ -526,7 +526,7 @@
 <!-- Node7 -->
 <g id="Node000007" class="node">
 <title>Node7</title>
-<g id="a_Node000007"><a xlink:href="effects_8c.html#a0a426d7a6a86f3f43d2d48c0dba16a35" target="_top" xlink:title=" ">
+<g id="a_Node000007"><a xlink:href="effects_8c.html#a1a4dae35e70897080437d2f53647bce7" target="_top" xlink:title=" ">
 <polygon fill="#fff0f0" stroke="red" points="414,-1248 314,-1248 314,-1229 414,-1229 414,-1248"/>
 <text text-anchor="middle" x="364" y="-1236" font-family="Helvetica,sans-Serif" font-size="10.00">apply_boo_effect</text>
 </a>
@@ -843,7 +843,7 @@
 <!-- Node82 -->
 <g id="Node000082" class="node">
 <title>Node82</title>
-<g id="a_Node000082"><a xlink:href="effects_8c.html#a0fb4928e7128ee9e78ae7eedb5d2192e" target="_top" xlink:title=" ">
+<g id="a_Node000082"><a xlink:href="effects_8c.html#a8a9a075cd223847aee7eeb82e05ce907" target="_top" xlink:title=" ">
 <polygon fill="#fff0f0" stroke="red" points="410,-1396 318,-1396 318,-1377 410,-1377 410,-1396"/>
 <text text-anchor="middle" x="364" y="-1384" font-family="Helvetica,sans-Serif" font-size="10.00">func_8008FC64</text>
 </a>

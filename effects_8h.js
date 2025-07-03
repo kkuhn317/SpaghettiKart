@@ -127,9 +127,9 @@ var effects_8h =
     [ "D_80165280", "effects_8h.html#afd733ad65d2fae362b76ce2396f88776", null ],
     [ "D_8018D900", "effects_8h.html#a10973deea03f96575de006aebdb53f04", null ],
     [ "D_8018D920", "effects_8h.html#a3410af7cb220bbe92baceb43a28e6310", null ],
-    [ "D_8018D950", "effects_8h.html#af1eed56d0bd5ea8fe2728369a7d4d186", null ],
-    [ "D_8018D970", "effects_8h.html#afcfae7f1c6d0eb2e36f343b21b440307", null ],
     [ "D_8018D990", "effects_8h.html#a506e551f05db1c6956882398e3b5b68b", null ],
     [ "gFrameSinceLastACombo", "effects_8h.html#ab3be82f2825d455e80d5d095e9877fab", null ],
+    [ "gPlayerBooEffectStartTime", "effects_8h.html#af0f0f6db2a3e9a90a6ab06b9c7b20661", null ],
+    [ "gPlayerOtherScreensAlpha", "effects_8h.html#a1d3a2d4702641e5cd36cdda1d380dae3", null ],
     [ "gPlayerStarEffectStartTime", "effects_8h.html#a40ec9d7bf51963569509387c71141392", null ]
 ];

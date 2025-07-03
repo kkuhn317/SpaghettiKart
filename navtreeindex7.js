@@ -1,7 +1,5 @@
 var NAVTREEINDEX7 =
 {
-"bowsers__castle__vertices_8h_source.html":[12,0,2,0,14],
-"box__truck_2render_8inc_8c.html":[12,0,3,0,2,0],
 "box__truck_2render_8inc_8c.html#a959b9756711fe631bb33a7870be5937c":[12,0,3,0,2,0,0],
 "box__truck_2render_8inc_8c_source.html":[12,0,3,0,2,0],
 "bstring_8h.html":[12,0,3,9,31],
@@ -249,5 +247,7 @@ var NAVTREEINDEX7 =
 "ceremony__and__credits_8c.html#ae536c5125cf4b0f00a7a986342b8d897":[12,0,3,5,2,116],
 "ceremony__and__credits_8c.html#ae68f2b462a9b90f0a251c466859df0c7":[12,0,3,5,2,31],
 "ceremony__and__credits_8c.html#ae909875fc93fc6b134a8dfd6218bd2ed":[12,0,3,5,2,26],
-"ceremony__and__credits_8c.html#aea394add4c9214deadc2b58b3eedaabd":[12,0,3,5,2,135]
+"ceremony__and__credits_8c.html#aea394add4c9214deadc2b58b3eedaabd":[12,0,3,5,2,135],
+"ceremony__and__credits_8c.html#aed398d4f2353243d48ad2b45d9348964":[12,0,3,5,2,137],
+"ceremony__and__credits_8c.html#aeecbc0801f7140ebd3d6299c73c2a862":[12,0,3,5,2,123]
 };

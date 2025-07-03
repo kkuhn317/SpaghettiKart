@@ -1,7 +1,5 @@
 var NAVTREEINDEX26 =
 {
-"collision_8c.html#a0fe340ccfe1d926a592ea9a0c84d7574":[12,0,3,11,4,10],
-"collision_8c.html#a17444cb89575efc30fc878e8b182c900":[12,0,3,11,4,44],
 "collision_8c.html#a1e07ff5a06746e194715b46aa899c8e5":[12,0,3,11,4,1],
 "collision_8c.html#a21fef964ab48191a1c0341954ef27a40":[12,0,3,11,4,9],
 "collision_8c.html#a23443870e0d3a6797de707a89ded7ef0":[12,0,3,11,4,28],
@@ -167,7 +165,7 @@ var NAVTREEINDEX26 =
 "controlflow.html#actors-1":[1,2,4,2],
 "controlflow.html#code-breakdown":[1,2,4],
 "controlflow.html#course-folder":[1,2,4,4,0],
-"controlflow.html#courses-1":[1,2,4,4],
+"controlflow.html#courses":[1,2,4,4],
 "controlflow.html#ending":[1,2,4,8],
 "controlflow.html#engine":[1,2,4,6],
 "controlflow.html#math":[1,2,4,7],
@@ -249,5 +247,7 @@ var NAVTREEINDEX26 =
 "cosf_8c.html#a6099a5ab3736c2b7f52a629df54c56f8":[12,0,3,9,0,0,5],
 "cosf_8c.html#a7b126b2344591e649c21c9ab0b8adb40":[12,0,3,9,0,0,2],
 "cosf_8c.html#a930c6354299da6653ced4e299fa5a39c":[12,0,3,9,0,0,8],
-"cosf_8c.html#aa5128078c1b944aee4d12ffc96e1ebc5":[12,0,3,9,0,0,7]
+"cosf_8c.html#aa5128078c1b944aee4d12ffc96e1ebc5":[12,0,3,9,0,0,7],
+"cosf_8c.html#ae9391927e0a6b95f8872b8dd70ded279":[12,0,3,9,0,0,4],
+"cosf_8c.html#af55f5c5fb6d3288e48e23c84991d6800":[12,0,3,9,0,0,6]
 };

@@ -212,7 +212,7 @@ var sectionId = 'dynsection-253';
 <!-- Node4 -->
 <g id="Node000004" class="node">
 <title>Node4</title>
-<g id="a_Node000004"><a xlink:href="player__controller_8c.html#a8e6865020b9110bd4dc3353cb7ef0a00" target="_top" xlink:title=" ">
+<g id="a_Node000004"><a xlink:href="player__controller_8c.html#a5bb23c788b1a40f8ed2a56ccbd4d5aea" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="387,-839.5 256,-839.5 256,-820.5 387,-820.5 387,-839.5"/>
 <text text-anchor="middle" x="321.5" y="-827.5" font-family="Helvetica,sans-Serif" font-size="10.00">control_cpu_movement</text>
 </a>
@@ -581,7 +581,7 @@ var sectionId = 'dynsection-253';
 <!-- Node68 -->
 <g id="Node000068" class="node">
 <title>Node68</title>
-<g id="a_Node000068"><a xlink:href="effects_8c.html#a6e21e42b0229fe1e1829bd8909527e2b" target="_top" xlink:title=" ">
+<g id="a_Node000068"><a xlink:href="effects_8c.html#a3bed0c3da44bfea1616d42194ba2f527" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="895,-426.5 761,-426.5 761,-407.5 895,-407.5 895,-426.5"/>
 <text text-anchor="middle" x="828" y="-414.5" font-family="Helvetica,sans-Serif" font-size="10.00">apply_boo_sound_effect</text>
 </a>
