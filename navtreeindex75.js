@@ -1,5 +1,11 @@
 var NAVTREEINDEX75 =
 {
+"structUnk__800EA06C.html#a79076344cd4e05fe2c18969ea303301e":[14,0,307,1],
+"structUnk__8018EFD8.html":[14,0,308],
+"structUnk__8018EFD8.html#a076eaad1b6bc3fcaa9d794917a6a5d87":[14,0,308,9],
+"structUnk__8018EFD8.html#a22884c91110b60d26e1222763c643ba3":[14,0,308,0],
+"structUnk__8018EFD8.html#a25f74d0e382db0dc3b5f15c68fdca5ee":[14,0,308,5],
+"structUnk__8018EFD8.html#a51cf77087e4f00bb5b2020d4cb3611b7":[14,0,308,4],
 "structUnk__8018EFD8.html#a7c153545a5f3228f2168a4d43b44568a":[14,0,308,12],
 "structUnk__8018EFD8.html#a80f3c84fa7635876e584c33b23088535":[14,0,308,6],
 "structUnk__8018EFD8.html#aa6a6d8ed3556cb6347456cf88d1a3c64":[14,0,308,2],
@@ -243,11 +249,5 @@ var NAVTREEINDEX75 =
 "struct____osThreadTail.html":[14,0,21],
 "struct____osThreadTail.html#a1dce50ccddfccd2ab527894819c7b42a":[14,0,21,0],
 "struct____osThreadTail.html#a9f1bda85addc90a22c413145e1b46afb":[14,0,21,1],
-"struct__struct__gCoursePathSizes__0x10.html":[14,0,22],
-"struct__struct__gCoursePathSizes__0x10.html#a00ef513725902353b5435323f95e557f":[14,0,22,1],
-"struct__struct__gCoursePathSizes__0x10.html#a0e6d218dbd05d34ac82634df6503a14b":[14,0,22,3],
-"struct__struct__gCoursePathSizes__0x10.html#a5274e96565e0a09e452be049e3640c51":[14,0,22,4],
-"struct__struct__gCoursePathSizes__0x10.html#a7d7e301d0243f88a9b57169698969707":[14,0,22,5],
-"struct__struct__gCoursePathSizes__0x10.html#aa5404e63c222a90eade8da99eddc7bef":[14,0,22,0],
-"struct__struct__gCoursePathSizes__0x10.html#af90e4491d06b0ac92bcb691a7c70571c":[14,0,22,2]
+"struct__struct__gCoursePathSizes__0x10.html":[14,0,22]
 };

@@ -1,5 +1,11 @@
 var NAVTREEINDEX55 =
 {
+"podium__ceremony__actors_8h.html#a1ac704186b642f21eef90523a8545c17":[15,0,3,5,14,23],
+"podium__ceremony__actors_8h.html#a4b67fed0453c70f84572c948865859b5":[15,0,3,5,14,16],
+"podium__ceremony__actors_8h.html#a4cf29946cafbb5ecec991aad64b2c8a0":[15,0,3,5,14,19],
+"podium__ceremony__actors_8h.html#a4f96b24c26d95211da8fbfc79ddac447":[15,0,3,5,14,26],
+"podium__ceremony__actors_8h.html#a50327f9262d3b1ccf308da06e6e257ee":[15,0,3,5,14,36],
+"podium__ceremony__actors_8h.html#a5fa04bd88237c86735fa038902368d1c":[15,0,3,5,14,33],
 "podium__ceremony__actors_8h.html#a627072a12cb9f239d1e7b629161b4b45":[15,0,3,5,14,5],
 "podium__ceremony__actors_8h.html#a698a9866415b2f1874f87d9dfc960c67":[15,0,3,5,14,4],
 "podium__ceremony__actors_8h.html#a698a9866415b2f1874f87d9dfc960c67a3392b59c8aa0ec56670fbcd5638cbfde":[15,0,3,5,14,4,0],
@@ -243,11 +249,5 @@ var NAVTREEINDEX55 =
 "race__logic_8h.html#a18aa11908bd75450e1cc7a07038adce5":[15,0,3,11,13,15],
 "race__logic_8h.html#a1b2815c62b11e33e3c74d7fd65af5edc":[15,0,3,11,13,30],
 "race__logic_8h.html#a2645116d52469ec9b45c668d694e98c4":[15,0,3,11,13,10],
-"race__logic_8h.html#a26fc0e5f675f4602960709d90df9ac8f":[15,0,3,11,13,33],
-"race__logic_8h.html#a2ac76336684bc3948c759d35cf5435b2":[15,0,3,11,13,32],
-"race__logic_8h.html#a2cdab5a73f43b56fbd9b4f0ddf58c386":[15,0,3,11,13,7],
-"race__logic_8h.html#a3189893b0ea5d4a7b1d679edc52d78ed":[15,0,3,11,13,28],
-"race__logic_8h.html#a356c21937c0221ceae8f34442bb2e820":[15,0,3,11,13,23],
-"race__logic_8h.html#a3e9f9e3af8403dbedd2e08adb6342fe7":[15,0,3,11,13,9],
-"race__logic_8h.html#a47f2e46e866e68495bc5792fb13f0d66":[15,0,3,11,13,2]
+"race__logic_8h.html#a26fc0e5f675f4602960709d90df9ac8f":[15,0,3,11,13,33]
 };
