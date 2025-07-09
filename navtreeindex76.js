@@ -1,5 +1,6 @@
 var NAVTREEINDEX76 =
 {
+"struct__struct__gCoursePathSizes__0x10.html":[14,0,22],
 "struct__struct__gCoursePathSizes__0x10.html#a00ef513725902353b5435323f95e557f":[14,0,22,1],
 "struct__struct__gCoursePathSizes__0x10.html#a0e6d218dbd05d34ac82634df6503a14b":[14,0,22,3],
 "struct__struct__gCoursePathSizes__0x10.html#a5274e96565e0a09e452be049e3640c51":[14,0,22,4],
@@ -248,6 +249,5 @@ var NAVTREEINDEX76 =
 "structstruct__D__802874D8.html#a543aa34b6de446afd99b5adda183eb0a":[14,0,278,4],
 "structstruct__D__802874D8.html#a81915496d06fe4f254ed97b7aec7904e":[14,0,278,0],
 "structstruct__D__802874D8.html#a9971c5c574a48f613ca5f13e34a0c038":[14,0,278,3],
-"structstruct__D__802874D8.html#ab9413587ba6f6219734dfeefef3eeb6f":[14,0,278,6],
-"structstruct__D__802874D8.html#ac2d3e30b45493f725952c0bf917c68ef":[14,0,278,5]
+"structstruct__D__802874D8.html#ab9413587ba6f6219734dfeefef3eeb6f":[14,0,278,6]
 };

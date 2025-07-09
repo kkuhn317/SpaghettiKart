@@ -1,5 +1,6 @@
 var NAVTREEINDEX73 =
 {
+"structSound.html#a19b4ab45a574128c12423c7ae6fa693e":[14,0,250,3],
 "structSound.html#a58b1b08b974347c7837d8ab8d67355b3":[14,0,250,1],
 "structSound.html#a70931607825e2e45674276b664a25621":[14,0,250,4],
 "structSound.html#a76da5ca3575e9d2752a7fc7dad75723d":[14,0,250,2],
@@ -248,6 +249,5 @@ var NAVTREEINDEX73 =
 "structUIWidgets_1_1FloatSliderOptions.html#a7a64bf97fb926dd7e7ec07874dd9390f":[13,0,11,4,17],
 "structUIWidgets_1_1FloatSliderOptions.html#a7a64bf97fb926dd7e7ec07874dd9390f":[14,0,7,3,17],
 "structUIWidgets_1_1FloatSliderOptions.html#a972a3e7cb5f5d44cc4de2a605ef321ec":[13,0,11,4,20],
-"structUIWidgets_1_1FloatSliderOptions.html#a972a3e7cb5f5d44cc4de2a605ef321ec":[14,0,7,3,20],
-"structUIWidgets_1_1FloatSliderOptions.html#a99d5f3cbea75988dec1c7201a7a9e87c":[13,0,11,4,14]
+"structUIWidgets_1_1FloatSliderOptions.html#a972a3e7cb5f5d44cc4de2a605ef321ec":[14,0,7,3,20]
 };

@@ -1,5 +1,6 @@
 var NAVTREEINDEX75 =
 {
+"structUnk__800EA06C.html#a47df6d2468982fc1601dc0f822aad05c":[14,0,307,0],
 "structUnk__800EA06C.html#a79076344cd4e05fe2c18969ea303301e":[14,0,307,1],
 "structUnk__8018EFD8.html":[14,0,308],
 "structUnk__8018EFD8.html#a076eaad1b6bc3fcaa9d794917a6a5d87":[14,0,308,9],
@@ -248,6 +249,5 @@ var NAVTREEINDEX75 =
 "struct____OSThreadprofile__s.html#af240d20f2ed49aad6e1782ca1c31e457":[14,0,20,1],
 "struct____osThreadTail.html":[14,0,21],
 "struct____osThreadTail.html#a1dce50ccddfccd2ab527894819c7b42a":[14,0,21,0],
-"struct____osThreadTail.html#a9f1bda85addc90a22c413145e1b46afb":[14,0,21,1],
-"struct__struct__gCoursePathSizes__0x10.html":[14,0,22]
+"struct____osThreadTail.html#a9f1bda85addc90a22c413145e1b46afb":[14,0,21,1]
 };

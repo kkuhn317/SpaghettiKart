@@ -1,5 +1,6 @@
 var NAVTREEINDEX68 =
 {
+"structEditor_1_1ContentBrowserWindow_1_1Tracks.html#ae242e83bf1f60e8399c497e8cd0b5bd3":[14,0,0,0,0,2],
 "structEditor_1_1ContentBrowserWindow_1_1Tracks.html#aeda30694de6abcbc8fee34d1040766f8":[13,0,1,0,0,1],
 "structEditor_1_1ContentBrowserWindow_1_1Tracks.html#aeda30694de6abcbc8fee34d1040766f8":[14,0,0,0,0,1],
 "structEditor_1_1Gizmo_1_1TrackDimensions.html":[13,0,1,2,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX68 =
 "structItemWindowObjects.html#ae6f7009b96aa2024ce9ecfc5f0e6861e":[14,0,142,28],
 "structItemWindowObjects.html#aea65c4a1ad27329976c1ef1dcf122266":[14,0,142,1],
 "structItemWindowObjects.html#af18c30595a54d7246a3a81c372623820":[14,0,142,36],
-"structItemWindowObjects.html#af289ab4b7f0ca39b39b983e7c3063e6a":[14,0,142,4],
-"structItemWindowObjects.html#afb0b5a41b478529fcfec0bbd1a04c740":[14,0,142,41]
+"structItemWindowObjects.html#af289ab4b7f0ca39b39b983e7c3063e6a":[14,0,142,4]
 };

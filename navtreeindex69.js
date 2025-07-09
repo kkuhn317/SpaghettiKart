@@ -1,5 +1,6 @@
 var NAVTREEINDEX69 =
 {
+"structItemWindowObjects.html#afb0b5a41b478529fcfec0bbd1a04c740":[14,0,142,41],
 "structItemWindowObjects.html#afe04d28bb652c42e59fcca5374e6eac7":[14,0,142,22],
 "structKartTyre.html":[14,0,145],
 "structKartTyre.html#a3c3c6b17d5d829be8303f662fe412c27":[14,0,145,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX69 =
 "structOSTimer__str.html#af7a85643161598def68dd36bf358cbbb":[14,0,202,2],
 "structObject.html":[14,0,177],
 "structObject.html#a01c1f3b5e0addfab28925726b8d67c90":[14,0,177,23],
-"structObject.html#a0375df4e95a5de9772d897da1d97be18":[14,0,177,5],
-"structObject.html#a044c60e5a40e8a1ad5b6f2914af0e831":[14,0,177,41]
+"structObject.html#a0375df4e95a5de9772d897da1d97be18":[14,0,177,5]
 };

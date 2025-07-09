@@ -1,5 +1,6 @@
 var NAVTREEINDEX72 =
 {
+"structSF64_1_1Vec3i.html#a734152511f6b627df9a864264b5462c9":[13,0,8,26,1],
 "structSF64_1_1Vec3i.html#a734152511f6b627df9a864264b5462c9":[14,0,4,26,1],
 "structSF64_1_1Vec3i.html#ab05c47dc5e5925e153be2ed17a33ff9d":[13,0,8,26,2],
 "structSF64_1_1Vec3i.html#ab05c47dc5e5925e153be2ed17a33ff9d":[14,0,4,26,2],
@@ -248,6 +249,5 @@ var NAVTREEINDEX72 =
 "structSnowmanSpawn.html":[14,0,249],
 "structSnowmanSpawn.html#a0c1d4813f32b0f0074b8770996e2c192":[14,0,249,1],
 "structSnowmanSpawn.html#af7232660ed73569f632b7b299c320cc0":[14,0,249,0],
-"structSound.html":[14,0,250],
-"structSound.html#a19b4ab45a574128c12423c7ae6fa693e":[14,0,250,3]
+"structSound.html":[14,0,250]
 };

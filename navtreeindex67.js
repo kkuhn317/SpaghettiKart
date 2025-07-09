@@ -1,5 +1,6 @@
 var NAVTREEINDEX67 =
 {
+"structBananaBunchParent.html#abe346356b3aaefdd530f6e119deef37a":[14,0,76,2],
 "structBananaBunchParent.html#abed61c26331a3ddf65be3ff692da89ae":[14,0,76,0],
 "structBananaBunchParent.html#ace9ff16f10758860c1c120eb60d9cfc4":[14,0,76,10],
 "structBananaBunchParent.html#ad308ed0758aef4141ec5e6de8b8101f8":[14,0,76,12],
@@ -248,6 +249,5 @@ var NAVTREEINDEX67 =
 "structEditor_1_1ContentBrowserWindow_1_1Tracks.html#a82fa4c6134b3586e6e96b68d5acc8d15":[14,0,0,0,0,4],
 "structEditor_1_1ContentBrowserWindow_1_1Tracks.html#ab7d244556115f94a18e200edc8ad8cd2":[13,0,1,0,0,0],
 "structEditor_1_1ContentBrowserWindow_1_1Tracks.html#ab7d244556115f94a18e200edc8ad8cd2":[14,0,0,0,0,0],
-"structEditor_1_1ContentBrowserWindow_1_1Tracks.html#ae242e83bf1f60e8399c497e8cd0b5bd3":[13,0,1,0,0,2],
-"structEditor_1_1ContentBrowserWindow_1_1Tracks.html#ae242e83bf1f60e8399c497e8cd0b5bd3":[14,0,0,0,0,2]
+"structEditor_1_1ContentBrowserWindow_1_1Tracks.html#ae242e83bf1f60e8399c497e8cd0b5bd3":[13,0,1,0,0,2]
 };
