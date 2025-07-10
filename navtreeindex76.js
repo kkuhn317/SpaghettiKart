@@ -1,5 +1,16 @@
 var NAVTREEINDEX76 =
 {
+"struct____OSThreadContext.html#ae4b35f4af291321df075c0344dd87cf4":[14,0,19,18],
+"struct____OSThreadContext.html#af365f032516859ba5f788e7d4dd9780c":[14,0,19,36],
+"struct____OSThreadContext.html#af9379c2223768103f41cea04c19bcb86":[14,0,19,39],
+"struct____OSThreadContext.html#afd618336af19bdbf7ae7f38de8d9a8f8":[14,0,19,33],
+"struct____OSThreadprofile__s.html":[14,0,20],
+"struct____OSThreadprofile__s.html#a0c442ea9649b43c79487aafe0bab8d11":[14,0,20,2],
+"struct____OSThreadprofile__s.html#a7341bc2e601d2ba4b44f43b34c3775d1":[14,0,20,0],
+"struct____OSThreadprofile__s.html#af240d20f2ed49aad6e1782ca1c31e457":[14,0,20,1],
+"struct____osThreadTail.html":[14,0,21],
+"struct____osThreadTail.html#a1dce50ccddfccd2ab527894819c7b42a":[14,0,21,0],
+"struct____osThreadTail.html#a9f1bda85addc90a22c413145e1b46afb":[14,0,21,1],
 "struct__struct__gCoursePathSizes__0x10.html":[14,0,22],
 "struct__struct__gCoursePathSizes__0x10.html#a00ef513725902353b5435323f95e557f":[14,0,22,1],
 "struct__struct__gCoursePathSizes__0x10.html#a0e6d218dbd05d34ac82634df6503a14b":[14,0,22,3],
@@ -238,16 +249,5 @@ var NAVTREEINDEX76 =
 "structstruct__D__801930D0__inner.html":[14,0,277],
 "structstruct__D__801930D0__inner.html#a09a990d56f1930959b2007a353b96129":[14,0,277,7],
 "structstruct__D__801930D0__inner.html#a1cb49950bfc4c3c9dc5148baabc90656":[14,0,277,4],
-"structstruct__D__801930D0__inner.html#a28aad86428a550b07d25363a03123251":[14,0,277,2],
-"structstruct__D__801930D0__inner.html#a30837c4e1c1bd1cb66701c41e8b20d35":[14,0,277,0],
-"structstruct__D__801930D0__inner.html#a3d2b460491233ee67058b834b91fa5b2":[14,0,277,6],
-"structstruct__D__801930D0__inner.html#a553e412292214b142330c4ee43abf6c6":[14,0,277,1],
-"structstruct__D__801930D0__inner.html#aa9b0391f87a082f12112f245afec7647":[14,0,277,3],
-"structstruct__D__801930D0__inner.html#ad5d6555362a114d418fba7a008768773":[14,0,277,5],
-"structstruct__D__802874D8.html":[14,0,278],
-"structstruct__D__802874D8.html#a376c647d46884be2cbf01f65bf30834e":[14,0,278,1],
-"structstruct__D__802874D8.html#a543aa34b6de446afd99b5adda183eb0a":[14,0,278,4],
-"structstruct__D__802874D8.html#a81915496d06fe4f254ed97b7aec7904e":[14,0,278,0],
-"structstruct__D__802874D8.html#a9971c5c574a48f613ca5f13e34a0c038":[14,0,278,3],
-"structstruct__D__802874D8.html#ab9413587ba6f6219734dfeefef3eeb6f":[14,0,278,6]
+"structstruct__D__801930D0__inner.html#a28aad86428a550b07d25363a03123251":[14,0,277,2]
 };

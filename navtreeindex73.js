@@ -1,5 +1,16 @@
 var NAVTREEINDEX73 =
 {
+"structSkyboxColours.html#a0ac1cea76e1da20cff9cb370433ca63c":[14,0,247,3],
+"structSkyboxColours.html#a2181f9cceb42a4483dcc7606c3907781":[14,0,247,1],
+"structSkyboxColours.html#a2be030d439269ee112dad8c957c4b018":[14,0,247,2],
+"structSkyboxColours.html#a2f0d950679a557ad46d5fa4a5ac7680a":[14,0,247,7],
+"structSkyboxColours.html#a5fc79df7b53785df0805278ab362bbf6":[14,0,247,6],
+"structSkyboxColours.html#a97f193351ea4b1931e7c2ae691008c42":[14,0,247,5],
+"structSkyboxColours.html#ab0925054e9155d18a93065bba12c0019":[14,0,247,4],
+"structSnowmanSpawn.html":[14,0,249],
+"structSnowmanSpawn.html#a0c1d4813f32b0f0074b8770996e2c192":[14,0,249,1],
+"structSnowmanSpawn.html#af7232660ed73569f632b7b299c320cc0":[14,0,249,0],
+"structSound.html":[14,0,250],
 "structSound.html#a19b4ab45a574128c12423c7ae6fa693e":[14,0,250,3],
 "structSound.html#a58b1b08b974347c7837d8ab8d67355b3":[14,0,250,1],
 "structSound.html#a70931607825e2e45674276b664a25621":[14,0,250,4],
@@ -238,16 +249,5 @@ var NAVTREEINDEX73 =
 "structUIWidgets_1_1FloatSliderOptions.html#a468de0f700de06a33cecc6ec62921d8a":[14,0,7,3,4],
 "structUIWidgets_1_1FloatSliderOptions.html#a58cd314242dda429dc202a89d51a6631":[13,0,11,4,9],
 "structUIWidgets_1_1FloatSliderOptions.html#a58cd314242dda429dc202a89d51a6631":[14,0,7,3,9],
-"structUIWidgets_1_1FloatSliderOptions.html#a59eed180408402038299ed3235a06624":[13,0,11,4,8],
-"structUIWidgets_1_1FloatSliderOptions.html#a59eed180408402038299ed3235a06624":[14,0,7,3,8],
-"structUIWidgets_1_1FloatSliderOptions.html#a5f017a7e98ff6fd0504cecd94d5e54f0":[13,0,11,4,12],
-"structUIWidgets_1_1FloatSliderOptions.html#a5f017a7e98ff6fd0504cecd94d5e54f0":[14,0,7,3,12],
-"structUIWidgets_1_1FloatSliderOptions.html#a6518bfd7324a07fc01de18700f364397":[13,0,11,4,0],
-"structUIWidgets_1_1FloatSliderOptions.html#a6518bfd7324a07fc01de18700f364397":[14,0,7,3,0],
-"structUIWidgets_1_1FloatSliderOptions.html#a6c3382201536fe9205f0df3e1de43a24":[13,0,11,4,13],
-"structUIWidgets_1_1FloatSliderOptions.html#a6c3382201536fe9205f0df3e1de43a24":[14,0,7,3,13],
-"structUIWidgets_1_1FloatSliderOptions.html#a7a64bf97fb926dd7e7ec07874dd9390f":[13,0,11,4,17],
-"structUIWidgets_1_1FloatSliderOptions.html#a7a64bf97fb926dd7e7ec07874dd9390f":[14,0,7,3,17],
-"structUIWidgets_1_1FloatSliderOptions.html#a972a3e7cb5f5d44cc4de2a605ef321ec":[13,0,11,4,20],
-"structUIWidgets_1_1FloatSliderOptions.html#a972a3e7cb5f5d44cc4de2a605ef321ec":[14,0,7,3,20]
+"structUIWidgets_1_1FloatSliderOptions.html#a59eed180408402038299ed3235a06624":[13,0,11,4,8]
 };

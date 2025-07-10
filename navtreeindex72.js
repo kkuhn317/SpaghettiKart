@@ -1,5 +1,16 @@
 var NAVTREEINDEX72 =
 {
+"structSF64_1_1Vec3fData.html#ab2e666b7525fc68a7d321c831fa74b01":[14,0,4,25,1],
+"structSF64_1_1Vec3fData.html#adc94f7e03edc2fc618626a39d63b6363":[13,0,8,25,0],
+"structSF64_1_1Vec3fData.html#adc94f7e03edc2fc618626a39d63b6363":[14,0,4,25,0],
+"structSF64_1_1Vec3fData.html#aec0fd4c1bf34ba59a69314263a0d436b":[13,0,8,25,2],
+"structSF64_1_1Vec3fData.html#aec0fd4c1bf34ba59a69314263a0d436b":[14,0,4,25,2],
+"structSF64_1_1Vec3i.html":[13,0,8,26],
+"structSF64_1_1Vec3i.html":[14,0,4,26],
+"structSF64_1_1Vec3i.html#a0c9c8a6ef544c980ddd1c086f3f22fcc":[13,0,8,26,3],
+"structSF64_1_1Vec3i.html#a0c9c8a6ef544c980ddd1c086f3f22fcc":[14,0,4,26,3],
+"structSF64_1_1Vec3i.html#a13c81e396d2ee748614bc5cb42ff30ba":[13,0,8,26,0],
+"structSF64_1_1Vec3i.html#a13c81e396d2ee748614bc5cb42ff30ba":[14,0,4,26,0],
 "structSF64_1_1Vec3i.html#a734152511f6b627df9a864264b5462c9":[13,0,8,26,1],
 "structSF64_1_1Vec3i.html#a734152511f6b627df9a864264b5462c9":[14,0,4,26,1],
 "structSF64_1_1Vec3i.html#ab05c47dc5e5925e153be2ed17a33ff9d":[13,0,8,26,2],
@@ -238,16 +249,5 @@ var NAVTREEINDEX72 =
 "structSkybox.html#acae711c4881e4963c9dda0e2b16f3de3":[14,0,246,4],
 "structSkybox.html#af5f678277107fc2ae1978d46304502ae":[14,0,246,2],
 "structSkyboxColours.html":[14,0,247],
-"structSkyboxColours.html#a00c9ce1642a26b9469556631de7c7243":[14,0,247,0],
-"structSkyboxColours.html#a0ac1cea76e1da20cff9cb370433ca63c":[14,0,247,3],
-"structSkyboxColours.html#a2181f9cceb42a4483dcc7606c3907781":[14,0,247,1],
-"structSkyboxColours.html#a2be030d439269ee112dad8c957c4b018":[14,0,247,2],
-"structSkyboxColours.html#a2f0d950679a557ad46d5fa4a5ac7680a":[14,0,247,7],
-"structSkyboxColours.html#a5fc79df7b53785df0805278ab362bbf6":[14,0,247,6],
-"structSkyboxColours.html#a97f193351ea4b1931e7c2ae691008c42":[14,0,247,5],
-"structSkyboxColours.html#ab0925054e9155d18a93065bba12c0019":[14,0,247,4],
-"structSnowmanSpawn.html":[14,0,249],
-"structSnowmanSpawn.html#a0c1d4813f32b0f0074b8770996e2c192":[14,0,249,1],
-"structSnowmanSpawn.html#af7232660ed73569f632b7b299c320cc0":[14,0,249,0],
-"structSound.html":[14,0,250]
+"structSkyboxColours.html#a00c9ce1642a26b9469556631de7c7243":[14,0,247,0]
 };

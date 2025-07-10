@@ -612,7 +612,7 @@ var searchData=
   ['minz_609',['minZ',['../structCollisionTriangle.html#a7a24b29415e8ecf25171248862d87f94',1,'CollisionTriangle']]],
   ['mio0_5f0f_610',['MIO0_0F',['../memory_8c.html#a18ab4c1e32c3c90def2fbc839d7ee26c',1,'MIO0_0F(u8 *arg0, uintptr_t arg1, uintptr_t arg2):&#160;memory.c'],['../memory_8h.html#a3291d400b4e265559e894e400cdea4ae',1,'MIO0_0F(u8 *, uintptr_t, uintptr_t):&#160;memory.c']]],
   ['mio0decode_611',['mio0decode',['../stubs_8c.html#ae4722e596a88d66404ccaaf6ea181b41',1,'mio0decode(u8 *arg0, u8 *arg1):&#160;stubs.c'],['../stubs_8h.html#ae4722e596a88d66404ccaaf6ea181b41',1,'mio0decode(u8 *arg0, u8 *arg1):&#160;stubs.c']]],
-  ['mio0encode_612',['mio0encode',['../staff__ghosts_8h.html#aee8d226c442bc6a60158a37eeef8656a',1,'mio0encode(s32 input, s32, s32):&#160;stubs.c'],['../stubs_8c.html#a5e0b1e38e7d5d3a80dcc0c6d99b79f9e',1,'mio0encode(s32 input, s32 arg1, s32 arg2):&#160;stubs.c'],['../stubs_8h.html#aee8d226c442bc6a60158a37eeef8656a',1,'mio0encode(s32 input, s32, s32):&#160;stubs.c']]],
+  ['mio0encode_612',['mio0encode',['../replays_8h.html#aee8d226c442bc6a60158a37eeef8656a',1,'mio0encode(s32 input, s32, s32):&#160;stubs.c'],['../stubs_8c.html#a5e0b1e38e7d5d3a80dcc0c6d99b79f9e',1,'mio0encode(s32 input, s32 arg1, s32 arg2):&#160;stubs.c'],['../stubs_8h.html#aee8d226c442bc6a60158a37eeef8656a',1,'mio0encode(s32 input, s32, s32):&#160;stubs.c']]],
   ['mirrormodeangleoffset_613',['MirrorModeAngleOffset',['../classOPenguin.html#ad4aa009f29ba934bcd448b1963884fe5',1,'OPenguin::MirrorModeAngleOffset'],['../classStarEmitter.html#a616fd4232d25fd766966d62164bde212',1,'StarEmitter::MirrorModeAngleOffset']]],
   ['mixer_2ec_614',['mixer.c',['../mixer_8c.html',1,'']]],
   ['mixer_2eh_615',['mixer.h',['../mixer_8h.html',1,'']]],
