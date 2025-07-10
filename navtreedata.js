@@ -101,8 +101,8 @@ var NAVTREE =
       [ "Future plans", "md_docs_2textures-pack.html#future-plans-1", null ]
     ] ],
     [ "Tutorials", "tutorials.html", "tutorials" ],
-    [ "Todo List", "todo.html", null ],
     [ "Bug List", "bug.html", null ],
+    [ "Todo List", "todo.html", null ],
     [ "Deprecated List", "deprecated.html", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
