@@ -16,8 +16,8 @@
 <area shape="poly" id="edge40_Node000001_Node000428" title=" " alt="" coords="99,1235,149,1235,149,1241,99,1241"/>
 <area shape="rect" id="Node000429" href="$skybox__and__splitscreen_8c.html#a3ccbc877132c17e7864318f295367fb7" title=" " alt="" coords="163,1275,287,1300"/>
 <area shape="poly" id="edge41_Node000001_Node000429" title=" " alt="" coords="98,1248,167,1268,165,1273,96,1253"/>
-<area shape="rect" id="Node000305" href="$Game_8cpp.html#a682b05febe7b8e4a4adf68785d93e3d3" title=" " alt="" coords="161,1324,288,1349"/>
-<area shape="poly" id="edge42_Node000001_Node000305" title=" " alt="" coords="69,1249,103,1279,148,1309,164,1317,162,1322,145,1314,100,1283,65,1253"/>
+<area shape="rect" id="Node000297" href="$Game_8cpp.html#a682b05febe7b8e4a4adf68785d93e3d3" title=" " alt="" coords="161,1324,288,1349"/>
+<area shape="poly" id="edge42_Node000001_Node000297" title=" " alt="" coords="69,1249,103,1279,148,1309,164,1317,162,1322,145,1314,100,1283,65,1253"/>
 <area shape="rect" id="Node000430" href="$actors_8c.html#a142a32371ea62d0303702286b839bdfd" title="Loads actor textures, course specific actor textures. Calls to spawn_course_vehicles and place_course..." alt="" coords="147,1489,303,1529"/>
 <area shape="poly" id="edge43_Node000001_Node000430" title=" " alt="" coords="64,1249,206,1476,201,1478,59,1252"/>
 <area shape="rect" id="Node000442" href="$code__8006E9C0_8c.html#a47667a5a47fd4ca740865e963ce795c9" title=" " alt="" coords="187,1603,262,1628"/>

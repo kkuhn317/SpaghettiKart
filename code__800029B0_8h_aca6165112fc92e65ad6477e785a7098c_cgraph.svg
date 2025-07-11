@@ -208,19 +208,19 @@ var sectionId = 'dynsection-8';
 </a>
 </g>
 </g>
-<!-- Node305 -->
-<g id="Node000305" class="node">
-<title>Node305</title>
-<g id="a_Node000305"><a xlink:href="Game_8cpp.html#a682b05febe7b8e4a4adf68785d93e3d3" target="_top" xlink:title=" ">
+<!-- Node297 -->
+<g id="Node000297" class="node">
+<title>Node297</title>
+<g id="a_Node000297"><a xlink:href="Game_8cpp.html#a682b05febe7b8e4a4adf68785d93e3d3" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="212,-317 117,-317 117,-298 212,-298 212,-317"/>
 <text text-anchor="middle" x="164.5" y="-305" font-family="Helvetica,sans-Serif" font-size="10.00">GetCourseIndex</text>
 </a>
 </g>
 </g>
-<!-- Node1&#45;&gt;Node305 -->
-<g id="edge42_Node000001_Node000305" class="edge">
-<title>Node1&#45;&gt;Node305</title>
-<g id="a_edge42_Node000001_Node000305"><a xlink:title=" ">
+<!-- Node1&#45;&gt;Node297 -->
+<g id="edge42_Node000001_Node000297" class="edge">
+<title>Node1&#45;&gt;Node297</title>
+<g id="a_edge42_Node000001_Node000297"><a xlink:title=" ">
 <path fill="none" stroke="#63b8ff" d="M46.1,-371.68C59.03,-359.58 82.58,-339.07 106,-326.5 109.96,-324.37 114.21,-322.43 118.53,-320.66"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="119.91,-323.88 128.03,-317.08 117.44,-317.33 119.91,-323.88"/>
 </a>

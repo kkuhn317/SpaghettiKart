@@ -1,5 +1,10 @@
 var NAVTREEINDEX51 =
 {
+"new__func_8h.html#a07c95da05920a7bc4321bd8661995a03":[15,0,3,9,55,4],
+"new__func_8h.html#a0e3cf3e47fb94388cd044cdc24ac01a8":[15,0,3,9,55,5],
+"new__func_8h.html#a14257090762300bb1a4960ffad13fe8a":[15,0,3,9,55,2],
+"new__func_8h.html#a28221427b7ad6c81f9a250105f26cb2a":[15,0,3,9,55,9],
+"new__func_8h.html#a3cdd6953634c48f7eaa8fbe448c3fe8f":[15,0,3,9,55,6],
 "new__func_8h.html#a6a17a13ff7dc07c2fff19f8463a2982a":[15,0,3,9,55,8],
 "new__func_8h.html#a838e2ae4ce51bdad5ba9667fa45bd26a":[15,0,3,9,55,3],
 "new__func_8h.html#aa304c3ab9c84c922fe603fdf543c2551":[15,0,3,9,55,7],
@@ -244,10 +249,5 @@ var NAVTREEINDEX51 =
 "osPfsFileState_8c.html#ae0739abb62393e32cab63e2c658fd5d3":[15,0,3,9,83,0],
 "osPfsFreeBlocks_8c.html":[15,0,3,9,84],
 "osPfsFreeBlocks_8c.html#ad43f8c0b37c09b8f21058829206e8ef6":[15,0,3,9,84,0],
-"osPfsInit_8c.html":[15,0,3,9,85],
-"osPfsInit_8c.html#a4896a625ad888852615bb2f10831aeb7":[15,0,3,9,85,0],
-"osPfsInit_8c.html#a4a12c7eebdf6fb96dcbfe9be40782e9a":[15,0,3,9,85,1],
-"osPfsIsPlug_8c.html":[15,0,3,9,86],
-"osPfsIsPlug_8c.html#a0fcf2770e70d045d1ef22018dfb38554":[15,0,3,9,86,3],
-"osPfsIsPlug_8c.html#a9cf3e65d900512a0e8f8be83d47f0e7a":[15,0,3,9,86,1]
+"osPfsInit_8c.html":[15,0,3,9,85]
 };

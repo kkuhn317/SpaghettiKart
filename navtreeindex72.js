@@ -1,5 +1,10 @@
 var NAVTREEINDEX72 =
 {
+"structSF64_1_1Vec3fData.html":[13,0,8,25],
+"structSF64_1_1Vec3fData.html":[14,0,4,25],
+"structSF64_1_1Vec3fData.html#a390625d003568c695ea7fb804974f913":[13,0,8,25,3],
+"structSF64_1_1Vec3fData.html#a390625d003568c695ea7fb804974f913":[14,0,4,25,3],
+"structSF64_1_1Vec3fData.html#ab2e666b7525fc68a7d321c831fa74b01":[13,0,8,25,1],
 "structSF64_1_1Vec3fData.html#ab2e666b7525fc68a7d321c831fa74b01":[14,0,4,25,1],
 "structSF64_1_1Vec3fData.html#adc94f7e03edc2fc618626a39d63b6363":[13,0,8,25,0],
 "structSF64_1_1Vec3fData.html#adc94f7e03edc2fc618626a39d63b6363":[14,0,4,25,0],
@@ -244,10 +249,5 @@ var NAVTREEINDEX72 =
 "structSkybox.html":[14,0,246],
 "structSkybox.html#a38b95b0761ac6f03f1d85a93e514cad1":[14,0,246,5],
 "structSkybox.html#a4997ffec92872b821d40a35a20eeb0ca":[14,0,246,0],
-"structSkybox.html#a60e408b166dad45f452004d93b0ad15e":[14,0,246,3],
-"structSkybox.html#a6ec3cb6bb705b02184a2519504595eb9":[14,0,246,1],
-"structSkybox.html#acae711c4881e4963c9dda0e2b16f3de3":[14,0,246,4],
-"structSkybox.html#af5f678277107fc2ae1978d46304502ae":[14,0,246,2],
-"structSkyboxColours.html":[14,0,247],
-"structSkyboxColours.html#a00c9ce1642a26b9469556631de7c7243":[14,0,247,0]
+"structSkybox.html#a60e408b166dad45f452004d93b0ad15e":[14,0,246,3]
 };
