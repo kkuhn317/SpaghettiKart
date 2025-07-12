@@ -1,5 +1,11 @@
 var NAVTREEINDEX52 =
 {
+"osLeoDiskInit_8c.html#afaa21882532ed51d7333383c0b90a514":[15,0,3,9,79,1],
+"osPfsAllocateFile_8c.html":[15,0,3,9,80],
+"osPfsAllocateFile_8c.html#a12a746a3baa07de1c6d2791949388a4c":[15,0,3,9,80,1],
+"osPfsAllocateFile_8c.html#a6bb2c5cb35cc8f2d71036be0276e891f":[15,0,3,9,80,2],
+"osPfsAllocateFile_8c.html#aa35c1d7fc54662fbe18f3e9c8e75d3ab":[15,0,3,9,80,0],
+"osPfsChecker_8c.html":[15,0,3,9,81],
 "osPfsChecker_8c.html#a593716f3494df81f212ed3803c1f57a9":[15,0,3,9,81,0],
 "osPfsChecker_8c.html#a6c47d5b15542679260cfcf6a7c841019":[15,0,3,9,81,1],
 "osPfsChecker_8c.html#aef15b5519cb832836e2546c3fd1af64e":[15,0,3,9,81,2],
@@ -243,11 +249,5 @@ var NAVTREEINDEX52 =
 "piint_8h.html#a38fd7fad65301f7a0e2153e0b0f84c83":[15,0,3,9,115,18],
 "piint_8h.html#a3b4b7efff78e3245465d67a1ecfa4b8b":[15,0,3,9,115,6],
 "piint_8h.html#a3e05f8f40d1da55183ee0eaec0c5b6bb":[15,0,3,9,115,91],
-"piint_8h.html#a44f316abe60da01df88935f6443521a6":[15,0,3,9,115,17],
-"piint_8h.html#a457b66841d41a1bc457187634ec350f5":[15,0,3,9,115,2],
-"piint_8h.html#a45cd3bd3bdfa0b0e0506782a453ff151":[15,0,3,9,115,82],
-"piint_8h.html#a4b779bbe08ade9604fb16c12bf99108e":[15,0,3,9,115,60],
-"piint_8h.html#a4c6ad808a9ddf3caa7b956602acba68e":[15,0,3,9,115,38],
-"piint_8h.html#a5107c55550c8be92d5e6b8877cf057e1":[15,0,3,9,115,13],
-"piint_8h.html#a56e85eaf866dd7e7f9385bd0682532e4":[15,0,3,9,115,68]
+"piint_8h.html#a44f316abe60da01df88935f6443521a6":[15,0,3,9,115,17]
 };

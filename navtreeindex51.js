@@ -1,5 +1,11 @@
 var NAVTREEINDEX51 =
 {
+"networking_8h.html#a70a5b0b30911c1eccfc28540915f9c2d":[15,0,3,8,1,10],
+"networking_8h.html#a76270b0ef153942c5e4b2fcaf5d39deb":[15,0,3,8,1,25],
+"networking_8h.html#a7f7a40b3f0b65d490b0ee6658f8223d7":[15,0,3,8,1,22],
+"networking_8h.html#a9502f9c4e7a1f7f4936b8ff8992fa42f":[15,0,3,8,1,20],
+"networking_8h.html#a99b9c7f03653dc6ebb6e10aa759e8266":[15,0,3,8,1,13],
+"networking_8h.html#a9af574783710ca07ce7e2bc6fefc76b6":[15,0,3,8,1,21],
 "networking_8h.html#a9c6ade683b9f080f25707e0812ef7a6c":[15,0,3,8,1,5],
 "networking_8h.html#aadeacb4aee3e3e6dec2288ff4284d76b":[15,0,3,8,1,11],
 "networking_8h.html#ab06594b38f6f29fc6139a7f3cc5886ac":[15,0,3,8,1,23],
@@ -24,7 +30,7 @@ var NAVTREEINDEX51 =
 "new__func_8h.html#ac8095e2ec1adbd7e74e655c578968a36":[15,0,3,9,55,0],
 "new__func_8h_source.html":[15,0,3,9,55],
 "objects.html":[0,1],
-"objects.html#objects-1":[0,1,0],
+"objects.html#objects":[0,1,0],
 "objects_8h.html":[15,0,2,16],
 "objects_8h.html#a015cc1fa03690348fb398b9be74ecc15":[15,0,2,16,35],
 "objects_8h.html#a02bd29e49d2089bb6bd1bfe33e360584":[15,0,2,16,87],
@@ -243,11 +249,5 @@ var NAVTREEINDEX51 =
 "osLeoDiskInit_8c.html#a681f14ec1eabf80e0a3c82ebcfe9f6b7":[15,0,3,9,79,4],
 "osLeoDiskInit_8c.html#a8c133245f5ac727ca62259fd70faf82e":[15,0,3,9,79,0],
 "osLeoDiskInit_8c.html#aa304c3ab9c84c922fe603fdf543c2551":[15,0,3,9,79,2],
-"osLeoDiskInit_8c.html#aae0719cf2d9ddb4a109613bf3356c64a":[15,0,3,9,79,3],
-"osLeoDiskInit_8c.html#afaa21882532ed51d7333383c0b90a514":[15,0,3,9,79,1],
-"osPfsAllocateFile_8c.html":[15,0,3,9,80],
-"osPfsAllocateFile_8c.html#a12a746a3baa07de1c6d2791949388a4c":[15,0,3,9,80,1],
-"osPfsAllocateFile_8c.html#a6bb2c5cb35cc8f2d71036be0276e891f":[15,0,3,9,80,2],
-"osPfsAllocateFile_8c.html#aa35c1d7fc54662fbe18f3e9c8e75d3ab":[15,0,3,9,80,0],
-"osPfsChecker_8c.html":[15,0,3,9,81]
+"osLeoDiskInit_8c.html#aae0719cf2d9ddb4a109613bf3356c64a":[15,0,3,9,79,3]
 };

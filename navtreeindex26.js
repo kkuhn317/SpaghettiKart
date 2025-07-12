@@ -1,5 +1,6 @@
 var NAVTREEINDEX26 =
 {
+"code__80281C40_8c.html#ae07ff21e9da506afeb2a9a390ee9346e":[15,0,3,5,8,4],
 "code__80281C40_8c.html#af6f6a1f0caec6d086a4ab98602a6670e":[15,0,3,5,8,3],
 "code__80281C40_8h.html":[15,0,3,5,9],
 "code__80281C40_8h.html#a2e7d63dbfdabad69a70a95734822fe41":[15,0,3,5,9,6],
@@ -187,7 +188,7 @@ var NAVTREEINDEX26 =
 "controlflow.html#engine":[1,2,4,6],
 "controlflow.html#math":[1,2,4,7],
 "controlflow.html#menus":[1,2,4,0],
-"controlflow.html#objects":[1,2,4,3],
+"controlflow.html#objects-1":[1,2,4,3],
 "controlflow.html#overall-control-flow":[1,2,2],
 "controlflow.html#paradigm":[1,2,0],
 "controlflow.html#players":[1,2,4,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX26 =
 "controller_8h.html#ab58627f83d7b5069c7d442eb1c05f014":[15,0,3,9,35,73],
 "controller_8h.html#ab89cab8105b9c81909fbacd600814466":[15,0,3,9,35,31],
 "controller_8h.html#ac0f1bb81601cedc5fc5868fc7e500b88":[15,0,3,9,35,52],
-"controller_8h.html#ac77efb4feb09be419ce3f8b97668015b":[15,0,3,9,35,40],
-"controller_8h.html#ac9b5082f4c27da65023e8232f5799240":[15,0,3,9,35,18]
+"controller_8h.html#ac77efb4feb09be419ce3f8b97668015b":[15,0,3,9,35,40]
 };

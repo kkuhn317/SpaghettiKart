@@ -1,5 +1,11 @@
 var NAVTREEINDEX74 =
 {
+"structUIWidgets_1_1ComboboxOptions.html#ae7873570b7b0c61ac5c7804610a96fce":[13,0,11,3,3],
+"structUIWidgets_1_1ComboboxOptions.html#ae7873570b7b0c61ac5c7804610a96fce":[14,0,7,2,3],
+"structUIWidgets_1_1FloatSliderOptions.html":[13,0,11,4],
+"structUIWidgets_1_1FloatSliderOptions.html":[14,0,7,3],
+"structUIWidgets_1_1FloatSliderOptions.html#a11a789e4aa792be4c99fbe7e04ab91c3":[13,0,11,4,15],
+"structUIWidgets_1_1FloatSliderOptions.html#a11a789e4aa792be4c99fbe7e04ab91c3":[14,0,7,3,15],
 "structUIWidgets_1_1FloatSliderOptions.html#a1e3fe66b9a7838234705bb1cdc45abb7":[13,0,11,4,2],
 "structUIWidgets_1_1FloatSliderOptions.html#a1e3fe66b9a7838234705bb1cdc45abb7":[14,0,7,3,2],
 "structUIWidgets_1_1FloatSliderOptions.html#a250ee971de7e77532356d08dc1e18884":[13,0,11,4,10],
@@ -243,11 +249,5 @@ var NAVTREEINDEX74 =
 "structUnkStruct__80287500.html#a28d98385c6de9d96ad86bf55e3537c94":[14,0,326,10],
 "structUnkStruct__80287500.html#a375159440d4a259a8b527ca3cf26b929":[14,0,326,2],
 "structUnkStruct__80287500.html#a5670cd67302a59a7c97f081bc0734c8e":[14,0,326,3],
-"structUnkStruct__80287500.html#a6f0c4a6587d20e6097044c49427c0b16":[14,0,326,8],
-"structUnkStruct__80287500.html#a8e1a902be7cf96fc773b6df54f63447a":[14,0,326,11],
-"structUnkStruct__80287500.html#aae98552c62ebac6bc9bac70654525602":[14,0,326,6],
-"structUnkStruct__80287500.html#ab6c5d79f3a95e2c351de09cceadabcef":[14,0,326,9],
-"structUnkStruct__80287500.html#ac1f4bf19d1314f363a3518ef83e16617":[14,0,326,5],
-"structUnkStruct__80287500.html#ac59a3754bf6c893374ba756692b11469":[14,0,326,1],
-"structUnkStruct__80287500.html#acb42c984184fee77662b95e1bf5ba34d":[14,0,326,0]
+"structUnkStruct__80287500.html#a6f0c4a6587d20e6097044c49427c0b16":[14,0,326,8]
 };

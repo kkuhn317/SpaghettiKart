@@ -1,5 +1,11 @@
 var NAVTREEINDEX73 =
 {
+"structShellActor.html#a6d1756d5e7cf11fdb35eec5ef86c6951":[14,0,243,9],
+"structShellActor.html#a6eb62ab515773b295e7d8c4f6c10ae1b":[14,0,243,13],
+"structShellActor.html#a77c5d4878d9a0867430326a1d63491dc":[14,0,243,5],
+"structShellActor.html#a89a884c6ba2b5b022b7dcb5e74d50910":[14,0,243,16],
+"structShellActor.html#abb69af2d8de513a7f3ddadb94b2b6078":[14,0,243,2],
+"structShellActor.html#ac40ddee32f5d1a093578e3f23ed76e0b":[14,0,243,3],
 "structShellActor.html#acd41b01d05450b6a241a81907bb4fbb8":[14,0,243,6],
 "structShellActor.html#acf7c6324c79136005a8a16b0280862d4":[14,0,243,14],
 "structShellActor.html#ad503d4399dfef15a8aeb4cfec64ac155":[14,0,243,12],
@@ -243,11 +249,5 @@ var NAVTREEINDEX73 =
 "structUIWidgets_1_1ComboboxOptions.html#ac56c7f61c17ae6e81fd9ae901d69d3c5":[13,0,11,3,4],
 "structUIWidgets_1_1ComboboxOptions.html#ac56c7f61c17ae6e81fd9ae901d69d3c5":[14,0,7,2,4],
 "structUIWidgets_1_1ComboboxOptions.html#adaa063172be93f9df157b2ad1ad47df5":[13,0,11,3,11],
-"structUIWidgets_1_1ComboboxOptions.html#adaa063172be93f9df157b2ad1ad47df5":[14,0,7,2,11],
-"structUIWidgets_1_1ComboboxOptions.html#ae7873570b7b0c61ac5c7804610a96fce":[13,0,11,3,3],
-"structUIWidgets_1_1ComboboxOptions.html#ae7873570b7b0c61ac5c7804610a96fce":[14,0,7,2,3],
-"structUIWidgets_1_1FloatSliderOptions.html":[13,0,11,4],
-"structUIWidgets_1_1FloatSliderOptions.html":[14,0,7,3],
-"structUIWidgets_1_1FloatSliderOptions.html#a11a789e4aa792be4c99fbe7e04ab91c3":[13,0,11,4,15],
-"structUIWidgets_1_1FloatSliderOptions.html#a11a789e4aa792be4c99fbe7e04ab91c3":[14,0,7,3,15]
+"structUIWidgets_1_1ComboboxOptions.html#adaa063172be93f9df157b2ad1ad47df5":[14,0,7,2,11]
 };
