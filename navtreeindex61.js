@@ -1,5 +1,16 @@
 var NAVTREEINDEX61 =
 {
+"replays_8c.html#aedb1050835c582e17394a9c176bc2e78":[15,0,3,61,8],
+"replays_8c.html#aee24e49cb7f56db0afa7884ac229e9a8":[15,0,3,61,55],
+"replays_8c.html#aee4aca6ad9d5e3c97dac777a4ba497c7":[15,0,3,61,41],
+"replays_8c.html#aef6de91d5312eb365cb18c20b7e024d0":[15,0,3,61,50],
+"replays_8c.html#af2a2ca4014268d79ef26c33b328317f2":[15,0,3,61,5],
+"replays_8c.html#af3ecf6409c5c310ef01f811d8dd288d9":[15,0,3,61,2],
+"replays_8c.html#af977369c31c9c9e0bd2e0605d0c933ff":[15,0,3,61,20],
+"replays_8h.html":[15,0,3,62],
+"replays_8h.html#a00d76e17b6cf4eab22dbc0a2cb1eeaf6":[15,0,3,62,29],
+"replays_8h.html#a0a5ecd7326c14f60dc23b1d25ff10599":[15,0,3,62,31],
+"replays_8h.html#a0eb82092a448ee36c1e468dfa4765ce6":[15,0,3,62,27],
 "replays_8h.html#a1222747ec31ebcacce5ef87743ab4846":[15,0,3,62,12],
 "replays_8h.html#a18c90301a091210cb4a8ac2f085cae38":[15,0,3,62,18],
 "replays_8h.html#a1a6ef299ab3b94fc793a3c13bdac9598":[15,0,3,62,22],
@@ -238,16 +249,5 @@ var NAVTREEINDEX61 =
 "segments_8h.html#a5abd1d81c608882a0d8f517b8c383d6c":[15,0,2,19,31],
 "segments_8h.html#a5c4b46682e3b26db8919944b7766bc43":[15,0,2,19,7],
 "segments_8h.html#a5d9c8e65759367d19eda7d85d4fe36fa":[15,0,2,19,33],
-"segments_8h.html#a5fb071029a2685c4728754d96cbc9545":[15,0,2,19,42],
-"segments_8h.html#a761c05cde348942fdce0754b88fb1ca6":[15,0,2,19,19],
-"segments_8h.html#a7929c34c95fe113ccab671ed9de129ee":[15,0,2,19,22],
-"segments_8h.html#a83985bbab670a44f410118ee86e60ee8":[15,0,2,19,1],
-"segments_8h.html#a84298edcd96683e0cb18204f8c79632b":[15,0,2,19,28],
-"segments_8h.html#a8f3b09eb89cbeb4d1694dbe836ea1df8":[15,0,2,19,3],
-"segments_8h.html#a8f799bd3910a3bd042bb4faa6d776f20":[15,0,2,19,14],
-"segments_8h.html#a914d38b452840fbdf4fd3a0bb601ff21":[15,0,2,19,5],
-"segments_8h.html#aae75a5f728076b2937858542b7e9dbd3":[15,0,2,19,0],
-"segments_8h.html#aaefd65646408f3fbd4b9176e36951e43":[15,0,2,19,34],
-"segments_8h.html#aafa03ea9c3a929c8050106c259a06089":[15,0,2,19,18],
-"segments_8h.html#ab32e22bec107298e99cef7b7563166d1":[15,0,2,19,36]
+"segments_8h.html#a5fb071029a2685c4728754d96cbc9545":[15,0,2,19,42]
 };

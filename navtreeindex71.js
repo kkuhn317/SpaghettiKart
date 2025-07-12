@@ -1,5 +1,16 @@
 var NAVTREEINDEX71 =
 {
+"structPlayer.html#ab3ec920cd686937617af44c57507fcad":[14,0,213,8],
+"structPlayer.html#ab7ae0789868ef90ace8e47e35ff543e7":[14,0,213,86],
+"structPlayer.html#abb8992c4eacd17ba54e927f374fb8ff5":[14,0,213,47],
+"structPlayer.html#abfb30c34476a9a1903ca312e64b6204d":[14,0,213,48],
+"structPlayer.html#ac0d83e2fe2c6063fd20a3102dcaa45cc":[14,0,213,74],
+"structPlayer.html#ac74ff94dd2893c2e792da0eca94d8cb7":[14,0,213,81],
+"structPlayer.html#ac80f85211fcf5fa28a01983077bdd77e":[14,0,213,75],
+"structPlayer.html#ac8b8e3beb59a1df500c48c3be883d06b":[14,0,213,107],
+"structPlayer.html#acb0924695d46ceebb0e5d90b23216c96":[14,0,213,65],
+"structPlayer.html#ad3e2686773f244d2157d42507b69c2d0":[14,0,213,97],
+"structPlayer.html#ad4664147bf6b79a18d1598066888db09":[14,0,213,59],
 "structPlayer.html#ad83a862e58a8ea8cedd302203b558cf3":[14,0,213,39],
 "structPlayer.html#ad87b17d07ae16604a2a961502cfc2d5f":[14,0,213,30],
 "structPlayer.html#ad8c455f2915f1bcf36439bccd55b4e12":[14,0,213,2],
@@ -238,16 +249,5 @@ var NAVTREEINDEX71 =
 "structSF64_1_1Vec2f.html#a0ce46ae7e6af1bd459a922f58e4f3acc":[14,0,4,22,0],
 "structSF64_1_1Vec2f.html#a2b630c32145bbc80c7f552b8cd766b0a":[13,0,8,22,2],
 "structSF64_1_1Vec2f.html#a2b630c32145bbc80c7f552b8cd766b0a":[14,0,4,22,2],
-"structSF64_1_1Vec2f.html#a9e6d5f0f1c9f73d0828f1584bee81117":[13,0,8,22,1],
-"structSF64_1_1Vec2f.html#a9e6d5f0f1c9f73d0828f1584bee81117":[14,0,4,22,1],
-"structSF64_1_1Vec3f.html":[13,0,8,23],
-"structSF64_1_1Vec3f.html":[14,0,4,23],
-"structSF64_1_1Vec3f.html#a08b67199a4fb28da73f6f5601ff90331":[13,0,8,23,1],
-"structSF64_1_1Vec3f.html#a08b67199a4fb28da73f6f5601ff90331":[14,0,4,23,1],
-"structSF64_1_1Vec3f.html#a0cd136d5142448430ceff6dbbda6b8d4":[13,0,8,23,0],
-"structSF64_1_1Vec3f.html#a0cd136d5142448430ceff6dbbda6b8d4":[14,0,4,23,0],
-"structSF64_1_1Vec3f.html#a3aa88178ddbcf44d9ff978cb9f1bc91c":[13,0,8,23,2],
-"structSF64_1_1Vec3f.html#a3aa88178ddbcf44d9ff978cb9f1bc91c":[14,0,4,23,2],
-"structSF64_1_1Vec3f.html#ab86d5911000a5708a973d317e947d72d":[13,0,8,23,3],
-"structSF64_1_1Vec3f.html#ab86d5911000a5708a973d317e947d72d":[14,0,4,23,3]
+"structSF64_1_1Vec2f.html#a9e6d5f0f1c9f73d0828f1584bee81117":[13,0,8,22,1]
 };

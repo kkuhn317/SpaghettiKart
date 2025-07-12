@@ -1,5 +1,16 @@
 var NAVTREEINDEX86 =
 {
+"update__objects_8c.html#a5f00f0423e307eaad9fc86d715392e4f":[15,0,3,69,44],
+"update__objects_8c.html#a5f919af8fe62091da3c2beb957939727":[15,0,3,69,197],
+"update__objects_8c.html#a5ff4e49864e7c44e4b717c33c585b0bd":[15,0,3,69,71],
+"update__objects_8c.html#a601231686d436717b1f26ad0303fe7e3":[15,0,3,69,220],
+"update__objects_8c.html#a611ea98550b46aa887eb34b7472ef871":[15,0,3,69,171],
+"update__objects_8c.html#a63599280ed23408b6fd53d67a549e162":[15,0,3,69,37],
+"update__objects_8c.html#a6433786e30fbe8c3dc83f83c9f2c35f9":[15,0,3,69,27],
+"update__objects_8c.html#a65833b533abd5f0cd07d07217d923e07":[15,0,3,69,142],
+"update__objects_8c.html#a658f0eb95515deb574dce747d146c675":[15,0,3,69,79],
+"update__objects_8c.html#a67278882e7bbda5da750f13aec7f3253":[15,0,3,69,46],
+"update__objects_8c.html#a681d275ac47b1b52a797093ac96fddcd":[15,0,3,69,122],
 "update__objects_8c.html#a690661e495441e81ca9878adf2b39d14":[15,0,3,69,200],
 "update__objects_8c.html#a6c7938339fa5406ffe336278a92aa7ad":[15,0,3,69,158],
 "update__objects_8c.html#a6e56a43ec98e81db05f2410893efa437":[15,0,3,69,3],
@@ -238,16 +249,5 @@ var NAVTREEINDEX86 =
 "waypoints_8h.html#acd400daa95682d03a04716f74628af10":[15,0,2,24,17],
 "waypoints_8h.html#acfb8266e8b457b6fb4913ae20e6237d8":[15,0,2,24,27],
 "waypoints_8h.html#ae3566a02982df77dbd8ad7011b0ef86d":[15,0,2,24,26],
-"waypoints_8h.html#ae48f681ef2a4911e8747d3ceb0acbf6f":[15,0,2,24,25],
-"waypoints_8h.html#aec16d5234e8ca789a1000fbf1349ca3e":[15,0,2,24,8],
-"waypoints_8h.html#af5dd8797b862da2ce3e9cfdbcaceb79e":[15,0,2,24,5],
-"waypoints_8h_source.html":[15,0,2,24],
-"yoshi__egg_2render_8inc_8c.html":[15,0,3,0,20,0],
-"yoshi__egg_2render_8inc_8c.html#a4d082cb0256600e693927bccddbee605":[15,0,3,0,20,0,0],
-"yoshi__egg_2render_8inc_8c_source.html":[15,0,3,0,20,0],
-"yoshi__egg_2update_8inc_8c.html":[15,0,3,0,20,1],
-"yoshi__egg_2update_8inc_8c.html#ab59d1718525ade7c99a8332e32a20ec2":[15,0,3,0,20,1,0],
-"yoshi__egg_2update_8inc_8c_source.html":[15,0,3,0,20,1],
-"yoshi__kart_8h.html":[15,0,2,0,77],
-"yoshi__kart_8h.html#a2fa260b0b9d7d1938c3ddbffd472d17a":[15,0,2,0,77,1]
+"waypoints_8h.html#ae48f681ef2a4911e8747d3ceb0acbf6f":[15,0,2,24,25]
 };

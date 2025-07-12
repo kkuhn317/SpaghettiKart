@@ -1,5 +1,16 @@
 var NAVTREEINDEX60 =
 {
+"render__player_8c.html#a196985b7759b42df6514dd0ec7fc64a7":[15,0,3,59,6],
+"render__player_8c.html#a1b4c1f505293981dcb7285bac305c8f4":[15,0,3,59,73],
+"render__player_8c.html#a1cfc917f2d97de8a1e438fd141f18096":[15,0,3,59,59],
+"render__player_8c.html#a216df4c5869b528d9072b6006536a841":[15,0,3,59,25],
+"render__player_8c.html#a229ab780a8a5b76c08608148c5542534":[15,0,3,59,52],
+"render__player_8c.html#a2555e6001eefed5ff761a34efeeeee0b":[15,0,3,59,89],
+"render__player_8c.html#a26f92e74c10bdc3d173678bcf8f49fc6":[15,0,3,59,75],
+"render__player_8c.html#a2aa89d4fc7070bdd407ce7e9e2b8671e":[15,0,3,59,74],
+"render__player_8c.html#a2b2f28a894b719b9f7ea6d864f657dfc":[15,0,3,59,76],
+"render__player_8c.html#a2cffa64461486e9d80c11a3d32b277a0":[15,0,3,59,62],
+"render__player_8c.html#a30646967f10de8d498a70546d2b5f849":[15,0,3,59,92],
 "render__player_8c.html#a30ed78cf8502138212a8e5460b4c5933":[15,0,3,59,45],
 "render__player_8c.html#a35069b513a0c5f0b544688a61cb74aac":[15,0,3,59,66],
 "render__player_8c.html#a35eebbf671cc37666be29a2a9b6f3c8c":[15,0,3,59,36],
@@ -238,16 +249,5 @@ var NAVTREEINDEX60 =
 "replays_8c.html#ad9b538228a8f0987738ad0e8cd7f301a":[15,0,3,61,32],
 "replays_8c.html#ada30ba013c97df306b243dbd89d8979f":[15,0,3,61,11],
 "replays_8c.html#adb82b3575b5edee855a069cc37937215":[15,0,3,61,38],
-"replays_8c.html#ae7d61f2c74810b3ee3efdf03b4dcc3d2":[15,0,3,61,13],
-"replays_8c.html#aedb1050835c582e17394a9c176bc2e78":[15,0,3,61,8],
-"replays_8c.html#aee24e49cb7f56db0afa7884ac229e9a8":[15,0,3,61,55],
-"replays_8c.html#aee4aca6ad9d5e3c97dac777a4ba497c7":[15,0,3,61,41],
-"replays_8c.html#aef6de91d5312eb365cb18c20b7e024d0":[15,0,3,61,50],
-"replays_8c.html#af2a2ca4014268d79ef26c33b328317f2":[15,0,3,61,5],
-"replays_8c.html#af3ecf6409c5c310ef01f811d8dd288d9":[15,0,3,61,2],
-"replays_8c.html#af977369c31c9c9e0bd2e0605d0c933ff":[15,0,3,61,20],
-"replays_8h.html":[15,0,3,62],
-"replays_8h.html#a00d76e17b6cf4eab22dbc0a2cb1eeaf6":[15,0,3,62,29],
-"replays_8h.html#a0a5ecd7326c14f60dc23b1d25ff10599":[15,0,3,62,31],
-"replays_8h.html#a0eb82092a448ee36c1e468dfa4765ce6":[15,0,3,62,27]
+"replays_8c.html#ae7d61f2c74810b3ee3efdf03b4dcc3d2":[15,0,3,61,13]
 };

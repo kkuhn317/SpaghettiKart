@@ -1,5 +1,16 @@
 var NAVTREEINDEX87 =
 {
+"waypoints_8h.html#aec16d5234e8ca789a1000fbf1349ca3e":[15,0,2,24,8],
+"waypoints_8h.html#af5dd8797b862da2ce3e9cfdbcaceb79e":[15,0,2,24,5],
+"waypoints_8h_source.html":[15,0,2,24],
+"yoshi__egg_2render_8inc_8c.html":[15,0,3,0,20,0],
+"yoshi__egg_2render_8inc_8c.html#a4d082cb0256600e693927bccddbee605":[15,0,3,0,20,0,0],
+"yoshi__egg_2render_8inc_8c_source.html":[15,0,3,0,20,0],
+"yoshi__egg_2update_8inc_8c.html":[15,0,3,0,20,1],
+"yoshi__egg_2update_8inc_8c.html#ab59d1718525ade7c99a8332e32a20ec2":[15,0,3,0,20,1,0],
+"yoshi__egg_2update_8inc_8c_source.html":[15,0,3,0,20,1],
+"yoshi__kart_8h.html":[15,0,2,0,77],
+"yoshi__kart_8h.html#a2fa260b0b9d7d1938c3ddbffd472d17a":[15,0,2,0,77,1],
 "yoshi__kart_8h.html#afafa9ceb8160389e5bc3986fc50573c1":[15,0,2,0,77,0],
 "yoshi__kart_8h_source.html":[15,0,2,0,77],
 "yoshi__valley_2course__offsets_8c.html":[15,0,0,20,0],

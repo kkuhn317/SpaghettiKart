@@ -159,7 +159,6 @@ var defines_8h =
     [ "TOAD_SIZE", "defines_8h.html#aefc3b587853ceba930d4b7989cb84a51", null ],
     [ "TWO_PLAYERS_SELECTED", "defines_8h.html#a98748f4c5112d0a0081d909822d4c8ab", null ],
     [ "UNKNOWN_EFFECT_0x1", "defines_8h.html#aadb78c0ceeb138891e134a5ec90ad6ed", null ],
-    [ "UNKNOWN_EFFECT_0x10", "defines_8h.html#ab48bff6cd0ed2e11713ebf5a7d8235ad", null ],
     [ "UNKNOWN_EFFECT_0x100", "defines_8h.html#abdafcfef69ac70f880def7a5870c4a04", null ],
     [ "UNKNOWN_EFFECT_0x1000", "defines_8h.html#a12b30f45f25ffd04108b874e5e2bc963", null ],
     [ "UNKNOWN_EFFECT_0x10000", "defines_8h.html#aceb46aa6f9f7319770d1324a7ced921c", null ],

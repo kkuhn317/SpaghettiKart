@@ -1,5 +1,16 @@
 var NAVTREEINDEX72 =
 {
+"structSF64_1_1Vec2f.html#a9e6d5f0f1c9f73d0828f1584bee81117":[14,0,4,22,1],
+"structSF64_1_1Vec3f.html":[13,0,8,23],
+"structSF64_1_1Vec3f.html":[14,0,4,23],
+"structSF64_1_1Vec3f.html#a08b67199a4fb28da73f6f5601ff90331":[13,0,8,23,1],
+"structSF64_1_1Vec3f.html#a08b67199a4fb28da73f6f5601ff90331":[14,0,4,23,1],
+"structSF64_1_1Vec3f.html#a0cd136d5142448430ceff6dbbda6b8d4":[13,0,8,23,0],
+"structSF64_1_1Vec3f.html#a0cd136d5142448430ceff6dbbda6b8d4":[14,0,4,23,0],
+"structSF64_1_1Vec3f.html#a3aa88178ddbcf44d9ff978cb9f1bc91c":[13,0,8,23,2],
+"structSF64_1_1Vec3f.html#a3aa88178ddbcf44d9ff978cb9f1bc91c":[14,0,4,23,2],
+"structSF64_1_1Vec3f.html#ab86d5911000a5708a973d317e947d72d":[13,0,8,23,3],
+"structSF64_1_1Vec3f.html#ab86d5911000a5708a973d317e947d72d":[14,0,4,23,3],
 "structSF64_1_1Vec3fData.html":[13,0,8,25],
 "structSF64_1_1Vec3fData.html":[14,0,4,25],
 "structSF64_1_1Vec3fData.html#a390625d003568c695ea7fb804974f913":[13,0,8,25,3],
@@ -238,16 +249,5 @@ var NAVTREEINDEX72 =
 "structShellActor.html#a89a884c6ba2b5b022b7dcb5e74d50910":[14,0,243,16],
 "structShellActor.html#abb69af2d8de513a7f3ddadb94b2b6078":[14,0,243,2],
 "structShellActor.html#ac40ddee32f5d1a093578e3f23ed76e0b":[14,0,243,3],
-"structShellActor.html#acd41b01d05450b6a241a81907bb4fbb8":[14,0,243,6],
-"structShellActor.html#acf7c6324c79136005a8a16b0280862d4":[14,0,243,14],
-"structShellActor.html#ad503d4399dfef15a8aeb4cfec64ac155":[14,0,243,12],
-"structShellActor.html#adaca452aa94770d8d57f99cc1f3b7151":[14,0,243,10],
-"structShellActor.html#af3da1448ac4320471aadbc7652ea81a5":[14,0,243,4],
-"structSidebarEntry.html":[14,0,245],
-"structSidebarEntry.html#a24c86d28452ab7fccb7235d03a830ec3":[14,0,245,0],
-"structSidebarEntry.html#a988f16ab0c427232a66f7deb20c37ef1":[14,0,245,1],
-"structSkybox.html":[14,0,246],
-"structSkybox.html#a38b95b0761ac6f03f1d85a93e514cad1":[14,0,246,5],
-"structSkybox.html#a4997ffec92872b821d40a35a20eeb0ca":[14,0,246,0],
-"structSkybox.html#a60e408b166dad45f452004d93b0ad15e":[14,0,246,3]
+"structShellActor.html#acd41b01d05450b6a241a81907bb4fbb8":[14,0,243,6]
 };

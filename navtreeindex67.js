@@ -1,5 +1,16 @@
 var NAVTREEINDEX67 =
 {
+"structAudioSessionSettingsEU.html#ad4c68ea6af3d93ca161c299535cb0aab":[14,0,73,2],
+"structAudioSessionSettingsEU.html#adfe76cb7c88c0bfc85d2fe27f2b99160":[14,0,73,10],
+"structAudioSessionSettingsEU.html#ae4a9341b0913386e8fc19890619cb72f":[14,0,73,13],
+"structBananaActor.html":[14,0,75],
+"structBananaActor.html#a10bc99e6eeda7a4c8c7368dc8df52777":[14,0,75,14],
+"structBananaActor.html#a125826669f88f4663fb32d45e39fb6de":[14,0,75,8],
+"structBananaActor.html#a23b3c1167f55987ca33a44a544c1b000":[14,0,75,11],
+"structBananaActor.html#a2c7136a31124c699629cd3d88562869b":[14,0,75,1],
+"structBananaActor.html#a4598dafe53e7c6710f6d31b33dc3cef6":[14,0,75,13],
+"structBananaActor.html#a72b8568471d0153d1c1989acdd0a4627":[14,0,75,6],
+"structBananaActor.html#a7675553f8f43dd172f5dfe656509bb56":[14,0,75,2],
 "structBananaActor.html#a81f389d1c3c8687bee8fdcb205690a4d":[14,0,75,10],
 "structBananaActor.html#a83d149d5f5dd3bdea515cb6d0ad6a0ee":[14,0,75,7],
 "structBananaActor.html#ab30bfa430265f8e869e8b3ebf8bb9d03":[14,0,75,0],
@@ -238,16 +249,5 @@ var NAVTREEINDEX67 =
 "structCutsceneSplinePoint.html":[14,0,108],
 "structCutsceneSplinePoint.html#a56141a177956feb2bf2f1dcbf347dd2e":[14,0,108,0],
 "structCutsceneSplinePoint.html#a58d0f7ecc0595b19192b1d8397de22e0":[14,0,108,1],
-"structCutsceneSplinePoint.html#a6ac9bd7f67e1080b4154901b53b00e30":[14,0,108,2],
-"structD__80150158.html":[14,0,109],
-"structD__80150158.html#a89d74859e90572976c5094359e65f992":[14,0,109,2],
-"structD__80150158.html#a9a2b85ef05b849f1199d7a39e35c37c7":[14,0,109,0],
-"structD__80150158.html#ac538eb5518499f13c7a14e959ddfe07c":[14,0,109,1],
-"structD__80150158.html#ac8c6855d05a4b4e096b6608aaf816b5a":[14,0,109,3],
-"structDrum.html":[14,0,113],
-"structDrum.html#a042ebd42088ca9bb904e2c1410ff20a0":[14,0,113,4],
-"structDrum.html#a522aa4461898868236533c00107ff955":[14,0,113,3],
-"structDrum.html#a594bcec833a2b26bbf8a9134a9b16f9e":[14,0,113,2],
-"structDrum.html#a5fe2df7117b6927a9a8f4d9305d680fb":[14,0,113,9],
-"structDrum.html#a70515dee9d300a40837acaa36990d6cb":[14,0,113,7]
+"structCutsceneSplinePoint.html#a6ac9bd7f67e1080b4154901b53b00e30":[14,0,108,2]
 };

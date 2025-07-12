@@ -1,5 +1,16 @@
 var NAVTREEINDEX51 =
 {
+"networking_8h.html#aadeacb4aee3e3e6dec2288ff4284d76b":[15,0,3,8,1,11],
+"networking_8h.html#ab06594b38f6f29fc6139a7f3cc5886ac":[15,0,3,8,1,23],
+"networking_8h.html#ac589b1f67a7e20769c3a62741439e0c6":[15,0,3,8,1,29],
+"networking_8h.html#acc50de836de3a56188f73581f84afc83":[15,0,3,8,1,9],
+"networking_8h.html#add8be9e3368472358d8d6fea313550ed":[15,0,3,8,1,27],
+"networking_8h.html#aea2fc41f8618d9fad32b95d9313c26e0":[15,0,3,8,1,17],
+"networking_8h.html#aeb014937cd6cc5fce67cf91f60c0561b":[15,0,3,8,1,2],
+"networking_8h.html#aed9ca538cfe9988acf346351f27a368e":[15,0,3,8,1,15],
+"networking_8h.html#afc70931364035c41b086f0473286bba5":[15,0,3,8,1,8],
+"networking_8h_source.html":[15,0,3,8,1],
+"new__func_8h.html":[15,0,3,9,55],
 "new__func_8h.html#a07c95da05920a7bc4321bd8661995a03":[15,0,3,9,55,4],
 "new__func_8h.html#a0e3cf3e47fb94388cd044cdc24ac01a8":[15,0,3,9,55,5],
 "new__func_8h.html#a14257090762300bb1a4960ffad13fe8a":[15,0,3,9,55,2],
@@ -238,16 +249,5 @@ var NAVTREEINDEX51 =
 "osPfsAllocateFile_8c.html#a6bb2c5cb35cc8f2d71036be0276e891f":[15,0,3,9,80,2],
 "osPfsAllocateFile_8c.html#aa35c1d7fc54662fbe18f3e9c8e75d3ab":[15,0,3,9,80,0],
 "osPfsChecker_8c.html":[15,0,3,9,81],
-"osPfsChecker_8c.html#a593716f3494df81f212ed3803c1f57a9":[15,0,3,9,81,0],
-"osPfsChecker_8c.html#a6c47d5b15542679260cfcf6a7c841019":[15,0,3,9,81,1],
-"osPfsChecker_8c.html#aef15b5519cb832836e2546c3fd1af64e":[15,0,3,9,81,2],
-"osPfsDeleteFile_8c.html":[15,0,3,9,82],
-"osPfsDeleteFile_8c.html#a4694169ebbc67d1cab176b4f8945ce51":[15,0,3,9,82,2],
-"osPfsDeleteFile_8c.html#a9058bfef76860424d50c262127aabb87":[15,0,3,9,82,1],
-"osPfsDeleteFile_8c.html#ad76d8fbffc404bc08505ffdda655885d":[15,0,3,9,82,0],
-"osPfsFileState_8c.html":[15,0,3,9,83],
-"osPfsFileState_8c.html#ae0739abb62393e32cab63e2c658fd5d3":[15,0,3,9,83,0],
-"osPfsFreeBlocks_8c.html":[15,0,3,9,84],
-"osPfsFreeBlocks_8c.html#ad43f8c0b37c09b8f21058829206e8ef6":[15,0,3,9,84,0],
-"osPfsInit_8c.html":[15,0,3,9,85]
+"osPfsChecker_8c.html#a593716f3494df81f212ed3803c1f57a9":[15,0,3,9,81,0]
 };
