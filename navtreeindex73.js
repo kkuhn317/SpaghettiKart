@@ -1,5 +1,6 @@
 var NAVTREEINDEX73 =
 {
+"structShellActor.html#acd41b01d05450b6a241a81907bb4fbb8":[14,0,243,6],
 "structShellActor.html#acf7c6324c79136005a8a16b0280862d4":[14,0,243,14],
 "structShellActor.html#ad503d4399dfef15a8aeb4cfec64ac155":[14,0,243,12],
 "structShellActor.html#adaca452aa94770d8d57f99cc1f3b7151":[14,0,243,10],
@@ -248,6 +249,5 @@ var NAVTREEINDEX73 =
 "structUIWidgets_1_1FloatSliderOptions.html":[13,0,11,4],
 "structUIWidgets_1_1FloatSliderOptions.html":[14,0,7,3],
 "structUIWidgets_1_1FloatSliderOptions.html#a11a789e4aa792be4c99fbe7e04ab91c3":[13,0,11,4,15],
-"structUIWidgets_1_1FloatSliderOptions.html#a11a789e4aa792be4c99fbe7e04ab91c3":[14,0,7,3,15],
-"structUIWidgets_1_1FloatSliderOptions.html#a1e3fe66b9a7838234705bb1cdc45abb7":[13,0,11,4,2]
+"structUIWidgets_1_1FloatSliderOptions.html#a11a789e4aa792be4c99fbe7e04ab91c3":[14,0,7,3,15]
 };

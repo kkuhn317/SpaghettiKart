@@ -1,5 +1,6 @@
 var NAVTREEINDEX67 =
 {
+"structAudioSessionSettingsEU.html#ad136cdb2c48ddb11d0ec05c913dc6ff0":[14,0,73,11],
 "structAudioSessionSettingsEU.html#ad4c68ea6af3d93ca161c299535cb0aab":[14,0,73,2],
 "structAudioSessionSettingsEU.html#adfe76cb7c88c0bfc85d2fe27f2b99160":[14,0,73,10],
 "structAudioSessionSettingsEU.html#ae4a9341b0913386e8fc19890619cb72f":[14,0,73,13],
@@ -248,6 +249,5 @@ var NAVTREEINDEX67 =
 "structCutscene.html#adf71ab9b7e76c8a387d4934437caa7e2":[14,0,107,0],
 "structCutsceneSplinePoint.html":[14,0,108],
 "structCutsceneSplinePoint.html#a56141a177956feb2bf2f1dcbf347dd2e":[14,0,108,0],
-"structCutsceneSplinePoint.html#a58d0f7ecc0595b19192b1d8397de22e0":[14,0,108,1],
-"structCutsceneSplinePoint.html#a6ac9bd7f67e1080b4154901b53b00e30":[14,0,108,2]
+"structCutsceneSplinePoint.html#a58d0f7ecc0595b19192b1d8397de22e0":[14,0,108,1]
 };

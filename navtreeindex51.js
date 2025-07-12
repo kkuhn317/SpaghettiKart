@@ -1,5 +1,6 @@
 var NAVTREEINDEX51 =
 {
+"networking_8h.html#a9c6ade683b9f080f25707e0812ef7a6c":[15,0,3,8,1,5],
 "networking_8h.html#aadeacb4aee3e3e6dec2288ff4284d76b":[15,0,3,8,1,11],
 "networking_8h.html#ab06594b38f6f29fc6139a7f3cc5886ac":[15,0,3,8,1,23],
 "networking_8h.html#ac589b1f67a7e20769c3a62741439e0c6":[15,0,3,8,1,29],
@@ -23,7 +24,7 @@ var NAVTREEINDEX51 =
 "new__func_8h.html#ac8095e2ec1adbd7e74e655c578968a36":[15,0,3,9,55,0],
 "new__func_8h_source.html":[15,0,3,9,55],
 "objects.html":[0,1],
-"objects.html#objects":[0,1,0],
+"objects.html#objects-1":[0,1,0],
 "objects_8h.html":[15,0,2,16],
 "objects_8h.html#a015cc1fa03690348fb398b9be74ecc15":[15,0,2,16,35],
 "objects_8h.html#a02bd29e49d2089bb6bd1bfe33e360584":[15,0,2,16,87],
@@ -248,6 +249,5 @@ var NAVTREEINDEX51 =
 "osPfsAllocateFile_8c.html#a12a746a3baa07de1c6d2791949388a4c":[15,0,3,9,80,1],
 "osPfsAllocateFile_8c.html#a6bb2c5cb35cc8f2d71036be0276e891f":[15,0,3,9,80,2],
 "osPfsAllocateFile_8c.html#aa35c1d7fc54662fbe18f3e9c8e75d3ab":[15,0,3,9,80,0],
-"osPfsChecker_8c.html":[15,0,3,9,81],
-"osPfsChecker_8c.html#a593716f3494df81f212ed3803c1f57a9":[15,0,3,9,81,0]
+"osPfsChecker_8c.html":[15,0,3,9,81]
 };
