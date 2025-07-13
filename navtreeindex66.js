@@ -1,5 +1,6 @@
 var NAVTREEINDEX66 =
 {
+"stdarg_8h_source.html":[15,0,2,1,1],
 "stddef_8h.html":[15,0,2,1,2],
 "stddef_8h.html#a19a04836d558f3c018b597e8dea1e0e0":[15,0,2,1,2,0],
 "stddef_8h_source.html":[15,0,2,1,2],
@@ -248,6 +249,5 @@ var NAVTREEINDEX66 =
 "structAudioSessionSettingsEU.html":[14,0,73],
 "structAudioSessionSettingsEU.html#a001374b0d252673c9c48b8e6af7161a7":[14,0,73,7],
 "structAudioSessionSettingsEU.html#a35ffb6dade75e5b4017ec63db7f05fa1":[14,0,73,3],
-"structAudioSessionSettingsEU.html#a4c3e53e152b60ad2eafcd6e6ec82378d":[14,0,73,5],
-"structAudioSessionSettingsEU.html#a689006c056317c1c24a21fd14aa306f9":[14,0,73,1]
+"structAudioSessionSettingsEU.html#a4c3e53e152b60ad2eafcd6e6ec82378d":[14,0,73,5]
 };

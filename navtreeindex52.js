@@ -1,5 +1,6 @@
 var NAVTREEINDEX52 =
 {
+"osLeoDiskInit_8c.html#aae0719cf2d9ddb4a109613bf3356c64a":[15,0,3,9,79,3],
 "osLeoDiskInit_8c.html#afaa21882532ed51d7333383c0b90a514":[15,0,3,9,79,1],
 "osPfsAllocateFile_8c.html":[15,0,3,9,80],
 "osPfsAllocateFile_8c.html#a12a746a3baa07de1c6d2791949388a4c":[15,0,3,9,80,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX52 =
 "piint_8h.html#a37f198ebe6470683a95f5cd1e400f350":[15,0,3,9,115,49],
 "piint_8h.html#a38fd7fad65301f7a0e2153e0b0f84c83":[15,0,3,9,115,18],
 "piint_8h.html#a3b4b7efff78e3245465d67a1ecfa4b8b":[15,0,3,9,115,6],
-"piint_8h.html#a3e05f8f40d1da55183ee0eaec0c5b6bb":[15,0,3,9,115,91],
-"piint_8h.html#a44f316abe60da01df88935f6443521a6":[15,0,3,9,115,17]
+"piint_8h.html#a3e05f8f40d1da55183ee0eaec0c5b6bb":[15,0,3,9,115,91]
 };

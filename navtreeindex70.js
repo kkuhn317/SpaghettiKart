@@ -1,5 +1,6 @@
 var NAVTREEINDEX70 =
 {
+"structOMoleGroup_1_1MoleEntry.html#ae146c07a1aedbd8ea9e5b780bf7a1bf9":[14,0,191,0,0],
 "structOSEventMessageStruct__0__s.html":[14,0,197],
 "structOSEventMessageStruct__0__s.html#a5e38fae09a84df1598d28ab574708add":[14,0,197,1],
 "structOSEventMessageStruct__0__s.html#af1a57f744f32174015a18c0be67cacb1":[14,0,197,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX70 =
 "structPlayer.html#a9f4496ecf8717edfaf59a28ab6f726ab":[14,0,213,77],
 "structPlayer.html#aa2aea429bcc24178e3e4f6a0a599f49f":[14,0,213,60],
 "structPlayer.html#aa3d81d78f1cce34a89a0f83d50f78733":[14,0,213,15],
-"structPlayer.html#aa47478e0b0fb0bb673c1081d5840268f":[14,0,213,55],
-"structPlayer.html#aa77a79a8862283a08c255f07962e6e60":[14,0,213,80]
+"structPlayer.html#aa47478e0b0fb0bb673c1081d5840268f":[14,0,213,55]
 };

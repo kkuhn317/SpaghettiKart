@@ -1,5 +1,6 @@
 var NAVTREEINDEX50 =
 {
+"namespaceMK64.html#a7bd07479273b52e702ac4baf9081791da02c86eb2792f3262c21d030a87e19793":[13,0,5,25,20],
 "namespaceMK64.html#a7bd07479273b52e702ac4baf9081791da0901af44ea5f01c0746f69bc2d1f33ed":[13,0,5,25,10],
 "namespaceMK64.html#a7bd07479273b52e702ac4baf9081791da27118326006d3829667a400ad23d5d98":[13,0,5,25,19],
 "namespaceMK64.html#a7bd07479273b52e702ac4baf9081791da4410ec34d9e6c1a68100ca0ce033fb17":[13,0,5,25,2],
@@ -248,6 +249,5 @@ var NAVTREEINDEX50 =
 "networking_8h.html#a47d880268cfe380cc1bb2d92dbf3c293":[15,0,3,8,1,7],
 "networking_8h.html#a55e6c7e800d9db21514847b8e14d0af3":[15,0,3,8,1,3],
 "networking_8h.html#a638cf4ec2e59fc36805267df3b8b5cf0":[15,0,3,8,1,14],
-"networking_8h.html#a64f17a6ca0cba5861600194cb67dbd51":[15,0,3,8,1,30],
-"networking_8h.html#a678fa6b5dcf329b34042645d60f8f4c9":[15,0,3,8,1,28]
+"networking_8h.html#a64f17a6ca0cba5861600194cb67dbd51":[15,0,3,8,1,30]
 };
