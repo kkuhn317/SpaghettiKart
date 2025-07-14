@@ -1,5 +1,6 @@
 var NAVTREEINDEX27 =
 {
+"controller_8h.html#ac77efb4feb09be419ce3f8b97668015b":[15,0,3,9,35,40],
 "controller_8h.html#ac9b5082f4c27da65023e8232f5799240":[15,0,3,9,35,18],
 "controller_8h.html#ad72b03fda20a869620a8df92c4d3a8d8":[15,0,3,9,35,27],
 "controller_8h.html#ad76d8fbffc404bc08505ffdda655885d":[15,0,3,9,35,45],
@@ -211,7 +212,7 @@ var NAVTREEINDEX27 =
 "course__offsets_8h.html#af7c3d5a48e591b30ff6c2b2f23e8d2cc":[15,0,2,8,7],
 "course__offsets_8h_source.html":[15,0,2,8],
 "courses.html":[3,0],
-"courses.html#courses-1":[3,0,0],
+"courses.html#courses":[3,0,0],
 "courses_2test__course_2data_8c.html":[15,0,0,17,0],
 "courses_2test__course_2data_8c.html#a5776e9da61369423652d9d1c875f2abd":[15,0,0,17,0,0],
 "courses_2test__course_2data_8c.html#a5b6179834eac70a4585df8f3519be920":[15,0,0,17,0,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX27 =
 "crc_8c.html":[15,0,3,9,36],
 "crc_8c.html#a3da2a6d11716fef869b6be888c9b7263":[15,0,3,9,36,1],
 "crc_8c.html#a5ab8a1ce418d27ff12d648c447c8ab6e":[15,0,3,9,36,0],
-"credits_8c.html":[15,0,3,5,10],
-"credits_8c.html#a480d4ac79c5035c07a1420e9a72fed41":[15,0,3,5,10,1]
+"credits_8c.html":[15,0,3,5,10]
 };
