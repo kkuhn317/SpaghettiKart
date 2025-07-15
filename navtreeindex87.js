@@ -1,7 +1,5 @@
 var NAVTREEINDEX87 =
 {
-"waypoints_8h.html#a95ff1a706d5fb5bd43a94bb9737f5797":[15,0,2,24,20],
-"waypoints_8h.html#ab65b47dda5e717c02a1910cd9e6e5dd2":[15,0,2,24,13],
 "waypoints_8h.html#abe3f9b84841d59b43bafa84554f151d4":[15,0,2,24,12],
 "waypoints_8h.html#ac3def14969f395c80c3789853c3f8ed9":[15,0,2,24,4],
 "waypoints_8h.html#aca21b4c8bda4955e7f2b958f3033fb00":[15,0,2,24,2],
