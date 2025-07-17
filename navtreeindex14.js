@@ -112,8 +112,9 @@ var NAVTREEINDEX14 =
 "classOTrophy.html#a00b69561b52ab9167e373ce37702aea0ab9d9b4988c1cfb6199d200b20a817a6a":[14,0,205,0,3],
 "classOTrophy.html#a03168e7545fe42e1a9a6b5d0a1a76921":[14,0,205,11],
 "classOTrophy.html#a2eb7707fd5f496e55c91ee160590cdd7":[14,0,205,3],
-"classOTrophy.html#a47d31d870d1f0ede68013a0cf47d79f7":[14,0,205,15],
+"classOTrophy.html#a47d31d870d1f0ede68013a0cf47d79f7":[14,0,205,16],
 "classOTrophy.html#a49dec562364c78fb2a3fd1a318249c74":[14,0,205,9],
+"classOTrophy.html#a4ca051131f7359fd3579a12c537d538e":[14,0,205,14],
 "classOTrophy.html#a5c03cbdb2860998f8f88aca4dfdd69ba":[14,0,205,5],
 "classOTrophy.html#a6430fad04fc455c30f430b7dad14702d":[14,0,205,1],
 "classOTrophy.html#a6430fad04fc455c30f430b7dad14702da1845328f55aaf9946a5f120a63d75d17":[14,0,205,1,1],
@@ -128,7 +129,7 @@ var NAVTREEINDEX14 =
 "classOTrophy.html#a907d7e4c1695e4764fc2e299a10cc782":[14,0,205,8],
 "classOTrophy.html#aa5e93e6b452f1a6da2b473ea2821bf0d":[14,0,205,13],
 "classOTrophy.html#ad4d2abf5f8cc69c87c0c680119c7670d":[14,0,205,4],
-"classOTrophy.html#adf51e58365355cc693acd5ff051bc555":[14,0,205,14],
+"classOTrophy.html#adf51e58365355cc693acd5ff051bc555":[14,0,205,15],
 "classOTrophy.html#afc43ecd25495ec077da26a2f0d5fcdbf":[14,0,205,6],
 "classOTrophy.html#afeec2bd72339d52e595186b1ee3d1b99":[14,0,205,12],
 "classParticleEmitter.html":[14,0,209],
@@ -248,6 +249,5 @@ var NAVTREEINDEX14 =
 "classSF64_1_1Hitbox.html#a38cd19393ce4f5929ad9117aa2a58fb9":[14,0,4,7,1],
 "classSF64_1_1Hitbox.html#a731d3024667d94602f8fc85a3a88008c":[13,0,8,7,0],
 "classSF64_1_1Hitbox.html#a731d3024667d94602f8fc85a3a88008c":[14,0,4,7,0],
-"classSF64_1_1Hitbox.html#afeef07d3fd1a9b391b6d2c27f47cace6":[13,0,8,7,2],
-"classSF64_1_1Hitbox.html#afeef07d3fd1a9b391b6d2c27f47cace6":[14,0,4,7,2]
+"classSF64_1_1Hitbox.html#afeef07d3fd1a9b391b6d2c27f47cace6":[13,0,8,7,2]
 };

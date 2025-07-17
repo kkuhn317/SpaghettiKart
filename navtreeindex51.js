@@ -1,5 +1,6 @@
 var NAVTREEINDEX51 =
 {
+"networking_8h.html#a47d880268cfe380cc1bb2d92dbf3c293":[15,0,3,8,1,7],
 "networking_8h.html#a55e6c7e800d9db21514847b8e14d0af3":[15,0,3,8,1,3],
 "networking_8h.html#a638cf4ec2e59fc36805267df3b8b5cf0":[15,0,3,8,1,14],
 "networking_8h.html#a64f17a6ca0cba5861600194cb67dbd51":[15,0,3,8,1,30],
@@ -248,6 +249,5 @@ var NAVTREEINDEX51 =
 "osInitialize_8c.html#ac3f701802ea091ac52d9d80840bb7cd0":[15,0,3,9,76,2],
 "osInitialize_8c.html#acfb0fdf45b4ccc5ad77f155cf184c910":[15,0,3,9,76,6],
 "osJamMesg_8c.html":[15,0,3,9,78],
-"osJamMesg_8c.html#ac69f7738a5120910a2f6202d27fb44f4":[15,0,3,9,78,0],
-"osLeoDiskInit_8c.html":[15,0,3,9,79]
+"osJamMesg_8c.html#ac69f7738a5120910a2f6202d27fb44f4":[15,0,3,9,78,0]
 };
