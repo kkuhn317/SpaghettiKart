@@ -74,7 +74,7 @@ var NAVTREE =
     [ "Custom characters", "md_docs_2custom-characters.html", [
       [ "Examples for all characters:", "md_docs_2custom-characters.html#examples-for-all-characters", null ],
       [ "Additional Files", "md_docs_2custom-characters.html#additional-files", [
-        [ "Tips", "md_docs_2custom-characters.html#tips", [
+        [ "Tips", "md_docs_2custom-characters.html#tips-1", [
           [ "Change Viewport Render Settings", "md_docs_2custom-characters.html#change-viewport-render-settings", null ]
         ] ],
         [ "Tools To Help", "md_docs_2custom-characters.html#tools-to-help", null ],
@@ -90,7 +90,7 @@ var NAVTREE =
       [ "Import", "md_docs_2custom-track.html#import", null ],
       [ "Track Initialization", "md_docs_2custom-track.html#track-initialization", null ],
       [ "Playing Your Custom Track", "md_docs_2custom-track.html#playing-your-custom-track", null ],
-      [ "Tips", "md_docs_2custom-track.html#tips-1", [
+      [ "Tips", "md_docs_2custom-track.html#tips", [
         [ "Extra information that may be helpful", "md_docs_2custom-track.html#extra-information-that-may-be-helpful", null ]
       ] ]
     ] ],
