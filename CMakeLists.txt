@@ -108,6 +108,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU|Clang|AppleClang")
             -Wno-narrowing \
             -Wno-missing-braces \
             -ffast-math \
+            -flto=auto \
             -pipe"
     )
 
