@@ -49,7 +49,7 @@ var NAVTREE =
           ] ],
           [ "Build", "md_docs_2BUILDING.html#build", null ]
         ] ],
-        [ "Docker", "md_docs_2BUILDING.html#docker", [
+        [ "Docker", "md_docs_2BUILDING.html#docker-1", [
           [ "Create the docker container", "md_docs_2BUILDING.html#create-the-docker-container", null ],
           [ "Configure the project", "md_docs_2BUILDING.html#configure-the-project", null ],
           [ "Compile the project", "md_docs_2BUILDING.html#compile-the-project", null ]
