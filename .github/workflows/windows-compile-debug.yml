@@ -1,4 +1,4 @@
-name: Windows Validation
+name: Windows Validation (Debug)
 
 on:
   pull_request:

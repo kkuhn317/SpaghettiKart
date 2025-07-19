@@ -1,4 +1,4 @@
-name: MacOS Validation
+name: MacOS Validation (Debug)
 
 on:
   pull_request:

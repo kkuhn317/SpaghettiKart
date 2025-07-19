@@ -1,4 +1,4 @@
-name: Linux Validation
+name: Linux Validation (Debug)
 
 on:
   pull_request:
