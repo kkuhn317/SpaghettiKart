@@ -5,7 +5,7 @@ var basics =
       [ "Linux", "compiling.html#linux", null ],
       [ "Windows", "compiling.html#windows", null ],
       [ "macOS", "compiling.html#macos", null ],
-      [ "Docker", "compiling.html#docker", null ],
+      [ "Docker", "compiling.html#docker-1", null ],
       [ "Building US", "compiling.html#building-us", null ],
       [ "Building EU", "compiling.html#building-eu", null ]
     ] ],
@@ -25,7 +25,7 @@ var basics =
         [ "Menus", "controlflow.html#menus", null ],
         [ "Players", "controlflow.html#players", null ],
         [ "Actors", "controlflow.html#actors-1", null ],
-        [ "Objects", "controlflow.html#objects", null ],
+        [ "Objects", "controlflow.html#objects-1", null ],
         [ "Courses", "controlflow.html#courses", [
           [ "Course Folder", "controlflow.html#course-folder", null ]
         ] ],
