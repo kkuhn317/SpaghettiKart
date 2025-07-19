@@ -39,8 +39,8 @@ jobs:
           sudo make install
       - name: Build
         run: |
-          cmake -H. -Bbuild-cmake -GNinja -DCMAKE_BUILD_TYPE=Release
-          cmake --build build-cmake -j --config Release
+          cmake -H. -Bbuild-cmake -GNinja -DCMAKE_BUILD_TYPE=Debug
+          cmake --build build-cmake -j --config Debug
       - name: Create Package
         run: |
           mkdir spaghetti-release
