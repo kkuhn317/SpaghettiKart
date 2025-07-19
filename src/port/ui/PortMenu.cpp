@@ -99,6 +99,12 @@ void PortMenu::AddSettings() {
         .Callback([](WidgetInfo& info) { Ship::Context::GetInstance()->GetWindow()->ToggleFullscreen(); })
         .Options(CheckboxOptions().Tooltip("Toggles Fullscreen On/Off."));
 
+    AddWidget(path, "Startup Behaviour", WIDGET_CVAR_COMBOBOX)
+        .CVar("gSkipIntro")
+        .Options(ComboboxOptions()
+            .ComboMap(introBehaviourOptions)
+            .Tooltip("Select which scene or menu the game launch to."));
+
     AddWidget(path, "Menu Theme", WIDGET_CVAR_COMBOBOX)
         .CVar("gSettings.Menu.Theme")
         .Options(ComboboxOptions()
@@ -294,12 +300,12 @@ void PortMenu::AddSettings() {
             info.isHidden = mPortMenu->disabledMap.at(DISABLE_FOR_NO_WINDOWED_FULLSCREEN).active;
         })
         .Options(CheckboxOptions().Tooltip("Enables Windowed Fullscreen Mode."));
-    AddWidget(path, "Allow multi-windows", WIDGET_CVAR_CHECKBOX)
+    AddWidget(path, "Allow multiple ImGui windows", WIDGET_CVAR_CHECKBOX)
         .CVar(CVAR_ENABLE_MULTI_VIEWPORTS)
         .PreFunc(
             [](WidgetInfo& info) { info.isHidden = mPortMenu->disabledMap.at(DISABLE_FOR_NO_MULTI_VIEWPORT).active; })
         .Options(CheckboxOptions().Tooltip(
-            "Allows multiple windows to be opened at once. Requires a reload to take effect."));
+            "Allows multiple ImGui windows to be opened at once (Does not effect the game or the splitscreen modes). Requires a reload to take effect."));
     AddWidget(path, "Texture Filter (Needs reload)", WIDGET_CVAR_COMBOBOX)
         .CVar(CVAR_TEXTURE_FILTER)
         .Options(ComboboxOptions().Tooltip("Sets the applied Texture Filtering.").ComboMap(textureFilteringMap));
@@ -349,6 +355,9 @@ void PortMenu::AddEnhancements() {
     AddWidget(path, "Disable Culling", WIDGET_CVAR_CHECKBOX)
         .CVar("gNoCulling")
         .Options(CheckboxOptions().Tooltip("Disable original culling of mk64"));
+    AddWidget(path, "Disable Rubberbanding", WIDGET_CVAR_CHECKBOX)
+        .CVar("gDisableRubberbanding")
+        .Options(CheckboxOptions().Tooltip("Disable rubberbanding in the game."));
     AddWidget(path, "Far Frustrum", WIDGET_CVAR_SLIDER_FLOAT)
         .CVar("gFarFrustrum")
         .PreFunc([](WidgetInfo& info) { info.isHidden = !CVarGetInteger("gNoCulling", 0); })
@@ -364,7 +373,15 @@ void PortMenu::AddEnhancements() {
         .PreFunc([](WidgetInfo& info) { info.isHidden = !CVarGetInteger("gEnableCustomCC", 0); })
         .Options(FloatSliderOptions().Min(0.0f).Max(1000.0f).DefaultValue(150.0f).Step(10.0f));
 
+    AddWidget(path, "Enable Digital Speedometer", WIDGET_CVAR_CHECKBOX)
+        .CVar("gEnableDigitalSpeedometer")
+        .Options(CheckboxOptions().Tooltip("Welcome to the modern era"));
+
     AddWidget(path, "Harder CPU", WIDGET_CVAR_CHECKBOX).CVar("gHarderCPU");
+
+    AddWidget(path, "Show Spaghetti version", WIDGET_CVAR_CHECKBOX)
+        .CVar("gShowSpaghettiVersion")
+        .Options(CheckboxOptions().Tooltip("Show the Spaghetti Kart version on the Mario Kart menu").DefaultValue(true));
 
     path = { "Enhancements", "Cheats", SECTION_COLUMN_1 };
     AddSidebarEntry("Enhancements", "Cheats", 3);
@@ -425,6 +442,9 @@ void PortMenu::AddDevTools() {
         .Options(CheckboxOptions().Tooltip("Changes the menu display from overlay to windowed."));
     AddWidget(path, "Debug Mode", WIDGET_CVAR_CHECKBOX)
         .CVar("gEnableDebugMode")
+        .Callback([](WidgetInfo& info) {
+            SPDLOG_INFO(CVarGetInteger("gEnableDebugMode", 0) == 0 ? "Debug Mode deactivated" : "Debug Mode activated");
+        })
         .Options(CheckboxOptions().Tooltip("Enables Debug Mode."));
     AddWidget(path, "Modify Interpolation Target FPS", WIDGET_CVAR_CHECKBOX)
         .CVar("gModifyInterpolationTargetFPS")

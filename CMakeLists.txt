@@ -11,6 +11,36 @@ set(NATO_PHONETIC_ALPHABET
   "Xray" "Yankee" "Zulu"
 )
 
+execute_process(
+  COMMAND git describe --tags
+  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+  OUTPUT_VARIABLE PROJECT_VERSION
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+if (DEFINED PROJECT_VERSION AND NOT "${PROJECT_VERSION}" STREQUAL "")
+  string(REPLACE "-" ";" PROJECT_VERSION_LIST "${PROJECT_VERSION}")
+  list(GET PROJECT_VERSION_LIST 0 PROJECT_VERSION_PATCH)
+  string(REPLACE "." ";" PROJECT_VERSION_LIST "${PROJECT_VERSION_PATCH}")
+  list(LENGTH PROJECT_VERSION_LIST PROJECT_VERSION_LIST_LENGTH)
+  if (${PROJECT_VERSION_LIST_LENGTH} LESS 3)
+    set(PROJECT_VERSION_PATCH 0)
+  else()
+    list(GET PROJECT_VERSION_LIST 2 PROJECT_VERSION_PATCH)
+  endif()
+else()
+  set(PROJECT_VERSION "Unknown")
+  execute_process(
+    COMMAND git log --pretty=format:%h -1
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    OUTPUT_VARIABLE PROJECT_VERSION_PATCH
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+  )
+  if (DEFINED PROJECT_VERSION_PATCH AND NOT "${PROJECT_VERSION_PATCH}" STREQUAL "")
+    set(PROJECT_VERSION "${PROJECT_VERSION}-${PROJECT_VERSION_PATCH}")
+  endif()
+  set(PROJECT_VERSION_PATCH 0)
+endif()
+
 # Get the patch version number from the project version
 math(EXPR PATCH_INDEX "${PROJECT_VERSION_PATCH}")
 
@@ -19,6 +49,8 @@ list(GET NATO_PHONETIC_ALPHABET ${PATCH_INDEX} PROJECT_PATCH_WORD)
 
 set(PROJECT_BUILD_NAME "Alfredo ${PROJECT_PATCH_WORD}" CACHE STRING "" FORCE)
 set(PROJECT_TEAM "github.com/harbourmasters" CACHE STRING "" FORCE)
+
+message("Spaghetti Kart version: ${PROJECT_VERSION} Alfredo ${PROJECT_PATCH_WORD}")
 
 if(APPLE)
   enable_language(OBJCXX)
@@ -35,9 +67,6 @@ set(CMAKE_CXX_STANDARD 20 CACHE STRING "The C++ standard to use")
 set(CMAKE_C_STANDARD 11 CACHE STRING "The C standard to use")
 set_property(DIRECTORY ${CMAKE_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Spaghettify)
 set(PROJECT_TEAM "MegaMech")
-set(PROJECT_VERSION_MAJOR 1)
-set(PROJECT_VERSION_MINOR 0)
-set(PROJECT_VERSION_PATCH 0)
 #add_compile_options(-fsanitize=address)
 #add_link_options(-fsanitize=address)
 
@@ -58,10 +87,8 @@ set_property(DIRECTORY ${CMAKE_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${PROJECT
 set_property(DIRECTORY ${CMAKE_SOURCE_DIR} PROPERTY VS_DEBUGGER_WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 endif()
 
-if(NOT EXISTS ${CMAKE_BINARY_DIR}/config.yml)
-	execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different "${CMAKE_SOURCE_DIR}/config.yml" "${CMAKE_BINARY_DIR}/config.yml")
-	execute_process(COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/yamls/" "${CMAKE_BINARY_DIR}/yamls/")
-endif()
+execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different "${CMAKE_SOURCE_DIR}/config.yml" "${CMAKE_BINARY_DIR}/config.yml")
+execute_process(COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/yamls/" "${CMAKE_BINARY_DIR}/yamls/")
 
 if (MSVC)
 set(CPP "${CMAKE_C_COMPILER}" "/EP")
@@ -150,6 +177,7 @@ add_compile_definitions(
     NON_MATCHING=1
     NON_EQUIVALENT=1
 	AVOID_UB=1
+	SPAGHETTI_VERSION="${PROJECT_VERSION}"
 )
 
 # Find necessary libraries
@@ -321,6 +349,10 @@ include_directories(${STB_DIR})
 set(EXCLUDE_MPQ_SUPPORT TRUE CACHE BOOL "")
 add_compile_definitions(EXCLUDE_MPQ_SUPPORT)
 
+if(CMAKE_SYSTEM_NAME STREQUAL "NintendoSwitch")
+    find_package(SDL2)
+endif()
+
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/src
@@ -422,7 +454,6 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
         "Vorbis::vorbisfile"
     )
 elseif(CMAKE_SYSTEM_NAME STREQUAL "NintendoSwitch")
-    find_package(SDL2)
     set(ADDITIONAL_LIBRARY_DEPENDENCIES
         -lglad
         SDL2::SDL2
@@ -478,7 +509,7 @@ if(CMAKE_SYSTEM_NAME MATCHES "NintendoSwitch")
 nx_generate_nacp(${PROJECT_NAME}.nacp
    NAME "${PROJECT_NAME}"
    AUTHOR "${PROJECT_TEAM}"
-   VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}"
+   VERSION "${PROJECT_VERSION}"
 )
 
 nx_create_nro(${PROJECT_NAME}

@@ -26,7 +26,7 @@ extern "C" {
     #include "render_objects.h"
     #include "assets/common_data.h"
     #include "save.h"
-    #include "staff_ghosts.h"
+    #include "replays.h"
     #include "actors.h"
     #include "collision.h"
     #include "memory.h"
@@ -49,7 +49,7 @@ RainbowRoad::RainbowRoad() {
     this->gfx = d_course_rainbow_road_packed_dls;
     this->gfxSize = 5670;
     Props.textures = rainbow_road_textures;
-    Props.Minimap.Texture = gTextureCourseOutlineRainbowRoad;
+    Props.Minimap.Texture = minimap_rainbow_road;
     Props.Minimap.Width = ResourceGetTexWidthByName(Props.Minimap.Texture);
     Props.Minimap.Height = ResourceGetTexHeightByName(Props.Minimap.Texture);
     Props.Minimap.Pos[0].X = 261;
@@ -59,6 +59,7 @@ RainbowRoad::RainbowRoad() {
     Props.Minimap.PlayerScaleFactor = 0.0103f;
     Props.Minimap.FinishlineX = 0;
     Props.Minimap.FinishlineY = 0;
+    ResizeMinimap(&Props.Minimap);
 
     Props.SetText(Props.Name, "rainbow road", sizeof(Props.Name));
     Props.SetText(Props.DebugName, "rainbow", sizeof(Props.DebugName));
@@ -127,14 +128,14 @@ void RainbowRoad::Load() {
     parse_course_displaylists((TrackSections*)LOAD_ASSET_RAW(d_course_rainbow_road_addr));
     func_80295C6C();
     // d_course_rainbow_road_packed_dl_2068
-    find_vtx_and_set_colours(segmented_gfx_to_virtual((void*)0x07002068), -0x6A, 255, 255, 255);
+    find_vtx_and_set_colours(segmented_gfx_to_virtual((void*)0x07002068), 106, 255, 255, 255);
     // d_course_rainbow_road_packed_dl_1E18
-    find_vtx_and_set_colours(segmented_gfx_to_virtual((void*)0x07001E18), -0x6A, 255, 255, 255);
+    find_vtx_and_set_colours(segmented_gfx_to_virtual((void*)0x07001E18), 106, 255, 255, 255);
     // d_course_rainbow_road_packed_dl_1318
     find_vtx_and_set_colours(segmented_gfx_to_virtual((void*)0x07001318), 255, 255, 255, 0);
     if (gGamestate != CREDITS_SEQUENCE) {
         // d_course_rainbow_road_packed_dl_1FB8
-        find_vtx_and_set_colours(segmented_gfx_to_virtual((void*)0x07001FB8), -0x6A, 255, 255, 255);
+        find_vtx_and_set_colours(segmented_gfx_to_virtual((void*)0x07001FB8), 106, 255, 255, 255);
     }
 }
 
@@ -236,11 +237,11 @@ void RainbowRoad::DrawWater(struct UnkStruct_800DC5EC* screen, uint16_t pathCoun
 
 void RainbowRoad::CreditsSpawnActors() {
     // d_course_rainbow_road_packed_dl_2068
-    find_vtx_and_set_colours(segmented_gfx_to_virtual((void*)0x07002068), -0x6A, 0xFF, 0xFF, 0xFF);
+    find_vtx_and_set_colours(segmented_gfx_to_virtual((void*)0x07002068), 106, 0xFF, 0xFF, 0xFF);
     // d_course_rainbow_road_packed_dl_1E18
-    find_vtx_and_set_colours(segmented_gfx_to_virtual((void*)0x07001E18), -0x6A, 0xFF, 0xFF, 0xFF);
+    find_vtx_and_set_colours(segmented_gfx_to_virtual((void*)0x07001E18), 106, 0xFF, 0xFF, 0xFF);
     // d_course_rainbow_road_packed_dl_1318
-    find_vtx_and_set_colours(segmented_gfx_to_virtual((void*)0x07001318), -1, 0xFF, 0xFF, 0);
+    find_vtx_and_set_colours(segmented_gfx_to_virtual((void*)0x07001318), 255, 0xFF, 0xFF, 0);
 }
 
 void RainbowRoad::Destroy() {}

@@ -10,6 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          fetch-depth: 0
+          fetch-tags: true
           submodules: recursive
       - name: Install dependencies
         run: brew install ninja cmake
@@ -24,7 +26,7 @@ jobs:
       - name: Create Package
         run: |
           mkdir spaghetti-release
-          mv build-cmake/spaghetti spaghetti-release/
+          mv build-cmake/Spaghettify spaghetti-release/
       - name: Publish packaged artifacts
         uses: actions/upload-artifact@v4
         with:

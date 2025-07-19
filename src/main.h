@@ -135,9 +135,6 @@ extern Player* gPlayerSix;
 extern Player* gPlayerSeven;
 extern Player* gPlayerEight;
 
-extern Player* gPlayerOneCopy;
-extern Player* gPlayerTwoCopy;
-
 extern struct GfxPool gGfxPools[];
 extern struct GfxPool* gGfxPool;
 
@@ -207,15 +204,8 @@ extern OSMesg gPIMesgBuf[];
 extern OSMesgQueue gPIMesgQueue;
 void race_logic_loop(void);
 extern s32 gGamestate;
-#ifndef gRaceState_AS_U16
-// Prevent overlapping writes in gcc
-// Whether gRaceState was intended to be a separate variable in main.c from the rest of the game is unknown
-#ifdef GCC
-extern u16 gRaceState;
-#else
+
 extern s32 gRaceState;
-#endif
-#endif
 
 extern u16 D_800DC514;
 extern u16 creditsRenderMode;

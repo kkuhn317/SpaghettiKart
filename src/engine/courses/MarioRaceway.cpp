@@ -26,7 +26,7 @@ extern "C" {
     #include "render_objects.h"
     #include "assets/common_data.h"
     #include "save.h"
-    #include "staff_ghosts.h"
+    #include "replays.h"
     #include "actors.h"
     #include "mario_raceway_data.h"
     #include "collision.h"
@@ -76,7 +76,7 @@ MarioRaceway::MarioRaceway() {
     this->gfxSize = 3367;
 
     Props.textures = mario_raceway_textures;
-    Props.Minimap.Texture = gTextureCourseOutlineMarioRaceway;
+    Props.Minimap.Texture = minimap_mario_raceway;
     Props.Minimap.Width = ResourceGetTexWidthByName(Props.Minimap.Texture);
     Props.Minimap.Height = ResourceGetTexHeightByName(Props.Minimap.Texture);
     Props.Minimap.Pos[0].X = 260;
@@ -86,6 +86,7 @@ MarioRaceway::MarioRaceway() {
     Props.Minimap.PlayerScaleFactor = 0.022f;
     Props.Minimap.FinishlineX = 0;
     Props.Minimap.FinishlineY = -2.0;
+    ResizeMinimap(&Props.Minimap);
 
     Id = "mk:mario_raceway";
     Props.SetText(Props.Name, "mario raceway", sizeof(Props.Name));
@@ -133,7 +134,7 @@ MarioRaceway::MarioRaceway() {
     Props.PathTable2[2] = NULL;
     Props.PathTable2[3] = NULL;
 
-    Props.CloudTexture = (uint8_t*) LOAD_ASSET_RAW(gTextureExhaust5);
+    Props.CloudTexture = (uint8_t*) gTextureExhaust5;
     Props.Clouds = gKalimariDesertClouds;
     Props.CloudList = gLuigiRacewayClouds;
 
@@ -146,6 +147,9 @@ MarioRaceway::MarioRaceway() {
     Props.Skybox.FloorBottomLeft = {0, 0, 0};
     Props.Skybox.FloorTopLeft = {0, 0, 0};
     Props.Sequence = MusicSeq::MUSIC_SEQ_RACEWAYS_WARIO_STADIUM;
+    for (size_t i = 0; i < 68; i++) {
+        replace_segmented_textures_with_o2r_textures((Gfx*) mario_raceway_dls[i], Props.textures);
+    }
 }
 
 void MarioRaceway::Load() {
@@ -172,16 +176,16 @@ void MarioRaceway::Load() {
 }
 
 void MarioRaceway::LoadTextures() {
-    dma_textures(gTextureTrees1, 0x0000035BU, 0x00000800U);
-    D_802BA058 = dma_textures(gTexturePiranhaPlant1, 0x000003E8U, 0x00000800U);
-    dma_textures(gTexturePiranhaPlant2, 0x000003E8U, 0x00000800U);
-    dma_textures(gTexturePiranhaPlant3, 0x000003E8U, 0x00000800U);
-    dma_textures(gTexturePiranhaPlant4, 0x000003E8U, 0x00000800U);
-    dma_textures(gTexturePiranhaPlant5, 0x000003E8U, 0x00000800U);
-    dma_textures(gTexturePiranhaPlant6, 0x000003E8U, 0x00000800U);
-    dma_textures(gTexturePiranhaPlant7, 0x000003E8U, 0x00000800U);
-    dma_textures(gTexturePiranhaPlant8, 0x000003E8U, 0x00000800U);
-    dma_textures(gTexturePiranhaPlant9, 0x000003E8U, 0x00000800U);
+    dma_textures(gTextureTrees1, 0x0000035BU, 0x00000800U); // 0x03009000
+    D_802BA058 = dma_textures(gTexturePiranhaPlant1, 0x000003E8U, 0x00000800U); // 0x03009800
+    dma_textures(gTexturePiranhaPlant2, 0x000003E8U, 0x00000800U); // 0x0300A000
+    dma_textures(gTexturePiranhaPlant3, 0x000003E8U, 0x00000800U); // 0x0300A800
+    dma_textures(gTexturePiranhaPlant4, 0x000003E8U, 0x00000800U); // 0x0300B000
+    dma_textures(gTexturePiranhaPlant5, 0x000003E8U, 0x00000800U); // 0x0300B800
+    dma_textures(gTexturePiranhaPlant6, 0x000003E8U, 0x00000800U); // 0x0300C000
+    dma_textures(gTexturePiranhaPlant7, 0x000003E8U, 0x00000800U); // 0x0300C800
+    dma_textures(gTexturePiranhaPlant8, 0x000003E8U, 0x00000800U); // 0x0300D000
+    dma_textures(gTexturePiranhaPlant9, 0x000003E8U, 0x00000800U); // 0x0300D800
 }
 
 void MarioRaceway::BeginPlay() {
@@ -262,10 +266,10 @@ void MarioRaceway::WhatDoesThisDoAI(Player* player, int8_t playerId) {
 void MarioRaceway::SetStaffGhost() {
     u32 temp_v0 = func_800B4E24(0) & 0xfffff;
     if (temp_v0 <= 9000) {
-        D_80162DD6 = 0;
+        bCourseGhostDisabled = 0;
         D_80162DF4 = 0;
     } else {
-        D_80162DD6 = 1;
+        bCourseGhostDisabled = 1;
         D_80162DF4 = 1;
     }
     D_80162DC4 = d_mario_raceway_staff_ghost;

@@ -28,7 +28,7 @@
 f32 D_802856B0 = 98.0f;
 f32 D_802856B4 = 12.0f;
 f32 gOrderedSizeSlidingBorders = 52.0f;
-f32 D_802856BC = 52.0f;
+static const f32 D_802856BC = 52.0f;
 f32 gSizeSlidingBorders = 0.0f;
 s32 D_802856C4 = 0;
 
@@ -1582,7 +1582,8 @@ void ceremony_transition_sliding_borders(void) {
     gDPSetCycleType(gDisplayListHead++, G_CYC_FILL);
     gDPSetFillColor(gDisplayListHead++, (GPACK_RGBA5551(0, 0, 0, 1) << 16 | GPACK_RGBA5551(0, 0, 0, 1)));
 
-    gDPFillWideRectangle(gDisplayListHead++, OTRGetRectDimensionFromLeftEdge(0), 0, OTRGetGameRenderWidth(), (s32)lry);
+    // Add lry - 1 so that the transition border clears the top of the screen properly
+    gDPFillWideRectangle(gDisplayListHead++, OTRGetRectDimensionFromLeftEdge(0), 0, OTRGetGameRenderWidth(), (s32)lry - 1);
     gDPFillWideRectangle(gDisplayListHead++, OTRGetRectDimensionFromLeftEdge(0), (s32)uly, OTRGetGameRenderWidth(), 239);
     //gDPFillRectangle(gDisplayListHead++, 0, 0, 319, (s32) lry);
     //gDPFillRectangle(gDisplayListHead++, 0, (s32) uly, 319, 239);

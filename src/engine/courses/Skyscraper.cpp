@@ -24,7 +24,7 @@ extern "C" {
     #include "render_objects.h"
     #include "assets/common_data.h"
     #include "save.h"
-    #include "staff_ghosts.h"
+    #include "replays.h"
     #include "actors.h"
     #include "collision.h"
     #include "memory.h"
@@ -64,7 +64,7 @@ Skyscraper::Skyscraper() {
     this->gfx = d_course_skyscraper_packed_dls;
     this->gfxSize = 548;
     Props.textures = skyscraper_textures;
-    Props.Minimap.Texture = gTextureCourseOutlineSkyscraper;
+    Props.Minimap.Texture = minimap_skyscraper;
     Props.Minimap.Width = ResourceGetTexWidthByName(Props.Minimap.Texture);
     Props.Minimap.Height = ResourceGetTexHeightByName(Props.Minimap.Texture);
     Props.Minimap.Pos[0].X = 257;
@@ -74,6 +74,7 @@ Skyscraper::Skyscraper() {
     Props.Minimap.PlayerScaleFactor = 0.0445f;
     Props.Minimap.FinishlineX = 0;
     Props.Minimap.FinishlineY = 0;
+    ResizeMinimap(&Props.Minimap);
 
     Props.SetText(Props.Name, "skyscraper", sizeof(Props.Name));
     Props.SetText(Props.DebugName, "skyscraper", sizeof(Props.DebugName));

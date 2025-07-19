@@ -46,7 +46,7 @@ extern "C" {
     #include "render_objects.h"
     #include "assets/common_data.h"
     #include "save.h"
-    #include "staff_ghosts.h"
+    #include "replays.h"
     #include "actors.h"
     #include "collision.h"
     #include "memory.h"
@@ -61,7 +61,7 @@ extern "C" {
 TestCourse::TestCourse() {
     this->gfxSize = 100;
     this->textures = NULL;
-    Props.Minimap.Texture = gTextureCourseOutlineMarioRaceway;
+    Props.Minimap.Texture = minimap_mario_raceway;
     Props.Minimap.Width = ResourceGetTexWidthByName(Props.Minimap.Texture);
     Props.Minimap.Height = ResourceGetTexHeightByName(Props.Minimap.Texture);
     Props.Minimap.Pos[0].X = 260;
@@ -72,6 +72,7 @@ TestCourse::TestCourse() {
     Props.Minimap.FinishlineX = 0;
     Props.Minimap.FinishlineY = 0;
     Props.Minimap.Colour = {255, 255, 255};
+    ResizeMinimap(&Props.Minimap);
 
     Id = "mk:test_course";
 
@@ -119,7 +120,7 @@ TestCourse::TestCourse() {
     Props.PathTable2[2] = NULL;
     Props.PathTable2[3] = NULL;
 
-    Props.CloudTexture = (u8*) LOAD_ASSET_RAW(gTextureExhaust5);
+    Props.CloudTexture = (u8*) gTextureExhaust5;
     Props.Clouds = gKalimariDesertClouds;
     Props.CloudList = gLuigiRacewayClouds;
 
@@ -145,16 +146,16 @@ void TestCourse::Load() {
 }
 
 void TestCourse::LoadTextures() {
-    dma_textures(gTextureTrees1, 0x0000035BU, 0x00000800U);
-    D_802BA058 = dma_textures(gTexturePiranhaPlant1, 0x000003E8U, 0x00000800U);
-    dma_textures(gTexturePiranhaPlant2, 0x000003E8U, 0x00000800U);
-    dma_textures(gTexturePiranhaPlant3, 0x000003E8U, 0x00000800U);
-    dma_textures(gTexturePiranhaPlant4, 0x000003E8U, 0x00000800U);
-    dma_textures(gTexturePiranhaPlant5, 0x000003E8U, 0x00000800U);
-    dma_textures(gTexturePiranhaPlant6, 0x000003E8U, 0x00000800U);
-    dma_textures(gTexturePiranhaPlant7, 0x000003E8U, 0x00000800U);
-    dma_textures(gTexturePiranhaPlant8, 0x000003E8U, 0x00000800U);
-    dma_textures(gTexturePiranhaPlant9, 0x000003E8U, 0x00000800U);
+    dma_textures(gTextureTrees1, 0x0000035BU, 0x00000800U); // 0x03009000
+    D_802BA058 = dma_textures(gTexturePiranhaPlant1, 0x000003E8U, 0x00000800U); // 0x03009800
+    dma_textures(gTexturePiranhaPlant2, 0x000003E8U, 0x00000800U); // 0x0300A000
+    dma_textures(gTexturePiranhaPlant3, 0x000003E8U, 0x00000800U); // 0x0300A800
+    dma_textures(gTexturePiranhaPlant4, 0x000003E8U, 0x00000800U); // 0x0300B000
+    dma_textures(gTexturePiranhaPlant5, 0x000003E8U, 0x00000800U); // 0x0300B800
+    dma_textures(gTexturePiranhaPlant6, 0x000003E8U, 0x00000800U); // 0x0300C000
+    dma_textures(gTexturePiranhaPlant7, 0x000003E8U, 0x00000800U); // 0x0300C800
+    dma_textures(gTexturePiranhaPlant8, 0x000003E8U, 0x00000800U); // 0x0300D000
+    dma_textures(gTexturePiranhaPlant9, 0x000003E8U, 0x00000800U); // 0x0300D800
 }
 
 Path2D test_course_path2D[] = {
@@ -269,7 +270,7 @@ void TestCourse::BeginPlay() {
     // gWorldInstance.AddActor(new OSeagull(2, pos));
     // gWorldInstance.AddActor(new OSeagull(3, pos));
     // gWorldInstance.AddObject(new OCheepCheep(FVector(0, 40, 0), OCheepCheep::CheepType::RACE, IPathSpan(0, 10)));
-    // gWorldInstance.AddObject(new OTrophy(FVector(0,0,0), OTrophy::TrophyType::GOLD, OTrophy::Behaviour::GO_FISH));
+    gWorldInstance.AddObject(new OTrophy(FVector(0,0,0), OTrophy::TrophyType::GOLD, OTrophy::Behaviour::GO_FISH));
     //gWorldInstance.AddObject(new OSnowman(FVector(0, 0, 0)));
     //gWorldInstance.AddObject(new OTrashBin(FVector(0.0f, 0.0f, 0.0f), IRotator(0, 90, 0), 1.0f, OTrashBin::Behaviour::MUNCHING));
 
@@ -294,9 +295,9 @@ void TestCourse::BeginPlay() {
     gWorldInstance.AddObject(new OBombKart(pos2, &gTrackPaths[0][25], 25, 4, 0.8333333f));
     gWorldInstance.AddObject(new OBombKart(pos2, &gTrackPaths[0][45], 45, 4, 0.8333333f));
 
-    gWorldInstance.AddActor(new AShip(FVector(0, 0, 0), AShip::Skin::SHIP3));
+   // gWorldInstance.AddActor(new AShip(FVector(0, 0, 0), AShip::Skin::SHIP3));
 
-    gWorldInstance.AddObject(new OGrandPrixBalloons(FVector(0, 0, 0)));
+//    gWorldInstance.AddObject(new OGrandPrixBalloons(FVector(0, 0, 0)));
 }
 
 void TestCourse::WhatDoesThisDo(Player* player, int8_t playerId) {

@@ -24,7 +24,7 @@ extern "C" {
     #include "render_objects.h"
     #include "assets/common_data.h"
     #include "save.h"
-    #include "staff_ghosts.h"
+    #include "replays.h"
     #include "actors.h"
     #include "collision.h"
     #include "memory.h"
@@ -43,7 +43,7 @@ DoubleDeck::DoubleDeck() {
     this->gfx = d_course_double_deck_packed_dls;
     this->gfxSize = 699;
     Props.textures = double_deck_textures;
-    Props.Minimap.Texture = gTextureCourseOutlineDoubleDeck;
+    Props.Minimap.Texture = minimap_double_deck;
     Props.Minimap.Width = ResourceGetTexWidthByName(Props.Minimap.Texture);
     Props.Minimap.Height = ResourceGetTexHeightByName(Props.Minimap.Texture);
     Props.Minimap.Pos[0].X = 257;
@@ -53,6 +53,7 @@ DoubleDeck::DoubleDeck() {
     Props.Minimap.PlayerScaleFactor = 0.0285f;
     Props.Minimap.FinishlineX = 0;
     Props.Minimap.FinishlineY = 0;
+    ResizeMinimap(&Props.Minimap);
 
     Props.SetText(Props.Name, "double deck", sizeof(Props.Name));
     Props.SetText(Props.DebugName, "deck", sizeof(Props.DebugName));
