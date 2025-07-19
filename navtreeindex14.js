@@ -1,5 +1,7 @@
 var NAVTREEINDEX14 =
 {
+"classOSeagull.html#afb8d3fd824adf5e5edbf698c94f59111":[14,0,196,6],
+"classOSeagull.html#afbe00548c91b2db5834e88901cf7a385":[14,0,196,5],
 "classOSnowman.html":[14,0,198],
 "classOSnowman.html#a0217cd01efce681e431f99568ec9cb0a":[14,0,198,19],
 "classOSnowman.html#a1499c98a5fa8db7da8225623989d30ce":[14,0,198,13],
@@ -247,7 +249,5 @@ var NAVTREEINDEX14 =
 "classSF64_1_1Hitbox.html":[14,0,4,7],
 "classSF64_1_1Hitbox.html#a38cd19393ce4f5929ad9117aa2a58fb9":[13,0,8,7,1],
 "classSF64_1_1Hitbox.html#a38cd19393ce4f5929ad9117aa2a58fb9":[14,0,4,7,1],
-"classSF64_1_1Hitbox.html#a731d3024667d94602f8fc85a3a88008c":[13,0,8,7,0],
-"classSF64_1_1Hitbox.html#a731d3024667d94602f8fc85a3a88008c":[14,0,4,7,0],
-"classSF64_1_1Hitbox.html#afeef07d3fd1a9b391b6d2c27f47cace6":[13,0,8,7,2]
+"classSF64_1_1Hitbox.html#a731d3024667d94602f8fc85a3a88008c":[13,0,8,7,0]
 };
