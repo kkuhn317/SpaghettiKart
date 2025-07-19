@@ -153,8 +153,8 @@ endif()
 ################################################################################
 # Global configuration types
 ################################################################################
-set(CMAKE_C_FLAGS_DEBUG "-g -DDEBUG ${COMMON_C_FLAGS}")
-set(CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG ${COMMON_CXX_FLAGS}")
+set(CMAKE_C_FLAGS_DEBUG "-g -DNDEBUG ${COMMON_C_FLAGS}")
+set(CMAKE_CXX_FLAGS_DEBUG "-g -DNDEBUG ${COMMON_CXX_FLAGS}")
 set(CMAKE_C_FLAGS_RELEASE "-O3 -DNDEBUG ${COMMON_C_FLAGS}")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG ${COMMON_CXX_FLAGS}")
 
