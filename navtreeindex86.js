@@ -1,5 +1,6 @@
 var NAVTREEINDEX86 =
 {
+"update__objects_8c.html#a3adf8ea9e6bd7bba08eae49402cc7b3e":[15,0,3,69,118],
 "update__objects_8c.html#a3be1995862278cf310334b57e7ce3b62":[15,0,3,69,137],
 "update__objects_8c.html#a3d6e81d4571cd5c03e4ddd9d765c77bf":[15,0,3,69,84],
 "update__objects_8c.html#a3f1280e08506aa4958434f0bd5e1c56a":[15,0,3,69,39],
@@ -248,6 +249,5 @@ var NAVTREEINDEX86 =
 "wario__stadium__vertices_8h_source.html":[15,0,2,0,76],
 "wasm_8cpp.html":[15,0,3,6,34],
 "wasm_8h.html":[15,0,3,6,35],
-"wasm_8h.html#a0ac53033d6af6a084d07271da6a7e7ec":[15,0,3,6,35,1],
-"wasm_8h.html#ab15e4f88d7d30d77cb6349eccbace897":[15,0,3,6,35,0]
+"wasm_8h.html#a0ac53033d6af6a084d07271da6a7e7ec":[15,0,3,6,35,1]
 };

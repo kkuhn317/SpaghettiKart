@@ -1,5 +1,6 @@
 var NAVTREEINDEX73 =
 {
+"structSequencePlayer.html#ad5576867f0d2c85dc2b1635130d56165":[14,0,242,9],
 "structSequencePlayer.html#ae1041d5fcb3af39d07d2d44859c89469":[14,0,242,17],
 "structSequencePlayer.html#ae3d0b820eb9ec2dec5a8dc8129b1ee49":[14,0,242,16],
 "structSequencePlayer.html#af54f87fbbb94f0d95eb7af18a2d94b14":[14,0,242,38],
@@ -248,6 +249,5 @@ var NAVTREEINDEX73 =
 "structUIWidgets_1_1CheckboxOptions.html#afc302ed495894d639e5905a1d3fe9e1c":[14,0,7,1,5],
 "structUIWidgets_1_1ComboboxOptions.html":[13,0,11,3],
 "structUIWidgets_1_1ComboboxOptions.html":[14,0,7,2],
-"structUIWidgets_1_1ComboboxOptions.html#a0f1bee33e691977c334a429f53e7d0e2":[13,0,11,3,8],
-"structUIWidgets_1_1ComboboxOptions.html#a0f1bee33e691977c334a429f53e7d0e2":[14,0,7,2,8]
+"structUIWidgets_1_1ComboboxOptions.html#a0f1bee33e691977c334a429f53e7d0e2":[13,0,11,3,8]
 };

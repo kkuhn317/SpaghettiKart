@@ -1,5 +1,6 @@
 var NAVTREEINDEX68 =
 {
+"structCrabSpawn.html#ae360b7292c549a8b6857c0663c8d7921":[14,0,101,0],
 "structCreditsRenderInfo.html":[14,0,103],
 "structCreditsRenderInfo.html#a070bc6dabde8bd85a94aa88bd5007036":[14,0,103,4],
 "structCreditsRenderInfo.html#a090acbb788424a45eded5604be6e88d5":[14,0,103,7],
@@ -248,6 +249,5 @@ var NAVTREEINDEX68 =
 "structItemWindowObjects.html#a19722aa3ce93329a01c33729767b593b":[14,0,142,16],
 "structItemWindowObjects.html#a1f4737b57a37407f76e09fb012e22184":[14,0,142,51],
 "structItemWindowObjects.html#a20615d4a45301331bbfa9d0d1c75d2f5":[14,0,142,50],
-"structItemWindowObjects.html#a2373aac0815d9493b392fa561baa56da":[14,0,142,13],
-"structItemWindowObjects.html#a26039654763742e399cf3432cf4d2041":[14,0,142,25]
+"structItemWindowObjects.html#a2373aac0815d9493b392fa561baa56da":[14,0,142,13]
 };

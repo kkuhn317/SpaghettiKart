@@ -1,5 +1,6 @@
 var NAVTREEINDEX66 =
 {
+"start__game_8c.html":[15,0,3,8,4],
 "start__game_8c.html#a066d4466ee0a05edd9600c478b674a7e":[15,0,3,8,4,3],
 "start__game_8c.html#a2a306c238cbe5ae028cbeee2e724b2e6":[15,0,3,8,4,2],
 "start__game_8c.html#a2bfff8ec22628d92c889dd558cc9ac3d":[15,0,3,8,4,5],
@@ -248,6 +249,5 @@ var NAVTREEINDEX66 =
 "structAudioListItem.html#a75f7cf4ca61be215028346fab2ac6ab8":[14,0,70,0],
 "structAudioListItem.html#ab838a8bb1d7648057b666190a9ee6108":[14,0,70,5],
 "structAudioListItem.html#ad518e6401fbb50f6221cb6d86e7fc2fd":[14,0,70,3],
-"structAudioListItem.html#afb3e57e2306a3f69ead1dff998ab4d9f":[14,0,70,1],
-"structAudioSequenceData.html":[14,0,71]
+"structAudioListItem.html#afb3e57e2306a3f69ead1dff998ab4d9f":[14,0,70,1]
 };

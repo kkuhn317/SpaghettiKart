@@ -1,5 +1,6 @@
 var NAVTREEINDEX67 =
 {
+"structAudioSequenceData.html":[14,0,71],
 "structAudioSequenceData.html#a54cf7b43b663e913eae7387ce72fc9ac":[14,0,71,3],
 "structAudioSequenceData.html#a7b756f0d1d619adeac197f9643ac431f":[14,0,71,2],
 "structAudioSequenceData.html#aa14fd2ae175467f199ad0cd663cbcfae":[14,0,71,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX67 =
 "structCrabSpawn.html":[14,0,101],
 "structCrabSpawn.html#a3225bdeff5c5063d3c80bccda31a8cbf":[14,0,101,2],
 "structCrabSpawn.html#a3b4ded936588ed01e9c84056fe7bd793":[14,0,101,1],
-"structCrabSpawn.html#a6286ebe326b8c1731e1137e2e284d3c4":[14,0,101,3],
-"structCrabSpawn.html#ae360b7292c549a8b6857c0663c8d7921":[14,0,101,0]
+"structCrabSpawn.html#a6286ebe326b8c1731e1137e2e284d3c4":[14,0,101,3]
 };

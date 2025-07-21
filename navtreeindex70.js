@@ -1,5 +1,6 @@
 var NAVTREEINDEX70 =
 {
+"structNoteSubEu.html#af7e8d3f08f13dd24fb832d058d832d00":[14,0,173,16],
 "structNoteSubEu.html#afea5dec32c9dd20d9b47a8f75f5a0316":[14,0,173,10],
 "structNoteSynthesisBuffers.html":[14,0,174],
 "structNoteSynthesisBuffers.html#a363bff9ec76f24c9464b14fddab2df79":[14,0,174,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX70 =
 "structPlayer.html#a631bcd31aa2002897de6daf22f40cdef":[14,0,213,105],
 "structPlayer.html#a649c835eb5117a45758d3ac1946070b4":[14,0,213,7],
 "structPlayer.html#a681f0fac4abe58cf5919dd4c6ac503d0":[14,0,213,5],
-"structPlayer.html#a69f86baaaebdf03323b95eb771fd99d0":[14,0,213,14],
-"structPlayer.html#a6e98a588ddd477b8fef70524fc720d4d":[14,0,213,68]
+"structPlayer.html#a69f86baaaebdf03323b95eb771fd99d0":[14,0,213,14]
 };
