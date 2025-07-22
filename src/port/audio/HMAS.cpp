@@ -1,6 +1,7 @@
 #include "HMAS.h"
 
 #define MINIAUDIO_IMPLEMENTATION
+#define MA_NO_RUNTIME_LINKING
 #include "audio/miniaudio.h"
 #include <spdlog/spdlog.h>
 #include "port/Engine.h"
