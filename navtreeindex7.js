@@ -1,6 +1,5 @@
 var NAVTREEINDEX7 =
 {
-"blue__and__red__shells_2render_8inc_8c.html":[16,0,3,0,1,0],
 "blue__and__red__shells_2render_8inc_8c.html#a516dec1dd3d7c2d39294a1ab4edcff4a":[16,0,3,0,1,0,0],
 "blue__and__red__shells_2render_8inc_8c.html#aad2583aa98831d6ef751cf57d0ec166a":[16,0,3,0,1,0,1],
 "blue__and__red__shells_2render_8inc_8c_source.html":[16,0,3,0,1,0],
@@ -249,5 +248,6 @@ var NAVTREEINDEX7 =
 "ceremony__and__credits_8c.html#a8b971351adcc1d2c95e16bd3e532b548":[16,0,3,5,2,18],
 "ceremony__and__credits_8c.html#a8c434044c23b4aa41f94885710f4666f":[16,0,3,5,2,33],
 "ceremony__and__credits_8c.html#a8f22f409e50680fb7fc0d7eeab784c3b":[16,0,3,5,2,60],
-"ceremony__and__credits_8c.html#a90b71c3f885a7d2ca209c2d710d37255":[16,0,3,5,2,93]
+"ceremony__and__credits_8c.html#a90b71c3f885a7d2ca209c2d710d37255":[16,0,3,5,2,93],
+"ceremony__and__credits_8c.html#a956b3f48a385d8c138bb35ae9847c992":[16,0,3,5,2,145]
 };

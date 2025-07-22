@@ -1,6 +1,5 @@
 var NAVTREEINDEX42 =
 {
-"md_docs_2BUILDING.html#generating-a-distributable":[2,2,0],
 "md_docs_2BUILDING.html#generating-the-distributable":[2,0,1],
 "md_docs_2BUILDING.html#getting-ci-to-work-on-your-fork":[2,3],
 "md_docs_2BUILDING.html#install-dependencies":[2,1,1,0],
@@ -249,5 +248,6 @@ var NAVTREEINDEX42 =
 "menu__items_8c.html#a1f74ad8bb5f44589378d6c7d91ed55e6":[16,0,3,49,64],
 "menu__items_8c.html#a1f94c40e36c6f17a5d767eec6b724460":[16,0,3,49,188],
 "menu__items_8c.html#a1f98c9f90d9c032228b1e2f35160e072":[16,0,3,49,257],
-"menu__items_8c.html#a1fbba00e12e86c92555e7306213bd449":[16,0,3,49,170]
+"menu__items_8c.html#a1fbba00e12e86c92555e7306213bd449":[16,0,3,49,170],
+"menu__items_8c.html#a2046c7c288a734a5e18c69bb15675d1f":[16,0,3,49,44]
 };
