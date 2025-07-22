@@ -1,5 +1,6 @@
 var NAVTREEINDEX27 =
 {
+"controller_8h.html#a0fcf2770e70d045d1ef22018dfb38554":[16,0,3,9,35,72],
 "controller_8h.html#a10eefb0787dcb8416ab56b25091f88d7":[16,0,3,9,35,28],
 "controller_8h.html#a1144084c570d273b89cca3edc7b98c70":[16,0,3,9,35,71],
 "controller_8h.html#a12a746a3baa07de1c6d2791949388a4c":[16,0,3,9,35,57],
@@ -248,6 +249,5 @@ var NAVTREEINDEX27 =
 "course__offsets_8h.html#a9b4ac208462af505a16217f21b4c0433":[16,0,2,9,19],
 "course__offsets_8h.html#a9e4b5cc24e9b3bac82700e239cc7057c":[16,0,2,9,27],
 "course__offsets_8h.html#aa164e6a1e031b52f92226b459c090819":[16,0,2,9,28],
-"course__offsets_8h.html#abb616aa5388e2e0767288227ae225663":[16,0,2,9,22],
-"course__offsets_8h.html#ac3ca1cd097725c823cac411308fccec1":[16,0,2,9,14]
+"course__offsets_8h.html#abb616aa5388e2e0767288227ae225663":[16,0,2,9,22]
 };

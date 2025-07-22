@@ -1,5 +1,6 @@
 var NAVTREEINDEX11 =
 {
+"classEditor_1_1Gizmo.html#ab5f28dd99f1b04c83170073c822dbf3c":[14,0,1,2,13],
 "classEditor_1_1Gizmo.html#ab5f28dd99f1b04c83170073c822dbf3c":[15,0,0,2,13],
 "classEditor_1_1Gizmo.html#abd4af9d65f50af5f4af6a9e437f8fe80":[14,0,1,2,31],
 "classEditor_1_1Gizmo.html#abd4af9d65f50af5f4af6a9e437f8fe80":[15,0,0,2,31],
@@ -248,6 +249,5 @@ var NAVTREEINDEX11 =
 "classKoopaTroopaBeach.html#a182cbbac4bb465d78ee9df0825524664":[15,0,147,9],
 "classKoopaTroopaBeach.html#a28c5620db0c5ee804471815af786b739":[15,0,147,7],
 "classKoopaTroopaBeach.html#a7790540cdd46c8cef5c0d9db8d12b5ec":[15,0,147,4],
-"classKoopaTroopaBeach.html#a7ca6e564b45390c31b76e364a0ee6ff4":[15,0,147,12],
-"classKoopaTroopaBeach.html#a7de549f2afcf0587abba439666e1d6df":[15,0,147,14]
+"classKoopaTroopaBeach.html#a7ca6e564b45390c31b76e364a0ee6ff4":[15,0,147,12]
 };

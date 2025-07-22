@@ -1,5 +1,6 @@
 var HMAS_8cpp =
 [
+    [ "MA_NO_RUNTIME_LINKING", "HMAS_8cpp.html#ae2e2c1adc42ef89e9659fb771a4041bc", null ],
     [ "MINIAUDIO_IMPLEMENTATION", "HMAS_8cpp.html#abf77f70dc931f91a9f09e7b54d8278f5", null ],
     [ "HMAS_AddEffect", "HMAS_8cpp.html#ac2a77b78c5136dc216da6bf01f003060", null ],
     [ "HMAS_IsIDRegistered", "HMAS_8cpp.html#a943f713ceca4307e6e1bb48253c6ad6c", null ],

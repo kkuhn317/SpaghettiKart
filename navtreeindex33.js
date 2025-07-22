@@ -1,5 +1,6 @@
 var NAVTREEINDEX33 =
 {
+"ghostship__model_8h.html#a2788fa6f2c991527de2b357b3caa2511":[16,0,0,8,1,0],
 "ghostship__model_8h.html#a285bb78d3c99f2a3dfbe4cdb3c3c6b19":[16,0,0,8,1,36],
 "ghostship__model_8h.html#a3153c6031a423ee38e7620d8b44290fe":[16,0,0,8,1,32],
 "ghostship__model_8h.html#a4df0293b295d3d4c3cd7ec8cae237e45":[16,0,0,8,1,4],
@@ -248,6 +249,5 @@ var NAVTREEINDEX33 =
 "harbour__masters_8h.html#a5e51f678c3cc36c9b4cb762695b84f8b":[16,0,3,42,21],
 "harbour__masters_8h.html#a635176e6dac4ce20096785cab4933894":[16,0,3,42,6],
 "harbour__masters_8h.html#a68300d94bd009fd4d66a24a24b3bcdf9":[16,0,3,42,17],
-"harbour__masters_8h.html#a6ad81ce435abfaa64d09ae6812cfe5fc":[16,0,3,42,12],
-"harbour__masters_8h.html#a7443faf1c80974e303a772e5a0c9cc94":[16,0,3,42,7]
+"harbour__masters_8h.html#a6ad81ce435abfaa64d09ae6812cfe5fc":[16,0,3,42,12]
 };

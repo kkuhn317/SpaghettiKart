@@ -1,5 +1,6 @@
 var NAVTREEINDEX38 =
 {
+"libultra__internal_8h.html#aa9e8840bd3019cfee79abcb10f96ae55":[16,0,3,9,53,2],
 "libultra__internal_8h.html#aaadded63bebce6cfdda5ecda193fc9ea":[16,0,3,9,53,15],
 "libultra__internal_8h.html#aaf213269e5918aa00205b050e1ecf814":[16,0,3,9,53,24],
 "libultra__internal_8h.html#aaf48395faaf5205d7e4c3cfc043b0525":[16,0,3,9,53,10],
@@ -248,6 +249,5 @@ var NAVTREEINDEX38 =
 "macros_8h.html#afb95d4bc9307ade70d0ac672aa24b82f":[16,0,2,14,22],
 "macros_8h.html#afcf59d0855225b13f2060708ce1d6a9f":[16,0,2,14,2],
 "macros_8h_source.html":[16,0,2,14],
-"macros_8inc.html":[16,0,2,15],
-"main_8c.html":[16,0,3,45]
+"macros_8inc.html":[16,0,2,15]
 };
