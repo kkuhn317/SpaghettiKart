@@ -48,3 +48,5 @@ Here is the table containing only the regular Mario Kart courses, from Banshee B
 | DK's Jungle Parkway     |
 | Rainbow Road            |
 | Winning Results         |
+
+Hopefully this helps you find some music to put in your mods or gives you an idea of what future courses or custom remixes can be like.
