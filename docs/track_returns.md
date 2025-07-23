@@ -4,7 +4,7 @@
 
 | **Mario Kart 64 Course** | **Mario Kart DS** | **Mario Kart Wii** | **Mario Kart 7** | **Mario Kart 8 / Deluxe** | **Booster Course Pass** | **Mario Kart Tour** | **Mario Kart World** |
 | ------------------------ | ----------------- | ------------------ | ---------------- | ------------------------- | ----------------------- | ------------------- | -------------------- |
-| Banshee Boardwalk | ✓ | | | | | ✓ | |
+| Banshee Boardwalk | ✓ | | | | | | |
 | Bowser's Castle | | ✓ | | | | ✓ | |
 | Choco Mountain | ✓ | | | | ✓ | ✓ | ✓ |
 | D.K.'s Jungle Parkway | | ✓ | | | | ✓ | |
