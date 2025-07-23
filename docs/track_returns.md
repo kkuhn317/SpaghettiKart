@@ -25,3 +25,26 @@ Here is the table containing only the regular Mario Kart courses, from Banshee B
 
 ## Battle Courses
 
+| **Battle Course** | **Mario Kart DS** | **Mario Kart Wii** | **Mario Kart 7** | **Mario Kart 8 / Deluxe** | **Booster Course Pass** | **Mario Kart Tour** | **Mario Kart World** |
+| ----------------- | ----------------- | ------------------ | ---------------- | ------------------------- | ----------------------- | ------------------- | -------------------- |
+| Big Donut | | | ✓ | | | | ✓ |
+| Block Fort | ✓ | | | | | | |
+| Double Deck | | | | | | | |
+| Skyscraper | | ✓ | | | | | |
+
+## Mario Kart World Remixes
+
+| **Mario Kart 64 Theme** |
+| :---------------------- |
+| Title Theme             |
+| Setup and Kart Select   |
+| Moo Moo Farm/Yoshi Valley |
+| Koopa Troopa Beach (Day) |
+| Koopa Troopa Beach (Night) |
+| Kalimari Desert         |
+| Toad's Turnpike         |
+| Frappe Snowland/Sherbet Land |
+| Frappe Snowland/Sherbet Land (Night) |
+| DK's Jungle Parkway     |
+| Rainbow Road            |
+| Winning Results         |
