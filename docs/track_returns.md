@@ -1,32 +1,32 @@
 # Tracks that are used as Retro Courses in the Future.
 
-## Specificially Used to help find music and to see how courses are adapted in the future
+## Specifically Used to help find music and to see how courses are adapted in the future
 
 | **Mario Kart 64 Course** | **Mario Kart DS** | **Mario Kart Wii** | **Mario Kart 7** | **Mario Kart 8 / Deluxe** | **Booster Course Pass** | **Mario Kart Tour** | **Mario Kart World** |
 | ------------------------ | ----------------- | ------------------ | ---------------- | ------------------------- | ----------------------- | ------------------- | -------------------- |
-| Banshee Boardwalk        | ✓                 |                    |                  |                           |                         |                     |                      |
-| Bowser's Castle          |                   | ✓                  |                  |                           |                         |                     |                      |
-| Choco Mountain           | ✓                 |                    |                  |                           | ✓                       | ✓                   | ✓                    |
-| D.K.'s Jungle Parkway    |                   | ✓                  |                  |                           |                         |                     |                      |
-| Frappe Snowland          | ✓                 |                    |                  |                           |                         | ✓                   |                      |
-| Kalimari Desert          |                   |                    | ✓                |                           | ✓                       | ✓                   |                      |
-| Koopa Troopa Beach       |                   |                    | ✓                |                           |                         | ✓                   | ✓                    |
-| Luigi Raceway            |                   |                    | ✓                |                           |                         | ✓                   |                      |
-| Mario Circuit            |                   |                    |                  |                           |                         |                     |                      |
-| Mario Raceway            |                   | ✓                  |                  |                           |                         | ✓                   |                      |
-| Moo Moo Farm             | ✓                 |                    |                  |                           |                         |                     |                      |
-| Rainbow Road             |                   |                    |                  | ✓                         |                         |                     |                      |
-| Wario Stadium            |                   |                    |                  |                           |                         | ✓                   | ✓                    |
-| Royal Raceway            |                   |                    | ✓                |                           | ✓                       |                     |                      |
-| Sherbet Land             | ✓                 |                    |                  |                           |                         |                     |                      |
-| Toad's Turnpike          |                   |                    |                  | ✓                         |                         |                     |                      |
-| Yoshi Valley             |                   |                    | ✓                |                           | ✓                       |                     |                      |
+| Banshee Boardwalk | ✓ | | | | | ✓ | |
+| Bowser's Castle | | ✓ | | | | ✓ | |
+| Choco Mountain | ✓ | | | | ✓ | ✓ | ✓ |
+| D.K.'s Jungle Parkway | | ✓ | | | | ✓ | |
+| Frappe Snowland | ✓ | | | | | ✓ | |
+| Kalimari Desert | | | ✓ | | ✓ | ✓ | |
+| Koopa Troopa Beach | | | ✓ | | | ✓ | ✓ |
+| Luigi Raceway | | | ✓ | | | ✓ | |
+| Mario Circuit | | | | | | ✓ | |
+| Mario Raceway | | ✓ | | | | ✓ | |
+| Moo Moo Farm | ✓ | | | | | ✓ | |
+| Rainbow Road | | | | ✓ | | | |
+| Wario Stadium | | | | | | ✓ | ✓ |
+| Royal Raceway | | | ✓ | | ✓ | | |
+| Sherbet Land | ✓ | | | | | ✓ | |
+| Toad's Turnpike | | | | ✓ | | ✓ | |
+| Yoshi Valley | | | ✓ | | ✓ | | |
 
 ## Battle Courses
 
 | **Battle Course** | **Mario Kart DS** | **Mario Kart Wii** | **Mario Kart 7** | **Mario Kart 8 / Deluxe** | **Booster Course Pass** | **Mario Kart Tour** | **Mario Kart World** |
 | ----------------- | ----------------- | ------------------ | ---------------- | ------------------------- | ----------------------- | ------------------- | -------------------- |
-| Big Donut         |                   |                    | ✓                |                           |                         | ✓                   | ✓                    |
-| Block Fort        | ✓                 |                    |                  |                           |                         |                     |                      |
-| Double Deck       |                   |                    |                  |                           |                         |                     |                      |
-| Skyscraper        |                   | ✓                  |                  |                           |                         |                     |                      |
+| Big Donut | | | ✓ | | | ✓ | ✓ |
+| Block Fort | ✓ | | | | | ✓ | |
+| Double Deck | | | | | | ✓ | |
+| Skyscraper | | ✓ | | | | ✓ | |
