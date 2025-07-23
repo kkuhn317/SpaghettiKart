@@ -33,7 +33,9 @@ s8 sControllerPak2State = BAD;
 // default time trial records in little endian form
 const u8 D_800F2E60[4] = { 0xc0, 0x27, 0x09, 0x00 };
 // osPfsFindFile -> gGameName ("MARIOKART64" in nosFont)
-const u8 gGameName[] = "MARIOKART64";
+const u8 gGameName[] = {
+    0x26, 0x1a, 0x2b, 0x22, 0x28, 0x24, 0x1a, 0x2b, 0x2d, 0x16, 0x14, 0x00, 0x00, 0x00, 0x00, 0x00
+};
 // ext_name param to osPfsFindFile (four total bytes, but only one is setable)
 const u8 gExtCode[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
@@ -867,9 +869,8 @@ s32 func_800B64EC(s32 arg0) {
     }
 
     sPlayerGhostReplay = (u32*) &D_802BFB80.arraySize8[0][D_80162DC8][3];
-    temp_v0 =
-        osPfsReadWriteFile(&gControllerPak1FileHandle, gControllerPak1FileNote, PFS_READ,
-                           (arg0 * (sizeof(u8) * 0x1000)) + 0x100, sizeof(u8) * 0x1000, (u8*) sPlayerGhostReplay);
+    temp_v0 = osPfsReadWriteFile(&gControllerPak1FileHandle, gControllerPak1FileNote, PFS_READ,
+                                 (arg0 * (sizeof(u8) * 0x1000)) + 0x100, sizeof(u8) * 0x1000, (u8*) sPlayerGhostReplay);
     if (temp_v0 == 0) {
         // clang-format off
         phi_s1 = (u8 *) &D_8018EE10[arg0]; temp_s0 = 0; while (1) {
