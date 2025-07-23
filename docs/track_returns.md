@@ -1,6 +1,6 @@
 # Tracks that are used as Retro Courses in the Future.
 
-## Specifically Used to help find music and to see how courses are adapted in the future
+## Specifically Used to help find music and to see how courses are adapted in the future including references too.
 
 Here is the table containing only the regular Mario Kart courses, from Banshee Boardwalk to Yoshi Valley:
 
@@ -14,7 +14,6 @@ Here is the table containing only the regular Mario Kart courses, from Banshee B
 | Kalimari Desert | | | ✓ | | ✓ | ✓ | |
 | Koopa Troopa Beach | | | ✓ | | | ✓ | |
 | Luigi Raceway | | | ✓ | | | ✓ | |
-| Mario Circuit | | | | | | | |
 | Mario Raceway | | ✓ | | | | ✓ | |
 | Moo Moo Farm | ✓ | | | | | | |
 | Rainbow Road | | | | ✓ | | | |
