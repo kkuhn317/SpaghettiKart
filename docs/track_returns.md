@@ -22,7 +22,7 @@ Here is the table containing only the regular Mario Kart courses, from Banshee B
 | Royal Raceway | | | | ✓ | | ✓ | |
 | Sherbet Land | | ✓ | | | | | |
 | Toad's Turnpike | | | | ✓ | | | |
-| Yoshi Valley | | | ✓ | | | | |
+| Yoshi Valley | | | | ✓ | | ✓ | |
 
 ## Battle Courses
 
