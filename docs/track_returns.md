@@ -2,31 +2,27 @@
 
 ## Specifically Used to help find music and to see how courses are adapted in the future
 
+Here is the table containing only the regular Mario Kart courses, from Banshee Boardwalk to Yoshi Valley:
+
 | **Mario Kart 64 Course** | **Mario Kart DS** | **Mario Kart Wii** | **Mario Kart 7** | **Mario Kart 8 / Deluxe** | **Booster Course Pass** | **Mario Kart Tour** | **Mario Kart World** |
 | ------------------------ | ----------------- | ------------------ | ---------------- | ------------------------- | ----------------------- | ------------------- | -------------------- |
 | Banshee Boardwalk | ✓ | | | | | | |
-| Bowser's Castle | | ✓ | | | | ✓ | |
+| Bowser's Castle | | ✓ | | | | | |
 | Choco Mountain | ✓ | | | | ✓ | ✓ | ✓ |
-| D.K.'s Jungle Parkway | | ✓ | | | | ✓ | |
+| D.K.'s Jungle Parkway | | ✓ | | | | | |
 | Frappe Snowland | ✓ | | | | | ✓ | |
 | Kalimari Desert | | | ✓ | | ✓ | ✓ | |
-| Koopa Troopa Beach | | | ✓ | | | ✓ | ✓ |
+| Koopa Troopa Beach | | | ✓ | | | ✓ | |
 | Luigi Raceway | | | ✓ | | | ✓ | |
-| Mario Circuit | | | | | | ✓ | |
+| Mario Circuit | | | | | | | |
 | Mario Raceway | | ✓ | | | | ✓ | |
-| Moo Moo Farm | ✓ | | | | | ✓ | |
+| Moo Moo Farm | ✓ | | | | | | |
 | Rainbow Road | | | | ✓ | | | |
-| Wario Stadium | | | | | | ✓ | ✓ |
-| Royal Raceway | | | ✓ | | ✓ | | |
-| Sherbet Land | ✓ | | | | | ✓ | |
-| Toad's Turnpike | | | | ✓ | | ✓ | |
-| Yoshi Valley | | | ✓ | | ✓ | | |
+| Wario Stadium | | | | | | | ✓ |
+| Royal Raceway | | | | ✓ | | ✓ | |
+| Sherbet Land | | ✓ | | | | | |
+| Toad's Turnpike | | | | ✓ | | | |
+| Yoshi Valley | | | ✓ | | | | |
 
 ## Battle Courses
 
-| **Battle Course** | **Mario Kart DS** | **Mario Kart Wii** | **Mario Kart 7** | **Mario Kart 8 / Deluxe** | **Booster Course Pass** | **Mario Kart Tour** | **Mario Kart World** |
-| ----------------- | ----------------- | ------------------ | ---------------- | ------------------------- | ----------------------- | ------------------- | -------------------- |
-| Big Donut | | | ✓ | | | ✓ | ✓ |
-| Block Fort | ✓ | | | | | ✓ | |
-| Double Deck | | | | | | ✓ | |
-| Skyscraper | | ✓ | | | | ✓ | |
