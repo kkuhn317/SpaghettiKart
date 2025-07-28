@@ -1,5 +1,11 @@
 var NAVTREEINDEX76 =
 {
+"structNotePlaybackState.html#aed3a0a2b7802c3dbf53f9515104ddfe9":[15,0,323,10],
+"structNotePlaybackState.html#af5453206d2ea339bc8aa5804ed50b7a1":[15,0,323,0],
+"structNotePlaybackState.html#afdd48f62f9137b20e5e86221d4994f85":[15,0,323,2],
+"structNotePool.html":[15,0,324],
+"structNotePool.html#a7057a6481ff7c9f5891bd08136c8da22":[15,0,324,3],
+"structNotePool.html#ac2528778f49b1dcfba89a73e952a52b8":[15,0,324,2],
 "structNotePool.html#ae6ac803349d6c44d17ec6c68b3ac0c0d":[15,0,324,0],
 "structNotePool.html#af26fcc95191d3421f77c078dca55e610":[15,0,324,1],
 "structNoteSubEu.html":[15,0,325],
@@ -243,11 +249,5 @@ var NAVTREEINDEX76 =
 "structPlayer.html#a398277c78880e1e08e858fbad5bf6054":[15,0,365,63],
 "structPlayer.html#a3c54f7cdfdf596fcb7500e4b56a3340d":[15,0,365,6],
 "structPlayer.html#a3c874f89bbbddc704819a22c81f4748a":[15,0,365,21],
-"structPlayer.html#a3c8e527683244a47bb0a015ac477610c":[15,0,365,82],
-"structPlayer.html#a3da88564e0d8688dde2aaea3708c491f":[15,0,365,83],
-"structPlayer.html#a3ded851869ea685ce2e31aa15d163893":[15,0,365,76],
-"structPlayer.html#a3f15308541332d1b01366533666a12dc":[15,0,365,33],
-"structPlayer.html#a402efa42d25c5aa9ee86f5d3475d8f69":[15,0,365,89],
-"structPlayer.html#a419ea126a859eaff91b8b8c2a2d08ba4":[15,0,365,62],
-"structPlayer.html#a43ea00ff8972384bcc7da1733b73e0ab":[15,0,365,13]
+"structPlayer.html#a3c8e527683244a47bb0a015ac477610c":[15,0,365,82]
 };

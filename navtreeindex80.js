@@ -1,5 +1,11 @@
 var NAVTREEINDEX80 =
 {
+"structUIWidgets_1_1ButtonOptions.html#a6ba8ceaf2c082e29650fbdcf060deaa0":[14,0,11,1,4],
+"structUIWidgets_1_1ButtonOptions.html#a6ba8ceaf2c082e29650fbdcf060deaa0":[15,0,7,0,4],
+"structUIWidgets_1_1ButtonOptions.html#aa3ca2312ba7a4417b3186d8a39463299":[14,0,11,1,3],
+"structUIWidgets_1_1ButtonOptions.html#aa3ca2312ba7a4417b3186d8a39463299":[15,0,7,0,3],
+"structUIWidgets_1_1ButtonOptions.html#ab3d3fc603567389d14d839c61176dd86":[14,0,11,1,0],
+"structUIWidgets_1_1ButtonOptions.html#ab3d3fc603567389d14d839c61176dd86":[15,0,7,0,0],
 "structUIWidgets_1_1CheckboxOptions.html":[14,0,11,2],
 "structUIWidgets_1_1CheckboxOptions.html":[15,0,7,1],
 "structUIWidgets_1_1CheckboxOptions.html#a0dddf57b441e2724b7d7f9b95abb0351":[14,0,11,2,3],
@@ -243,11 +249,5 @@ var NAVTREEINDEX80 =
 "structUnkStruct__46D0.html#a1d1f785457c8805f152dfc7d7a62b670":[15,0,474,2],
 "structUnkStruct__46D0.html#a6f1c723262e2e7ab40e7f66f14182ced":[15,0,474,1],
 "structUnkStruct__46D0.html#acad7ef22f3ed0b339a603af5d6576a22":[15,0,474,3],
-"structUnkStruct__46D0.html#ae6abbaf2038d293ba41cac74e1a14c14":[15,0,474,0],
-"structUnkStruct__800DC5EC.html":[15,0,475],
-"structUnkStruct__800DC5EC.html#a061c600f0c8bd66189a88c1ab6e921e1":[15,0,475,4],
-"structUnkStruct__800DC5EC.html#a1f140eee8c793dccffc1c4b6dad37459":[15,0,475,2],
-"structUnkStruct__800DC5EC.html#a30c59db4259b741aa0d509f5b7ea8f36":[15,0,475,0],
-"structUnkStruct__800DC5EC.html#a35b0326cc1d9dfeb28e5b0d64ecaf65f":[15,0,475,3],
-"structUnkStruct__800DC5EC.html#a44afd7ec23c595d02e0ad6abfa2c63a5":[15,0,475,8]
+"structUnkStruct__46D0.html#ae6abbaf2038d293ba41cac74e1a14c14":[15,0,474,0]
 };

@@ -1,5 +1,11 @@
 var NAVTREEINDEX74 =
 {
+"structCourseTable.html#ac8cd9a4c39f0f06665b451ff3c523dff":[15,0,95,4],
+"structCourseTable.html#ad879d31ac49f90c48ed960e6f6336348":[15,0,95,1],
+"structCourseTable.html#adff350097d0d5770bc1e5139622b499c":[15,0,95,6],
+"structCourseTable.html#ae64dfa535621d0e69175d027ed501628":[15,0,95,10],
+"structCourseTimeTrialRecords.html":[15,0,96],
+"structCourseTimeTrialRecords.html#a3b556cec6168ce7530e88e6828c9fdfb":[15,0,96,1],
 "structCourseTimeTrialRecords.html#a91e118cf346d05af5de32d3e3e237710":[15,0,96,0],
 "structCourseTimeTrialRecords.html#ad1c5445784e4ecc217c3f89faaeebc62":[15,0,96,2],
 "structCourseVtx.html":[15,0,97],
@@ -243,11 +249,5 @@ var NAVTREEINDEX74 =
 "structItemBox.html#a8770643814f0a75ee870072d5600055a":[15,0,140,8],
 "structItemBox.html#a8eb9f33bf219f7ee75c996a558e74a2f":[15,0,140,5],
 "structItemBox.html#aa61066eefb600fd439ffca1deb6beecc":[15,0,140,2],
-"structItemBox.html#aad7a9f46654608486a15ebd5251b70e7":[15,0,140,6],
-"structItemBox.html#acbe8c0af0b7e62a73c6537404b952999":[15,0,140,12],
-"structItemBox.html#af8f78b9ee3b51c94f1c5e9492c06b54c":[15,0,140,10],
-"structItemBox.html#afbe6f4cee304f147c300049c1e8b95b7":[15,0,140,13],
-"structItemProbabilities.html":[15,0,141],
-"structItemProbabilities.html#a0d9a0fc2bd984a13b62af2e803ab9777":[15,0,141,7],
-"structItemProbabilities.html#a1a221b104acdddfb541471de95d76918":[15,0,141,0]
+"structItemBox.html#aad7a9f46654608486a15ebd5251b70e7":[15,0,140,6]
 };

@@ -1,5 +1,11 @@
 var NAVTREEINDEX79 =
 {
+"structSequencePlayer.html#a42df80f44f64202ba927900f35d6d596":[15,0,394,33],
+"structSequencePlayer.html#a42e56aec302593359b1b418e13ac6606":[15,0,394,26],
+"structSequencePlayer.html#a52d9bde44ab299d57a0130946f5a58ae":[15,0,394,0],
+"structSequencePlayer.html#a635977b76a293b84a5300052140970d7":[15,0,394,11],
+"structSequencePlayer.html#a6494f095eaba1578d6086e061a9875f8":[15,0,394,20],
+"structSequencePlayer.html#a698b8513083d52d235d212c8ed0bea82":[15,0,394,3],
 "structSequencePlayer.html#a6c1f8b339beb96a7720cb4da4134442c":[15,0,394,25],
 "structSequencePlayer.html#a7365d7f4cd14457acf350a93483454e1":[15,0,394,28],
 "structSequencePlayer.html#a7585d60594a0c42abd0c837cdde323c1":[15,0,394,29],
@@ -243,11 +249,5 @@ var NAVTREEINDEX79 =
 "structUIWidgets_1_1ButtonOptions.html#a13696251aa297ab0e7e7490ef8d77bbf":[14,0,11,1,1],
 "structUIWidgets_1_1ButtonOptions.html#a13696251aa297ab0e7e7490ef8d77bbf":[15,0,7,0,1],
 "structUIWidgets_1_1ButtonOptions.html#a32dce52a7a00ece8b153f6f00cf78fed":[14,0,11,1,2],
-"structUIWidgets_1_1ButtonOptions.html#a32dce52a7a00ece8b153f6f00cf78fed":[15,0,7,0,2],
-"structUIWidgets_1_1ButtonOptions.html#a6ba8ceaf2c082e29650fbdcf060deaa0":[14,0,11,1,4],
-"structUIWidgets_1_1ButtonOptions.html#a6ba8ceaf2c082e29650fbdcf060deaa0":[15,0,7,0,4],
-"structUIWidgets_1_1ButtonOptions.html#aa3ca2312ba7a4417b3186d8a39463299":[14,0,11,1,3],
-"structUIWidgets_1_1ButtonOptions.html#aa3ca2312ba7a4417b3186d8a39463299":[15,0,7,0,3],
-"structUIWidgets_1_1ButtonOptions.html#ab3d3fc603567389d14d839c61176dd86":[14,0,11,1,0],
-"structUIWidgets_1_1ButtonOptions.html#ab3d3fc603567389d14d839c61176dd86":[15,0,7,0,0]
+"structUIWidgets_1_1ButtonOptions.html#a32dce52a7a00ece8b153f6f00cf78fed":[15,0,7,0,2]
 };

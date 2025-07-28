@@ -1,5 +1,11 @@
 var NAVTREEINDEX72 =
 {
+"starship__model_8h.html#a12e0dd8500ab3ef789f64e14e46dddbc":[16,0,0,8,11,0],
+"starship__model_8h.html#a16ee5a59a2f77c91bbd60aca7f04642f":[16,0,0,8,11,14],
+"starship__model_8h.html#a2c9cd182002f286f550422e084b0179a":[16,0,0,8,11,25],
+"starship__model_8h.html#a39055ba5054600c58dc6484117fc946e":[16,0,0,8,11,17],
+"starship__model_8h.html#a4e3189118da52c20a9c8f586518ffcf3":[16,0,0,8,11,4],
+"starship__model_8h.html#a584777225d4e215d5609fc60512352fd":[16,0,0,8,11,6],
 "starship__model_8h.html#a67cb391ff911c4d6e78595e1f51d4b0d":[16,0,0,8,11,27],
 "starship__model_8h.html#a6995972a9b8c39ac2cbfee728773eaec":[16,0,0,8,11,24],
 "starship__model_8h.html#a6a7c4f9b514c37a09c602c5ed02d2f06":[16,0,0,8,11,18],
@@ -243,11 +249,5 @@ var NAVTREEINDEX72 =
 "structAudioBankSample.html#a8eb091509a0dccf66789081e342dfe86":[15,0,67,11],
 "structAudioBankSample.html#a9e849c9f116154a815392d77a155fbc2":[15,0,67,6],
 "structAudioBankSample.html#ab508b7fa68ed4037e3fdc1b8380372b4":[15,0,67,1],
-"structAudioBankSample.html#abae57a9b292e1b7ffb68063c0d5d3a0e":[15,0,67,5],
-"structAudioBankSample.html#ad188e9d6ef8fb385d84bc3c635927469":[15,0,67,4],
-"structAudioBankSample.html#ad598652b025155d5a15a99251dd97828":[15,0,67,10],
-"structAudioBankSample.html#ad66d2ea44427eef3ea448179e1f4a0c0":[15,0,67,0],
-"structAudioBankSound.html":[15,0,68],
-"structAudioBankSound.html#a071a356c7f702306b8071e1bc830c11d":[15,0,68,3],
-"structAudioBankSound.html#a2d41c84ecf76ec2edcf520495380a693":[15,0,68,2]
+"structAudioBankSample.html#abae57a9b292e1b7ffb68063c0d5d3a0e":[15,0,67,5]
 };

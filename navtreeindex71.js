@@ -1,5 +1,11 @@
 var NAVTREEINDEX71 =
 {
+"sounds_8h.html#aa720157811885c6030eae2e6584c9fec":[16,0,2,21,19],
+"sounds_8h.html#ab5236912e8d24461f8aa2504368c2811":[16,0,2,21,14],
+"sounds_8h.html#ab59fc4e1f11577b8c20ee8c136cf0172":[16,0,2,21,4],
+"sounds_8h.html#ababe19e841b4ff40b2e5d882d7cba29b":[16,0,2,21,26],
+"sounds_8h.html#ac4b9557ff90d356c9baea1e2fca97920":[16,0,2,21,38],
+"sounds_8h.html#ac4e9894101eaffbd37146777874c92cf":[16,0,2,21,5],
 "sounds_8h.html#accdc6dfaa039039a066acbc8cac43bfb":[16,0,2,21,42],
 "sounds_8h.html#ad5c3461c52d2fdc3a45f89ca9d0a82f8":[16,0,2,21,15],
 "sounds_8h.html#add1b4cfe8874a1467f247276123d325c":[16,0,2,21,36],
@@ -243,11 +249,5 @@ var NAVTREEINDEX71 =
 "starship__model_8h.html":[16,0,0,8,11],
 "starship__model_8h.html#a067039af6aca323b7558e0327f52cfd0":[16,0,0,8,11,22],
 "starship__model_8h.html#a08e9481c191952dbd10f77f2a48b67ba":[16,0,0,8,11,8],
-"starship__model_8h.html#a0bdd311c3e6a16c1a3b9a2dccff7ea84":[16,0,0,8,11,2],
-"starship__model_8h.html#a12e0dd8500ab3ef789f64e14e46dddbc":[16,0,0,8,11,0],
-"starship__model_8h.html#a16ee5a59a2f77c91bbd60aca7f04642f":[16,0,0,8,11,14],
-"starship__model_8h.html#a2c9cd182002f286f550422e084b0179a":[16,0,0,8,11,25],
-"starship__model_8h.html#a39055ba5054600c58dc6484117fc946e":[16,0,0,8,11,17],
-"starship__model_8h.html#a4e3189118da52c20a9c8f586518ffcf3":[16,0,0,8,11,4],
-"starship__model_8h.html#a584777225d4e215d5609fc60512352fd":[16,0,0,8,11,6]
+"starship__model_8h.html#a0bdd311c3e6a16c1a3b9a2dccff7ea84":[16,0,0,8,11,2]
 };
