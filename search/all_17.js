@@ -464,14 +464,13 @@ var searchData=
   ['use_5fthunder_5fitem_461',['use_thunder_item',['../actors__extended_8c.html#a58a90bceb7852ff16b389f2bba53817f',1,'actors_extended.c']]],
   ['use_5ftriple_5fshell_5fitem_462',['use_triple_shell_item',['../actors__extended_8c.html#a47255ea9aa07316c48b95fd7a97ac40d',1,'actors_extended.c']]],
   ['used_463',['used',['../structUnkEntry.html#a5694063a75aaf50db1cb7d687e46bdc6',1,'UnkEntry']]],
-  ['used_20as_20retro_20courses_20in_20the_20future_464',['Tracks that are used as Retro Courses in the Future.',['../md_docs_2track__returns.html',1,'']]],
-  ['used_20to_20help_20find_20music_20and_20to_20see_20how_20courses_20are_20adapted_20in_20the_20future_20including_20references_20too_465',['Specifically Used to help find music and to see how courses are adapted in the future including references too.',['../md_docs_2track__returns.html#specifically-used-to-help-find-music-and-to-see-how-courses-are-adapted-in-the-future-including-references-too',1,'']]],
-  ['usedspace_466',['usedSpace',['../structAllocOnlyPool.html#a35f92b08706806346c9579f39bd2b820',1,'AllocOnlyPool']]],
-  ['usereverb_467',['useReverb',['../structSynthesisReverb.html#a5b14756d9ad6c5588fdb97041605f43e',1,'SynthesisReverb']]],
-  ['username_468',['username',['../structNetworkClient.html#a7d252043369012a60cac7e533a92601c',1,'NetworkClient']]],
-  ['usesheadsetpaneffects_469',['usesHeadsetPanEffects',['../structReverbBitsData.html#aa908f813a0564ca417bb72f3574c4bfd',1,'ReverbBitsData::usesHeadsetPanEffects'],['../structNoteSubEu.html#a348ed95a1f9f39ce69ce1ae82c696e8f',1,'NoteSubEu::usesHeadsetPanEffects']]],
-  ['useverbosedeviceenumeration_470',['useVerboseDeviceEnumeration',['../structma__context__config.html#aec7b00b8a724660dc13a9d09c39b8ab9',1,'ma_context_config']]],
-  ['utils_2ecpp_471',['Utils.cpp',['../Utils_8cpp.html',1,'']]],
-  ['utils_2eh_472',['Utils.h',['../Utils_8h.html',1,'']]],
-  ['uuid_473',['uuid',['../classAActor.html#ad0d300f6ac4f1daa02669c340c7c523f',1,'AActor::uuid'],['../classOObject.html#a7811ae54fed1f16c7bc34088b99b89b7',1,'OObject::uuid']]]
+  ['used_20to_20help_20find_20music_20and_20to_20see_20how_20courses_20are_20adapted_20in_20the_20future_20including_20references_20too_464',['Specifically Used to help find music and to see how courses are adapted in the future including references too.',['../md_docs_2track__returns.html#specifically-used-to-help-find-music-and-to-see-how-courses-are-adapted-in-the-future-including-references-too',1,'']]],
+  ['usedspace_465',['usedSpace',['../structAllocOnlyPool.html#a35f92b08706806346c9579f39bd2b820',1,'AllocOnlyPool']]],
+  ['usereverb_466',['useReverb',['../structSynthesisReverb.html#a5b14756d9ad6c5588fdb97041605f43e',1,'SynthesisReverb']]],
+  ['username_467',['username',['../structNetworkClient.html#a7d252043369012a60cac7e533a92601c',1,'NetworkClient']]],
+  ['usesheadsetpaneffects_468',['usesHeadsetPanEffects',['../structReverbBitsData.html#aa908f813a0564ca417bb72f3574c4bfd',1,'ReverbBitsData::usesHeadsetPanEffects'],['../structNoteSubEu.html#a348ed95a1f9f39ce69ce1ae82c696e8f',1,'NoteSubEu::usesHeadsetPanEffects']]],
+  ['useverbosedeviceenumeration_469',['useVerboseDeviceEnumeration',['../structma__context__config.html#aec7b00b8a724660dc13a9d09c39b8ab9',1,'ma_context_config']]],
+  ['utils_2ecpp_470',['Utils.cpp',['../Utils_8cpp.html',1,'']]],
+  ['utils_2eh_471',['Utils.h',['../Utils_8h.html',1,'']]],
+  ['uuid_472',['uuid',['../classAActor.html#ad0d300f6ac4f1daa02669c340c7c523f',1,'AActor::uuid'],['../classOObject.html#a7811ae54fed1f16c7bc34088b99b89b7',1,'OObject::uuid']]]
 ];

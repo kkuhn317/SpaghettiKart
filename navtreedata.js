@@ -78,7 +78,7 @@ var NAVTREE =
     [ "Custom characters", "md_docs_2custom-characters.html", [
       [ "Examples for all characters:", "md_docs_2custom-characters.html#examples-for-all-characters", null ],
       [ "Additional Files", "md_docs_2custom-characters.html#additional-files", [
-        [ "Tips", "md_docs_2custom-characters.html#tips-1", [
+        [ "Tips", "md_docs_2custom-characters.html#tips", [
           [ "Change Viewport Render Settings", "md_docs_2custom-characters.html#change-viewport-render-settings", null ]
         ] ],
         [ "Tools To Help", "md_docs_2custom-characters.html#tools-to-help", null ],
@@ -94,7 +94,7 @@ var NAVTREE =
       [ "Import", "md_docs_2custom-track.html#import", null ],
       [ "Track Initialization", "md_docs_2custom-track.html#track-initialization", null ],
       [ "Playing Your Custom Track", "md_docs_2custom-track.html#playing-your-custom-track", null ],
-      [ "Tips", "md_docs_2custom-track.html#tips", [
+      [ "Tips", "md_docs_2custom-track.html#tips-1", [
         [ "Extra information that may be helpful", "md_docs_2custom-track.html#extra-information-that-may-be-helpful", null ]
       ] ]
     ] ],
@@ -105,7 +105,7 @@ var NAVTREE =
       [ "Tools To Help", "md_docs_2textures-pack.html#tools-to-help-1", null ],
       [ "Future plans", "md_docs_2textures-pack.html#future-plans-2", null ]
     ] ],
-    [ "Tracks that are used as Retro Courses in the Future.", "md_docs_2track__returns.html", [
+    [ "Returning Tracks", "md_docs_2track__returns.html", [
       [ "Specifically Used to help find music and to see how courses are adapted in the future including refer...", "md_docs_2track__returns.html#specifically-used-to-help-find-music-and-to-see-how-courses-are-adapted-in-the-future-including-references-too", null ],
       [ "Battle Courses", "md_docs_2track__returns.html#battle-courses", null ],
       [ "Mario Kart World Remixes", "md_docs_2track__returns.html#mario-kart-world-remixes", null ]

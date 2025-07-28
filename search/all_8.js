@@ -2103,10 +2103,9 @@ var searchData=
   ['func_5funnamed7_2100',['func_unnamed7',['../effects_8c.html#a82d9292d0fe62f19cd5a5f64593eadf5',1,'func_unnamed7(void):&#160;effects.c'],['../effects_8h.html#aa4e5fcd6872dec26296dca41158926de',1,'func_unnamed7(void):&#160;effects.c']]],
   ['func_5funnamed8_2101',['func_unnamed8',['../effects_8c.html#ad8f7d27adb8877a47658ec4474db7f1f',1,'func_unnamed8(void):&#160;effects.c'],['../effects_8h.html#a2394277f48ef51cbe4dd87b526f82406',1,'func_unnamed8(void):&#160;effects.c']]],
   ['func_5funnamed9_2102',['func_unnamed9',['../effects_8c.html#acb2ee8c76fb39d941370a9d14b0ab554',1,'func_unnamed9(void):&#160;effects.c'],['../effects_8h.html#a7c83e2daa08d326bebecbd60d5220f08',1,'func_unnamed9(void):&#160;effects.c']]],
-  ['future_2103',['Tracks that are used as Retro Courses in the Future.',['../md_docs_2track__returns.html',1,'']]],
-  ['future_20including_20references_20too_2104',['Specifically Used to help find music and to see how courses are adapted in the future including references too.',['../md_docs_2track__returns.html#specifically-used-to-help-find-music-and-to-see-how-courses-are-adapted-in-the-future-including-references-too',1,'']]],
-  ['future_20plans_2105',['Future plans',['../md_docs_2custom-audio.html#future-plans',1,'Future plans'],['../md_docs_2textures-pack.html#future-plans-2',1,'Future plans'],['../md_docs_2custom-characters.html#future-plans-1',1,'Future plans']]],
-  ['fvector_2106',['FVector',['../structFVector.html',1,'']]],
-  ['fvector2d_2107',['FVector2D',['../structFVector2D.html',1,'']]],
-  ['fvector4_2108',['FVector4',['../structFVector4.html',1,'']]]
+  ['future_20including_20references_20too_2103',['Specifically Used to help find music and to see how courses are adapted in the future including references too.',['../md_docs_2track__returns.html#specifically-used-to-help-find-music-and-to-see-how-courses-are-adapted-in-the-future-including-references-too',1,'']]],
+  ['future_20plans_2104',['Future plans',['../md_docs_2custom-audio.html#future-plans',1,'Future plans'],['../md_docs_2custom-characters.html#future-plans-1',1,'Future plans'],['../md_docs_2textures-pack.html#future-plans-2',1,'Future plans']]],
+  ['fvector_2105',['FVector',['../structFVector.html',1,'']]],
+  ['fvector2d_2106',['FVector2D',['../structFVector2D.html',1,'']]],
+  ['fvector4_2107',['FVector4',['../structFVector4.html',1,'']]]
 ];
