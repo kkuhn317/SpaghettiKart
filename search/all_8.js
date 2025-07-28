@@ -47,7 +47,7 @@ var searchData=
   ['fb_5fwriteframebufferslicetocpu_44',['FB_WriteFramebufferSliceToCPU',['../framebuffer__effects_8c.html#a71b68b58779ff9a29542a67e601bf244',1,'FB_WriteFramebufferSliceToCPU(Gfx **gfxP, void *buffer, u8 byteSwap):&#160;framebuffer_effects.c'],['../framebuffer__effects_8h.html#a71b68b58779ff9a29542a67e601bf244',1,'FB_WriteFramebufferSliceToCPU(Gfx **gfxP, void *buffer, u8 byteSwap):&#160;framebuffer_effects.c']]],
   ['fcontroller_45',['fController',['../freecam_8cpp.html#a91e61a627cb54d156c65a06c76b90162',1,'freecam.cpp']]],
   ['fedora_46',['Fedora',['../compiling.html#fedora',1,'Fedora'],['../md_docs_2BUILDING.html#fedora-1',1,'Fedora']]],
-  ['file_47',['file',['../structstate__pak.html#a4b8a1e583a334273940d876a3a995de5',1,'state_pak::file'],['../structma__decoder.html#ab5c26992f619d3ac8c1ec5c31901ef7f',1,'ma_decoder::file'],['../structma__encoder.html#aa8a93d4a13b43fee623cbd73772c76f8',1,'ma_encoder::file']]],
+  ['file_47',['file',['../structControllerPak.html#ac6ec3958ca3eaf7efb58d0ee378297a1',1,'ControllerPak::file'],['../structstate__pak.html#a4b8a1e583a334273940d876a3a995de5',1,'state_pak::file'],['../structma__decoder.html#ab5c26992f619d3ac8c1ec5c31901ef7f',1,'ma_decoder::file'],['../structma__encoder.html#aa8a93d4a13b43fee623cbd73772c76f8',1,'ma_encoder::file']]],
   ['file_5fdialog_48',['file_dialog',['../classpfd_1_1internal_1_1file__dialog.html',1,'pfd::internal::file_dialog'],['../classpfd_1_1internal_1_1file__dialog.html#a16f53945e61d23aa9b7fc373701dd13f',1,'pfd::internal::file_dialog::file_dialog()']]],
   ['file_5fsize_49',['file_size',['../structcourse__texture.html#a46504f7bfa82687cab6d337fc73ee6c5',1,'course_texture']]],
   ['fileindex_50',['fileIndex',['../stubs_8c.html#aad7c30ce3d215aa5280d5e2de98e2a1a',1,'stubs.c']]],
@@ -2105,7 +2105,7 @@ var searchData=
   ['func_5funnamed9_2102',['func_unnamed9',['../effects_8c.html#acb2ee8c76fb39d941370a9d14b0ab554',1,'func_unnamed9(void):&#160;effects.c'],['../effects_8h.html#a7c83e2daa08d326bebecbd60d5220f08',1,'func_unnamed9(void):&#160;effects.c']]],
   ['future_2103',['Tracks that are used as Retro Courses in the Future.',['../md_docs_2track__returns.html',1,'']]],
   ['future_20including_20references_20too_2104',['Specifically Used to help find music and to see how courses are adapted in the future including references too.',['../md_docs_2track__returns.html#specifically-used-to-help-find-music-and-to-see-how-courses-are-adapted-in-the-future-including-references-too',1,'']]],
-  ['future_20plans_2105',['Future plans',['../md_docs_2custom-audio.html#future-plans',1,'Future plans'],['../md_docs_2custom-characters.html#future-plans-1',1,'Future plans'],['../md_docs_2textures-pack.html#future-plans-2',1,'Future plans']]],
+  ['future_20plans_2105',['Future plans',['../md_docs_2custom-audio.html#future-plans',1,'Future plans'],['../md_docs_2textures-pack.html#future-plans-2',1,'Future plans'],['../md_docs_2custom-characters.html#future-plans-1',1,'Future plans']]],
   ['fvector_2106',['FVector',['../structFVector.html',1,'']]],
   ['fvector2d_2107',['FVector2D',['../structFVector2D.html',1,'']]],
   ['fvector4_2108',['FVector4',['../structFVector4.html',1,'']]]

@@ -1,5 +1,15 @@
 var NAVTREEINDEX98 =
 {
+"update__objects_8c.html#afe64f2394ee0deab6370b77609500bda":[17,0,3,69,193],
+"update__objects_8h.html":[17,0,3,70],
+"update__objects_8h_source.html":[17,0,3,70],
+"vehicles.html":[0,2],
+"vehicles.html#boats":[0,2,2],
+"vehicles.html#cars--trucks":[0,2,1],
+"vehicles.html#trains":[0,2,0],
+"vehicles_8h.html":[17,0,2,24],
+"vehicles_8h.html#a180fece3a8e26cdf6c649546cfabbb62":[17,0,2,24,8],
+"vehicles_8h.html#a18cc70af1471e76bc2f38d27632c1976":[17,0,2,24,16],
 "vehicles_8h.html#a1ba73f3115262148a920a3bb2620cdce":[17,0,2,24,11],
 "vehicles_8h.html#a1ba73f3115262148a920a3bb2620cdce":[17,0,2,24,12],
 "vehicles_8h.html#a2ae53606be0b114cafef6b612d096d16":[17,0,2,24,17],
