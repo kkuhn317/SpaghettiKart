@@ -1,6 +1,5 @@
 var NAVTREEINDEX82 =
 {
-"struct____OSContReadFormat.html#a6080ca36929b11d4abb21ed871b06bbc":[16,0,10,3],
 "struct____OSContReadFormat.html#a9bc690c10ef0076a8b533ba0f16d9a67":[16,0,10,5],
 "struct____OSContReadFormat.html#ac77e3ea90ddc9fcd05b4f1a0583e6441":[16,0,10,4],
 "struct____OSContReadFormat.html#ae9cbac3e50bcd7400988aa5e64f56aae":[16,0,10,0],
@@ -249,5 +248,6 @@ var NAVTREEINDEX82 =
 "structma__audio__buffer__config.html":[16,0,159],
 "structma__audio__buffer__config.html#a00d22f5b132417b135a6831a5706e55a":[16,0,159,3],
 "structma__audio__buffer__config.html#a617c16785bf170bdf196106dd821187a":[16,0,159,1],
-"structma__audio__buffer__config.html#a78aac53b8268fe8a8f5f095b13af21fa":[16,0,159,0]
+"structma__audio__buffer__config.html#a78aac53b8268fe8a8f5f095b13af21fa":[16,0,159,0],
+"structma__audio__buffer__config.html#ab28bd1f47733cb5ff78b82b486d6d1fc":[16,0,159,2]
 };

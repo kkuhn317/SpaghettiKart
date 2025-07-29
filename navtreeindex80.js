@@ -1,6 +1,5 @@
 var NAVTREEINDEX80 =
 {
-"structTriangle.html#a7767fe7777ebd652687c28c6e44238c9":[16,0,455,1],
 "structTriangle.html#aacdd556064e8069804edeadaca5f7e1c":[16,0,455,0],
 "structTripleShellParent.html":[16,0,456],
 "structTripleShellParent.html#a13b6efc8edb8f17285a9f22419e4244a":[16,0,456,9],
@@ -249,5 +248,6 @@ var NAVTREEINDEX80 =
 "structUnkPool.html#a54e0b9a13c0b02bbd2dd4cbe4c539bfb":[16,0,469,1],
 "structUnkPool.html#ab3cfce0714280493c920b0d583e1943c":[16,0,469,0],
 "structUnkPool.html#ae09f5a40fa70785e43743f4d447ed669":[16,0,469,2],
-"structUnkPool.html#af095c6f51178e3247e6b5d59bd6c24ef":[16,0,469,3]
+"structUnkPool.html#af095c6f51178e3247e6b5d59bd6c24ef":[16,0,469,3],
+"structUnkStr__802AA7C8.html":[16,0,470]
 };
