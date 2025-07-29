@@ -1,5 +1,6 @@
 var NAVTREEINDEX81 =
 {
+"structUnkStr__802AA7C8.html":[16,0,470],
 "structUnkStr__802AA7C8.html#a0b7bbf36f49ea5a48b1edbe5faeb4846":[16,0,470,3],
 "structUnkStr__802AA7C8.html#a498165b778bb5169c8cf8dd859c17503":[16,0,470,1],
 "structUnkStr__802AA7C8.html#a56ca69593a242e976e89c5ec62771049":[16,0,470,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX81 =
 "struct____OSContRamReadFormat.html#adac20edde85fef49f024ca4167c8720b":[16,0,9,0],
 "struct____OSContReadFormat.html":[16,0,10],
 "struct____OSContReadFormat.html#a3ea9e938e3742406d9cafb5f7c6a8df6":[16,0,10,1],
-"struct____OSContReadFormat.html#a4a0069791ce30d82145ae10c1edb936c":[16,0,10,2],
-"struct____OSContReadFormat.html#a6080ca36929b11d4abb21ed871b06bbc":[16,0,10,3]
+"struct____OSContReadFormat.html#a4a0069791ce30d82145ae10c1edb936c":[16,0,10,2]
 };

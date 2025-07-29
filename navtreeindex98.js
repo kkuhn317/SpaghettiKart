@@ -1,5 +1,6 @@
 var NAVTREEINDEX98 =
 {
+"update__objects_8c.html#afe64f2394ee0deab6370b77609500bda":[17,0,3,69,193],
 "update__objects_8h.html":[17,0,3,70],
 "update__objects_8h_source.html":[17,0,3,70],
 "vehicles.html":[0,2],

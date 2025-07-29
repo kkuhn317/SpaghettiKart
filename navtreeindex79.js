@@ -1,5 +1,6 @@
 var NAVTREEINDEX79 =
 {
+"structSequenceChannelLayer.html#a86bc9dd7a08b9cbae7a936c25bd86caa":[16,0,394,9],
 "structSequenceChannelLayer.html#a8b4073bbd9cb18dc42b3f88b47725fc3":[16,0,394,19],
 "structSequenceChannelLayer.html#a8f40bd52a5fe66d11e747129e8ef63fd":[16,0,394,28],
 "structSequenceChannelLayer.html#a9ebb5f2009113ab0698671fe70aa4ad3":[16,0,394,5],
@@ -248,6 +249,5 @@ var NAVTREEINDEX79 =
 "structTrainStuff.html#ad55c878cf7b149b9c47b0f1faf753145":[16,0,454,6],
 "structTrainStuff.html#af09aad0b146135b41f76a9a0bc497e4b":[16,0,454,7],
 "structTriangle.html":[16,0,455],
-"structTriangle.html#a1ec25363fee520bf2daa68764ac0abae":[16,0,455,2],
-"structTriangle.html#a7767fe7777ebd652687c28c6e44238c9":[16,0,455,1]
+"structTriangle.html#a1ec25363fee520bf2daa68764ac0abae":[16,0,455,2]
 };

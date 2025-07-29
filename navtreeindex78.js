@@ -1,5 +1,6 @@
 var NAVTREEINDEX78 =
 {
+"structSF64_1_1EnvSettingsData.html#a056762d1595ce09fa74430c6f5b83c60":[15,0,8,5,5],
 "structSF64_1_1EnvSettingsData.html#a056762d1595ce09fa74430c6f5b83c60":[16,0,4,5,5],
 "structSF64_1_1EnvSettingsData.html#a0d69807eb970cf62815990ae7071061a":[15,0,8,5,13],
 "structSF64_1_1EnvSettingsData.html#a0d69807eb970cf62815990ae7071061a":[16,0,4,5,13],
@@ -248,6 +249,5 @@ var NAVTREEINDEX78 =
 "structSequenceChannelLayer.html#a76ef12979939418b30dac956622e2418":[16,0,394,15],
 "structSequenceChannelLayer.html#a81d0e8dd7b7bfb1b3182d560241e8b37":[16,0,394,6],
 "structSequenceChannelLayer.html#a847c174ff1b4e29c3e717188bb5b76f4":[16,0,394,2],
-"structSequenceChannelLayer.html#a858650267fc8950ed805560217e97378":[16,0,394,0],
-"structSequenceChannelLayer.html#a86bc9dd7a08b9cbae7a936c25bd86caa":[16,0,394,9]
+"structSequenceChannelLayer.html#a858650267fc8950ed805560217e97378":[16,0,394,0]
 };

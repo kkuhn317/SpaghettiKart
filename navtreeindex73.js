@@ -1,5 +1,6 @@
 var NAVTREEINDEX73 =
 {
+"structAnimationCycleSpec.html#a908f9e109d7fd0cda2501dee8a40815e":[16,0,57,0],
 "structAnimationCycleSpec.html#aafe200883957788393b92b5e614b341e":[16,0,57,1],
 "structArmature.html":[16,0,58],
 "structArmature.html#a1f7bbd5d2d6eb7d572b3c0f2fe2dc5c1":[16,0,58,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX73 =
 "structColor.html":[16,0,91],
 "structColor.html#a33e482be18d6ea31d2b403bee13683b7":[16,0,91,0],
 "structColor.html#a3958a556b47d2de3dd45c75aac833c20":[16,0,91,2],
-"structColor.html#a5defbb21620e480e556181772d665f34":[16,0,91,1],
-"structController.html":[16,0,92]
+"structColor.html#a5defbb21620e480e556181772d665f34":[16,0,91,1]
 };

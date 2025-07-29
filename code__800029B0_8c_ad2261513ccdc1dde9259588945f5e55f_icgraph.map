@@ -1,5 +1,5 @@
-<map id="func_800C8F44" name="func_800C8F44">
-<area shape="rect" id="Node000001" title=" " alt="" coords="3588,814,3711,839"/>
+<map id="update_music_volume" name="update_music_volume">
+<area shape="rect" id="Node000001" title=" " alt="" coords="3588,814,3757,839"/>
 <area shape="rect" id="Node000002" href="$code__800029B0_8c.html#a7f2e9212dffa5894377677511e9aea7a" title=" " alt="" coords="3417,814,3540,839"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="3574,829,3540,829,3540,824,3574,824"/>
 <area shape="rect" id="Node000003" href="$race__logic_8c.html#a81fc82f45c9f9fcbf0d71fd2e0d6853c" title=" " alt="" coords="3247,789,3369,814"/>

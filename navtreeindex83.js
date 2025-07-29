@@ -1,5 +1,6 @@
 var NAVTREEINDEX83 =
 {
+"structma__audio__buffer__config.html#ab28bd1f47733cb5ff78b82b486d6d1fc":[16,0,159,2],
 "structma__audio__buffer__config.html#abb88d4c148dff938249490a2f317dd3a":[16,0,159,4],
 "structma__audio__buffer__config.html#ace86689d2c6365c5cc13af823ead7fc7":[16,0,159,5],
 "structma__audio__buffer__ref.html":[16,0,160],
@@ -248,6 +249,5 @@ var NAVTREEINDEX83 =
 "structma__decoder__config.html#a520477169a21971affd5ca5f23e14008":[16,0,186,3],
 "structma__decoder__config.html#a54f88cd33c9ae9e1a7e93f5e2b3b9a22":[16,0,186,1],
 "structma__decoder__config.html#a57d04cfde2dd4785261f6ad3d88284a8":[16,0,186,12],
-"structma__decoder__config.html#a5b9d8c9374bb5f7661c7d4878e6ff192":[16,0,186,6],
-"structma__decoder__config.html#a6247cefa3da21b1304562827e3991743":[16,0,186,7]
+"structma__decoder__config.html#a5b9d8c9374bb5f7661c7d4878e6ff192":[16,0,186,6]
 };

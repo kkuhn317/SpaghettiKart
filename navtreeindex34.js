@@ -1,5 +1,6 @@
 var NAVTREEINDEX34 =
 {
+"harbour__masters_8h.html#a7443faf1c80974e303a772e5a0c9cc94":[17,0,3,42,7],
 "harbour__masters_8h.html#a7b79fa9fd05776b243095d39431d2a12":[17,0,3,42,1],
 "harbour__masters_8h.html#a7c8a2c1bbaaa2dc1983533e5e84e9e89":[17,0,3,42,9],
 "harbour__masters_8h.html#a888c1cb7f6966c044430d68609b78cf7":[17,0,3,42,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX34 =
 "heap_8h.html#ab8d4a0abb63641a36559bf0a0ad013f9":[17,0,3,1,9,21],
 "heap_8h.html#aba424a42f8fe3056ec1d69af7ce98760":[17,0,3,1,9,48],
 "heap_8h.html#abe485e48dbb11d78afab0ff0beb8e005":[17,0,3,1,9,24],
-"heap_8h.html#abe90d76dabdd7e8808cb1d520607888c":[17,0,3,1,9,37],
-"heap_8h.html#ac66be349bc4ed1435ee2f57b83bef5a4":[17,0,3,1,9,71]
+"heap_8h.html#abe90d76dabdd7e8808cb1d520607888c":[17,0,3,1,9,37]
 };
