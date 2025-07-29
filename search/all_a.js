@@ -114,7 +114,7 @@ var searchData=
   ['held_5fbanana_111',['HELD_BANANA',['../actor__types_8h.html#ac1412f2ed50826478acf5d826cb0e4bca9c93e2cf1f7b12a51a2c6034bea0622d',1,'actor_types.h']]],
   ['held_5ffake_5fitem_5fbox_112',['HELD_FAKE_ITEM_BOX',['../actor__types_8h.html#ae07d85ac7035dc21319b791b430d4246',1,'actor_types.h']]],
   ['held_5fshell_113',['HELD_SHELL',['../actor__types_8h.html#ac01c8e97d91d8f2968ca1f8d4eb0495ba514b7d298fa86789854ef2056f82f7fd',1,'actor_types.h']]],
-  ['help_114',['Help',['../md_docs_2textures-pack.html#tools-to-help-1',1,'Tools To Help'],['../md_docs_2custom-characters.html#tools-to-help',1,'Tools To Help']]],
+  ['help_114',['Help',['../md_docs_2custom-characters.html#tools-to-help',1,'Tools To Help'],['../md_docs_2textures-pack.html#tools-to-help-1',1,'Tools To Help']]],
   ['help_20find_20music_20and_20to_20see_20how_20courses_20are_20adapted_20in_20the_20future_20including_20references_20too_115',['Specifically Used to help find music and to see how courses are adapted in the future including references too.',['../md_docs_2track__returns.html#specifically-used-to-help-find-music-and-to-see-how-courses-are-adapted-in-the-future-including-references-too',1,'']]],
   ['helpful_116',['Extra information that may be helpful',['../md_docs_2custom-track.html#extra-information-that-may-be-helpful',1,'']]],
   ['hi_117',['hi',['../uniondu.html#ac24ce7d9a78b6632965424039e4362c3',1,'du::hi'],['../struct____OSThreadContext.html#a22b3930da4f78d513776547d37123599',1,'__OSThreadContext::hi']]],
