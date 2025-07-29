@@ -68,7 +68,7 @@ var searchData=
   ['bat_2ecpp_65',['Bat.cpp',['../Bat_8cpp.html',1,'']]],
   ['bat_2eh_66',['Bat.h',['../Bat_8h.html',1,'']]],
   ['battle_67',['BATTLE',['../defines_8h.html#a3f48cce4d2125604131fc7878460f44a',1,'defines.h']]],
-  ['battle_20courses_68',['Battle Courses',['../md_docs_2track__returns.html#battle-courses',1,'']]],
+  ['battle_20courses_68',['Battle Courses',['../md_docs_2sequences-information.html#battle-courses',1,'Battle Courses'],['../md_docs_2track__returns.html#battle-courses-1',1,'Battle Courses']]],
   ['battle_5fcup_69',['BATTLE_CUP',['../defines_8h.html#ae701751e4c86a447b2b7d96715151241ac92cb0afca1b2eb39ace61e1fa9cd730',1,'defines.h']]],
   ['battleprobabilitycurve_70',['battleProbabilityCurve',['../update__objects_8c.html#ad2b9deb416ecea685a4dcddd5b5ccce4',1,'update_objects.c']]],
   ['bcmp_71',['bcmp',['../bstring_8h.html#a41defc2ecf285507e63eb254a8b427fd',1,'bstring.h']]],

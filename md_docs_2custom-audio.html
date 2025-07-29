@@ -109,13 +109,13 @@ $(function(){initNavTree('md_docs_2custom-audio.html',''); initResizable(true); 
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="custom-audio"></a></p>
-<p>To replace a sequences you should only create a zip file with sequences to replace at the same path as mk64.o2r. Only wav, mp3, ogg and flac are supported. For define the loop you need to create a json with the same name but end with .json. the json look like this: </p><div class="fragment"><div class="line">{</div>
+<p>Replacing music tracks (sequences) requires a zip file that contains audio tracks in the same path/naming as in the original mk64.o2r. Only wav, mp3, ogg and flac are supported. To define the loop you need to create a json with the same name but end with .json. the json look like this: </p><div class="fragment"><div class="line">{</div>
 <div class="line">    &quot;loop&quot;: {</div>
 <div class="line">        &quot;start&quot;: 0,</div>
 <div class="line">        &quot;end&quot;: 0</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><p> The json file are optional. The unit of <code>start</code> and <code>end</code> is in pcm frames. You can use a tool like Audacity to find the correct values (it's call samples in Audacity). All properties avaible are: </p><div class="fragment"><div class="line">{</div>
+</div><!-- fragment --><p> The json file are optional. The unit of <code>start</code> and <code>end</code> is in pcm frames. You can use a tool like Audacity to find the correct values (it's call samples in Audacity). All properties available are: </p><div class="fragment"><div class="line">{</div>
 <div class="line">    &quot;name&quot;: &quot;Name&quot;,</div>
 <div class="line">    &quot;author&quot;: &quot;Author&quot;,</div>
 <div class="line">    &quot;date&quot;: &quot;Date&quot;,</div>
@@ -135,7 +135,6 @@ Example:</h1>
 </div><!-- fragment --><h1><a class="anchor" id="future-plans"></a>
 Future plans</h1>
 <ul>
-<li>Make name more meaningful and uniform. (example: change <code>seq_16</code>). You can suggest name or make a PR to help rename them/organise them.</li>
 <li>Support samples.</li>
 <li>Create a tool to convert sequences and samples. </li>
 </ul>

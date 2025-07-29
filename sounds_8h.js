@@ -48,7 +48,7 @@ var sounds_8h =
     [ "SOUND_MENU_VERSUS", "sounds_8h.html#a457ac1730cdbe2b3e2afcd6fa697b6ff", null ],
     [ "MusicSeq", "sounds_8h.html#a462955cf4ece430059af4e4185a8727c", [
       [ "MUSIC_SEQ_UNKNOWN", "sounds_8h.html#a462955cf4ece430059af4e4185a8727cad03b762de8b88259836abc900f862d5b", null ],
-      [ "MUSIC_SEQ_00", "sounds_8h.html#a462955cf4ece430059af4e4185a8727cae8a16c05da6f7842558cf51004cb11bd", null ],
+      [ "MUSIC_SEQ_SOUND_PLAYER", "sounds_8h.html#a462955cf4ece430059af4e4185a8727ca88fd966c1c4a7adf0fe8b1a71730adad", null ],
       [ "MUSIC_SEQ_TITLE_SCREEN", "sounds_8h.html#a462955cf4ece430059af4e4185a8727ca7e2ba3d26c70e8b9f80b134e310bafd5", null ],
       [ "MUSIC_SEQ_MAIN_MENU", "sounds_8h.html#a462955cf4ece430059af4e4185a8727ca2779af32be625ff2fa529976e8d530ac", null ],
       [ "MUSIC_SEQ_WARIO_STADIUM", "sounds_8h.html#a462955cf4ece430059af4e4185a8727ca14ea9119e8095a208d64896c1a9db582", null ],
@@ -64,7 +64,7 @@ var sounds_8h =
       [ "MUSIC_SEQ_FINISH_1ST_PLACE", "sounds_8h.html#a462955cf4ece430059af4e4185a8727ca407fd63498bcbec8e1b5af685fb2880e", null ],
       [ "MUSIC_SEQ_FINISH_2ND_4TH_PLACE", "sounds_8h.html#a462955cf4ece430059af4e4185a8727ca30fb72439368ee4fd76b19f1fd910e18", null ],
       [ "MUSIC_SEQ_FINISH_5TH_8TH_PLACE", "sounds_8h.html#a462955cf4ece430059af4e4185a8727cac48d675bd3b7f0c0b0abcac5d1b8250b", null ],
-      [ "MUSIC_SEQ_16", "sounds_8h.html#a462955cf4ece430059af4e4185a8727caaaf3f827a971e5c6e0e157736d9f73a3", null ],
+      [ "MUSIC_SEQ_WINNING_RESULTS", "sounds_8h.html#a462955cf4ece430059af4e4185a8727ca728abce6fffb6603cfea84ce7844a3a5", null ],
       [ "MUSIC_SEQ_STAR_JINGLE", "sounds_8h.html#a462955cf4ece430059af4e4185a8727ca83e197f9d2b6cff44936866b30e6dd8d", null ],
       [ "MUSIC_SEQ_RAINBOW_ROAD", "sounds_8h.html#a462955cf4ece430059af4e4185a8727ca4dc13cbf333fc84304cce6e8436f3442", null ],
       [ "MUSIC_SEQ_DK_JUNGLE", "sounds_8h.html#a462955cf4ece430059af4e4185a8727ca58b5b5e40ba246fae20211899a05a1e4", null ],

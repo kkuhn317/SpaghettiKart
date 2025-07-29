@@ -240,7 +240,7 @@ var searchData=
   ['trackproperties_2ecpp_237',['TrackProperties.cpp',['../TrackProperties_8cpp.html',1,'']]],
   ['trackproperties_2eh_238',['TrackProperties.h',['../TrackProperties_8h.html',1,'']]],
   ['trackpropertieswindow_239',['TrackPropertiesWindow',['../classEditor_1_1TrackPropertiesWindow.html',1,'Editor']]],
-  ['tracks_240',['Tracks',['../md_docs_2custom-track.html',1,'Custom Tracks'],['../md_docs_2track__returns.html',1,'Returning Tracks'],['../structEditor_1_1ContentBrowserWindow_1_1Tracks.html',1,'Editor::ContentBrowserWindow::Tracks'],['../classEditor_1_1ContentBrowserWindow.html#a50283b5de3e83db921729d5c3c4e25e0',1,'Editor::ContentBrowserWindow::Tracks']]],
+  ['tracks_240',['Tracks',['../md_docs_2custom-track.html',1,'Custom Tracks'],['../md_docs_2sequences-information.html#race-tracks',1,'Race Tracks'],['../md_docs_2track__returns.html',1,'Returning Tracks'],['../structEditor_1_1ContentBrowserWindow_1_1Tracks.html',1,'Editor::ContentBrowserWindow::Tracks'],['../classEditor_1_1ContentBrowserWindow.html#a50283b5de3e83db921729d5c3c4e25e0',1,'Editor::ContentBrowserWindow::Tracks']]],
   ['tracksection_241',['TrackSection',['../namespaceMK64.html#a38de6847b2446bd40c519608c4691352a19a5bfedd6a4c50c0337be5fc782d7ed',1,'MK64']]],
   ['tracksectionid_242',['trackSectionId',['../structTrackPathPoint.html#a3572feaaa5b94c4948f447adfd4aa66e',1,'TrackPathPoint']]],
   ['tracksections_243',['TrackSections',['../structTrackSections.html',1,'']]],
