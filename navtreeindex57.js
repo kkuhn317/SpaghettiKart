@@ -77,7 +77,7 @@ var NAVTREEINDEX57 =
 "new__func_8h.html#ac8095e2ec1adbd7e74e655c578968a36":[17,0,3,9,55,0],
 "new__func_8h_source.html":[17,0,3,9,55],
 "objects.html":[0,1],
-"objects.html#objects":[0,1,0],
+"objects.html#objects-1":[0,1,0],
 "objects_8h.html":[17,0,2,17],
 "objects_8h.html#a015cc1fa03690348fb398b9be74ecc15":[17,0,2,17,35],
 "objects_8h.html#a02bd29e49d2089bb6bd1bfe33e360584":[17,0,2,17,87],
