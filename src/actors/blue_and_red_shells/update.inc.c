@@ -459,6 +459,28 @@ void update_actor_red_blue_shell(struct ShellActor* shell) {
                 func_802B4E30((struct Actor*) shell);
             }
             break;
+        case TRIPLE_BLUE_SHELL:
+            player = &gPlayers[shell->playerId];
+            parent = (TripleShellParent*) GET_ACTOR(shell->parentIndex);
+            if (parent->type != ACTOR_TRIPLE_BLUE_SHELL) {
+                destroy_destructable_actor((struct Actor*) shell);
+            } else {
+                shell->rotAngle += parent->rotVelocity;
+                somePosVel[0] = sins(shell->rotAngle) * 8.0f;
+                somePosVel[1] = shell->boundingBoxSize - player->boundingBoxSize;
+                somePosVel[2] = coss(shell->rotAngle) * 8.0f;
+                mtxf_translate_vec3f_mat3(somePosVel, player->orientationMatrix);
+                origPos[0] = shell->pos[0];
+                origPos[1] = shell->pos[1];
+                origPos[2] = shell->pos[2];
+                shell->pos[0] = player->pos[0] + somePosVel[0];
+                shell->pos[1] = player->pos[1] + somePosVel[1];
+                shell->pos[2] = player->pos[2] + somePosVel[2];
+                actor_terrain_collision(&shell->unk30, 4.0f, shell->pos[0], shell->pos[1], shell->pos[2], origPos[0],
+                                        origPos[1], origPos[2]);
+                func_802B4E30((struct Actor*) shell);
+            }
+            break;
         case DESTROYED_SHELL:
             shell->velocity[1] -= 0.3f;
             if (shell->velocity[1] < -5.0f) {

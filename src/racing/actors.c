@@ -2649,6 +2649,9 @@ void update_course_actors(void) {
             case ACTOR_TRIPLE_RED_SHELL:
                 update_actor_triple_shell((TripleShellParent*) actor, ACTOR_RED_SHELL);
                 break;
+            case ACTOR_TRIPLE_BLUE_SHELL:
+                update_actor_triple_shell((TripleShellParent*) actor, ACTOR_BLUE_SPINY_SHELL);
+                break;
             case ACTOR_MARIO_SIGN:
                 update_actor_mario_sign(actor);
                 break;

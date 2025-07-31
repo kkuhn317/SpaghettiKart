@@ -60,6 +60,7 @@ void triple_shell_actor_collide_with_player(struct ShellActor* shell, s32 shellT
             shell->state = GREEN_SHELL_HIT_A_RACER;
             break;
         case ACTOR_RED_SHELL:
+        case ACTOR_BLUE_SPINY_SHELL:
             shell->state = DESTROYED_SHELL;
             break;
     }
@@ -329,6 +330,9 @@ bool is_shell_exist(s16 arg0) {
     if (actor->state == TRIPLE_RED_SHELL) {
         return true;
     }
+    if (actor->state == TRIPLE_BLUE_SHELL) {
+        return true;
+    }
     return false;
 }
 
@@ -443,6 +447,8 @@ void update_actor_triple_shell(TripleShellParent* parent, s16 shellType) {
                                       (player->characterId * 0x10) + SOUND_ARG_LOAD(0x29, 0x00, 0x80, 0x00));
                         if (parent->type == ACTOR_TRIPLE_RED_SHELL) {
                             add_red_shell_in_unexpired_actor_list(parent->shellIndices[0]);
+                        } else if (parent->type == ACTOR_TRIPLE_BLUE_SHELL) {
+                            add_blue_shell_in_unexpired_actor_list(parent->shellIndices[0]);
                         } else {
                             add_green_shell_in_unexpired_actor_list(parent->shellIndices[0]);
                         }
@@ -587,6 +593,9 @@ s32 init_triple_shell(TripleShellParent* parent, Player* player, s16 shellType, 
             break;
         case ACTOR_RED_SHELL:
             shell->state = TRIPLE_RED_SHELL;
+            break;
+        case ACTOR_BLUE_SPINY_SHELL:
+            shell->state = TRIPLE_BLUE_SHELL;
             break;
     }
     shell->rotVelocity = 0;
@@ -890,7 +899,7 @@ void player_use_item(Player* player) {
             use_red_shell_item(player);
             break;
         case ITEM_BLUE_SPINY_SHELL:
-            use_blue_shell_item(player);
+            use_triple_shell_item(player, ACTOR_TRIPLE_BLUE_SHELL);
             break;
         case ITEM_BANANA:
             use_banana_item(player);
