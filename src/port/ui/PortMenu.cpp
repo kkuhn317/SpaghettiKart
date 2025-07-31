@@ -455,13 +455,13 @@ void PortMenu::AddRulesets() {
             "Collect as many trophies as you can. Racer with the most trophies wins!"));
     AddWidget(path, "Track X Stretch", WIDGET_SLIDER_FLOAT)
         .ValuePointer(&gVtxStretch[0])
-        .Options(UIWidgets::FloatSliderOptions().Min(0.1f).Max(10.0f).Step(0.1f).Format("%.2f"));
+        .Options(UIWidgets::FloatSliderOptions().Min(-20.0f).Max(20.0f).Step(0.1f).Format("%.2f"));
     AddWidget(path, "Track Y Stretch", WIDGET_SLIDER_FLOAT)
         .ValuePointer(&gVtxStretch[1])
-        .Options(UIWidgets::FloatSliderOptions().Min(0.1f).Max(10.0f).Step(0.1f).Format("%.2f"));
+        .Options(UIWidgets::FloatSliderOptions().Min(-20.0f).Max(20.0f).Step(0.1f).Format("%.2f"));
     AddWidget(path, "Track Z Stretch", WIDGET_SLIDER_FLOAT)
         .ValuePointer(&gVtxStretch[2])
-        .Options(UIWidgets::FloatSliderOptions().Min(0.1f).Max(10.0f).Step(0.1f).Format("%.2f"));
+        .Options(UIWidgets::FloatSliderOptions().Min(-20.0f).Max(20.0f).Step(0.1f).Format("%.2f"));
 
 
     AddWidget(path, "Trains", WIDGET_CVAR_SLIDER_INT)
